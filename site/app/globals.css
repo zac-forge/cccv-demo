@@ -538,7 +538,7 @@
     color: color-mix(in srgb, var(--color-ink) 9%, transparent);
   }
   .ghost-on-salt {
-    color: color-mix(in srgb, var(--color-ink) 10%, transparent);
+    color: color-mix(in srgb, var(--color-ink) 8%, transparent);
   }
   .ghost-on-blue {
     color: color-mix(in srgb, var(--color-salt) 10%, transparent);
@@ -577,28 +577,6 @@
     text-transform: uppercase;
     line-height: 1.5;
     transform: rotate(-0.8deg);
-  }
-
-  /* The next field arriving early. A shallow plane at the foot of a
-     section, stepped once well off centre so the edge reads as a colour
-     field entering the composition rather than a divider drawn across
-     it. The oversized word behind it is set a layer lower and runs on
-     underneath, which is what makes the three planes read. It is
-     absolutely positioned inside a section that already carries
-     `relative isolate overflow-hidden`, so it is clipped by its own
-     section and the next one is never moved. */
-  .field-enter {
-    position: absolute;
-    inset-inline: 0;
-    bottom: 0;
-    height: 26px;
-    background-color: var(--color-yellow);
-  }
-  @media (min-width: 1024px) {
-    .field-enter {
-      height: 48px;
-      clip-path: polygon(0 0, 62% 0, 62% 42%, 100% 42%, 100% 100%, 0 100%);
-    }
   }
 
   /* Publisher line, back-of-the-sleeve scale. */
