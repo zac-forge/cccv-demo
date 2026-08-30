@@ -199,8 +199,17 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            LATEST MESSAGE — the teaching is what this church is for,
-            so it gets a feature split, not a content module.
+            LATEST TEACHING — set as a spread, not a feature card. A
+            folio bar runs the full width of the shell: the imprint at
+            one end, the series at the other, one Baptism Blue rule
+            beneath both, and a single yellow tick registering that rule
+            to the point where the type column starts. Image and type
+            then hang from the same line.
+
+            Everything here is locally contained: no negative margins
+            leaving the section, nothing absolutely positioned outside a
+            local wrapper. The section's own overflow-hidden is still
+            load-bearing for the scaled background image.
             ========================================================= */}
         <section id="message" className="field-ink relative isolate overflow-hidden">
           <Image
@@ -212,44 +221,64 @@ export default function Home() {
           />
           <div className="absolute inset-0 -z-10 bg-ink/[0.88]" aria-hidden="true" />
 
-          <div className="band-lg shell grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="relative lg:col-span-7">
-              <SermonPlayer videoId={SERMON.videoId} title={SERMON.title} />
-
-              {/* Their own words: the book is SERMON.passage, the line
-                  below it is SERMON.tags[1]. Nothing invented. */}
-              <span
-                aria-hidden="true"
-                className="mark-slug -bottom-4 left-5 sm:left-6"
-              >
-                <span className="block">Luke</span>
-                <span className="block">Verse by verse</span>
-              </span>
+          <div className="band-lg shell">
+            {/* Folio: imprint one end, series the other. Print notation,
+                not an eyebrow above a row of tags. */}
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+              <p className="t-eyebrow tracking-[0.34em]">Latest message</p>
+              <p className="t-eyebrow muted tracking-[0.26em]">
+                {SERMON.tags.join(" · ")}
+              </p>
             </div>
 
-            <div className="lg:col-span-5">
-              <p className="t-eyebrow text-yellow">Latest message</p>
+            {/* The one rule, and the one production mark on it. The tick
+                falls exactly where the type column begins below, so it
+                registers the rule to the grid. Desktop only. */}
+            <div className="mt-4 border-t-2 border-blue lg:grid lg:grid-cols-12 lg:gap-16">
+              <span
+                aria-hidden="true"
+                className="-mt-[7px] hidden h-3 w-0.5 bg-yellow lg:col-start-7 lg:block"
+              />
+            </div>
 
-              {/* Title, passage and series are the church's own, from the
-                  video on their YouTube channel. */}
-              <h2 className="f-display t-feature mt-5">{SERMON.title}</h2>
-              <p className="f-data mt-5 text-[1.375rem] md:text-[1.625rem]">
-                {SERMON.passage}
-              </p>
+            <div className="mt-12 grid items-start gap-12 md:mt-16 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-6">
+                <SermonPlayer videoId={SERMON.videoId} title={SERMON.title} />
+              </div>
 
-              {/* Small print, not interface pills. */}
-              <p className="t-meta muted mt-4">{SERMON.tags.join(" · ")}</p>
+              <div className="lg:col-span-6">
+                {/* Title, passage and series are the church's own, from
+                    the video on their YouTube channel. */}
+                <h2 className="f-display t-message">
+                  {SERMON.titleLines.map((line, i) => (
+                    <span key={line} className="lg:block">
+                      {line}
+                      {i < SERMON.titleLines.length - 1 ? " " : ""}
+                    </span>
+                  ))}
+                </h2>
 
-              {/* Verbatim from /sermons. */}
-              <p className="muted measure mt-7">
-                We&rsquo;re always adding to our online library from Pastor
-                Dave&rsquo;s previous teachings, so if you&rsquo;re looking for a
-                particular book, check back in a bit.
-              </p>
+                <p className="f-data mt-8 text-[clamp(1.5rem,2.4vw,2.125rem)] leading-none md:mt-10">
+                  {SERMON.passage}
+                </p>
 
-              <a href="#" className="link-rule mt-8">
-                Browse recent teachings
-              </a>
+                {/* Verbatim from /sermons. */}
+                <p className="muted measure mt-8 md:mt-10">
+                  We&rsquo;re always adding to our online library from Pastor
+                  Dave&rsquo;s previous teachings, so if you&rsquo;re looking for
+                  a particular book, check back in a bit.
+                </p>
+
+                <a href="#" className="link-folio group mt-10 md:mt-12">
+                  Browse recent teachings
+                  <span
+                    aria-hidden="true"
+                    className="transition-transform duration-150 group-hover:translate-x-1"
+                  >
+                    &rarr;
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </section>

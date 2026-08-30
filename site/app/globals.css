@@ -156,6 +156,14 @@
     letter-spacing: -0.032em;
   }
 
+  /* The sermon title. Hand-broken into three lines and led tighter than
+     .t-feature so the block reads as one shape, not four sentences. */
+  .t-message {
+    font-size: clamp(2.75rem, 5.4vw, 4.5rem);
+    line-height: 0.86;
+    letter-spacing: -0.034em;
+  }
+
   .t-times {
     font-size: clamp(1.75rem, 3.2vw, 2.75rem);
     line-height: 0.98;
@@ -302,6 +310,36 @@
   }
   .link-rule:hover {
     border-bottom-color: currentColor;
+  }
+
+  /* The same link set as folio notation rather than a control: tracked
+     type, an arrow, and a rule that lengthens under it on hover. The
+     rule is Baptism Blue so the CTA belongs to the folio rule above it;
+     the type itself carries the contrast. */
+  .link-folio {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding-bottom: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .link-folio::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-blue);
+    transition: width 140ms linear, background-color 140ms linear;
+  }
+  .link-folio:hover::after {
+    width: calc(100% + 1.25rem);
+    background-color: currentColor;
   }
 
   /* ----------------------------------------------------------------
