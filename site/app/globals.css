@@ -139,8 +139,8 @@
   }
   @media (min-width: 768px) {
     .t-hero {
-      font-size: clamp(4.5rem, 8vw, 8.5rem);
-      line-height: 0.88;
+      font-size: clamp(4.5rem, 9vw, 8.5rem);
+      line-height: 0.86;
     }
   }
 

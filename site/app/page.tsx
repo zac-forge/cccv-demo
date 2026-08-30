@@ -52,12 +52,12 @@ export default function Home() {
               alt="Calvary Chapel Conejo Valley"
               width={1601}
               height={611}
-              className="h-auto w-[74vw] max-w-[360px] md:w-[38vw] md:max-w-[540px]"
+              className="h-auto w-[60vw] max-w-[300px] md:w-[30vw] md:max-w-[420px]"
             />
 
             {/* Their own words: "Faith Comes By Hearing" is the title of
                 their daily radio broadcast (/radio). */}
-            <h1 className="f-display t-hero mt-7 max-w-[8ch] md:mt-9 md:max-w-[11ch]">
+            <h1 className="f-display t-hero mt-7 max-w-[8ch] md:mt-24 md:max-w-[11ch]">
               Faith comes by hearing.
             </h1>
 
