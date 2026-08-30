@@ -291,12 +291,23 @@ export default function Home() {
           id="ministries"
           className="field-salt band relative isolate overflow-hidden"
         >
+          {/* Environmental typography, not a watermark: set larger and
+              cropped harder on both axes so it reads as signage the page
+              is built over. Dropped to -z-20 so the incoming field below
+              can pass in front of it. */}
           <span
             aria-hidden="true"
-            className="ghost-word ghost-on-salt f-display bottom-[-2.5rem] right-[-3vw] hidden text-[clamp(10rem,20vw,22rem)] lg:block"
+            className="ghost-word ghost-on-salt f-display bottom-[-2.5rem] right-[-4vw] -z-20 hidden text-[clamp(9rem,23vw,27rem)] md:block lg:bottom-[-4rem] lg:right-[-7vw]"
           >
             Ministries
           </span>
+
+          {/* Events' yellow arriving a moment early. Decorative, inert,
+              and clipped by this section — Events itself is untouched
+              and stays in normal flow. No rule: a horizontal line here
+              read as a divider drawn across the page, which is the one
+              thing this transition is meant to stop doing. */}
+          <span aria-hidden="true" className="field-enter -z-10 hidden md:block" />
 
           <div className="shell">
             <div className="flex flex-wrap items-end justify-between gap-6">
