@@ -493,12 +493,17 @@
     line-height: 0.7;
     letter-spacing: -0.045em;
   }
-  /* Effective contrast against the field each one sits on. */
+  /* Effective contrast against the field each one sits on. Set to be
+     caught during a normal scroll, still well under the content. Body
+     copy over these stays above 10:1, so readability is untouched. */
   .ghost-on-stock {
-    color: color-mix(in srgb, var(--color-ink) 5%, transparent);
+    color: color-mix(in srgb, var(--color-ink) 9%, transparent);
   }
   .ghost-on-salt {
-    color: color-mix(in srgb, var(--color-ink) 3.5%, transparent);
+    color: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
+  .ghost-on-blue {
+    color: color-mix(in srgb, var(--color-salt) 10%, transparent);
   }
 
   /* A notation set vertically in the band's outer margin. Real setting,

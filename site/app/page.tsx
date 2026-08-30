@@ -137,7 +137,7 @@ export default function Home() {
               bottom edges and sitting behind the numbered steps. */}
           <span
             aria-hidden="true"
-            className="ghost-word ghost-on-stock f-display bottom-[-2rem] left-[-4vw] hidden text-[clamp(9rem,17vw,18rem)] md:block"
+            className="ghost-word ghost-on-stock f-display bottom-[-2.5rem] left-[-4vw] hidden text-[clamp(10.5rem,19.5vw,20.5rem)] md:block"
           >
             Sunday
           </span>
@@ -156,7 +156,7 @@ export default function Home() {
 
               {/* Bleeds past the container on the right rather than
                   sitting in it as a thumbnail. */}
-              <div className="relative lg:col-span-7 lg:-ml-8 lg:mr-[calc(50%-50vw)]">
+              <div className="relative lg:col-span-7 lg:-ml-20 lg:mr-[calc(50%-50vw)]">
                 <div className="relative aspect-[16/10] w-full border border-ink lg:aspect-auto lg:h-[26rem]">
                   <Image
                     src="/ministries/01-foundations-alt.png"
@@ -264,7 +264,7 @@ export default function Home() {
         >
           <span
             aria-hidden="true"
-            className="ghost-word ghost-on-salt f-display right-[-5vw] top-[42%] hidden text-[clamp(10rem,20vw,22rem)] lg:block"
+            className="ghost-word ghost-on-salt f-display bottom-[-2.5rem] right-[-3vw] hidden text-[clamp(10rem,20vw,22rem)] lg:block"
           >
             Ministries
           </span>
@@ -427,13 +427,21 @@ export default function Home() {
           FOOTER — the back of a printed programme. One graphic
           device: the dove, outline only, blue showing through it.
           =========================================================== */}
-      <footer id="about" className="field-blue relative overflow-hidden py-20 md:py-24">
-        <img
-          src="/dove-salt.svg"
-          alt=""
+      <footer
+        id="about"
+        className="field-blue relative isolate overflow-hidden py-20 md:py-24"
+      >
+        {/* Environmental type in the space the dove used to occupy:
+            mass and balance, not a second heading. Cropped by the top
+            and right edges. */}
+        <span
           aria-hidden="true"
-          className="pointer-events-none absolute -right-10 top-6 w-[300px] opacity-[0.14] md:-right-8 md:top-10 md:w-[460px]"
-        />
+          className="ghost-word ghost-on-blue f-display right-[-3vw] top-[-2rem] hidden text-right text-[clamp(7rem,13vw,15rem)] lg:block"
+        >
+          Conejo
+          <br />
+          Valley
+        </span>
 
         <div className="shell relative">
           <img
