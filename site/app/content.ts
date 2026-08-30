@@ -169,9 +169,9 @@ export const FOOTER_LINKS = [
 export const SERMON = {
   videoId: "NvkGG0jTnyI",
   title: "Losing Sight Of What Really Matters",
-  // The same title, broken by hand for the desktop column so it sets as
-  // one typographic shape instead of an arbitrary browser wrap. Joined
-  // back into a single line below lg.
+  // The same title, broken by hand so it sets as one shape at every
+  // width rather than rewrapping arbitrarily per breakpoint. A line
+  // too long for a narrow phone simply wraps within itself.
   titleLines: ["Losing Sight", "Of What Really", "Matters"],
   passage: "Luke 7:36-50, 8:1-21",
   tags: ["The Book of Luke", "Verse by verse"],

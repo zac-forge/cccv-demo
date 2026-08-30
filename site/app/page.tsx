@@ -149,7 +149,7 @@ export default function Home() {
             <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
                 <p className="t-eyebrow text-red">New here</p>
-                <h2 className="f-display t-section mt-5 max-w-[13ch]">
+                <h2 className="f-display t-section mt-5 max-w-[10ch] md:max-w-[13ch]">
                   What a Sunday looks like
                 </h2>
                 <a href="#connect" className="link-rule mt-8">
@@ -254,7 +254,7 @@ export default function Home() {
                     the video on their YouTube channel. */}
                 <h2 className="f-display t-message">
                   {SERMON.titleLines.map((line, i) => (
-                    <span key={line} className="lg:block">
+                    <span key={line} className="block">
                       {line}
                       {i < SERMON.titleLines.length - 1 ? " " : ""}
                     </span>
@@ -315,14 +315,14 @@ export default function Home() {
               </p>
             </div>
 
-            <ul className="mt-14 grid grid-cols-2 gap-5 md:mt-16 lg:grid-cols-12 lg:gap-6">
+            <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-16 lg:grid-cols-12 lg:gap-6">
               {MINISTRIES.map((m) => (
                 <li
                   key={m.slug}
                   className={
                     m.wide
-                      ? "col-span-2 lg:col-span-6"
-                      : "col-span-1 lg:col-span-3"
+                      ? "sm:col-span-2 lg:col-span-6"
+                      : "sm:col-span-1 lg:col-span-3"
                   }
                 >
                   <article className={`${m.field} h-full border border-ink`}>
@@ -334,7 +334,7 @@ export default function Home() {
                         src={`/ministries/${m.slug}.png`}
                         alt=""
                         fill
-                        sizes="(max-width: 1024px) 50vw, 40vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
                         className="object-cover"
                       />
                     </div>
@@ -497,12 +497,12 @@ export default function Home() {
               {FOOTER_LINKS.map((col) => (
                 <nav key={col.heading} aria-label={col.heading}>
                   <h2 className="t-eyebrow text-yellow">{col.heading}</h2>
-                  <ul className="mt-5 space-y-3">
+                  <ul className="mt-5 space-y-1 lg:space-y-3">
                     {col.links.map((link) => (
                       <li key={link}>
                         <a
                           href="#"
-                          className="muted text-[0.9375rem] underline-offset-4 hover:text-salt hover:underline"
+                          className="muted inline-block py-2 text-[0.9375rem] underline-offset-4 hover:text-salt hover:underline lg:inline lg:py-0"
                         >
                           {link}
                         </a>
