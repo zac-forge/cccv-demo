@@ -133,13 +133,18 @@
   }
 
   .t-hero {
-    font-size: clamp(3.5rem, 15vw, 5.5rem);
-    line-height: 0.9;
+    font-size: clamp(3.75rem, 16vw, 5.75rem);
+    line-height: 0.88;
     letter-spacing: -0.035em;
   }
   @media (min-width: 768px) {
     .t-hero {
-      font-size: clamp(4.5rem, 8vw, 8.5rem);
+      /* Brief asked for a 9rem cap. Inside a 1440 container the text
+         is ~4.82x the font size, so anything over 7.2rem runs past the
+         seam and onto the artwork's cloud band, where salt type on
+         salt cloud is unreadable. Capped at the largest size that
+         still clears. */
+      font-size: clamp(5.5rem, 8vw, 7.2rem);
       line-height: 0.88;
     }
   }
@@ -250,6 +255,12 @@
       border-color 120ms linear;
   }
 
+  /* Hero pair only: 54px tall. .btn stays 44px everywhere else. */
+  .btn-lg {
+    padding-block: 1.25rem;
+    padding-inline: 2rem;
+  }
+
   .btn-sun {
     background: var(--color-yellow);
     color: var(--color-ink);
@@ -305,38 +316,72 @@
   }
 
   /* ----------------------------------------------------------------
-     Header. Transparent over the hero, solid Album Stock past it.
+     Header. Not a bar over a picture: it has no ground of its own on
+     the hero, and the logotype is taller than the row it sits in, so
+     the mark hangs into the field below and ties the two together.
+     Every scroll-state value is a custom property, so the later motion
+     pass retunes numbers without touching structure.
      ---------------------------------------------------------------- */
   .site-header {
     --nav-fg: var(--color-salt);
     --focus: var(--color-yellow);
+    --header-h: 68px;
+    --logo-w: 190px;
+    --logo-drop: 0px;
     background-color: transparent;
     border-bottom: 1px solid transparent;
     transition: background-color 200ms linear, border-color 200ms linear;
   }
+  @media (min-width: 768px) {
+    .site-header {
+      --header-h: 104px;
+      --logo-w: 276px;
+      --logo-drop: 26px;
+    }
+  }
+
+  /* Scrolled past the hero: nearly opaque Baptism Blue, a shorter row,
+     and the mark pulled back inside it. Structure only for now. */
   .site-header[data-solid="true"] {
-    --nav-fg: var(--color-ink);
-    --focus: var(--color-red);
-    background-color: var(--color-stock);
-    border-bottom-color: var(--color-ink);
+    --logo-drop: 0px;
+    background-color: color-mix(in srgb, var(--color-blue) 96%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--color-salt) 20%, transparent);
+  }
+  @media (min-width: 768px) {
+    .site-header[data-solid="true"] {
+      --header-h: 96px;
+      --logo-w: 240px;
+    }
+  }
+
+  .site-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    height: var(--header-h);
+    transition: height 200ms linear;
   }
 
   .site-logo {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 200ms linear, visibility 200ms linear;
+    flex-shrink: 0;
+    transform: translateY(var(--logo-drop));
+    transition: transform 200ms linear;
   }
-  .site-header[data-solid="true"] .site-logo {
-    opacity: 1;
-    visibility: visible;
+  .site-logo img {
+    display: block;
+    width: var(--logo-w);
+    height: auto;
+    transition: width 200ms linear;
   }
 
+  /* Utility, deliberately quiet against the mark. */
   .navlink {
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-size: 0.8125rem;
+    font-weight: 500;
     line-height: 1;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.055em;
     color: var(--nav-fg);
     padding-bottom: 6px;
     border-bottom: 2px solid transparent;
@@ -373,7 +418,7 @@
     width: 34px;
     height: 34px;
     border: 1px solid currentColor;
-    border-radius: var(--radius-print);
+    border-radius: 0;
     transition: background-color 120ms linear, border-color 120ms linear,
       color 120ms linear;
   }
@@ -422,49 +467,124 @@
   }
 
   /* ----------------------------------------------------------------
-     Hero. The sun and rays own the upper right of the artwork, so the
-     type takes the flat navy at upper left. Directional scrim, never
-     a flat overlay: that would kill the sun.
+     HERO. A flat Baptism Blue field with one oversized printed object
+     cropped into it. Not a photograph with type laid over it: the
+     artwork has a hard left edge that cuts past the centre line into
+     the headline's air, and the blue it sits on is the same blue the
+     service band is printed in.
      ---------------------------------------------------------------- */
-  .hero-scrim {
-    background: linear-gradient(
-      178deg,
-      rgba(22, 19, 26, 0.68) 0%,
-      rgba(22, 19, 26, 0.52) 40%,
-      rgba(22, 19, 26, 0.7) 100%
-    );
+  .hero-field {
+    --focus: var(--color-yellow);
+    --muted: color-mix(in srgb, var(--color-salt) 86%, transparent);
+    /* Matches the header's resting height. Deliberately does NOT track
+       the shrunk scroll state: the plate must not move on scroll. */
+    --plate-top: 104px;
+    --gutter: clamp(24px, 4.4vw, 64px);
+    /* The artwork's left edge is derived from the headline's own
+       measure rather than a fixed percentage, so the plate always
+       meets the type one 24px register past it instead of drifting
+       into a gutter at some widths and onto the cloud band at others.
+       4.82 is the rendered width of "Faith comes" in Fraunces at these
+       variation settings, as a multiple of font-size — measured, and
+       re-checked at every breakpoint in the sweep below. */
+    --seam: calc(var(--gutter) + 4.82 * clamp(5.5rem, 8vw, 7.2rem) + 24px);
+    background-color: var(--color-blue);
+    color: var(--color-salt);
   }
-
   @media (min-width: 768px) {
-    .hero-scrim {
-      background: linear-gradient(
-        98deg,
-        rgba(22, 19, 26, 0.84) 0%,
-        rgba(22, 19, 26, 0.78) 34%,
-        rgba(22, 19, 26, 0.6) 56%,
-        rgba(22, 19, 26, 0.24) 72%,
-        rgba(22, 19, 26, 0) 88%
-      );
+    .hero-field {
+      display: flex;
+      align-items: center;
+      min-height: min(88vh, 960px);
     }
   }
 
-  /* Protects the nav row, which sits over the rays at every width. */
-  .hero-topscrim {
-    background: linear-gradient(
-      180deg,
-      rgba(22, 19, 26, 0.72) 0px,
-      rgba(22, 19, 26, 0.66) 96px,
-      rgba(22, 19, 26, 0.3) 154px,
-      rgba(22, 19, 26, 0) 228px
-    );
+  /* Wider than .shell. The hero is a poster field; nothing in it has
+     to line up with the 1320 text column the rest of the page uses. */
+  .hero-shell {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(24px, 4.4vw, 64px);
   }
 
-  .hero-img {
-    object-position: 28% center;
-  }
   @media (min-width: 768px) {
-    .hero-img {
-      object-position: 50% 50%;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 52% 48%;
+      align-items: center;
+    }
+  }
+
+  .hero-verse {
+    max-width: min(480px, calc(var(--seam) - var(--gutter) - 28px));
+    margin-top: clamp(2.25rem, 3.6vw, 3.25rem);
+  }
+
+  .hero-cta {
+    margin-top: clamp(2.25rem, 3.2vw, 3rem);
+  }
+
+  .hero-field .btn-outline {
+    border-color: color-mix(in srgb, var(--color-salt) 72%, transparent);
+  }
+
+  /* Mobile: the artwork is the last element, full-bleed and cropped,
+     so the opening reads graphic rather than as stacked blocks. */
+  .hero-plate {
+    position: relative;
+    height: 42svh;
+    min-height: 280px;
+    margin-top: clamp(2.5rem, 7vw, 3.5rem);
+  }
+  /* Far enough right to keep the sun in frame: at this crop a 64%
+     origin pushes it out of the plate entirely. */
+  .hero-plate img {
+    object-fit: cover;
+    object-position: 88% 45%;
+  }
+
+  /* The plate's top edge lands on the header baseline. That keeps the
+     nav row on flat blue — salt on Baptism Blue is 6.04, where salt on
+     the rays measured 1.00 — so the artwork needs no scrim over it and
+     the rays keep full strength. The logotype hangs past that line and
+     is what stitches the header to the field. */
+  @media (min-width: 768px) {
+    .hero-plate {
+      position: absolute;
+      top: var(--plate-top);
+      right: 0;
+      bottom: 0;
+      /* Anchored to the 1440 container, not the viewport, so the seam
+         keeps the same relationship to the headline past 1440 instead
+         of drifting away from it. */
+      left: calc(50% - min(50vw, 720px) + var(--seam));
+      height: auto;
+      min-height: 0;
+      margin-top: 0;
+    }
+    .hero-plate img {
+      object-position: 76% 50%;
+    }
+  }
+
+  /* 768–1100. Three things go wrong here if the desktop rules just
+     carry over: the 5.5rem clamp FLOOR holds the headline at 88px,
+     which a 52% column cannot set on two lines; the plate turns
+     portrait so a 76% origin pushes the sun out of frame; and the
+     headline runs onto the light rays. So: smaller headline, artwork
+     shifted right and cropped harder, seam moved out to 48%. The
+     composition stays asymmetric — it does not become a centred
+     column. */
+  @media (min-width: 768px) and (max-width: 1100px) {
+    .t-hero {
+      font-size: clamp(3.5rem, 7.6vw, 5.5rem);
+    }
+    .hero-field {
+      --seam: calc(var(--gutter) + 4.82 * clamp(3.5rem, 7.6vw, 5.5rem) + 24px);
+    }
+    .hero-plate img {
+      object-position: 92% 50%;
     }
   }
 

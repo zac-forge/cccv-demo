@@ -47,26 +47,23 @@ export default function Header() {
       </div>
 
       <header className="site-header sticky top-0 z-50" data-solid={isSolid}>
-        <div className="shell flex h-[68px] items-center justify-between gap-6 md:h-[96px]">
-          {/* Held in the DOM at constant size so nav never shifts when it
-              fades in. Hidden from tab order while it is invisible. */}
+        <div className="hero-shell site-header-row">
+          {/* The mark is the identity and is always present. It is taller
+              than the row, so it hangs into the hero field below. */}
           <a
             href="#top"
-            className="site-logo shrink-0"
+            className="site-logo"
             aria-label="Calvary Chapel Conejo Valley, back to top"
-            tabIndex={isSolid ? 0 : -1}
-            aria-hidden={!isSolid}
           >
             <img
-              src="/logotype-trim.svg"
+              src="/logotype-white-trim.svg"
               alt="Calvary Chapel Conejo Valley"
               width={1601}
               height={611}
-              className="h-11 w-auto md:h-[68px]"
             />
           </a>
 
-          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
             {NAV.map((item) => (
               <a key={item.label} href={item.href} className="navlink">
                 {item.label}
@@ -97,7 +94,7 @@ export default function Header() {
         <div
           id="mobile-nav"
           hidden={!open}
-          className="border-t border-ink/85 bg-stock lg:hidden"
+          className="field-blue border-t border-[color:var(--rule)] lg:hidden"
         >
           <nav aria-label="Primary, mobile" className="shell flex flex-col py-2">
             {NAV.map((item) => (
@@ -105,7 +102,7 @@ export default function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-ink/15 py-3.5 text-[1.0625rem] font-medium text-ink last:border-b-0"
+                className="border-b border-[color:var(--rule)] py-3.5 text-[1.0625rem] font-medium last:border-b-0"
               >
                 {item.label}
               </a>

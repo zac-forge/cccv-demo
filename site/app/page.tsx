@@ -25,64 +25,61 @@ export default function Home() {
 
       <main id="main">
         {/* =========================================================
-            HERO — poster. The artwork puts the sun and its rays in
-            the upper right, so mark and headline take the flat navy
-            at upper left and run wider than any column would allow.
+            HERO — one field shared with the header above it. Flat
+            Baptism Blue, the headline as the graphic, and the artwork
+            cropped into the right 56% with a hard edge that cuts past
+            the centre line. The logotype lives in the header and hangs
+            down into this field, so there is no mark repeated here.
             ========================================================= */}
-        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-0 md:pt-[96px]">
-          <Image
-            src="/site/hero.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-img -z-20 scale-105 object-cover"
-          />
-          <div className="hero-scrim absolute inset-0 -z-10" aria-hidden="true" />
-          <div
-            className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[228px]"
-            aria-hidden="true"
-          />
+        <section className="hero-field relative isolate -mt-[68px] overflow-hidden pt-[68px] md:-mt-[104px] md:pt-[104px]">
+          <div className="hero-shell relative z-10 w-full pt-10 md:pt-0">
+            <div className="hero-grid">
+              <div>
+                {/* Their own words: "Faith Comes By Hearing" is the title
+                    of their daily radio broadcast (/radio). */}
+                <h1 className="f-display t-hero">
+                  Faith comes
+                  <br />
+                  by hearing.
+                </h1>
 
-          {/* Not a centred container: the block is pinned left and the
-              headline is allowed to run past the mark above it. */}
-          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
-            <img
-              src="/logotype-white-trim.svg"
-              alt="Calvary Chapel Conejo Valley"
-              width={1601}
-              height={611}
-              className="h-auto w-[74vw] max-w-[360px] md:w-[38vw] md:max-w-[540px]"
-            />
+                {/* Romans 10:17, NKJV — the translation their site quotes.
+                    Verbatim, not fitted to the layout. Set as printed
+                    scripture: no rule, no box, reference beneath. */}
+                <figure className="hero-verse">
+                  <blockquote className="t-lede muted">
+                    &ldquo;So then faith comes by hearing, and hearing by the
+                    word of God.&rdquo;
+                  </blockquote>
+                  {/* Salt, not yellow: yellow is 8.15 on ink but only
+                      3.63 on Baptism Blue, which fails at 11px. The
+                      yellow accent in this field is the primary CTA. */}
+                  <figcaption className="t-meta mt-4">Romans 10:17</figcaption>
+                </figure>
 
-            {/* Their own words: "Faith Comes By Hearing" is the title of
-                their daily radio broadcast (/radio). */}
-            <h1 className="f-display t-hero mt-7 max-w-[8ch] md:mt-9 md:max-w-[11ch]">
-              Faith comes by hearing.
-            </h1>
-
-            <div className="mt-9 flex flex-col gap-9 md:mt-12 md:flex-row md:items-end md:gap-16">
-              {/* Romans 10:17, NKJV — the translation their site quotes.
-                  Verbatim, not fitted to the layout. */}
-              <figure className="max-w-[34ch] border-l-2 border-yellow pl-5">
-                <blockquote className="t-lede muted">
-                  &ldquo;So then faith comes by hearing, and hearing by the word
-                  of God.&rdquo;
-                </blockquote>
-                <figcaption className="t-eyebrow mt-3 text-yellow">
-                  Romans 10:17
-                </figcaption>
-              </figure>
-
-              <div className="flex flex-col gap-3 sm:flex-row md:pb-1">
-                <a href="#new-here" className="btn btn-sun">
-                  Plan your visit
-                </a>
-                <a href="#message" className="btn btn-outline">
-                  Watch a message
-                </a>
+                <div className="hero-cta flex flex-col items-start gap-3 xl:flex-row">
+                  <a href="#new-here" className="btn btn-lg btn-sun">
+                    Plan your visit
+                  </a>
+                  <a href="#message" className="btn btn-lg btn-outline">
+                    Watch a message
+                  </a>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Last in the DOM so mobile stacks it under the CTAs; on
+              desktop it is lifted out of flow into the right 56%. */}
+          <div className="hero-plate">
+            <Image
+              src="/site/hero.png"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 767px) 100vw, 58vw"
+              className="object-cover"
+            />
           </div>
 
           <div
@@ -96,9 +93,12 @@ export default function Home() {
             SERVICE TIMES — flat blue information band. Printed on the
             back of the bulletin, not four cards.
             ========================================================= */}
+        {/* Rides up over the foot of the hero and crops the artwork
+            with a flat rectangular edge. No rule, no floating card:
+            the two blues are the same ink, so the seam is the crop. */}
         <section
           aria-label="Service times and location"
-          className="field-blue band-sm"
+          className="field-blue band-sm relative z-10 -mt-6 md:-mt-8"
         >
           <div className="shell">
             <dl className="grid grid-cols-1 sm:-mx-8 sm:grid-cols-2 lg:grid-cols-4">
