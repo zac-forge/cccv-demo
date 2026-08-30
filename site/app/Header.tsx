@@ -20,12 +20,13 @@ export default function Header() {
   const [solid, setSolid] = useState(false);
 
   useEffect(() => {
-    // Marker sits at the head of the hero, rendered by the page, so the
-    // solid state engages within ~38px of scroll rather than after it.
+    // The marker IS the hero logotype. The header only asserts the
+    // identity once the hero's own mark has left the viewport, so the two
+    // never read as competing logos.
     const node = document.getElementById("hero-sentinel");
     if (!node) return;
 
-    // Watch a 1px marker at the head of the hero. No scroll listener.
+    // Fires when the mark is fully out of view. No scroll listener.
     const io = new IntersectionObserver(
       ([entry]) => {
         setSolid(!entry.isIntersecting && entry.boundingClientRect.top <= 0);

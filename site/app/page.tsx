@@ -48,6 +48,7 @@ export default function Home() {
               headline is allowed to run past the mark above it. */}
           <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
             <img
+              id="hero-sentinel"
               src="/logotype-white-trim.svg"
               alt="Calvary Chapel Conejo Valley"
               width={1601}
@@ -84,12 +85,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          <div
-            id="hero-sentinel"
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 left-0 h-px w-full"
-          />
         </section>
 
         {/* =========================================================
