@@ -505,9 +505,6 @@
   .ghost-on-blue {
     color: color-mix(in srgb, var(--color-salt) 10%, transparent);
   }
-  .ghost-on-ink {
-    color: color-mix(in srgb, var(--color-salt) 18%, transparent);
-  }
 
   /* A notation set vertically in the band's outer margin. Real setting,
      not a rotation, so the box stays predictable. */
