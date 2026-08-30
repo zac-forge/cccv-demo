@@ -93,8 +93,18 @@ export default function Home() {
             ========================================================= */}
         <section
           aria-label="Service times and location"
-          className="field-blue band-sm"
+          className="field-blue band-sm relative"
         >
+          {/* Their own location, set vertically in the band's outer
+              margin. Desktop only — narrower widths have no margin to
+              put it in. */}
+          <span
+            aria-hidden="true"
+            className="edge-note right-[clamp(10px,1.5vw,24px)] top-1/2 hidden -translate-y-1/2 lg:block"
+          >
+            Thousand Oaks &middot; California
+          </span>
+
           <div className="shell">
             <dl className="grid grid-cols-1 sm:-mx-8 sm:grid-cols-2 lg:grid-cols-4">
               {TIMES.map((cell) => (
@@ -119,7 +129,19 @@ export default function Home() {
             NEW HERE — editorial. Oversized ghosted numerals, printed
             rules instead of boxes, illustration bleeding off the edge.
             ========================================================= */}
-        <section id="new-here" className="field-stock band overflow-hidden">
+        <section
+          id="new-here"
+          className="field-stock band relative isolate overflow-hidden"
+        >
+          {/* Environmental type, not a heading: cropped by the left and
+              bottom edges and sitting behind the numbered steps. */}
+          <span
+            aria-hidden="true"
+            className="ghost-word ghost-on-stock f-display bottom-[-2rem] left-[-4vw] hidden text-[clamp(9rem,17vw,18rem)] md:block"
+          >
+            Sunday
+          </span>
+
           <div className="shell">
             <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
@@ -134,7 +156,7 @@ export default function Home() {
 
               {/* Bleeds past the container on the right rather than
                   sitting in it as a thumbnail. */}
-              <div className="relative lg:col-span-7 lg:mr-[calc(50%-50vw)]">
+              <div className="relative lg:col-span-7 lg:-ml-8 lg:mr-[calc(50%-50vw)]">
                 <div className="relative aspect-[16/10] w-full border border-ink lg:aspect-auto lg:h-[26rem]">
                   <Image
                     src="/ministries/01-foundations-alt.png"
@@ -191,8 +213,18 @@ export default function Home() {
           <div className="absolute inset-0 -z-10 bg-ink/[0.88]" aria-hidden="true" />
 
           <div className="band-lg shell grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
+            <div className="relative lg:col-span-7">
               <SermonPlayer videoId={SERMON.videoId} title={SERMON.title} />
+
+              {/* Their own words: the book is SERMON.passage, the line
+                  below it is SERMON.tags[1]. Nothing invented. */}
+              <span
+                aria-hidden="true"
+                className="mark-slug -bottom-4 left-5 sm:left-6"
+              >
+                <span className="block">Luke</span>
+                <span className="block">Verse by verse</span>
+              </span>
             </div>
 
             <div className="lg:col-span-5">
@@ -226,7 +258,17 @@ export default function Home() {
             MINISTRIES — a set of screenprinted handbills. Panels vary
             in width, crop and field; type and spacing do not.
             ========================================================= */}
-        <section id="ministries" className="field-salt band">
+        <section
+          id="ministries"
+          className="field-salt band relative isolate overflow-hidden"
+        >
+          <span
+            aria-hidden="true"
+            className="ghost-word ghost-on-salt f-display right-[-5vw] top-[42%] hidden text-[clamp(10rem,20vw,22rem)] lg:block"
+          >
+            Ministries
+          </span>
+
           <div className="shell">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
@@ -431,6 +473,19 @@ export default function Home() {
               ))}
             </div>
           </div>
+
+          {/* Back-of-the-sleeve publisher line. Identity and location
+              only, both already verified elsewhere on the page. */}
+          <span
+            aria-hidden="true"
+            className="sign-off bottom-7 right-0 hidden text-right lg:block"
+          >
+            Calvary Chapel
+            <br />
+            Conejo Valley
+            <br />
+            Thousand Oaks, CA
+          </span>
 
           <p className="rule-t muted mt-14 pt-8 text-[0.8125rem]">
             Design concept for Calvary Chapel Conejo Valley. Not the live site.

@@ -475,6 +475,81 @@
   }
 
   /* ----------------------------------------------------------------
+     DEPTH. Three planes: oversized cropped type behind, content
+     untouched in the middle, an occasional printed mark crossing a
+     boundary in front. Everything here is decorative — aria-hidden in
+     the markup, out of the reading order, inert to the pointer, and
+     absolutely positioned so none of it can shift the page. The print
+     texture is the existing global .grain; no second texture system.
+     ---------------------------------------------------------------- */
+
+  /* Environmental typography. Cropped by its section, never a heading. */
+  .ghost-word {
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    line-height: 0.7;
+    letter-spacing: -0.045em;
+  }
+  /* Effective contrast against the field each one sits on. */
+  .ghost-on-stock {
+    color: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  }
+  .ghost-on-salt {
+    color: color-mix(in srgb, var(--color-ink) 3.5%, transparent);
+  }
+
+  /* A notation set vertically in the band's outer margin. Real setting,
+     not a rotation, so the box stays predictable. */
+  .edge-note {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: color-mix(in srgb, var(--color-salt) 46%, transparent);
+  }
+
+  /* A printer's slug, not a UI badge: square corners, hairline rule,
+     and it straddles the plate edge rather than sitting inside it. */
+  .mark-slug {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    border: 1px solid var(--color-yellow);
+    background-color: var(--color-ink);
+    color: var(--color-salt);
+    padding: 0.5rem 0.8125rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    transform: rotate(-0.8deg);
+  }
+
+  /* Publisher line, back-of-the-sleeve scale. */
+  .sign-off {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    line-height: 1.9;
+    color: color-mix(in srgb, var(--color-salt) 42%, transparent);
+  }
+
+  /* ----------------------------------------------------------------
      Reduced motion
      ---------------------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
