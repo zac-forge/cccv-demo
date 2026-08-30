@@ -29,39 +29,27 @@ export default function Home() {
             the upper right, so mark and headline take the flat navy
             at upper left and run wider than any column would allow.
             ========================================================= */}
-        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(560px,84svh)] flex-col justify-end overflow-hidden pb-0 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:flex-row md:items-center md:pb-14 md:pt-[96px]">
-          {/* Mobile art-directs the artwork into a band at the foot of
-              the poster, so the headline sits on the flat field and the
-              sun and rays are actually in frame — a narrow full-bleed
-              crop of this image can hold one or the other, never both.
-              From md up it is the approved full-bleed fill, untouched. */}
-          <div
-            aria-hidden="true"
-            className="relative order-last -z-20 aspect-[16/9] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:w-auto"
-          >
-            <Image
-              src="/site/hero.png"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className="hero-img scale-105 object-cover"
-            />
-          </div>
-          {/* Both scrims exist to keep type legible over the artwork. On
-              mobile no type sits on it, so they only mute the poster. */}
-          <div
-            className="hero-scrim absolute inset-0 -z-10 hidden md:block"
-            aria-hidden="true"
+        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[96px]">
+          {/* One plane at every width. Mobile zooms and lifts the crop so
+              the sun clears the type block instead of sitting behind it;
+              desktop keeps its approved 105% / centred crop. */}
+          <Image
+            src="/site/hero.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="hero-img -z-20 -translate-y-[8%] scale-[1.25] object-cover md:translate-y-0 md:scale-105"
           />
+          <div className="hero-scrim absolute inset-0 -z-10" aria-hidden="true" />
           <div
-            className="hero-topscrim absolute inset-x-0 top-0 -z-10 hidden h-[228px] md:block"
+            className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[228px]"
             aria-hidden="true"
           />
 
           {/* Not a centred container: the block is pinned left and the
               headline is allowed to run past the mark above it. */}
-          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] pb-10 md:mx-auto md:pb-0">
+          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
             <img
               id="hero-sentinel"
               src="/logotype-white-trim.svg"

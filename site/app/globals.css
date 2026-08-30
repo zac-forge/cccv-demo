@@ -498,10 +498,11 @@
   }
 
   .hero-img {
-    /* The band at the foot of the mobile poster. Held to the right of
-       the artwork so the sun sits whole and inboard of the edge, with
-       its rays and the ridgeline behind it. */
-    object-position: 92% center;
+    /* Portrait crop. Held right so the sun is in frame at all — 28%
+       put the phone over the flat left-hand sky, where there is none —
+       and paired with a zoom and lift on the element so the sun sits
+       above the type rather than behind it. */
+    object-position: 95% center;
   }
   @media (min-width: 768px) {
     .hero-img {
