@@ -140,6 +140,7 @@ export default function Home() {
               bottom edges and sitting behind the numbered steps. */}
           <span
             aria-hidden="true"
+            data-drift=""
             className="ghost-word ghost-on-stock f-display bottom-[-2.5rem] left-[-4vw] hidden text-[clamp(10.5rem,19.5vw,20.5rem)] md:block"
           >
             Sunday
@@ -148,9 +149,14 @@ export default function Home() {
           <div className="shell">
             <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
-                <p className="t-eyebrow text-red">New here</p>
-                <h2 className="f-display t-section mt-5 max-w-[10ch] md:max-w-[13ch]">
-                  What a Sunday looks like
+                <p data-reveal="" className="t-eyebrow text-red">
+                  New here
+                </p>
+                <h2
+                  data-reveal="clip"
+                  className="f-display t-section mt-5 max-w-[10ch] md:max-w-[13ch]"
+                >
+                  <span>What a Sunday looks like</span>
                 </h2>
                 <a href="#connect" className="link-rule mt-8">
                   Plan your visit
@@ -176,6 +182,7 @@ export default function Home() {
               {SUNDAY_STEPS.map((step, i) => (
                 <li
                   key={step.title}
+                  data-reveal=""
                   className={[
                     "rule-t relative overflow-hidden py-9 md:py-12",
                     i % 2 === 0
@@ -227,7 +234,10 @@ export default function Home() {
           <div className="band-lg shell">
             {/* Folio: imprint one end, series the other. Print notation,
                 not an eyebrow above a row of tags. */}
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+            <div
+              data-reveal=""
+              className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+            >
               <p className="t-eyebrow tracking-[0.34em]">Latest message</p>
               <p className="t-eyebrow muted tracking-[0.26em]">
                 {SERMON.tags.join(" · ")}
@@ -237,7 +247,10 @@ export default function Home() {
             {/* The one rule, and the one production mark on it. The tick
                 falls exactly where the type column begins below, so it
                 registers the rule to the grid. Desktop only. */}
-            <div className="mt-4 border-t-2 border-blue lg:grid lg:grid-cols-12 lg:gap-16">
+            <div
+              data-reveal="rule"
+              className="mt-4 border-t-2 border-blue lg:grid lg:grid-cols-12 lg:gap-16"
+            >
               <span
                 aria-hidden="true"
                 className="-mt-[7px] hidden h-3 w-0.5 bg-yellow lg:col-start-7 lg:block"
@@ -245,14 +258,14 @@ export default function Home() {
             </div>
 
             <div className="mt-12 grid items-start gap-12 md:mt-16 lg:grid-cols-12 lg:gap-16">
-              <div className="lg:col-span-6">
+              <div data-reveal="" data-late="" className="lg:col-span-6">
                 <SermonPlayer videoId={SERMON.videoId} title={SERMON.title} />
               </div>
 
               <div className="lg:col-span-6">
                 {/* Title, passage and series are the church's own, from
                     the video on their YouTube channel. */}
-                <h2 className="f-display t-message">
+                <h2 data-reveal="clip" className="f-display t-message">
                   {SERMON.titleLines.map((line, i) => (
                     <span key={line} className="block">
                       {line}
@@ -296,6 +309,7 @@ export default function Home() {
         >
           <span
             aria-hidden="true"
+            data-drift=""
             className="ghost-word ghost-on-salt f-display bottom-[-2.5rem] right-[-3vw] hidden text-[clamp(10rem,20vw,22rem)] lg:block"
           >
             Ministries
@@ -304,9 +318,14 @@ export default function Home() {
           <div className="shell">
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
-                <p className="t-eyebrow text-red">Ministries</p>
-                <h2 className="f-display t-section mt-5 max-w-[14ch]">
-                  Somewhere to grow, whoever you are
+                <p data-reveal="" className="t-eyebrow text-red">
+                  Ministries
+                </p>
+                <h2
+                  data-reveal="clip"
+                  className="f-display t-section mt-5 max-w-[14ch]"
+                >
+                  <span>Somewhere to grow, whoever you are</span>
                 </h2>
               </div>
               <p className="muted max-w-[30ch] text-[0.9375rem]">
@@ -319,15 +338,18 @@ export default function Home() {
               {MINISTRIES.map((m) => (
                 <li
                   key={m.slug}
+                  data-reveal=""
                   className={
                     m.wide
                       ? "sm:col-span-2 lg:col-span-6"
                       : "sm:col-span-1 lg:col-span-3"
                   }
                 >
-                  <article className={`${m.field} h-full border border-ink`}>
+                  <article
+                    className={`ministry-card ${m.field} h-full border border-ink`}
+                  >
                     <div
-                      className="relative w-full border-b border-ink"
+                      className="relative w-full overflow-hidden border-b border-ink"
                       style={{ aspectRatio: m.ratio }}
                     >
                       <Image
@@ -359,13 +381,18 @@ export default function Home() {
             ========================================================= */}
         <section id="events" className="field-yellow band">
           <div className="shell">
-            <p className="t-eyebrow">Events</p>
-            <h2 className="f-display t-section mt-5">What&rsquo;s coming up</h2>
+            <p data-reveal="" className="t-eyebrow">
+              Events
+            </p>
+            <h2 data-reveal="clip" className="f-display t-section mt-5">
+              <span>What&rsquo;s coming up</span>
+            </h2>
 
             <ul className="mt-14 md:mt-16">
               {EVENTS.map((e) => (
                 <li
                   key={e.name}
+                  data-reveal=""
                   className="rule-t last:border-b last:border-[color:var(--rule)]"
                 >
                   <a
@@ -408,10 +435,13 @@ export default function Home() {
         <section id="connect" className="field-stock relative overflow-hidden">
           <div className="shell band-lg grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
-              <h2 className="f-display t-feature max-w-[10ch]">
-                Come and see.
+              <h2
+                data-reveal="clip"
+                className="f-display t-feature max-w-[10ch]"
+              >
+                <span>Come and see.</span>
               </h2>
-              <p className="t-lede measure-tight mt-9">
+              <p data-reveal="" className="t-lede measure-tight mt-9">
                 We count it a blessing and a privilege to serve each and every
                 one of you. Please feel free to call me with any questions or
                 concerns, and text me your prayer requests.
@@ -442,6 +472,8 @@ export default function Home() {
               so it reads as a plate the page runs over. */}
           <div
             aria-hidden="true"
+            data-reveal=""
+            data-late=""
             className="relative mx-6 mb-16 aspect-[4/3] border border-ink lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mb-0 lg:aspect-auto lg:w-[42vw] lg:border-y-0 lg:border-r-0"
           >
             <Image
@@ -468,6 +500,7 @@ export default function Home() {
             and right edges. */}
         <span
           aria-hidden="true"
+          data-drift=""
           className="ghost-word ghost-on-blue f-display right-[-3vw] top-[-2rem] hidden text-right text-[clamp(7rem,13vw,15rem)] lg:block"
         >
           Conejo

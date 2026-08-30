@@ -22,6 +22,16 @@
 :root {
   --focus: var(--color-red);
   color-scheme: light;
+
+  /* ----------------------------------------------------------------
+     Motion system. One decelerating curve and three speeds; every
+     animated rule on the page pulls from these rather than inventing
+     its own numbers.
+     ---------------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms; /* links, arrows, button states */
+  --dur-standard: 300ms; /* navigation, small graphic changes */
+  --dur-reveal: 700ms; /* editorial entrances */
 }
 
 @layer base {
@@ -254,8 +264,18 @@
     text-transform: uppercase;
     line-height: 1;
     text-align: center;
-    transition: background-color 120ms linear, color 120ms linear,
-      border-color 120ms linear;
+    transition: background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      translate var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .btn:hover {
+      translate: 0 -1px;
+    }
+  }
+  .btn:active {
+    translate: 0 0;
   }
 
   .btn-sun {
@@ -299,6 +319,7 @@
 
   /* A text link that behaves like a printed rule, not a button. */
   .link-rule {
+    position: relative;
     display: inline-block;
     font-size: 0.75rem;
     font-weight: 700;
@@ -306,10 +327,26 @@
     text-transform: uppercase;
     padding-bottom: 6px;
     border-bottom: 2px solid var(--color-red);
-    transition: border-color 120ms linear, color 120ms linear;
+    transition: border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .link-rule::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    bottom: -2px;
+    width: 1.25rem;
+    height: 2px;
+    background-color: currentColor;
+    scale: 0 1;
+    transform-origin: left center;
+    transition: scale var(--dur-fast) var(--ease-out);
   }
   .link-rule:hover {
     border-bottom-color: currentColor;
+  }
+  .link-rule:hover::after {
+    scale: none;
   }
 
   /* The same link set as folio notation rather than a control: tracked
@@ -335,10 +372,12 @@
     width: 100%;
     height: 2px;
     background-color: var(--color-blue);
-    transition: width 140ms linear, background-color 140ms linear;
+    transform-origin: left center;
+    transition: scale var(--dur-fast) var(--ease-out),
+      background-color var(--dur-fast) var(--ease-out);
   }
   .link-folio:hover::after {
-    width: calc(100% + 1.25rem);
+    scale: 1.09 1;
     background-color: currentColor;
   }
 
@@ -350,7 +389,8 @@
     --focus: var(--color-yellow);
     background-color: transparent;
     border-bottom: 1px solid transparent;
-    transition: background-color 200ms linear, border-color 200ms linear;
+    transition: background-color var(--dur-standard) var(--ease-out),
+      border-color var(--dur-standard) var(--ease-out);
   }
   .site-header[data-solid="true"] {
     --nav-fg: var(--color-ink);
@@ -362,11 +402,17 @@
   .site-logo {
     opacity: 0;
     visibility: hidden;
-    transition: opacity 200ms linear, visibility 200ms linear;
+    /* Rises the last few pixels into place instead of blinking on. A
+       transform, so the nav row never reflows. */
+    translate: 0 6px;
+    transition: opacity var(--dur-standard) var(--ease-out),
+      translate var(--dur-standard) var(--ease-out),
+      visibility var(--dur-standard);
   }
   .site-header[data-solid="true"] .site-logo {
     opacity: 1;
     visibility: visible;
+    translate: none;
   }
 
   .navlink {
@@ -378,7 +424,8 @@
     color: var(--nav-fg);
     padding-bottom: 6px;
     border-bottom: 2px solid transparent;
-    transition: border-color 120ms linear, color 120ms linear;
+    transition: border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-standard) var(--ease-out);
   }
   .navlink:hover {
     border-bottom-color: var(--color-red);
@@ -511,6 +558,17 @@
   }
 
   /* Oversized numerals sit behind the text as printed ghosts. */
+  /* The card never lifts; only the crop breathes, and only where a real
+     pointer exists. */
+  .ministry-card img {
+    transition: scale 500ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .ministry-card:hover img {
+      scale: 1.015;
+    }
+  }
+
   .numeral-ghost {
     color: color-mix(in srgb, var(--color-blue) 22%, transparent);
     user-select: none;
@@ -597,9 +655,112 @@
   }
 
   /* ----------------------------------------------------------------
+     MOTION. Every hidden state below is gated on [data-motion="on"],
+     which an inline script in <head> sets before first paint and only
+     when the user has not asked for reduced motion. No script, no
+     JavaScript, or reduced motion means nothing is ever hidden and the
+     approved static page stands exactly as designed — content is never
+     waiting on JS to become visible.
+     ---------------------------------------------------------------- */
+  [data-motion="on"] [data-reveal] {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  [data-motion="on"] [data-reveal].is-in {
+    opacity: 1;
+    translate: none;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+      translate var(--dur-reveal) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Printed type being exposed rather than a slide transition: the line
+     rises inside a mask. The padding/negative-margin pair gives
+     descenders room outside the mask without changing layout, and the
+     whole treatment only exists while motion is on. */
+  [data-motion="on"] [data-reveal="clip"] {
+    opacity: 1;
+    translate: none;
+    /* The mask is a clip-path, not overflow plus padding: padding would
+       need a negative margin to stay layout-neutral, and Tailwind's own
+       mt-* utility outranks it, which silently added ~13px to every
+       clipped heading. clip-path costs no layout at all. The bottom edge
+       sits just outside the box so descenders are never shaved. */
+    clip-path: inset(-50% -50% -0.15em -50%);
+  }
+  [data-motion="on"] [data-reveal="clip"] > * {
+    display: block;
+    opacity: 0;
+    translate: 0 0.7em;
+  }
+  [data-motion="on"] [data-reveal="clip"].is-in > * {
+    opacity: 1;
+    translate: none;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+      translate var(--dur-reveal) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* An editorial rule drawn left to right. scaleX, never width. */
+  [data-motion="on"] [data-reveal="rule"] {
+    opacity: 1;
+    translate: none;
+    scale: 0 1;
+    transform-origin: left center;
+  }
+  [data-motion="on"] [data-reveal="rule"].is-in {
+    scale: none;
+    transition: scale var(--dur-reveal) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* Sequential content: a very small stagger, and only in the two lists
+     that genuinely read as a sequence. Ministries is deliberately left
+     out — eight staggered cards is a waterfall, and each card already
+     arrives on its own as it is scrolled to. */
+  #new-here li[data-reveal]:nth-child(2),
+  #events li[data-reveal]:nth-child(2) {
+    --reveal-delay: 70ms;
+  }
+  #new-here li[data-reveal]:nth-child(3),
+  #events li[data-reveal]:nth-child(3) {
+    --reveal-delay: 140ms;
+  }
+  #new-here li[data-reveal]:nth-child(n + 4),
+  #events li[data-reveal]:nth-child(n + 4) {
+    --reveal-delay: 210ms;
+  }
+  /* Plates that follow their own heading by a beat. */
+  [data-motion="on"] [data-late] {
+    --reveal-delay: 160ms;
+  }
+
+  /* Mobile takes less of everything: shorter travel, no stagger. Drift
+     is disabled outright in the script. */
+  @media (max-width: 767px) {
+    [data-motion="on"] [data-reveal] {
+      translate: 0 10px;
+      --reveal-delay: 0ms !important;
+    }
+    [data-motion="on"] [data-reveal="clip"] > * {
+      translate: 0 0.45em;
+    }
+  }
+
+  /* ----------------------------------------------------------------
      Reduced motion
      ---------------------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
+    /* Belt and braces: if the attribute is ever stale — the setting
+       changed after load — content is still immediately visible. */
+    [data-motion="on"] [data-reveal],
+    [data-motion="on"] [data-reveal] > *,
+    [data-motion="on"] [data-reveal="clip"] > * {
+      opacity: 1 !important;
+      translate: none !important;
+      scale: none !important;
+    }
+
     html {
       scroll-behavior: auto;
     }
