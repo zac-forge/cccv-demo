@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# next
+.next/
+out/
+next-env.d.ts
+
+# platform
+.vercel/
+.DS_Store
+*.log
+
+# scratch
+assets/_to_delete/
+
+# playwright mcp scratch
+.playwright-mcp/
+
+# Internal docs — kept local, deliberately not published.
+# The repo is public so Vercel can import it; these are not ours to publish.
+BRAND.md
+DEMO.md
+HANDOFF.md
+CONTENT-SOURCES.md

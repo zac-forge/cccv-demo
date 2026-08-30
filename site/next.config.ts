@@ -1,0 +1,13 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      // Poster frame for the church's own sermon video.
+      { protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" },
+    ],
+  },
+};
+
+export default nextConfig;

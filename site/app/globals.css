@@ -1,0 +1,386 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Maranatha Blue — locked palette. See BRAND.md.
+   ink 11.63 on stock · salt 6.04 on blue · red 4.52 on stock
+   yellow 8.15 on ink and NEVER on a light ground.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-ink: #26212b;
+  --color-blue: #315e76;
+  --color-stock: #e5ddc9;
+  --color-salt: #f1eee4;
+  --color-red: #a93f2b;
+  --color-yellow: #d8b84c;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-print: 2px;
+}
+
+:root {
+  /* Focus ring colour flips per band so it is always visible. */
+  --focus: var(--color-red);
+  color-scheme: light;
+}
+
+@layer base {
+  /* ------------------------------------------------------------------
+     Base
+     ------------------------------------------------------------------ */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-stock);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 17px;
+    }
+  }
+
+  ::selection {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  /* A dark band re-points the focus ring and carries reversed type. */
+  .band-dark {
+    --focus: var(--color-yellow);
+  }
+}
+
+@layer components {
+  /* ------------------------------------------------------------------
+     Type scale — one dominant jump. Headline enormous, everything else
+     clustered just above body size. Nothing lives in the middle.
+     ------------------------------------------------------------------ */
+  .f-display {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 900, "SOFT" 60, "WONK" 1, "opsz" 120;
+    font-weight: 900;
+    letter-spacing: -0.022em;
+  }
+
+  .t-hero {
+    font-size: clamp(2.375rem, 5.4vw, 4.25rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+  }
+
+  .t-section {
+    font-size: clamp(1.75rem, 2.6vw, 2.125rem);
+    line-height: 1.06;
+  }
+
+  .t-value {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 36;
+    font-weight: 800;
+    font-size: 1.375rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  @media (min-width: 768px) {
+    .t-value {
+      font-size: 1.5rem;
+    }
+  }
+
+  .t-card {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 24;
+    font-weight: 800;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .t-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .t-lede {
+    font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+    line-height: 1.6;
+  }
+
+  .measure {
+    max-width: 34em;
+  }
+
+  /* ------------------------------------------------------------------
+     Layout
+     ------------------------------------------------------------------ */
+  .shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 56px);
+  }
+
+  .band {
+    padding-block: clamp(72px, 8.5vw, 118px);
+  }
+
+  /* ------------------------------------------------------------------
+     Controls — flat, bordered, screenprint. No shadows, 2px corners max.
+     ------------------------------------------------------------------ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-print);
+    padding: 0.8125rem 1.375rem;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    text-align: center;
+    transition: background-color 120ms linear, color 120ms linear,
+      border-color 120ms linear;
+  }
+
+  .btn-sun {
+    background: var(--color-yellow);
+    color: var(--color-ink);
+    border-color: var(--color-yellow);
+  }
+  .btn-sun:hover {
+    background: var(--color-salt);
+    border-color: var(--color-salt);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--color-salt);
+    border-color: color-mix(in srgb, var(--color-salt) 55%, transparent);
+  }
+  .btn-outline:hover {
+    background: var(--color-salt);
+    color: var(--color-ink);
+    border-color: var(--color-salt);
+  }
+
+  .btn-give {
+    background: var(--color-red);
+    color: var(--color-salt);
+    border-color: var(--color-red);
+    padding: 14px 26px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .btn-give:hover {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+  }
+
+  /* Transparent over the hero, solid Album Stock once past it. The two
+     states differ only in these variables. */
+  .site-header {
+    --nav-fg: var(--color-salt);
+    --focus: var(--color-yellow);
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 200ms linear, border-color 200ms linear;
+  }
+  .site-header[data-solid="true"] {
+    --nav-fg: var(--color-ink);
+    --focus: var(--color-red);
+    background-color: var(--color-stock);
+    border-bottom-color: var(--color-ink);
+  }
+
+  .site-logo {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms linear, visibility 200ms linear;
+  }
+  .site-header[data-solid="true"] .site-logo {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Flat bordered hamburger. Colour follows the header state, so it is
+     Salt White over the hero and Maranatha Ink once the bar goes solid.
+     The button stays a 44px touch target; only the mark inside is small. */
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: -5px;
+    color: var(--nav-fg);
+    transition: color 200ms linear;
+  }
+
+  .burger-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid currentColor;
+    border-radius: var(--radius-print);
+    transition: background-color 120ms linear, border-color 120ms linear,
+      color 120ms linear;
+  }
+  .burger:hover .burger-box {
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+    color: var(--color-salt);
+  }
+
+  .burger:focus-visible {
+    outline: none;
+  }
+  .burger:focus-visible .burger-box {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .burger-box > span {
+    display: block;
+    width: 15px;
+    height: 2px;
+    background-color: currentColor;
+    transition: transform 140ms linear, opacity 140ms linear;
+  }
+  .burger[data-open="true"] .burger-box > span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .burger[data-open="true"] .burger-box > span:nth-child(2) {
+    opacity: 0;
+  }
+  .burger[data-open="true"] .burger-box > span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  .navlink {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--nav-fg);
+    padding-bottom: 6px;
+    border-bottom: 3px solid transparent;
+    transition: border-color 120ms linear, color 120ms linear;
+  }
+  .navlink:hover,
+  .navlink[aria-current="true"] {
+    border-bottom-color: var(--color-red);
+  }
+
+  /* ------------------------------------------------------------------
+     Paper grain — the flat UI meets the screenprint halfway.
+     ------------------------------------------------------------------ */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /* ------------------------------------------------------------------
+     Hero — the sun and rays own the upper right of the artwork, so the
+     type takes the flat navy at upper left and a directional scrim
+     protects it. Never a flat overlay: that would kill the sun.
+     ------------------------------------------------------------------ */
+  .hero-scrim {
+    background: linear-gradient(
+      178deg,
+      rgba(22, 19, 26, 0.74) 0%,
+      rgba(22, 19, 26, 0.6) 42%,
+      rgba(22, 19, 26, 0.74) 100%
+    );
+  }
+
+  /* The logotype now runs much further right, toward the ray field, so the
+     directional scrim carries further before it releases. Still directional:
+     a flat overlay would kill the sun. */
+  @media (min-width: 768px) {
+    .hero-scrim {
+      background: linear-gradient(
+        98deg,
+        rgba(22, 19, 26, 0.82) 0%,
+        rgba(22, 19, 26, 0.73) 32%,
+        rgba(22, 19, 26, 0.47) 52%,
+        rgba(22, 19, 26, 0.17) 68%,
+        rgba(22, 19, 26, 0) 84%
+      );
+    }
+  }
+
+  /* The nav sits over the artwork's upper right, where the rays and the sun
+     are. This band protects the header row across the full width; the sun's
+     body sits below it and survives. */
+  .hero-topscrim {
+    background: linear-gradient(
+      180deg,
+      rgba(22, 19, 26, 0.72) 0px,
+      rgba(22, 19, 26, 0.66) 92px,
+      rgba(22, 19, 26, 0.3) 150px,
+      rgba(22, 19, 26, 0) 224px
+    );
+  }
+
+  .hero-img {
+    object-position: 28% center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-img {
+      object-position: 50% 50%;
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     Reduced motion
+     ------------------------------------------------------------------ */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
