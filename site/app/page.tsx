@@ -29,40 +29,55 @@ export default function Home() {
             the upper right, so mark and headline take the flat navy
             at upper left and run wider than any column would allow.
             ========================================================= */}
-        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[96px]">
-          <Image
-            src="/site/hero.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-img -z-20 scale-105 object-cover"
-          />
-          <div className="hero-scrim absolute inset-0 -z-10" aria-hidden="true" />
+        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(560px,84svh)] flex-col justify-end overflow-hidden pb-0 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:flex-row md:items-center md:pb-14 md:pt-[96px]">
+          {/* Mobile art-directs the artwork into a band at the foot of
+              the poster, so the headline sits on the flat field and the
+              sun and rays are actually in frame — a narrow full-bleed
+              crop of this image can hold one or the other, never both.
+              From md up it is the approved full-bleed fill, untouched. */}
           <div
-            className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[228px]"
+            aria-hidden="true"
+            className="relative order-last -z-20 aspect-[16/9] w-full overflow-hidden md:absolute md:inset-0 md:aspect-auto md:w-auto"
+          >
+            <Image
+              src="/site/hero.png"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="hero-img scale-105 object-cover"
+            />
+          </div>
+          {/* Both scrims exist to keep type legible over the artwork. On
+              mobile no type sits on it, so they only mute the poster. */}
+          <div
+            className="hero-scrim absolute inset-0 -z-10 hidden md:block"
+            aria-hidden="true"
+          />
+          <div
+            className="hero-topscrim absolute inset-x-0 top-0 -z-10 hidden h-[228px] md:block"
             aria-hidden="true"
           />
 
           {/* Not a centred container: the block is pinned left and the
               headline is allowed to run past the mark above it. */}
-          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
+          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] pb-10 md:mx-auto md:pb-0">
             <img
               id="hero-sentinel"
               src="/logotype-white-trim.svg"
               alt="Calvary Chapel Conejo Valley"
               width={1601}
               height={611}
-              className="h-auto w-[60vw] max-w-[300px] md:w-[30vw] md:max-w-[420px]"
+              className="h-auto w-[52vw] max-w-[208px] md:w-[30vw] md:max-w-[420px]"
             />
 
             {/* Their own words: "Faith Comes By Hearing" is the title of
                 their daily radio broadcast (/radio). */}
-            <h1 className="f-display t-hero mt-7 max-w-[8ch] md:mt-24 md:max-w-[11ch]">
+            <h1 className="f-display t-hero mt-6 max-w-[8ch] md:mt-24 md:max-w-[11ch]">
               Faith comes by hearing.
             </h1>
 
-            <div className="mt-9 flex flex-col gap-9 md:mt-12 md:flex-row md:items-end md:gap-16">
+            <div className="mt-7 flex flex-col gap-7 md:mt-12 md:flex-row md:items-end md:gap-16">
               {/* Romans 10:17, NKJV — the translation their site quotes.
                   Verbatim, not fitted to the layout. */}
               <figure className="max-w-[34ch] border-l-2 border-yellow pl-5">
@@ -75,7 +90,7 @@ export default function Home() {
                 </figcaption>
               </figure>
 
-              <div className="flex flex-col gap-3 sm:flex-row md:pb-1">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-stretch md:pb-1">
                 <a href="#new-here" className="btn btn-sun">
                   Plan your visit
                 </a>
@@ -106,15 +121,15 @@ export default function Home() {
           </span>
 
           <div className="shell">
-            <dl className="grid grid-cols-1 sm:-mx-8 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="-mx-4 grid grid-cols-2 sm:-mx-8 lg:grid-cols-4">
               {TIMES.map((cell) => (
                 <div
                   key={cell.label}
-                  className="border-t border-[color:var(--rule)] py-8 sm:px-8 sm:[&:nth-child(even)]:border-l lg:[&:not(:first-child)]:border-l"
+                  className="border-t border-[color:var(--rule)] px-4 py-8 [&:nth-child(even)]:border-l sm:px-8 lg:[&:not(:first-child)]:border-l"
                 >
                   <dt className="t-eyebrow text-yellow">{cell.label}</dt>
                   <dd className="mt-4">
-                    <p className="f-data t-times">{cell.value}</p>
+                    <p className="f-data t-times max-sm:text-[1.375rem]">{cell.value}</p>
                     <p className="muted mt-3 max-w-[26ch] text-[0.9375rem] leading-snug">
                       {cell.detail}
                     </p>

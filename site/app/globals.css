@@ -134,7 +134,7 @@
 
   .t-hero {
     font-size: clamp(3.5rem, 15vw, 5.5rem);
-    line-height: 0.9;
+    line-height: 0.88;
     letter-spacing: -0.035em;
   }
   @media (min-width: 768px) {
@@ -498,7 +498,10 @@
   }
 
   .hero-img {
-    object-position: 28% center;
+    /* The band at the foot of the mobile poster. Held to the right of
+       the artwork so the sun sits whole and inboard of the edge, with
+       its rays and the ridgeline behind it. */
+    object-position: 92% center;
   }
   @media (min-width: 768px) {
     .hero-img {
