@@ -29,7 +29,7 @@ export default function Home() {
             the upper right, so mark and headline take the flat navy
             at upper left and run wider than any column would allow.
             ========================================================= */}
-        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-0 md:pt-[96px]">
+        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[96px]">
           <Image
             src="/site/hero.png"
             alt=""
@@ -88,7 +88,7 @@ export default function Home() {
           <div
             id="hero-sentinel"
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 left-0 h-px w-full"
+            className="pointer-events-none absolute top-0 left-0 h-px w-full"
           />
         </section>
 

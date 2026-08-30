@@ -20,11 +20,12 @@ export default function Header() {
   const [solid, setSolid] = useState(false);
 
   useEffect(() => {
-    // Marker sits at the foot of the hero, rendered by the page.
+    // Marker sits at the head of the hero, rendered by the page, so the
+    // solid state engages within ~38px of scroll rather than after it.
     const node = document.getElementById("hero-sentinel");
     if (!node) return;
 
-    // Watch a 1px marker at the foot of the hero. No scroll listener.
+    // Watch a 1px marker at the head of the hero. No scroll listener.
     const io = new IntersectionObserver(
       ([entry]) => {
         setSolid(!entry.isIntersecting && entry.boundingClientRect.top <= 0);
