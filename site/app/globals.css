@@ -120,7 +120,7 @@
     font-family: var(--font-display);
     font-variation-settings: "wght" 900, "SOFT" 60, "WONK" 1, "opsz" 120;
     font-weight: 900;
-    letter-spacing: -0.024em;
+    letter-spacing: -0.028em;
   }
 
   /* Data set in the display face: wonk off, because Fraunces' swash
@@ -145,18 +145,20 @@
   }
 
   .t-section {
-    font-size: clamp(2.125rem, 4vw, 3.25rem);
-    line-height: 0.98;
+    font-size: clamp(2.375rem, 4.6vw, 4rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
   }
 
   .t-feature {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 0.95;
+    font-size: clamp(2.75rem, 5.4vw, 4.75rem);
+    line-height: 0.92;
+    letter-spacing: -0.032em;
   }
 
   .t-times {
     font-size: clamp(1.75rem, 3.2vw, 2.75rem);
-    line-height: 1.02;
+    line-height: 0.98;
   }
 
   .t-numeral {
@@ -165,8 +167,9 @@
   }
 
   .t-date {
-    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
-    line-height: 0.82;
+    font-size: clamp(3.25rem, 7vw, 6rem);
+    line-height: 0.78;
+    letter-spacing: -0.032em;
   }
 
   .t-card {
@@ -187,7 +190,7 @@
   }
 
   .t-meta {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -217,11 +220,14 @@
     padding-inline: clamp(24px, 5vw, 64px);
   }
 
+  .band-sm {
+    padding-block: clamp(2.5rem, 4vw, 4rem);
+  }
   .band {
-    padding-block: clamp(5rem, 9vw, 9rem);
+    padding-block: clamp(6rem, 9vw, 9rem);
   }
   .band-lg {
-    padding-block: clamp(6rem, 11vw, 12rem);
+    padding-block: clamp(7rem, 11vw, 12rem);
   }
 
   /* ----------------------------------------------------------------
@@ -409,7 +415,7 @@
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.045;
+    opacity: 0.035;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;

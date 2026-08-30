@@ -98,7 +98,7 @@ export default function Home() {
             ========================================================= */}
         <section
           aria-label="Service times and location"
-          className="field-blue py-14 md:py-20"
+          className="field-blue band-sm"
         >
           <div className="shell">
             <dl className="grid grid-cols-1 sm:-mx-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -158,7 +158,9 @@ export default function Home() {
                   key={step.title}
                   className={[
                     "rule-t relative overflow-hidden py-9 md:py-12",
-                    i % 2 === 0 ? "md:pr-14" : "md:pl-14 md:rule-l",
+                    i % 2 === 0
+                      ? "md:pr-14"
+                      : "md:pl-14 md:border-l md:border-[color:var(--rule)]",
                   ].join(" ")}
                 >
                   <span
@@ -169,7 +171,7 @@ export default function Home() {
                   </span>
                   <div className="relative">
                     <h3 className="t-card">{step.title}</h3>
-                    <p className="measure muted mt-3 max-w-[38ch]">
+                    <p className="measure muted mt-3">
                       {step.body}
                     </p>
                   </div>
@@ -212,7 +214,7 @@ export default function Home() {
               <p className="t-meta muted mt-4">{SERMON.tags.join(" · ")}</p>
 
               {/* Verbatim from /sermons. */}
-              <p className="muted measure mt-7 max-w-[42ch]">
+              <p className="muted measure mt-7">
                 We&rsquo;re always adding to our online library from Pastor
                 Dave&rsquo;s previous teachings, so if you&rsquo;re looking for a
                 particular book, check back in a bit.
@@ -238,13 +240,13 @@ export default function Home() {
                   Somewhere to grow, whoever you are
                 </h2>
               </div>
-              <p className="muted measure max-w-[30ch] text-[0.9375rem]">
+              <p className="muted max-w-[30ch] text-[0.9375rem]">
                 Eight studies and fellowships, meeting through the week on
                 campus.
               </p>
             </div>
 
-            <ul className="mt-14 grid grid-cols-2 gap-5 lg:grid-cols-12 lg:gap-6">
+            <ul className="mt-14 grid grid-cols-2 gap-5 md:mt-16 lg:grid-cols-12 lg:gap-6">
               {MINISTRIES.map((m) => (
                 <li
                   key={m.slug}
@@ -254,9 +256,7 @@ export default function Home() {
                       : "col-span-1 lg:col-span-3"
                   }
                 >
-                  <article
-                    className={`${m.field} group h-full border border-ink transition-[transform] duration-150 hover:-translate-y-1`}
-                  >
+                  <article className={`${m.field} h-full border border-ink`}>
                     <div
                       className="relative w-full border-b border-ink"
                       style={{ aspectRatio: m.ratio }}
@@ -266,7 +266,7 @@ export default function Home() {
                         alt=""
                         fill
                         sizes="(max-width: 1024px) 50vw, 40vw"
-                        className="object-cover transition-[object-position] duration-200 group-hover:object-[center_40%]"
+                        className="object-cover"
                       />
                     </div>
                     <div className="p-5 lg:p-6">
@@ -274,7 +274,7 @@ export default function Home() {
                       <p className="muted mt-3 text-[0.9375rem] leading-snug">
                         {m.blurb}
                       </p>
-                      <p className="t-meta mt-5 text-[0.6875rem]">{m.meta}</p>
+                      <p className="t-meta mt-5">{m.meta}</p>
                     </div>
                   </article>
                 </li>
@@ -293,29 +293,32 @@ export default function Home() {
             <p className="t-eyebrow">Events</p>
             <h2 className="f-display t-section mt-5">What&rsquo;s coming up</h2>
 
-            <ul className="mt-14">
+            <ul className="mt-14 md:mt-16">
               {EVENTS.map((e) => (
-                <li key={e.name} className="rule-t last:rule-b">
+                <li
+                  key={e.name}
+                  className="rule-t last:border-b last:border-[color:var(--rule)]"
+                >
                   <a
                     href="#"
-                    className="grid grid-cols-[4.5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[9rem_1fr] sm:gap-x-10 md:py-10"
+                    className="grid grid-cols-[5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr] sm:gap-x-10 md:py-10"
                   >
                     <span aria-hidden="true" className="f-data t-date">
                       {e.day ? (
                         <>
-                          <span className="t-eyebrow block text-[0.6875rem] tracking-[0.24em]">
+                          <span className="t-eyebrow block">
                             {e.month}
                           </span>
                           {e.day}
                         </>
                       ) : (
-                        <span className="block text-[2rem] leading-none sm:text-[2.75rem]">
+                        <span className="block text-[2rem] leading-none sm:text-[3.25rem]">
                           {e.month}
                         </span>
                       )}
                     </span>
                     <span>
-                      <span className="f-data block text-[1.5rem] leading-tight md:text-[2rem]">
+                      <span className="f-data block text-[1.375rem] leading-tight md:text-[1.75rem]">
                         {e.name}
                       </span>
                       <span className="muted mt-2 block text-[0.9375rem] md:text-base">
@@ -339,13 +342,13 @@ export default function Home() {
               <h2 className="f-display t-feature max-w-[10ch]">
                 Come and see.
               </h2>
-              <p className="t-lede measure mt-8 max-w-[44ch]">
+              <p className="t-lede measure-tight mt-9">
                 We count it a blessing and a privilege to serve each and every
                 one of you. Please feel free to call me with any questions or
                 concerns, and text me your prayer requests.
               </p>
 
-              <p className="mt-8">
+              <p className="mt-10">
                 <span className="t-eyebrow block text-red">Pastor Dave</span>
                 <a
                   href="#"
@@ -355,7 +358,7 @@ export default function Home() {
                 </a>
               </p>
 
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-12 flex flex-col gap-3 sm:flex-row">
                 <a href="#new-here" className="btn btn-ink">
                   Plan your visit
                 </a>
@@ -404,8 +407,8 @@ export default function Home() {
             className="h-auto w-[64vw] max-w-[420px]"
           />
 
-          <div className="rule-t mt-14 grid gap-12 pt-12 lg:grid-cols-12 lg:gap-16">
-            <address className="muted not-italic leading-relaxed lg:col-span-4">
+          <div className="rule-t mt-16 grid gap-12 pt-12 lg:grid-cols-12 lg:gap-16">
+            <address className="not-italic leading-relaxed lg:col-span-4">
               101 N. Skyline Dr.
               <br />
               Thousand Oaks, CA 91362
