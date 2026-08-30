@@ -10,6 +10,26 @@ import {
   TIMES,
 } from "./content";
 
+/* A printer's registration mark. It is drawn twice at the New Here /
+   Latest message seam — once in each field, each half cropped by its
+   own section — so one mark reads across the two plates. */
+function RegistrationMark({ className }: { className: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1"
+    >
+      <circle cx="12" cy="12" r="6.5" />
+      <path d="M0 12h24" />
+    </svg>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -196,21 +216,78 @@ export default function Home() {
               ))}
             </ol>
           </div>
+
+          {/* The rule between the two columns of steps does not stop
+              with them: it runs on through the tail of the section and
+              over the edge, so the transition is occupied by New Here's
+              own structure rather than by nothing. */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[clamp(6rem,9vw,9rem)] w-px -translate-x-1/2 bg-[color:var(--rule)] md:block"
+          />
+          {/* Top half of the mark; the section's own overflow crops it
+              exactly at the plate edge. */}
+          <RegistrationMark className="pointer-events-none absolute bottom-0 left-1/2 hidden h-6 w-6 -translate-x-1/2 translate-y-1/2 text-[color:var(--rule)] md:block" />
         </section>
 
         {/* =========================================================
             LATEST MESSAGE — the teaching is what this church is for,
             so it gets a feature split, not a content module.
             ========================================================= */}
-        <section id="message" className="field-ink relative isolate overflow-hidden">
-          <Image
-            src="/site/sunwave.png"
-            alt=""
-            fill
-            sizes="100vw"
-            className="-z-20 scale-[1.08] object-cover object-[center_34%]"
+        <section id="message" className="field-ink relative isolate">
+          {/* The photograph and its scrim carry their own clip, so the
+              section itself can stay open at the top edge and let the
+              seam elements straddle it. */}
+          <div className="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+            <Image
+              src="/site/sunwave.png"
+              alt=""
+              fill
+              sizes="100vw"
+              className="scale-[1.08] object-cover object-[center_34%]"
+            />
+            <div className="absolute inset-0 bg-ink/[0.88]" />
+          </div>
+
+          {/* The tail of the Sunday environment, continued onto this
+              plate in this field's ink. Same setting, same position —
+              only the colour changes at the edge. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden h-10 overflow-hidden md:block"
+          >
+            <span className="ghost-word ghost-on-ink f-display bottom-0 left-[-4vw] text-[clamp(10.5rem,19.5vw,20.5rem)]">
+              Sunday
+            </span>
+          </div>
+
+          {/* New Here's rule, arriving. */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-0 hidden h-[4.5rem] w-px -translate-x-1/2 bg-[color:var(--rule)] md:block"
           />
-          <div className="absolute inset-0 -z-10 bg-ink/[0.88]" aria-hidden="true" />
+          {/* Bottom half of the same registration mark. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden h-6 overflow-hidden md:block"
+          >
+            <RegistrationMark className="absolute left-1/2 top-0 h-6 w-6 -translate-x-1/2 -translate-y-1/2 text-[color:var(--rule)]" />
+          </div>
+
+          {/* This plate's tab, set before the section begins, so the eye
+              meets Latest message while the Sunday composition is still
+              resolving. "Watch" is their own nav label for this
+              section — not a second title for it. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 hidden md:block"
+          >
+            <div className="shell relative">
+              <span className="mark-slug absolute right-[clamp(24px,5vw,64px)] top-0 -translate-y-1/2">
+                Watch
+              </span>
+            </div>
+          </div>
 
           <div className="band-lg shell grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="relative lg:col-span-7">
