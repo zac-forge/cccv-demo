@@ -25,41 +25,47 @@ export default function Home() {
 
       <main id="main">
         {/* =========================================================
-            HERO — dark. The artwork puts the sun and its rays in the
-            upper right, so the type takes the flat navy at upper left.
+            HERO — poster. The artwork puts the sun and its rays in
+            the upper right, so mark and headline take the flat navy
+            at upper left and run wider than any column would allow.
             ========================================================= */}
-        <section className="band-dark relative isolate -mt-[68px] flex min-h-[clamp(600px,84svh,700px)] items-center overflow-hidden bg-ink pt-[68px] md:-mt-[92px] md:min-h-[clamp(700px,92vh,900px)] md:pt-[92px]">
+        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-0 md:pt-[96px]">
           <Image
             src="/site/hero.png"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="hero-img -z-20 object-cover"
+            className="hero-img -z-20 scale-105 object-cover"
           />
           <div className="hero-scrim absolute inset-0 -z-10" aria-hidden="true" />
-          <div className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[224px]" aria-hidden="true" />
+          <div
+            className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[228px]"
+            aria-hidden="true"
+          />
 
-          <div className="shell w-full">
-            <div className="w-full md:max-w-[40rem]">
-              <img
-                src="/logotype-white-trim.svg"
-                alt="Calvary Chapel Conejo Valley"
-                width={1601}
-                height={611}
-                className="mb-6 h-auto w-[70vw] max-w-[340px] md:mb-8 md:w-[42vw] md:max-w-[620px]"
-              />
+          {/* Not a centred container: the block is pinned left and the
+              headline is allowed to run past the mark above it. */}
+          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
+            <img
+              src="/logotype-white-trim.svg"
+              alt="Calvary Chapel Conejo Valley"
+              width={1601}
+              height={611}
+              className="h-auto w-[74vw] max-w-[360px] md:w-[38vw] md:max-w-[540px]"
+            />
 
-              {/* Their own words: "Faith Comes By Hearing" is the title of
-                  their daily radio broadcast (/radio). */}
-              <h1 className="f-display t-hero max-w-[11ch] text-salt">
-                Faith comes by hearing.
-              </h1>
+            {/* Their own words: "Faith Comes By Hearing" is the title of
+                their daily radio broadcast (/radio). */}
+            <h1 className="f-display t-hero mt-7 max-w-[8ch] md:mt-9 md:max-w-[11ch]">
+              Faith comes by hearing.
+            </h1>
 
-              {/* Romans 10:17, NKJV — the translation quoted elsewhere on
-                  their site (/serve). Verbatim, not fitted to the layout. */}
-              <figure className="mt-6 max-w-[34ch] md:mt-9">
-                <blockquote className="t-lede text-salt/90">
+            <div className="mt-9 flex flex-col gap-9 md:mt-12 md:flex-row md:items-end md:gap-16">
+              {/* Romans 10:17, NKJV — the translation their site quotes.
+                  Verbatim, not fitted to the layout. */}
+              <figure className="max-w-[34ch] border-l-2 border-yellow pl-5">
+                <blockquote className="t-lede muted">
                   &ldquo;So then faith comes by hearing, and hearing by the word
                   of God.&rdquo;
                 </blockquote>
@@ -68,7 +74,7 @@ export default function Home() {
                 </figcaption>
               </figure>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-11">
+              <div className="flex flex-col gap-3 sm:flex-row md:pb-1">
                 <a href="#new-here" className="btn btn-sun">
                   Plan your visit
                 </a>
@@ -87,24 +93,24 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            SERVICE TIMES — dark. The most-visited fact on a church
-            site, so it sits directly under the hero.
+            SERVICE TIMES — flat blue information band. Printed on the
+            back of the bulletin, not four cards.
             ========================================================= */}
         <section
           aria-label="Service times and location"
-          className="band-dark bg-ink py-14 text-salt md:py-16"
+          className="field-blue py-14 md:py-20"
         >
           <div className="shell">
-            <dl className="grid grid-cols-1 border-y border-salt/20 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="grid grid-cols-1 sm:-mx-8 sm:grid-cols-2 lg:grid-cols-4">
               {TIMES.map((cell) => (
                 <div
                   key={cell.label}
-                  className="border-b border-salt/20 py-7 last:border-b-0 sm:border-b-0 sm:border-r sm:border-salt/20 sm:px-7 sm:first:pl-0 sm:[&:nth-child(2)]:border-r-0 lg:[&:nth-child(2)]:border-r lg:last:border-r-0"
+                  className="border-t border-[color:var(--rule)] py-8 sm:px-8 sm:[&:nth-child(even)]:border-l lg:[&:not(:first-child)]:border-l"
                 >
                   <dt className="t-eyebrow text-yellow">{cell.label}</dt>
-                  <dd className="mt-3">
-                    <p className="t-value">{cell.value}</p>
-                    <p className="mt-2 text-[0.9375rem] leading-snug text-salt/75">
+                  <dd className="mt-4">
+                    <p className="f-data t-times">{cell.value}</p>
+                    <p className="muted mt-3 max-w-[26ch] text-[0.9375rem] leading-snug">
                       {cell.detail}
                     </p>
                   </dd>
@@ -115,71 +121,79 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            NEW HERE — light. Their "What to Expect" copy, ordered as
-            a Sunday morning actually runs.
+            NEW HERE — editorial. Oversized ghosted numerals, printed
+            rules instead of boxes, illustration bleeding off the edge.
             ========================================================= */}
-        <section id="new-here" className="band bg-stock">
-          <div className="shell grid items-stretch gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <p className="t-eyebrow text-red">New here</p>
-              <h2 className="f-display t-section mt-4 max-w-[16ch]">
-                What a Sunday looks like
-              </h2>
+        <section id="new-here" className="field-stock band overflow-hidden">
+          <div className="shell">
+            <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+              <div className="lg:col-span-5">
+                <p className="t-eyebrow text-red">New here</p>
+                <h2 className="f-display t-section mt-5 max-w-[13ch]">
+                  What a Sunday looks like
+                </h2>
+                <a href="#connect" className="link-rule mt-8">
+                  Plan your visit
+                </a>
+              </div>
 
-              <ol className="mt-10 border-t border-ink/20">
-                {SUNDAY_STEPS.map((step, i) => (
-                  <li
-                    key={step.title}
-                    className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-ink/20 py-6 sm:grid-cols-[3rem_1fr] sm:gap-x-6"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="t-value text-red"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="t-card">{step.title}</h3>
-                      <p className="mt-2 max-w-[46ch] text-ink/80">
-                        {step.body}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="relative aspect-[3/2] w-full border border-ink lg:aspect-auto lg:h-full lg:min-h-[30rem]">
-                <Image
-                  src="/ministries/01-foundations-alt.png"
-                  alt="Screenprinted illustration of an open Bible, a pencil and reading glasses on a wooden table"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 46vw"
-                  className="object-cover"
-                />
+              {/* Bleeds past the container on the right rather than
+                  sitting in it as a thumbnail. */}
+              <div className="relative lg:col-span-7 lg:mr-[calc(50%-50vw)]">
+                <div className="relative aspect-[16/10] w-full border border-ink lg:aspect-auto lg:h-[26rem]">
+                  <Image
+                    src="/ministries/01-foundations-alt.png"
+                    alt="Screenprinted illustration of an open Bible, a pencil and reading glasses on a wooden table"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 60vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
+
+            <ol className="mt-16 grid grid-cols-1 md:mt-20 md:grid-cols-2">
+              {SUNDAY_STEPS.map((step, i) => (
+                <li
+                  key={step.title}
+                  className={[
+                    "rule-t relative overflow-hidden py-9 md:py-12",
+                    i % 2 === 0 ? "md:pr-14" : "md:pl-14 md:rule-l",
+                  ].join(" ")}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="f-display t-numeral numeral-ghost pointer-events-none absolute -top-3 right-0 md:right-4"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="relative">
+                    <h3 className="t-card">{step.title}</h3>
+                    <p className="measure muted mt-3 max-w-[38ch]">
+                      {step.body}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 
         {/* =========================================================
-            LATEST MESSAGE — dark. sermon-bg under an ink scrim.
+            LATEST MESSAGE — the teaching is what this church is for,
+            so it gets a feature split, not a content module.
             ========================================================= */}
-        <section
-          id="message"
-          className="band-dark relative isolate overflow-hidden bg-ink text-salt"
-        >
+        <section id="message" className="field-ink relative isolate overflow-hidden">
           <Image
-            src="/site/sermon-bg.png"
+            src="/site/sunwave.png"
             alt=""
             fill
             sizes="100vw"
-            className="-z-20 scale-[1.08] object-cover object-[center_32%]"
+            className="-z-20 scale-[1.08] object-cover object-[center_34%]"
           />
-          <div className="absolute inset-0 -z-10 bg-ink/[0.89]" aria-hidden="true" />
+          <div className="absolute inset-0 -z-10 bg-ink/[0.88]" aria-hidden="true" />
 
-          <div className="band shell grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="band-lg shell grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <SermonPlayer videoId={SERMON.videoId} title={SERMON.title} />
             </div>
@@ -189,30 +203,22 @@ export default function Home() {
 
               {/* Title, passage and series are the church's own, from the
                   video on their YouTube channel. */}
-              <h2 className="f-display t-section mt-4">{SERMON.title}</h2>
-              <p className="t-value mt-3 text-[1.125rem] text-salt/85 md:text-[1.25rem]">
+              <h2 className="f-display t-feature mt-5">{SERMON.title}</h2>
+              <p className="f-data mt-5 text-[1.375rem] md:text-[1.625rem]">
                 {SERMON.passage}
               </p>
 
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {SERMON.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="border border-salt/35 px-3 py-1.5 text-[0.8125rem] font-medium text-salt/85"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
+              {/* Small print, not interface pills. */}
+              <p className="t-meta muted mt-4">{SERMON.tags.join(" · ")}</p>
 
               {/* Verbatim from /sermons. */}
-              <p className="mt-6 max-w-[46ch] text-salt/80">
+              <p className="muted measure mt-7 max-w-[42ch]">
                 We&rsquo;re always adding to our online library from Pastor
                 Dave&rsquo;s previous teachings, so if you&rsquo;re looking for a
                 particular book, check back in a bit.
               </p>
 
-              <a href="#" className="btn btn-sun mt-8">
+              <a href="#" className="link-rule mt-8">
                 Browse recent teachings
               </a>
             </div>
@@ -220,37 +226,55 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            MINISTRIES — light. Images bleed to the card edges.
+            MINISTRIES — a set of screenprinted handbills. Panels vary
+            in width, crop and field; type and spacing do not.
             ========================================================= */}
-        <section id="ministries" className="band bg-stock">
+        <section id="ministries" className="field-salt band">
           <div className="shell">
-            <p className="t-eyebrow text-red">Ministries</p>
-            <h2 className="f-display t-section mt-4 max-w-[18ch]">
-              Somewhere to grow, whoever you are
-            </h2>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <div>
+                <p className="t-eyebrow text-red">Ministries</p>
+                <h2 className="f-display t-section mt-5 max-w-[14ch]">
+                  Somewhere to grow, whoever you are
+                </h2>
+              </div>
+              <p className="muted measure max-w-[30ch] text-[0.9375rem]">
+                Eight studies and fellowships, meeting through the week on
+                campus.
+              </p>
+            </div>
 
-            <ul className="mt-12 grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-6">
-              {MINISTRIES.map((m, i) => (
-                <li key={m.slug}>
-                  <article className="group h-full border border-ink transition-colors duration-100 hover:bg-salt">
-                    <div className="relative aspect-[3/2] w-full border-b border-ink">
+            <ul className="mt-14 grid grid-cols-2 gap-5 lg:grid-cols-12 lg:gap-6">
+              {MINISTRIES.map((m) => (
+                <li
+                  key={m.slug}
+                  className={
+                    m.wide
+                      ? "col-span-2 lg:col-span-6"
+                      : "col-span-1 lg:col-span-3"
+                  }
+                >
+                  <article
+                    className={`${m.field} group h-full border border-ink transition-[transform] duration-150 hover:-translate-y-1`}
+                  >
+                    <div
+                      className="relative w-full border-b border-ink"
+                      style={{ aspectRatio: m.ratio }}
+                    >
                       <Image
                         src={`/ministries/${m.slug}.png`}
                         alt=""
                         fill
-                        sizes="(max-width: 1024px) 50vw, 23vw"
-                        loading={i < 4 ? "eager" : "lazy"}
-                        className="object-cover"
+                        sizes="(max-width: 1024px) 50vw, 40vw"
+                        className="object-cover transition-[object-position] duration-200 group-hover:object-[center_40%]"
                       />
                     </div>
-                    <div className="p-4 lg:p-5">
+                    <div className="p-5 lg:p-6">
                       <h3 className="t-card">{m.name}</h3>
-                      <p className="mt-2 text-[0.9375rem] leading-snug text-ink/80">
+                      <p className="muted mt-3 text-[0.9375rem] leading-snug">
                         {m.blurb}
                       </p>
-                      <p className="mt-4 text-[0.8125rem] font-semibold leading-snug text-red">
-                        {m.meta}
-                      </p>
+                      <p className="t-meta mt-5 text-[0.6875rem]">{m.meta}</p>
                     </div>
                   </article>
                 </li>
@@ -260,42 +284,41 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            EVENTS — light, on salt so it separates from ministries.
+            EVENTS — bulletin announcements. The date is the graphic.
+            Yellow carries ink type at 8.15, so the field is legible
+            and red stays a hairline accent.
             ========================================================= */}
-        <section id="events" className="band bg-salt">
+        <section id="events" className="field-yellow band">
           <div className="shell">
-            <p className="t-eyebrow text-red">Events</p>
-            <h2 className="f-display t-section mt-4">What&rsquo;s coming up</h2>
+            <p className="t-eyebrow">Events</p>
+            <h2 className="f-display t-section mt-5">What&rsquo;s coming up</h2>
 
-            <ul className="mt-10 border-t border-ink/25">
+            <ul className="mt-14">
               {EVENTS.map((e) => (
-                <li key={e.name} className="border-b border-ink/25">
+                <li key={e.name} className="rule-t last:rule-b">
                   <a
                     href="#"
-                    className="flex items-center gap-5 py-6 transition-colors duration-100 hover:bg-stock sm:gap-8"
+                    className="grid grid-cols-[4.5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[9rem_1fr] sm:gap-x-10 md:py-10"
                   >
-                    <span
-                      aria-hidden="true"
-                      className="flex h-16 w-16 shrink-0 flex-col items-center justify-center border border-red bg-red text-salt"
-                    >
+                    <span aria-hidden="true" className="f-data t-date">
                       {e.day ? (
                         <>
-                          <span className="t-eyebrow text-[0.625rem]">
+                          <span className="t-eyebrow block text-[0.6875rem] tracking-[0.24em]">
                             {e.month}
                           </span>
-                          <span className="t-value mt-0.5 text-[1.25rem] leading-none">
-                            {e.day}
-                          </span>
+                          {e.day}
                         </>
                       ) : (
-                        <span className="t-eyebrow text-[0.625rem]">
+                        <span className="block text-[2rem] leading-none sm:text-[2.75rem]">
                           {e.month}
                         </span>
                       )}
                     </span>
                     <span>
-                      <span className="t-card block">{e.name}</span>
-                      <span className="mt-1.5 block text-[0.9375rem] text-ink/75">
+                      <span className="f-data block text-[1.5rem] leading-tight md:text-[2rem]">
+                        {e.name}
+                      </span>
+                      <span className="muted mt-2 block text-[0.9375rem] md:text-base">
                         {e.detail}
                       </span>
                     </span>
@@ -307,37 +330,33 @@ export default function Home() {
         </section>
 
         {/* =========================================================
-            CONNECT — dark blue, sunrays behind it. Pastor Dave's own
-            welcome from the homepage.
+            COME AND SEE — the close. Pastor Dave's own words, and the
+            dove leaving the pier cropped hard off the right edge.
             ========================================================= */}
-        <section
-          id="connect"
-          className="band-dark relative isolate overflow-hidden bg-blue text-salt"
-        >
-          <Image
-            src="/site/sunrays.png"
-            alt=""
-            fill
-            sizes="100vw"
-            className="-z-20 object-cover object-bottom opacity-40 grayscale mix-blend-multiply"
-          />
-
-          <div className="band shell">
-            <div className="max-w-[46rem]">
-              <h2 className="f-display t-section max-w-[14ch]">
+        <section id="connect" className="field-stock relative overflow-hidden">
+          <div className="shell band-lg grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <h2 className="f-display t-feature max-w-[10ch]">
                 Come and see.
               </h2>
-              <p className="t-lede mt-6 max-w-[44ch] text-salt/90">
+              <p className="t-lede measure mt-8 max-w-[44ch]">
                 We count it a blessing and a privilege to serve each and every
                 one of you. Please feel free to call me with any questions or
                 concerns, and text me your prayer requests.
               </p>
-              <p className="t-eyebrow mt-5 text-yellow">
-                Pastor Dave · (831) 428-2214
+
+              <p className="mt-8">
+                <span className="t-eyebrow block text-red">Pastor Dave</span>
+                <a
+                  href="#"
+                  className="f-data mt-2 inline-block text-[1.75rem] leading-none md:text-[2.25rem]"
+                >
+                  (831) 428-2214
+                </a>
               </p>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href="#new-here" className="btn btn-sun">
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                <a href="#new-here" className="btn btn-ink">
                   Plan your visit
                 </a>
                 <a href="#" className="btn btn-outline">
@@ -346,31 +365,53 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Cropped past the section on the right and taller than it,
+              so it reads as a plate the page runs over. */}
+          <div
+            aria-hidden="true"
+            className="relative mx-6 mb-16 aspect-[4/3] border border-ink lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mb-0 lg:aspect-auto lg:w-[42vw] lg:border-y-0 lg:border-r-0"
+          >
+            <Image
+              src="/site/dovedeck.png"
+              alt=""
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover object-[60%_center]"
+            />
+          </div>
         </section>
       </main>
 
       {/* ===========================================================
-          FOOTER — dark.
+          FOOTER — the back of a printed programme. One graphic
+          device: the dove, outline only, blue showing through it.
           =========================================================== */}
-      <footer id="about" className="band-dark bg-ink py-16 text-salt md:py-20">
-        <div className="shell">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-4">
-              <img
-                src="/logotype-white-trim.svg"
-                alt="Calvary Chapel Conejo Valley"
-                width={1601}
-                height={611}
-                className="h-auto w-[196px]"
-              />
-              <address className="mt-7 not-italic leading-relaxed text-salt/80">
-                101 N. Skyline Dr.
-                <br />
-                Thousand Oaks, CA 91362
-                <br />
-                <span className="mt-2 inline-block">(831) 428-2214</span>
-              </address>
-            </div>
+      <footer id="about" className="field-blue relative overflow-hidden py-20 md:py-24">
+        <img
+          src="/dove-salt.svg"
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-10 top-6 w-[300px] opacity-[0.14] md:-right-8 md:top-10 md:w-[460px]"
+        />
+
+        <div className="shell relative">
+          <img
+            src="/logotype-white-trim.svg"
+            alt="Calvary Chapel Conejo Valley"
+            width={1601}
+            height={611}
+            className="h-auto w-[64vw] max-w-[420px]"
+          />
+
+          <div className="rule-t mt-14 grid gap-12 pt-12 lg:grid-cols-12 lg:gap-16">
+            <address className="muted not-italic leading-relaxed lg:col-span-4">
+              101 N. Skyline Dr.
+              <br />
+              Thousand Oaks, CA 91362
+              <br />
+              <span className="mt-3 inline-block">(831) 428-2214</span>
+            </address>
 
             <div className="grid gap-10 sm:grid-cols-3 lg:col-span-8">
               {FOOTER_LINKS.map((col) => (
@@ -381,7 +422,7 @@ export default function Home() {
                       <li key={link}>
                         <a
                           href="#"
-                          className="text-[0.9375rem] text-salt/80 underline-offset-4 hover:text-salt hover:underline"
+                          className="muted text-[0.9375rem] underline-offset-4 hover:text-salt hover:underline"
                         >
                           {link}
                         </a>
@@ -393,7 +434,7 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="mt-14 border-t border-salt/20 pt-7 text-[0.8125rem] text-salt/60">
+          <p className="rule-t muted mt-14 pt-8 text-[0.8125rem]">
             Design concept for Calvary Chapel Conejo Valley. Not the live site.
             Copy is drawn from ccconejovalley.com.
           </p>

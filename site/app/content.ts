@@ -10,7 +10,7 @@
 export const TIMES = [
   {
     label: "Sunday",
-    value: "9:00 & 11:00 am",
+    value: "9:00 & 11:00\u00a0am",
     detail: "Worship & New Testament Through The Bible Teaching",
   },
   {
@@ -57,6 +57,7 @@ export const SUNDAY_STEPS = [
 export const MINISTRIES = [
   {
     slug: "01-foundations",
+    wide: true, ratio: "16/10", field: "field-stock",
     name: "Foundations of Faith",
     blurb:
       "For new believers and those who want to understand and study the Word more deeply.",
@@ -64,6 +65,7 @@ export const MINISTRIES = [
   },
   {
     slug: "02-evangelism",
+    wide: false, ratio: "4/5", field: "field-salt",
     name: "Evangelism & Discipleship",
     blurb:
       "Learn to share the gospel of grace, and how to grow in the grace of God.",
@@ -71,6 +73,7 @@ export const MINISTRIES = [
   },
   {
     slug: "03-men",
+    wide: false, ratio: "4/5", field: "field-blue",
     name: "Men",
     blurb:
       "Pray, eat, worship, study, and enjoy table discussion. Open to the young and not so young.",
@@ -78,6 +81,7 @@ export const MINISTRIES = [
   },
   {
     slug: "04-women",
+    wide: false, ratio: "4/5", field: "field-salt",
     name: "Women",
     blurb:
       "Priscilla Shirer's The Armor of God study — standing strong in faith and putting on the full armor of God.",
@@ -85,6 +89,7 @@ export const MINISTRIES = [
   },
   {
     slug: "05-children",
+    wide: false, ratio: "4/5", field: "field-stock",
     name: "Children",
     blurb:
       "Teaching them the Bible at their level, so it's easy for them to understand.",
@@ -92,6 +97,7 @@ export const MINISTRIES = [
   },
   {
     slug: "06-youth",
+    wide: true, ratio: "16/10", field: "field-blue",
     name: "Youth",
     blurb:
       "Food, worship, prayer, Bible study and fellowship for 6th–12th graders.",
@@ -99,6 +105,7 @@ export const MINISTRIES = [
   },
   {
     slug: "07-young-adults",
+    wide: true, ratio: "16/9", field: "field-salt",
     name: "Young Adults",
     blurb:
       "Growing in spiritual maturity by pursuing God, trusting His pursuit of us, and knowing Him more through studying His word.",
@@ -106,6 +113,7 @@ export const MINISTRIES = [
   },
   {
     slug: "08-marriage",
+    wide: true, ratio: "16/9", field: "field-stock",
     name: "Marriage",
     blurb:
       "Whether you're newly married, preparing for marriage, or growing together through the seasons of life.",

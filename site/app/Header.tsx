@@ -47,7 +47,7 @@ export default function Header() {
       </div>
 
       <header className="site-header sticky top-0 z-50" data-solid={isSolid}>
-        <div className="shell flex h-[68px] items-center justify-between gap-6 md:h-[92px]">
+        <div className="shell flex h-[68px] items-center justify-between gap-6 md:h-[96px]">
           {/* Held in the DOM at constant size so nav never shifts when it
               fades in. Hidden from tab order while it is invisible. */}
           <a
@@ -62,17 +62,17 @@ export default function Header() {
               alt="Calvary Chapel Conejo Valley"
               width={1601}
               height={611}
-              className="h-11 w-auto md:h-16"
+              className="h-11 w-auto md:h-[68px]"
             />
           </a>
 
-          <nav aria-label="Primary" className="hidden items-center gap-[34px] lg:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
             {NAV.map((item) => (
               <a key={item.label} href={item.href} className="navlink">
                 {item.label}
               </a>
             ))}
-            <a href={GIVE_HREF} className="btn btn-give">
+            <a href={GIVE_HREF} className="navlink navlink-give">
               Give
             </a>
           </nav>
@@ -113,7 +113,7 @@ export default function Header() {
             <a
               href={GIVE_HREF}
               onClick={() => setOpen(false)}
-              className="btn btn-give my-3 self-start"
+              className="navlink navlink-give my-5 self-start"
             >
               Give
             </a>

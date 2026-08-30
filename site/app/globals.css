@@ -3,7 +3,7 @@
 /* ------------------------------------------------------------------
    Maranatha Blue — locked palette. See BRAND.md.
    ink 11.63 on stock · salt 6.04 on blue · red 4.52 on stock
-   yellow 8.15 on ink and NEVER on a light ground.
+   yellow 8.15 on ink. Red is an accent and never a field.
    ------------------------------------------------------------------ */
 @theme {
   --color-ink: #26212b;
@@ -20,18 +20,14 @@
 }
 
 :root {
-  /* Focus ring colour flips per band so it is always visible. */
   --focus: var(--color-red);
   color-scheme: light;
 }
 
 @layer base {
-  /* ------------------------------------------------------------------
-     Base
-     ------------------------------------------------------------------ */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
+    scroll-padding-top: 104px;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -60,104 +56,188 @@
     outline: 3px solid var(--focus);
     outline-offset: 3px;
   }
-
-  /* A dark band re-points the focus ring and carries reversed type. */
-  .band-dark {
-    --focus: var(--color-yellow);
-  }
 }
 
 @layer components {
-  /* ------------------------------------------------------------------
-     Type scale — one dominant jump. Headline enormous, everything else
-     clustered just above body size. Nothing lives in the middle.
-     ------------------------------------------------------------------ */
+  /* ----------------------------------------------------------------
+     Fields. Every section picks one. Each carries its own focus
+     colour so the ring is always visible on that ground.
+     ---------------------------------------------------------------- */
+  .field-ink {
+    background-color: var(--color-ink);
+    color: var(--color-salt);
+    --focus: var(--color-yellow);
+    --rule: color-mix(in srgb, var(--color-salt) 26%, transparent);
+    --muted: color-mix(in srgb, var(--color-salt) 78%, transparent);
+  }
+  .field-blue {
+    background-color: var(--color-blue);
+    color: var(--color-salt);
+    --focus: var(--color-yellow);
+    --rule: color-mix(in srgb, var(--color-salt) 34%, transparent);
+    --muted: color-mix(in srgb, var(--color-salt) 84%, transparent);
+  }
+  .field-yellow {
+    background-color: var(--color-yellow);
+    color: var(--color-ink);
+    --focus: var(--color-ink);
+    --rule: color-mix(in srgb, var(--color-ink) 40%, transparent);
+    --muted: color-mix(in srgb, var(--color-ink) 80%, transparent);
+  }
+  .field-stock {
+    background-color: var(--color-stock);
+    color: var(--color-ink);
+    --focus: var(--color-red);
+    --rule: color-mix(in srgb, var(--color-ink) 24%, transparent);
+    --muted: color-mix(in srgb, var(--color-ink) 78%, transparent);
+  }
+  .field-salt {
+    background-color: var(--color-salt);
+    color: var(--color-ink);
+    --focus: var(--color-red);
+    --rule: color-mix(in srgb, var(--color-ink) 24%, transparent);
+    --muted: color-mix(in srgb, var(--color-ink) 78%, transparent);
+  }
+
+  .rule-t {
+    border-top: 1px solid var(--rule);
+  }
+  .rule-b {
+    border-bottom: 1px solid var(--rule);
+  }
+  .rule-l {
+    border-left: 1px solid var(--rule);
+  }
+  .muted {
+    color: var(--muted);
+  }
+
+  /* ----------------------------------------------------------------
+     Type. High-contrast Didone character for display, a neutral
+     grotesque for everything that has to be read rather than felt.
+     ---------------------------------------------------------------- */
   .f-display {
     font-family: var(--font-display);
     font-variation-settings: "wght" 900, "SOFT" 60, "WONK" 1, "opsz" 120;
     font-weight: 900;
-    letter-spacing: -0.022em;
+    letter-spacing: -0.024em;
+  }
+
+  /* Data set in the display face: wonk off, because Fraunces' swash
+     ampersand garbles a service time. */
+  .f-data {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 48;
+    font-weight: 800;
+    letter-spacing: -0.018em;
   }
 
   .t-hero {
-    font-size: clamp(2.375rem, 5.4vw, 4.25rem);
-    line-height: 0.94;
-    letter-spacing: -0.03em;
+    font-size: clamp(3.5rem, 15vw, 5.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+  }
+  @media (min-width: 768px) {
+    .t-hero {
+      font-size: clamp(4.5rem, 8vw, 8.5rem);
+      line-height: 0.88;
+    }
   }
 
   .t-section {
-    font-size: clamp(1.75rem, 2.6vw, 2.125rem);
-    line-height: 1.06;
+    font-size: clamp(2.125rem, 4vw, 3.25rem);
+    line-height: 0.98;
   }
 
-  .t-value {
-    font-family: var(--font-display);
-    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 36;
-    font-weight: 800;
-    font-size: 1.375rem;
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+  .t-feature {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 0.95;
   }
 
-  @media (min-width: 768px) {
-    .t-value {
-      font-size: 1.5rem;
-    }
+  .t-times {
+    font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+    line-height: 1.02;
+  }
+
+  .t-numeral {
+    font-size: clamp(5rem, 10vw, 10rem);
+    line-height: 0.8;
+  }
+
+  .t-date {
+    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+    line-height: 0.82;
   }
 
   .t-card {
     font-family: var(--font-display);
     font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 24;
     font-weight: 800;
-    font-size: 1.0625rem;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
+    font-size: 1.1875rem;
+    line-height: 1.15;
+    letter-spacing: -0.012em;
   }
 
   .t-eyebrow {
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     line-height: 1.4;
   }
 
+  .t-meta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
   .t-lede {
-    font-size: clamp(1.0625rem, 1.35vw, 1.1875rem);
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
     line-height: 1.6;
   }
 
+  /* 55–68 characters. Never centred. */
   .measure {
-    max-width: 34em;
+    max-width: 62ch;
+  }
+  .measure-tight {
+    max-width: 46ch;
   }
 
-  /* ------------------------------------------------------------------
+  /* ----------------------------------------------------------------
      Layout
-     ------------------------------------------------------------------ */
+     ---------------------------------------------------------------- */
   .shell {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1320px;
     margin-inline: auto;
-    padding-inline: clamp(20px, 5vw, 56px);
+    padding-inline: clamp(24px, 5vw, 64px);
   }
 
   .band {
-    padding-block: clamp(72px, 8.5vw, 118px);
+    padding-block: clamp(5rem, 9vw, 9rem);
+  }
+  .band-lg {
+    padding-block: clamp(6rem, 11vw, 12rem);
   }
 
-  /* ------------------------------------------------------------------
-     Controls — flat, bordered, screenprint. No shadows, 2px corners max.
-     ------------------------------------------------------------------ */
+  /* ----------------------------------------------------------------
+     Controls. Rectangular, flat, bordered. No pills, no shadows.
+     ---------------------------------------------------------------- */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     border: 1px solid transparent;
-    border-radius: var(--radius-print);
-    padding: 0.8125rem 1.375rem;
-    font-size: 0.9375rem;
+    border-radius: 0;
+    padding: 0.9375rem 1.75rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     line-height: 1;
     text-align: center;
     transition: background-color 120ms linear, color 120ms linear,
@@ -176,32 +256,51 @@
 
   .btn-outline {
     background: transparent;
-    color: var(--color-salt);
-    border-color: color-mix(in srgb, var(--color-salt) 55%, transparent);
+    color: currentColor;
+    border-color: color-mix(in srgb, currentColor 55%, transparent);
   }
   .btn-outline:hover {
-    background: var(--color-salt);
+    background: currentColor;
+    border-color: currentColor;
+  }
+  .field-ink .btn-outline:hover,
+  .field-blue .btn-outline:hover {
     color: var(--color-ink);
-    border-color: var(--color-salt);
+  }
+  .field-stock .btn-outline:hover,
+  .field-salt .btn-outline:hover,
+  .field-yellow .btn-outline:hover {
+    color: var(--color-stock);
   }
 
-  .btn-give {
-    background: var(--color-red);
-    color: var(--color-salt);
-    border-color: var(--color-red);
-    padding: 14px 26px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-  .btn-give:hover {
+  .btn-ink {
     background: var(--color-ink);
+    color: var(--color-salt);
     border-color: var(--color-ink);
   }
+  .btn-ink:hover {
+    background: var(--color-blue);
+    border-color: var(--color-blue);
+  }
 
-  /* Transparent over the hero, solid Album Stock once past it. The two
-     states differ only in these variables. */
+  /* A text link that behaves like a printed rule, not a button. */
+  .link-rule {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--color-red);
+    transition: border-color 120ms linear, color 120ms linear;
+  }
+  .link-rule:hover {
+    border-bottom-color: currentColor;
+  }
+
+  /* ----------------------------------------------------------------
+     Header. Transparent over the hero, solid Album Stock past it.
+     ---------------------------------------------------------------- */
   .site-header {
     --nav-fg: var(--color-salt);
     --focus: var(--color-yellow);
@@ -226,9 +325,29 @@
     visibility: visible;
   }
 
-  /* Flat bordered hamburger. Colour follows the header state, so it is
-     Salt White over the hero and Maranatha Ink once the bar goes solid.
-     The button stays a 44px touch target; only the mark inside is small. */
+  .navlink {
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--nav-fg);
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 120ms linear, color 120ms linear;
+  }
+  .navlink:hover {
+    border-bottom-color: var(--color-red);
+  }
+
+  /* Give is differentiated by a standing rule, not by a filled pill. */
+  .navlink-give {
+    border-bottom-color: var(--color-red);
+  }
+  .navlink-give:hover {
+    border-bottom-color: currentColor;
+  }
+
   .burger {
     display: flex;
     align-items: center;
@@ -239,7 +358,6 @@
     color: var(--nav-fg);
     transition: color 200ms linear;
   }
-
   .burger-box {
     display: flex;
     flex-direction: column;
@@ -258,7 +376,6 @@
     border-color: var(--color-red);
     color: var(--color-salt);
   }
-
   .burger:focus-visible {
     outline: none;
   }
@@ -266,7 +383,6 @@
     outline: 3px solid var(--focus);
     outline-offset: 3px;
   }
-
   .burger-box > span {
     display: block;
     width: 15px;
@@ -284,93 +400,77 @@
     transform: translateY(-6px) rotate(-45deg);
   }
 
-  .navlink {
-    font-size: 0.8rem;
-    font-weight: 700;
-    line-height: 1;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--nav-fg);
-    padding-bottom: 6px;
-    border-bottom: 3px solid transparent;
-    transition: border-color 120ms linear, color 120ms linear;
-  }
-  .navlink:hover,
-  .navlink[aria-current="true"] {
-    border-bottom-color: var(--color-red);
-  }
-
-  /* ------------------------------------------------------------------
-     Paper grain — the flat UI meets the screenprint halfway.
-     ------------------------------------------------------------------ */
+  /* ----------------------------------------------------------------
+     One print texture, carried everywhere, quietly.
+     ---------------------------------------------------------------- */
   .grain::after {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 60;
     pointer-events: none;
-    opacity: 0.055;
+    opacity: 0.045;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
   }
 
-  /* ------------------------------------------------------------------
-     Hero — the sun and rays own the upper right of the artwork, so the
-     type takes the flat navy at upper left and a directional scrim
-     protects it. Never a flat overlay: that would kill the sun.
-     ------------------------------------------------------------------ */
+  /* ----------------------------------------------------------------
+     Hero. The sun and rays own the upper right of the artwork, so the
+     type takes the flat navy at upper left. Directional scrim, never
+     a flat overlay: that would kill the sun.
+     ---------------------------------------------------------------- */
   .hero-scrim {
     background: linear-gradient(
       178deg,
-      rgba(22, 19, 26, 0.74) 0%,
-      rgba(22, 19, 26, 0.6) 42%,
-      rgba(22, 19, 26, 0.74) 100%
+      rgba(22, 19, 26, 0.68) 0%,
+      rgba(22, 19, 26, 0.52) 40%,
+      rgba(22, 19, 26, 0.7) 100%
     );
   }
 
-  /* The logotype now runs much further right, toward the ray field, so the
-     directional scrim carries further before it releases. Still directional:
-     a flat overlay would kill the sun. */
   @media (min-width: 768px) {
     .hero-scrim {
       background: linear-gradient(
         98deg,
-        rgba(22, 19, 26, 0.82) 0%,
-        rgba(22, 19, 26, 0.73) 32%,
-        rgba(22, 19, 26, 0.47) 52%,
-        rgba(22, 19, 26, 0.17) 68%,
-        rgba(22, 19, 26, 0) 84%
+        rgba(22, 19, 26, 0.84) 0%,
+        rgba(22, 19, 26, 0.78) 34%,
+        rgba(22, 19, 26, 0.6) 56%,
+        rgba(22, 19, 26, 0.24) 72%,
+        rgba(22, 19, 26, 0) 88%
       );
     }
   }
 
-  /* The nav sits over the artwork's upper right, where the rays and the sun
-     are. This band protects the header row across the full width; the sun's
-     body sits below it and survives. */
+  /* Protects the nav row, which sits over the rays at every width. */
   .hero-topscrim {
     background: linear-gradient(
       180deg,
       rgba(22, 19, 26, 0.72) 0px,
-      rgba(22, 19, 26, 0.66) 92px,
-      rgba(22, 19, 26, 0.3) 150px,
-      rgba(22, 19, 26, 0) 224px
+      rgba(22, 19, 26, 0.66) 96px,
+      rgba(22, 19, 26, 0.3) 154px,
+      rgba(22, 19, 26, 0) 228px
     );
   }
 
   .hero-img {
     object-position: 28% center;
   }
-
   @media (min-width: 768px) {
     .hero-img {
       object-position: 50% 50%;
     }
   }
 
-  /* ------------------------------------------------------------------
+  /* Oversized numerals sit behind the text as printed ghosts. */
+  .numeral-ghost {
+    color: color-mix(in srgb, var(--color-blue) 22%, transparent);
+    user-select: none;
+  }
+
+  /* ----------------------------------------------------------------
      Reduced motion
-     ------------------------------------------------------------------ */
+     ---------------------------------------------------------------- */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
