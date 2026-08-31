@@ -560,7 +560,7 @@ export default function Home() {
             Thousand Oaks, CA
           </span>
 
-          <p className="rule-t muted mt-14 pt-8 text-[0.8125rem]">
+          <p className="rule-t muted mt-14 pt-14 text-[0.8125rem]">
             Design concept for Calvary Chapel Conejo Valley. Not the live site.
             Copy is drawn from ccconejovalley.com.
           </p>
