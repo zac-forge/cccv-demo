@@ -115,7 +115,7 @@ export default function Home() {
                   key={cell.label}
                   className="border-t border-[color:var(--rule)] px-4 py-8 [&:nth-child(even)]:border-l sm:px-8 lg:[&:not(:first-child)]:border-l"
                 >
-                  <dt className="t-eyebrow text-yellow">{cell.label}</dt>
+                  <dt className="t-eyebrow t-eyebrow-onblue">{cell.label}</dt>
                   <dd className="mt-4">
                     <p className="f-data t-times max-sm:text-[1.375rem]">{cell.value}</p>
                     <p className="muted mt-3 max-w-[26ch] text-[0.9375rem] leading-snug">
@@ -548,13 +548,21 @@ export default function Home() {
             <div className="grid gap-10 sm:grid-cols-3 lg:col-span-8">
               {FOOTER_LINKS.map((col) => (
                 <nav key={col.heading} aria-label={col.heading}>
-                  <h2 className="t-eyebrow text-yellow">{col.heading}</h2>
+                  <h2 className="t-eyebrow t-eyebrow-onblue">{col.heading}</h2>
                   <ul className="mt-5 space-y-1 lg:space-y-3">
                     {col.links.map((link) => (
                       <li key={link}>
+                        {/* Give is the one action in a list of
+                            destinations. A yellow rule echoes the nav
+                            chip without dropping a filled block into a
+                            link column and breaking its rhythm. */}
                         <a
                           href="#"
-                          className="muted inline-block py-2 text-[0.9375rem] underline-offset-4 hover:text-salt hover:underline lg:inline lg:py-0"
+                          className={`inline-block py-2 text-[0.9375rem] underline-offset-4 lg:inline lg:py-0 ${
+                            link === "Give"
+                              ? "footer-give"
+                              : "muted hover:text-salt hover:underline"
+                          }`}
                         >
                           {link}
                         </a>

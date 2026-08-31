@@ -22,8 +22,31 @@ const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
 });
 
+const DESCRIPTION =
+  "A design concept for Calvary Chapel Conejo Valley in Thousand Oaks, California. A demonstration, not the church's live site.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cccv-one.vercel.app"),
   title: "Calvary Chapel Conejo Valley — design concept",
+  description: DESCRIPTION,
+  // This demo must never be indexed. It carries the church's name and
+  // real copy, so a search result pointing here instead of
+  // ccconejovalley.com would send people to the wrong place.
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: "Calvary Chapel Conejo Valley — design concept",
+    description: DESCRIPTION,
+    type: "website",
+    images: [
+      {
+        url: "/site/hero.png",
+        width: 1915,
+        height: 821,
+        alt: "Screenprinted sunrise over the Conejo Valley hills",
+      },
+    ],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

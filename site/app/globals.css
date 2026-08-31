@@ -20,6 +20,11 @@
 }
 
 :root {
+  /* The primary yellow measures 3.63 as small type on the blue field,
+     under the 4.5 AA needs. This is the same hue lifted until it passes
+     (4.56). Used ONLY for small caps on blue — the yellow field itself
+     and every other use keeps --color-yellow exactly as approved. */
+  --color-yellow-onblue: #e8cf7a;
   --focus: var(--color-red);
   color-scheme: light;
 
@@ -760,6 +765,23 @@
      half. Nobody can tell a radio has been flipped. */
   .message-art {
     scale: -1.08 1.08;
+  }
+
+  .t-eyebrow-onblue {
+    color: var(--color-yellow-onblue);
+  }
+
+  /* Give is an action sitting in a column of destinations. Full-strength
+     type plus a yellow rule, echoing the nav chip without dropping a
+     filled block into the column. */
+  .footer-give {
+    color: var(--color-salt);
+    font-weight: 600;
+    box-shadow: inset 0 -2px 0 var(--color-yellow);
+    transition: box-shadow var(--dur-fast) var(--ease-out);
+  }
+  .footer-give:hover {
+    box-shadow: inset 0 -2px 0 var(--color-salt);
   }
 
   /* ----------------------------------------------------------------
