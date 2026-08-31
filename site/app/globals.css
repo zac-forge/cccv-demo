@@ -293,18 +293,14 @@
     color: currentColor;
     border-color: color-mix(in srgb, currentColor 55%, transparent);
   }
+  /* The fill must not be currentColor: the field rules below used to flip
+     `color` on the same hover, so `background: currentColor` resolved to
+     the *new* colour and the label vanished into its own fill (measured
+     1.00 on both instances). Solid ink chip, light label, on every field. */
   .btn-outline:hover {
-    background: currentColor;
-    border-color: currentColor;
-  }
-  .field-ink .btn-outline:hover,
-  .field-blue .btn-outline:hover {
-    color: var(--color-ink);
-  }
-  .field-stock .btn-outline:hover,
-  .field-salt .btn-outline:hover,
-  .field-yellow .btn-outline:hover {
-    color: var(--color-stock);
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-salt);
   }
 
   .btn-ink {

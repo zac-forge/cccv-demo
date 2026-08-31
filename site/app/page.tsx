@@ -29,7 +29,7 @@ export default function Home() {
             the upper right, so mark and headline take the flat navy
             at upper left and run wider than any column would allow.
             ========================================================= */}
-        <section className="field-ink relative isolate -mt-[68px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[68px] md:-mt-[96px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[96px]">
+        <section className="field-ink relative isolate -mt-[69px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[69px] md:-mt-[97px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[97px]">
           {/* One plane at every width. Mobile zooms and lifts the crop so
               the sun clears the type block instead of sitting behind it;
               desktop keeps its approved 105% / centred crop. */}
