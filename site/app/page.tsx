@@ -551,7 +551,7 @@ export default function Home() {
               only, both already verified elsewhere on the page. */}
           <span
             aria-hidden="true"
-            className="sign-off bottom-7 right-0 hidden text-right lg:block"
+            className="sign-off bottom-0 right-0 hidden text-right lg:block"
           >
             Calvary Chapel
             <br />
