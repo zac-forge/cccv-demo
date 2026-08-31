@@ -447,6 +447,11 @@
     background: var(--color-yellow);
     border: 1px solid var(--color-yellow);
     padding: 0.625rem 1.125rem;
+    /* .navlink reserves 8px under its type (6px padding + the 2px hover
+       rule), which lifts that type 4px above its box centre. The chip has
+       no rule, so centring the boxes leaves its type sitting 4px low.
+       Matching that 8px aligns the type rather than the boxes. */
+    margin-bottom: 8px;
     /* The header sets --focus to yellow while transparent, which would
        be invisible against this chip. */
     --focus: var(--color-ink);
