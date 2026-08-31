@@ -42,12 +42,6 @@ export default function Header() {
 
   return (
     <>
-      <div className="band-dark bg-ink text-salt/85">
-        <p className="shell py-2.5 text-center text-[0.6875rem] leading-snug tracking-[0.06em] sm:text-xs">
-          Design concept for Calvary Chapel Conejo Valley. Not the live site.
-        </p>
-      </div>
-
       <header className="site-header sticky top-0 z-50" data-solid={isSolid}>
         <div className="shell flex h-[68px] items-center justify-between gap-6 md:h-[96px]">
           {/* Held in the DOM at constant size so nav never shifts when it
