@@ -270,15 +270,19 @@
     transition: background-color var(--dur-fast) var(--ease-out),
       color var(--dur-fast) var(--ease-out),
       border-color var(--dur-fast) var(--ease-out),
-      translate var(--dur-fast) var(--ease-out);
+      translate var(--dur-fast) var(--ease-out),
+      scale var(--dur-fast) var(--ease-out);
   }
   @media (hover: hover) {
     .btn:hover {
       translate: 0 -1px;
     }
   }
+  /* A press has to read on touch, where no hover ever fired and the old
+     `translate: 0` unwound a lift that never happened. */
   .btn:active {
-    translate: 0 0;
+    translate: 0 1px;
+    scale: 0.985;
   }
 
   .btn-sun {
@@ -651,6 +655,119 @@
     text-transform: uppercase;
     line-height: 1.9;
     color: color-mix(in srgb, var(--color-salt) 42%, transparent);
+  }
+
+  /* ----------------------------------------------------------------
+     Nav scroll-spy. The active section is marked with the same red
+     underline hovering uses, so the vocabulary stays one idea.
+     ---------------------------------------------------------------- */
+  .navlink[data-active="true"] {
+    border-bottom-color: var(--color-red);
+  }
+
+  /* ----------------------------------------------------------------
+     Mobile menu. A real disclosure rather than a display toggle: it
+     collapses to zero grid rows so the height can animate to auto.
+     The closed state is plain CSS, so with motion off or JS disabled
+     it still hides correctly and stays out of the tab order.
+     ---------------------------------------------------------------- */
+  .mobile-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+  }
+  .mobile-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+  }
+  .mobile-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+  /* The rule belongs to the open state only. As a Tailwind border-t
+     utility it outranked anything here (utilities beat components) and
+     kept painting its 1px at zero height, pushing the header to 70px
+     against the hero's -69px pull and reopening the seam at the top of
+     the page. Owned here, it simply does not exist while closed. */
+  .mobile-panel[data-open="true"] .mobile-panel-inner {
+    border-top: 1px solid color-mix(in srgb, var(--color-ink) 85%, transparent);
+  }
+  [data-motion="on"] .mobile-panel {
+    /* Visibility flips only after the collapse has finished, so the
+       panel does not vanish mid-animation. */
+    transition: grid-template-rows var(--dur-standard) var(--ease-out),
+      visibility 0s linear var(--dur-standard);
+  }
+  [data-motion="on"] .mobile-panel[data-open="true"] {
+    transition: grid-template-rows var(--dur-standard) var(--ease-out),
+      visibility 0s;
+  }
+  [data-motion="on"] .mobile-panel a {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+  [data-motion="on"] .mobile-panel[data-open="true"] a {
+    opacity: 1;
+    translate: none;
+    transition: opacity var(--dur-fast) var(--ease-out),
+      translate var(--dur-fast) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 40ms);
+  }
+
+  /* ----------------------------------------------------------------
+     Press. Anything that is tappable but is not a .btn.
+     ---------------------------------------------------------------- */
+  .pressable {
+    transition: translate var(--dur-fast) var(--ease-out);
+  }
+  .pressable:active {
+    translate: 0 1px;
+  }
+  .link-folio:active::after {
+    scale: 1.09 1;
+  }
+
+  /* The sermon loader. A drawn rule rather than a spinning circle: the
+     page has no radius anywhere, and the folio already establishes a
+     rule sweeping left to right as this site's idea of progress. */
+  .sermon-spinner {
+    position: relative;
+    display: block;
+    width: 120px;
+    height: 2px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-salt) 18%, transparent);
+  }
+  .sermon-spinner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-yellow);
+    animation: sermon-sweep 1.1s var(--ease-out) infinite;
+  }
+  @keyframes sermon-sweep {
+    0% {
+      scale: 0 1;
+      transform-origin: left center;
+    }
+    50% {
+      scale: 1 1;
+      transform-origin: left center;
+    }
+    50.01% {
+      scale: 1 1;
+      transform-origin: right center;
+    }
+    100% {
+      scale: 0 1;
+      transform-origin: right center;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sermon-spinner::after {
+      animation: none;
+      scale: 1 1;
+    }
   }
 
   /* ----------------------------------------------------------------

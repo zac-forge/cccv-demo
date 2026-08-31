@@ -14,6 +14,7 @@ type Props = {
  */
 export default function SermonPlayer({ videoId, title }: Props) {
   const [playing, setPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
 
   if (playing) {
     return (
@@ -24,7 +25,18 @@ export default function SermonPlayer({ videoId, title }: Props) {
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
+          onLoad={() => setReady(true)}
         />
+        {/* YouTube's iframe takes a beat to paint. Without this the press
+            lands on a black rectangle and reads as a dead click. */}
+        {!ready && (
+          <span className="absolute inset-0 grid place-items-center bg-ink">
+            <span className="sr-only" role="status">
+              Loading the message
+            </span>
+            <span className="sermon-spinner" aria-hidden="true" />
+          </span>
+        )}
       </div>
     );
   }

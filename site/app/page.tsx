@@ -397,7 +397,7 @@ export default function Home() {
                 >
                   <a
                     href="#"
-                    className="grid grid-cols-[5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr] sm:gap-x-10 md:py-10"
+                    className="pressable grid grid-cols-[5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr] sm:gap-x-10 md:py-10"
                   >
                     <span aria-hidden="true" className="f-data t-date">
                       {e.day ? (
