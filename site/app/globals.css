@@ -434,12 +434,46 @@
     border-bottom-color: var(--color-red);
   }
 
-  /* Give is differentiated by a standing rule, not by a filled pill. */
+  /* Give is how the church is actually funded, so it stops being a
+     destination like the six links beside it and becomes an action. It
+     carries the same yellow field as the hero's primary CTA — a field
+     with ink type, which is the only way this palette uses yellow, and
+     the highest contrast pairing available at 8.15. Reads on both header
+     states: over the hero artwork and on solid Album Stock. */
   .navlink-give {
-    border-bottom-color: var(--color-red);
+    /* Ink, not --nav-fg: the chip brings its own ground, so the type
+       must not follow the header's light/dark swap. */
+    color: var(--color-ink);
+    background: var(--color-yellow);
+    border: 1px solid var(--color-yellow);
+    padding: 0.625rem 1.125rem;
+    /* The header sets --focus to yellow while transparent, which would
+       be invisible against this chip. */
+    --focus: var(--color-ink);
+    transition: background-color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      translate var(--dur-fast) var(--ease-out),
+      scale var(--dur-fast) var(--ease-out);
   }
-  .navlink-give:hover {
-    border-bottom-color: currentColor;
+  @media (hover: hover) {
+    .navlink-give:hover {
+      background: var(--color-salt);
+      border-color: var(--color-salt);
+      translate: 0 -1px;
+    }
+  }
+  .navlink-give:active {
+    translate: 0 1px;
+    scale: 0.985;
+  }
+  /* Below lg the chip lives in the mobile panel, where it is a thumb
+     target rather than a cursor target. 34px is under the 44px minimum. */
+  @media (max-width: 1023px) {
+    .navlink-give {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+    }
   }
 
   .burger {
