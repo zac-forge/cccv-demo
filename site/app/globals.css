@@ -754,6 +754,26 @@
   }
 
   /* ----------------------------------------------------------------
+     Event rows. The rules run the full measure but the content stops
+     around two thirds across, leaving the row with no right-hand
+     terminus. The arrow closes it, and doubles as the only signal that
+     the row is a link at all — ink, because this field carries ink type
+     and red is kept for the hairline rules.
+     ---------------------------------------------------------------- */
+  .event-go {
+    justify-self: end;
+    align-self: center;
+    font-size: 1.375rem;
+    line-height: 1;
+    transition: translate var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    a:hover > .event-go {
+      translate: 6px 0;
+    }
+  }
+
+  /* ----------------------------------------------------------------
      Press. Anything that is tappable but is not a .btn.
      ---------------------------------------------------------------- */
   .pressable {

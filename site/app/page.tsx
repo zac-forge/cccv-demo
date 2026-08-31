@@ -346,7 +346,7 @@ export default function Home() {
                   }
                 >
                   <article
-                    className={`ministry-card ${m.field} h-full border border-ink`}
+                    className={`ministry-card ${m.field} flex h-full flex-col border border-ink`}
                   >
                     <div
                       className="relative w-full overflow-hidden border-b border-ink"
@@ -360,12 +360,16 @@ export default function Home() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="p-5 lg:p-6">
+                    <div className="flex flex-1 flex-col p-5 lg:p-6">
                       <h3 className="t-card">{m.name}</h3>
                       <p className="muted mt-3 text-[0.9375rem] leading-snug">
                         {m.blurb}
                       </p>
-                      <p className="t-meta mt-5">{m.meta}</p>
+                      {/* mt-auto, so the meeting time sits on the card
+                          floor rather than wherever the blurb happens to
+                          end. Titles and blurbs run to different lengths;
+                          this is the line that has to agree across a row. */}
+                      <p className="t-meta mt-auto pt-5">{m.meta}</p>
                     </div>
                   </article>
                 </li>
@@ -397,7 +401,7 @@ export default function Home() {
                 >
                   <a
                     href="#"
-                    className="pressable grid grid-cols-[5rem_1fr] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr] sm:gap-x-10 md:py-10"
+                    className="pressable grid grid-cols-[5rem_1fr_auto] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 md:py-10"
                   >
                     <span aria-hidden="true" className="f-data t-date">
                       {e.day ? (
@@ -420,6 +424,11 @@ export default function Home() {
                       <span className="muted mt-2 block text-[0.9375rem] md:text-base">
                         {e.detail}
                       </span>
+                    </span>
+                    {/* Closes the row against the rule, and is the only
+                        thing telling you the row is a link at all. */}
+                    <span aria-hidden="true" className="event-go">
+                      &#8594;
                     </span>
                   </a>
                 </li>
