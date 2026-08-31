@@ -753,6 +753,15 @@
     transition-delay: calc(var(--i, 0) * 40ms);
   }
 
+  /* The radio is composed with the object right and open wall left,
+     but this section runs poster-left / type-right — so unflipped, the
+     speaker grille sits directly behind the running copy. Mirrored, the
+     object falls behind the opaque poster and the type gets the quiet
+     half. Nobody can tell a radio has been flipped. */
+  .message-art {
+    scale: -1.08 1.08;
+  }
+
   /* ----------------------------------------------------------------
      Event rows. The rules run the full measure but the content stops
      around two thirds across, leaving the row with no right-hand

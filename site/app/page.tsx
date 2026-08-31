@@ -223,13 +223,17 @@ export default function Home() {
             ========================================================= */}
         <section id="message" className="field-ink relative isolate overflow-hidden">
           <Image
-            src="/site/sunwave.png"
+            src="/site/message-bg.png"
             alt=""
             fill
             sizes="100vw"
-            className="-z-20 scale-[1.08] object-cover object-[center_34%]"
+            className="message-art -z-20 object-cover object-[center_38%]"
           />
-          <div className="absolute inset-0 -z-10 bg-ink/[0.88]" aria-hidden="true" />
+          {/* 0.88 buried the artwork so completely that only its tone
+              registered, which is how the old sun read as a generic
+              repeat of the hero. 0.78 lets the radio be recognisable
+              while the salt type stays well clear of AA. */}
+          <div className="absolute inset-0 -z-10 bg-ink/[0.82]" aria-hidden="true" />
 
           <div className="band-lg shell">
             {/* Folio: imprint one end, series the other. Print notation,
@@ -412,9 +416,15 @@ export default function Home() {
                           {e.day}
                         </>
                       ) : (
-                        <span className="block text-[2rem] leading-none sm:text-[3.25rem]">
-                          {e.month}
-                        </span>
+                        // Without an eyebrow this column loses the
+                        // [label][value] structure the dated rows have,
+                        // and the third row reads as a different object.
+                        <>
+                          <span className="t-eyebrow block">Date</span>
+                          <span className="block text-[2rem] leading-none sm:text-[3.25rem]">
+                            {e.month}
+                          </span>
+                        </>
                       )}
                     </span>
                     <span>
