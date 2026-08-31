@@ -166,11 +166,14 @@
     letter-spacing: -0.032em;
   }
 
-  /* The sermon title. Hand-broken into three lines and led tighter than
-     .t-feature so the block reads as one shape, not four sentences. */
+  /* The sermon title, hand-broken into three lines. Leading is set from
+     the measured ink, not by eye: "Losing Sight" drops 17.6px of descender
+     and "Of What Really" rises 54.4px, so at 72px the two need the full em
+     between baselines. 0.86 overlapped them by 10px. 1.06 clears the worst
+     pair by ~4px and still reads as one block. */
   .t-message {
     font-size: clamp(2.75rem, 5.4vw, 4.5rem);
-    line-height: 0.86;
+    line-height: 1.06;
     letter-spacing: -0.034em;
   }
 
