@@ -26,3 +26,10 @@ CONTENT-SOURCES.md
 
 # Internal working notes, not published.
 SESSION-HANDOFF.md
+
+# Build docs. Candid internal assessment of the church's current site,
+# their accounts and their decisions. Not ours to publish while the repo is public.
+docs/
+
+# FUSE leftovers from files deleted while open on a mounted volume.
+.fuse_hidden*
