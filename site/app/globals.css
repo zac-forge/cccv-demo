@@ -380,24 +380,27 @@
       transparent 82%
     );
   }
-  /* A full-bleed landscape behind a header (/about): a light blue wash
-     over the sky so cloud bands never sit under the type. */
+  /* A full-bleed landscape behind a header (/about): the homepage's
+     move at a lighter hand. An ink wash over the left makes the type
+     zone, so the statement's last lines can cross the hill line and
+     still read; the right stays the picture. */
   .poster-sky {
     pointer-events: none;
     background: linear-gradient(
       180deg,
-      rgba(49, 94, 118, 0.6) 0%,
-      rgba(49, 94, 118, 0.4) 45%,
-      rgba(49, 94, 118, 0) 72%
+      rgba(22, 19, 26, 0.58) 0%,
+      rgba(22, 19, 26, 0.46) 50%,
+      rgba(22, 19, 26, 0.15) 80%
     );
   }
   @media (min-width: 768px) {
     .poster-sky {
       background: linear-gradient(
-        100deg,
-        rgba(49, 94, 118, 0.5) 0%,
-        rgba(49, 94, 118, 0.3) 38%,
-        rgba(49, 94, 118, 0) 62%
+        98deg,
+        rgba(22, 19, 26, 0.62) 0%,
+        rgba(22, 19, 26, 0.5) 34%,
+        rgba(22, 19, 26, 0.26) 54%,
+        rgba(22, 19, 26, 0) 70%
       );
     }
   }

@@ -78,7 +78,7 @@ export default function Connect() {
           <p className="t-eyebrow mt-9 text-[color:var(--color-yellow-onblue)] md:mt-12">
             Connect
           </p>
-          <h1 className="f-display t-feature mt-5 max-w-[24ch]">
+          <h1 className="f-display t-feature mt-5 max-w-[20ch]">
             We count it a blessing and a privilege to serve each and every one
             of you.
           </h1>
