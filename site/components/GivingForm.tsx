@@ -2,11 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* Ministry Brands Amplify, confirmed live in their DOM: one loader
-   script that injects an iframe into #mb-formbuilder-container. It is
-   heavy, so nothing loads until the box is near the viewport, and the
-   box reserves its height first so the page never shifts when the form
-   arrives. Works under static export; nothing here needs a server. */
+/* Ministry Brands Amplify. The loader at forms.ministryforms.net does not
+   look for a container element. It finds its own <script> tag by src and
+   inserts the form iframe as that tag's next sibling; the iframe is what
+   carries id="mb-formbuilder-container". So the script has to be appended
+   inside this box, not to document.body, or the form lands after the
+   footer and, being outside React's tree, follows the visitor to every
+   page. The loader is heavy, so nothing loads until the box is near the
+   viewport, and the box reserves its height first so the page never
+   shifts when the form arrives. Works under static export. */
 export default function GivingForm({ formId }: { formId: string }) {
   const box = useRef<HTMLDivElement>(null);
   const [near, setNear] = useState(false);
@@ -29,12 +33,15 @@ export default function GivingForm({ formId }: { formId: string }) {
 
   useEffect(() => {
     if (!near) return;
+    const node = box.current;
+    if (!node) return;
     const script = document.createElement("script");
     script.src = `https://forms.ministryforms.net/embed.aspx?formId=${formId}`;
     script.async = true;
-    document.body.appendChild(script);
+    node.appendChild(script);
     return () => {
       script.remove();
+      node.querySelector("iframe#mb-formbuilder-container")?.remove();
     };
   }, [near, formId]);
 
@@ -43,7 +50,6 @@ export default function GivingForm({ formId }: { formId: string }) {
       ref={box}
       className="giving-box relative min-h-[760px] border border-ink bg-salt"
     >
-      <div id="mb-formbuilder-container" />
       {!near && (
         <p className="muted absolute left-6 top-6 text-[0.9375rem]">
           The giving form loads here.
