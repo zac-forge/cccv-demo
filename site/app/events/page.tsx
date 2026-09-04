@@ -18,15 +18,16 @@ export const metadata: Metadata = {
 
    The opening is a poster on ink (Drew, September 4): the title at
    poster size and, beside it, every upcoming event that has artwork as
-   a plate (EventPosters), each a link to its page with the date in
-   yellow numerals and the name as its caption. The plates are a strip:
+   a plate (EventPosters), each a link with the date in yellow numerals
+   and the name as its caption. The plates are a strip:
    one and the edge of the next on a phone, two and the edge of a third
    from sm, the rest by scrolling. Ink
    because the list below keeps the Events field, yellow, and yellow
    numerals only sit on a dark ground. No sunburst: the plates own that
    corner. */
 
-const FEATURED = EVENTS.filter((e) => e.page?.image);
+
+const FEATURED = EVENTS.filter((e) => e.image ?? e.page?.image);
 
 export default function Events() {
   return (

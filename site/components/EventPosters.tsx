@@ -8,7 +8,8 @@ import type { EventItem } from "@/lib/content";
 /* Event artwork as a strip of poster plates: one plate and the edge of
    the next on a phone, two and the edge of a third from sm, so the
    strip shows that it scrolls. It moves only when someone moves it: a
-   swipe, the keyboard, or the two arrows.
+   swipe, the keyboard, or the two arrows. Only events with art belong
+   here; an event without a page of its own carries its art on `image`.
    Native scroll-snap does the scrolling; the arrows are the only
    script. With as many plates as fit, the arrows do not render. */
 export default function EventPosters({ events }: { events: EventItem[] }) {
@@ -78,7 +79,7 @@ export default function EventPosters({ events }: { events: EventItem[] }) {
             <Link href={e.href} className="pressable block">
               <span className="relative block aspect-[3/2] overflow-hidden border border-[color:var(--rule)]">
                 <Image
-                  src={e.page!.image!}
+                  src={(e.image ?? e.page?.image)!}
                   alt=""
                   fill
                   priority={i === 0}

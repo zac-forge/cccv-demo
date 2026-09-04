@@ -355,6 +355,9 @@ export type EventItem = {
   name: string;
   detail: string;
   href: string;
+  /* Poster art for the /events strip when the event has no page of its
+     own (its href goes elsewhere). An event with a page uses page.image. */
+  image?: string;
   page?: {
     slug: string;
     image?: string;
@@ -418,6 +421,7 @@ export const EVENTS: EventItem[] = [
     name: "Evangelism & Discipleship Class",
     detail: "September 25 · 6:30–7:30 pm · No need to sign up",
     href: "/ministries/evangelism-discipleship",
+    image: "/ministries/02-evangelism.webp",
   },
 ];
 
