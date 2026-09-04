@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import CTABand from "@/components/CTABand";
 import PageHeader from "@/components/PageHeader";
@@ -12,10 +11,24 @@ import { CHURCH } from "@/lib/site";
    /home ("Who We Are", "What We Do", "Why We're Here"). Every paragraph
    is theirs, verbatim. Section headings are theirs where they had one
    ("What we believe", "Meet our pastor", "Meet our team", "Connect with
-   us"). Staff photos are being replaced, so the team is set as names.
-   The 805 number and Newbury Park mailing address on their /about are
-   not carried: the footer number is the one in use (CONTENT-SOURCES §6)
-   and the mailing address is an open question.
+   us"). The 805 number and Newbury Park mailing address on their /about
+   are not carried: the footer number is the one in use (CONTENT-SOURCES
+   §6) and the mailing address is an open question.
+
+   Design pass, September 4, on the /connect pass-02 rules: each section
+   gets the composition its job asks for, typography and rules before
+   components, and numerals only where there is a real sequence.
+
+   - The opening keeps its two columns; Acts 20:27, which "What we do"
+     cites, is set in the margin beneath it, as /new/know-jesus does.
+   - The creed is four adjectives, so the adjectives are the display
+     type: their sentences split typographically, never rewritten.
+   - The pastor's bio is an editorial split with a dated rail for the
+     three plants in his own account. Dates are the page's one sequence.
+   - The team is a ruled roster, not cards. Photos are being replaced;
+     a portrait slot fits the row when they arrive.
+   - "Connect with us" is one ruled row that closes the roster and
+     points at /connect and at Ministries we support.
    ------------------------------------------------------------------ */
 
 export const metadata: Metadata = {
@@ -26,6 +39,30 @@ export const metadata: Metadata = {
   alternates: { canonical: "/about" },
 };
 
+/* Each conviction ends on its one adjective. The adjective becomes the
+   display line and the stem stays above it at reading size, so the
+   sentence still reads whole and in order. */
+function splitConviction(sentence: string) {
+  const m = sentence.match(/^(.*\S)\s+(\S+)\.$/);
+  return m ? { stem: m[1], word: m[2] } : { stem: "", word: sentence };
+}
+
+/* The three church plants as Pastor Dave dates them in his bio. The
+   rows are Drew's condensation of his sentences; CONTENT-SOURCES §12. */
+const MILESTONES = [
+  {
+    year: "2000",
+    text: "Planted Calvary Chapel Santa Cruz with his wife, and served there as Senior Pastor for 10 years.",
+  },
+  { year: "2013", text: "Planted Calvary Chapel Calabasas." },
+  {
+    year: "2021",
+    text: "Calvary Chapel Calabasas became Calvary Chapel Conejo Valley.",
+  },
+];
+
+const [WHO, WHAT, WHY] = WHO_WE_ARE;
+
 export default function About() {
   return (
     <main id="main">
@@ -33,30 +70,47 @@ export default function About() {
         field="field-salt"
         trail={[{ label: "About", href: "/about" }]}
         title="About"
-        lede={<p>{WHO_WE_ARE[0].text}</p>}
+        lede={<p>{WHO.text}</p>}
       />
 
-      {/* What we do, why we're here: two of the three /home blocks, side
-          by side. The first is the lede above. */}
-      <section aria-label="What we do" className="field-salt pb-[clamp(4rem,7vw,6rem)]">
+      {/* =========================================================
+          WHAT WE DO, WHY WE'RE HERE — two of the three /home blocks,
+          side by side. The first is the lede above. "What we do" cites
+          Acts 20:27, so the verse is repeated in full beneath it.
+          ========================================================= */}
+      <section
+        aria-label="What we do"
+        className="field-salt pb-[clamp(4rem,7vw,6rem)]"
+      >
         <div className="shell grid gap-10 md:grid-cols-2 md:gap-16">
-          {WHO_WE_ARE.slice(1).map((block) => (
-            <div key={block.title} className="rule-t pt-6">
-              <h2 className="t-subhead">{block.title}</h2>
-              <p className="prose mt-4 max-w-[46ch]">{block.text}</p>
-            </div>
-          ))}
+          <div className="rule-t pt-6">
+            <h2 className="t-subhead">{WHAT.title}</h2>
+            <p className="prose mt-4 max-w-[46ch]">{WHAT.text}</p>
+            <Verse reference="Acts 20:27" className="mt-8 max-w-[36ch]" />
+          </div>
+          <div className="rule-t pt-6">
+            <h2 className="t-subhead">{WHY.title}</h2>
+            <p className="prose mt-4 max-w-[46ch]">{WHY.text}</p>
+          </div>
         </div>
       </section>
 
       {/* =========================================================
           WHAT WE BELIEVE — the statement of faith, in their words. The
-          four worship convictions are set as a list of pairs: the
-          conviction in the display face, the "Therefore" beneath it.
+          two paragraphs at reading measure, then the four convictions
+          as a litany: one ruled row each, the adjective in display type
+          beside its "Therefore".
           ========================================================= */}
-      <section id="beliefs" aria-labelledby="beliefs-title" className="field-stock band">
+      <section
+        id="beliefs"
+        aria-labelledby="beliefs-title"
+        className="field-stock band"
+      >
         <div className="shell">
-          <h2 id="beliefs-title" className="f-display t-section max-w-[12ch]">
+          <h2
+            id="beliefs-title"
+            className="f-display t-section max-w-[12ch]"
+          >
             What we believe
           </h2>
           <div className="prose measure mt-10 md:mt-12">
@@ -64,106 +118,157 @@ export default function About() {
               <p key={para.slice(0, 40)}>{para}</p>
             ))}
           </div>
-          <ul className="mt-12 grid gap-x-16 gap-y-10 md:mt-16 md:grid-cols-2">
-            {BELIEFS.worship.map((w) => (
-              <li key={w.we} className="rule-t pt-6">
-                <p className="t-subhead max-w-[18ch]">{w.we}</p>
-                <p className="prose mt-4 max-w-[46ch]">
-                  <span className="t-eyebrow mr-3 text-red">Therefore</span>
-                  {w.therefore}
-                </p>
-              </li>
-            ))}
+          <ul className="mt-14 md:mt-20">
+            {BELIEFS.worship.map((w) => {
+              const { stem, word } = splitConviction(w.we);
+              return (
+                <li
+                  key={w.we}
+                  className="rule-t grid gap-5 py-8 md:py-10 lg:grid-cols-12 lg:gap-16"
+                >
+                  <p className="lg:col-span-5">
+                    {stem && (
+                      <span className="muted block text-[1.0625rem] leading-snug">
+                        {stem}
+                      </span>
+                    )}
+                    <span className="f-display t-section mt-3 block">
+                      {word}
+                      {stem && "."}
+                    </span>
+                  </p>
+                  <p className="prose max-w-[46ch] lg:col-span-6 lg:col-start-7 lg:pt-2">
+                    <span className="t-eyebrow mr-3 text-red">Therefore</span>
+                    {w.therefore}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
 
       {/* =========================================================
-          MEET OUR PASTOR — his bio as they wrote it, Phil. 1:21 set
-          apart beside the paragraph that quotes it.
+          MEET OUR PASTOR — his bio as they wrote it in the reading
+          column. The rail carries the three plants he dates himself,
+          and Phil. 1:21 sits at the foot beside the paragraph that
+          quotes it.
           ========================================================= */}
-      <section id="pastor" aria-labelledby="pastor-title" className="field-salt band">
-        <div className="shell">
-          <p className="t-eyebrow text-red">Meet our pastor</p>
-          <h2 id="pastor-title" className="f-display t-section mt-5 max-w-[12ch]">
-            {PASTOR.name}
-          </h2>
-          <div className="mt-10 lg:grid lg:grid-cols-12 lg:gap-x-16 md:mt-12">
-            <div className="prose measure lg:col-span-7">
+      <section
+        id="pastor"
+        aria-labelledby="pastor-title"
+        className="field-salt band"
+      >
+        <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            <p className="t-eyebrow text-red">Meet our pastor</p>
+            <h2
+              id="pastor-title"
+              className="f-display t-section mt-5 max-w-[12ch]"
+            >
+              {PASTOR.name}
+            </h2>
+            <div className="prose measure mt-10 md:mt-12">
               {PASTOR.paragraphs.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}
             </div>
-            <div className="mt-8 lg:col-span-4 lg:col-start-9 lg:mt-0 lg:self-end">
-              <Verse reference="Philippians 1:21" />
-            </div>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 lg:flex lg:flex-col">
+            <h3 className="t-card">Where he has served</h3>
+            <dl className="mt-5">
+              {MILESTONES.map((m) => (
+                <div
+                  key={m.year}
+                  className="rule-t grid grid-cols-[5rem_1fr] gap-4 py-4"
+                >
+                  <dt className="f-data text-[1.375rem] leading-none">
+                    {m.year}
+                  </dt>
+                  <dd className="text-[1rem] leading-snug">{m.text}</dd>
+                </div>
+              ))}
+            </dl>
+            <Verse reference="Philippians 1:21" className="mt-10 lg:mt-auto" />
           </div>
         </div>
       </section>
 
       {/* =========================================================
-          MEET OUR TEAM — photos are being replaced, so each card carries
-          a screenprinted portrait plate instead: a couple from behind,
-          looking at the valley. Deliberate, not a missing image.
+          MEET OUR TEAM — a ruled roster: the couple's names in the
+          display face, their blurb beside. No cards, no placeholder
+          portraits; when the new photos come, a plate fits the row.
+          "Connect with us" closes the roster as one more ruled row.
           ========================================================= */}
-      <section id="team" aria-labelledby="team-title" className="field-stock band">
+      <section
+        id="team"
+        aria-labelledby="team-title"
+        className="field-stock band"
+      >
         <div className="shell">
           <h2 id="team-title" className="f-display t-section max-w-[12ch]">
             Meet our team
           </h2>
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
+          <ul className="mt-12 md:mt-14">
             {TEAM.map((person) => (
-              <li key={person.names} className="flex flex-col border border-ink bg-salt">
-                <div className="relative aspect-[2/3] overflow-hidden border-b border-ink">
-                  <Image
-                    src={`/staff/${person.portrait}.webp`}
-                    alt=""
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <h3 className="t-card">{person.names}</h3>
-                  <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
-                    {person.text}
-                  </p>
-                </div>
+              <li
+                key={person.names}
+                className="rule-t grid gap-3 py-7 md:py-8 lg:grid-cols-12 lg:gap-16"
+              >
+                <h3 className="f-display text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.05] tracking-[-0.02em] lg:col-span-4">
+                  {person.names}
+                </h3>
+                <p className="max-w-[58ch] text-[1.0625rem] leading-[1.6] lg:col-span-7 lg:col-start-6">
+                  {person.text}
+                </p>
               </li>
             ))}
           </ul>
+
+          <section
+            aria-labelledby="reach-title"
+            className="rule-t mt-4 grid gap-8 pt-8 md:pt-10 lg:grid-cols-12 lg:gap-16"
+          >
+            <div className="lg:col-span-4">
+              <h2 id="reach-title" className="t-subhead">
+                Connect with us
+              </h2>
+              <p className="muted mt-3 text-[1.0625rem]">
+                We&rsquo;d love to hear from you
+              </p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
+              <p>
+                <a
+                  href={`mailto:${CHURCH.email}`}
+                  className="link-inline text-[1.0625rem]"
+                >
+                  {CHURCH.email}
+                </a>
+                <br />
+                <a
+                  href={CHURCH.phoneHref}
+                  className="f-data mt-3 inline-block text-[1.5rem] leading-none"
+                >
+                  {CHURCH.phone}
+                </a>
+              </p>
+              <div className="flex flex-col items-start gap-4">
+                <Link href="/connect" className="link-rule">
+                  Prayer, serving and the directory
+                </Link>
+                <Link href="/about/who-we-support" className="link-rule">
+                  Ministries we support
+                </Link>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
 
-      <section aria-labelledby="reach-title" className="field-salt band">
-        <div className="shell grid gap-8 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
-            <h2 id="reach-title" className="f-display t-section max-w-[10ch]">
-              Connect with us
-            </h2>
-            <p className="prose mt-6">We&rsquo;d love to hear from you</p>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <p>
-              <span className="t-eyebrow block text-red">By email</span>
-              <a href={`mailto:${CHURCH.email}`} className="link-inline mt-2 inline-block text-[1.125rem]">
-                {CHURCH.email}
-              </a>
-            </p>
-            <p className="mt-6">
-              <span className="t-eyebrow block text-red">By phone</span>
-              <a href={CHURCH.phoneHref} className="f-data mt-2 inline-block text-[1.75rem] leading-none">
-                {CHURCH.phone}
-              </a>
-            </p>
-            <Link href="/connect" className="link-rule mt-8">
-              Prayer, serving and the directory
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <CTABand field="field-stock" />
+      {/* The roster above is stock, so the close is salt: the band never
+          shares a field with the section above it. */}
+      <CTABand />
     </main>
   );
 }

@@ -29,6 +29,10 @@ export const NKJV: Record<string, string> = {
   "2 Corinthians 5:8":
     "We are confident, yes, well pleased rather to be absent from the body and to be present with the Lord.",
   "Philippians 1:21": "For to me, to live is Christ, and to die is gain.",
+  /* Added 2026-09-04 for /about ("What we do" cites it); checked against
+     biblegateway.com (NKJV) the same day. */
+  "Acts 20:27":
+    "For I have not shunned to declare to you the whole counsel of God.",
   "John 6:37":
     "All that the Father gives Me will come to Me, and the one who comes to Me I will by no means cast out.",
 };
