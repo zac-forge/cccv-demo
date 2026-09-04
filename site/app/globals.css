@@ -247,8 +247,8 @@
 
   /* ----------------------------------------------------------------
      Long-form reading. The audience skews older and reads on a phone at
-     night: a step up from UI size, more leading than the UI gets, and a
-     measure held by the grid (see Passage in /new/know-jesus).
+     night: a step up from UI size, more leading than the UI gets, and
+     the site measure on the column.
      ---------------------------------------------------------------- */
   .prose {
     font-size: 1.125rem;
@@ -259,8 +259,24 @@
       font-size: 1.1875rem;
     }
   }
-  .passage + .passage {
-    margin-top: 1.6em;
+  .prose > * + * {
+    margin-top: 1.5em;
+  }
+  /* Section heads inside long-form: the display face a size below the
+     page title, with a clear beat above and a short one below, so the
+     column reads as chapters rather than a wall. */
+  .prose h2 {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 36;
+    font-weight: 800;
+    font-size: clamp(1.625rem, 2.4vw, 2.125rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-top: clamp(2.75rem, 4.5vw, 3.75rem);
+    margin-bottom: 1.125rem;
+  }
+  .prose h2 + * {
+    margin-top: 0;
   }
   .link-inline {
     color: var(--color-red);
