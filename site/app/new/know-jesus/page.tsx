@@ -208,11 +208,15 @@ export default function KnowJesus() {
         <div className="shell prose pb-[clamp(5rem,8vw,7rem)] pt-[clamp(4rem,7vw,6rem)]">
           {/* Their bold, set as display type: the one line on the page
               that carries its own weight, and the one use of display red. */}
-          <p
-            data-reveal="clip"
-            className="f-display t-section display-red max-w-[12ch]"
-          >
-            <span>It isn&rsquo;t the prayer that saves you. Jesus saves.</span>
+          {/* Two lines, one sentence each: the first never breaks where it
+              fits, and "Jesus saves." always takes the second (Drew,
+              September 4). */}
+          <p data-reveal="clip" className="f-display t-section display-red">
+            <span>
+              It isn&rsquo;t the prayer that saves you.
+              <br />
+              Jesus saves.
+            </span>
           </p>
           <Run>
             <p>
