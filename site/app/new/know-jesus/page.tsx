@@ -53,6 +53,7 @@ export default function KnowJesus() {
     <main id="main">
       <PageHeader
         poster
+        art="cross"
         field="field-blue"
         trail={[
           { label: "Visit", href: "/new" },

@@ -70,6 +70,7 @@ export default function Connect() {
     <main id="main">
       <PageHeader
         poster
+        art="none"
         field="field-blue"
         trail={[{ label: "Connect", href: "/connect" }]}
         title="Connect"

@@ -24,7 +24,9 @@ import { CHURCH } from "@/lib/site";
      /new/know-jesus: the title at poster size with Acts 20:27 hung
      beside it, the verse "What we do" cites, then their "Who we are"
      statement across the full shell. Blue, not salt, because the
-     sunburst is yellow and yellow only sits on a dark ground.
+     sunburst is yellow and yellow only sits on a dark ground. The art
+     is the Conejo Valley band along the foot, not the sunburst, since
+     the page is about where the church is (Drew, Sept 4).
    - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
@@ -74,6 +76,7 @@ export default function About() {
     <main id="main">
       <PageHeader
         poster
+        art="valley"
         field="field-blue"
         trail={[{ label: "About", href: "/about" }]}
         title="About"

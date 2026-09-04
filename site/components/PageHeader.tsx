@@ -1,6 +1,7 @@
 import Breadcrumb from "./Breadcrumb";
 import type { Crumb } from "./Breadcrumb";
-import PosterArt from "./PosterArt";
+import PosterArt, { ART_OWNS_RIGHT } from "./PosterArt";
+import type { PosterArtName } from "./PosterArt";
 
 type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-yellow";
 
@@ -18,7 +19,9 @@ type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-
    title row, for a page whose opening is a statement rather than a
    paragraph (/about). `asideNear` hangs the aside right after a short
    title, in the columns the scrim keeps clean, rather than out under
-   the rays where it competes with the sun (/about). */
+   the rays where it competes with the sun (/about). `art` picks the
+   piece behind the poster (PosterArt); a painted piece owns the right
+   side, so the aside then stacks under the deck instead. */
 export default function PageHeader({
   trail,
   title,
@@ -26,6 +29,7 @@ export default function PageHeader({
   statement,
   aside,
   asideNear = false,
+  art = "rays",
   field = "field-stock",
   poster = false,
 }: {
@@ -35,6 +39,7 @@ export default function PageHeader({
   statement?: React.ReactNode;
   aside?: React.ReactNode;
   asideNear?: boolean;
+  art?: PosterArtName;
   field?: Field;
   poster?: boolean;
 }) {
@@ -54,24 +59,30 @@ export default function PageHeader({
     );
   }
 
+  const stacked = ART_OWNS_RIGHT.has(art);
+
   return (
     <header
       className={`${field} page-header-poster relative isolate overflow-hidden`}
+      data-art={art}
     >
-      <PosterArt />
+      <PosterArt art={art} />
 
       <div className="shell relative">
         {trail && <Breadcrumb trail={trail} />}
         <div className="mt-9 grid gap-10 md:mt-12 lg:grid-cols-12 lg:items-end lg:gap-16">
-          <div className={asideNear ? "lg:col-span-4" : "lg:col-span-7"}>
+          <div className={asideNear && !stacked ? "lg:col-span-4" : "lg:col-span-7"}>
             <h1 className="f-display t-poster max-w-[11ch]">{title}</h1>
             {lede && (
               <div className="t-lede muted measure-tight mt-8 md:mt-10">
                 {lede}
               </div>
             )}
+            {aside && stacked && (
+              <div className="mt-8 max-w-[34ch] md:mt-10">{aside}</div>
+            )}
           </div>
-          {aside && (
+          {aside && !stacked && (
             <div
               className={
                 asideNear

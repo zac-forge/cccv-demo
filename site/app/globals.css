@@ -330,6 +330,13 @@
   .page-header-poster {
     padding-block: clamp(2.75rem, 5vw, 4.5rem) clamp(3.5rem, 7vw, 6rem);
   }
+  /* The valley band sits along the foot, under the type, so the header
+     grows by the band's height where the band shows (lg up). */
+  @media (min-width: 1024px) {
+    .page-header-poster[data-art="valley"] {
+      padding-bottom: calc(clamp(3.5rem, 7vw, 6rem) + 14rem);
+    }
+  }
   /* Between t-feature and t-hero: a poster, not the hero. */
   .t-poster {
     font-size: clamp(2.875rem, 6.2vw, 5.75rem);
@@ -362,6 +369,40 @@
       var(--field) 44%,
       transparent 74%
     );
+  }
+  /* A painted piece (cross, sower): the right half of the header, top
+     to bottom, its own left third faded out so the field takes over
+     with no seam. The pieces are painted on their field's colour, so
+     the mask is belt and braces. */
+  .poster-plate {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
+    pointer-events: none;
+    user-select: none;
+  }
+  /* The valley band: the whole width along the foot, the top of the
+     range showing, the field for a sky above it. */
+  .poster-foot {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    object-position: center top;
+    pointer-events: none;
+    user-select: none;
   }
 
 

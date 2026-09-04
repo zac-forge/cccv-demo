@@ -26,6 +26,7 @@ export default function Give() {
     <main id="main">
       <PageHeader
         poster
+        art="sower"
         field="field-ink"
         trail={[{ label: "Give", href: "/give" }]}
         title="Give"
