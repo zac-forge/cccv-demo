@@ -1332,30 +1332,42 @@
       flex-basis: calc((100% - 4rem) / 2.3);
     }
   }
-  /* The strip's arrows: a square outline chip in the field's own colour.
-     Hover fills salt, because on ink the btn-outline fill would vanish. */
-  .strip-arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.75rem;
-    height: 2.75rem;
-    border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
-    color: currentColor;
-    font-size: 1.25rem;
-    line-height: 1;
-    transition: background-color var(--dur-fast) var(--ease-out),
-      color var(--dur-fast) var(--ease-out),
-      opacity var(--dur-fast) var(--ease-out);
+  /* Mouse drag: the strip follows the hand, then settles on release.
+     Snap is off while dragging or the browser fights every move. */
+  .poster-strip {
+    cursor: grab;
   }
-  .strip-arrow:hover {
-    background: var(--color-salt);
-    border-color: var(--color-salt);
-    color: var(--color-ink);
+  .poster-strip[data-dragging] {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
   }
-  .strip-arrow[aria-disabled="true"] {
-    opacity: 0.35;
-    pointer-events: none;
+  .poster-strip:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 6px;
+  }
+  /* The strip's position, as a hairline with a short marker: the same
+     rule the rows use, the marker in the field's yellow. Wide enough to
+     hit, drawn thin. */
+  .strip-track {
+    position: relative;
+    height: 1.25rem;
+    cursor: pointer;
+  }
+  .strip-track::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--rule);
+  }
+  .strip-thumb {
+    position: absolute;
+    top: calc(50% - 1px);
+    height: 3px;
+    background: var(--color-yellow);
+    transition: none;
   }
 
   /* Section index: a contents strip. Rows on a phone; from lg one strip
