@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import EventList from "@/components/EventList";
 import Hero from "@/components/Hero";
 import MinistryGrid from "@/components/MinistryGrid";
 import SermonPlayer from "@/components/SermonPlayer";
@@ -254,54 +255,9 @@ export default function Home() {
               <span>What&rsquo;s coming up</span>
             </h2>
 
-            <ul className="mt-14 md:mt-16">
-              {EVENTS.map((e) => (
-                <li
-                  key={e.name}
-                  data-reveal=""
-                  className="rule-t last:border-b last:border-[color:var(--rule)]"
-                >
-                  <Link
-                    href={e.href}
-                    className="pressable grid grid-cols-[5rem_1fr_auto] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 md:py-10"
-                  >
-                    <span aria-hidden="true" className="f-data t-date">
-                      {e.day ? (
-                        <>
-                          <span className="t-eyebrow block">
-                            {e.month}
-                          </span>
-                          {e.day}
-                        </>
-                      ) : (
-                        // Without an eyebrow this column loses the
-                        // [label][value] structure the dated rows have,
-                        // and the third row reads as a different object.
-                        <>
-                          <span className="t-eyebrow block">Date</span>
-                          <span className="block text-[2rem] leading-none sm:text-[3.25rem]">
-                            {e.month}
-                          </span>
-                        </>
-                      )}
-                    </span>
-                    <span>
-                      <span className="f-data block text-[1.375rem] leading-tight md:text-[1.75rem]">
-                        {e.name}
-                      </span>
-                      <span className="muted mt-2 block text-[0.9375rem] md:text-base">
-                        {e.detail}
-                      </span>
-                    </span>
-                    {/* Closes the row against the rule, and is the only
-                        thing telling you the row is a link at all. */}
-                    <span aria-hidden="true" className="event-go">
-                      &#8594;
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-14 md:mt-16">
+              <EventList events={EVENTS} reveal />
+            </div>
           </div>
         </section>
 

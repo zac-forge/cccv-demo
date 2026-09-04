@@ -22,6 +22,13 @@ export const NKJV: Record<string, string> = {
     "And He sat down, called the twelve, and said to them, ‘If anyone desires to be first, he shall be last of all and servant of all.’",
   "Matthew 19:14":
     "But Jesus said, ‘Let the little children come to Me, and do not forbid them; for of such is the kingdom of heaven.’",
+  "Deuteronomy 16:17":
+    "Every man shall give as he is able, according to the blessing of the LORD your God which He has given you.",
+  "2 Corinthians 9:7-8":
+    "So let each one give as he purposes in his heart, not grudgingly or of necessity; for God loves a cheerful giver. And God is able to make all grace abound toward you, that you, always having all sufficiency in all things, may have an abundance for every good work.",
+  "2 Corinthians 5:8":
+    "We are confident, yes, well pleased rather to be absent from the body and to be present with the Lord.",
+  "Philippians 1:21": "For to me, to live is Christ, and to die is gain.",
   "John 6:37":
     "All that the Father gives Me will come to Me, and the one who comes to Me I will by no means cast out.",
 };

@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import CTABand from "@/components/CTABand";
+import Facts from "@/components/Facts";
 import PageHeader from "@/components/PageHeader";
 import Verse from "@/components/Verse";
 import { MINISTRIES } from "@/lib/content";
-import type { Fact } from "@/lib/content";
 
 /* One template, eight pages. Everything on the page is the ministry's
    own copy from /ministries/<slug>, via lib/content.ts; the heading
@@ -31,20 +31,6 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     description: `${m.blurb} ${m.meta}.`,
     alternates: { canonical: m.href },
   };
-}
-
-/* A printed schedule: their labels, their values, one rule per row. */
-function Facts({ facts }: { facts: Fact[] }) {
-  return (
-    <dl>
-      {facts.map((f) => (
-        <div key={f.label} className="rule-t grid grid-cols-[6.5rem_1fr] gap-4 py-4 sm:grid-cols-[8rem_1fr]">
-          <dt className="t-eyebrow pt-1 text-red">{f.label}</dt>
-          <dd className="text-[1.0625rem] leading-snug">{f.value}</dd>
-        </div>
-      ))}
-    </dl>
-  );
 }
 
 export default async function MinistryPage({ params }: { params: Params }) {

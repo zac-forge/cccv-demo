@@ -2,7 +2,7 @@ import Breadcrumb from "./Breadcrumb";
 import type { Crumb } from "./Breadcrumb";
 import PosterArt from "./PosterArt";
 
-type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink";
+type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-yellow";
 
 /* The interior page opening. `t-hero` exists once, on `/`; this is the
    other thing. Two sizes:

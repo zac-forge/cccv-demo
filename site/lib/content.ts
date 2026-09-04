@@ -343,20 +343,71 @@ export const MINISTRIES: Ministry[] = [
   },
 ];
 
-/* /eventscalendar/* and /ministries/evangelism-discipleship.
-   Dates are theirs, including the movie night's "TBD". The retreat and
-   the movie night keep their live-site slugs; the class is a ministry
-   page on their site, not an event page, and links there.
-   NOTE: DEMO.md asked for a Men's Breakfast. There is no such event
-   anywhere on their site, so I did not invent one — the Evangelism &
-   Discipleship class is a real dated event and takes the third slot. */
-export const EVENTS = [
+/* /eventscalendar/*, re-read 2026-09-03. Dates are theirs. The movie
+   night, "TBD" in August, is now dated. The Evangelism & Discipleship
+   class is a real dated event but a ministry page on their site, so its
+   row links there. Detail copy is verbatim; the movie night's emoji are
+   dropped. Past events keep their facts for the "past" list and get no
+   page. */
+export type EventItem = {
+  month: string;
+  day: string;
+  name: string;
+  detail: string;
+  href: string;
+  page?: {
+    slug: string;
+    paragraphs: string[];
+    facts: Fact[];
+    register?: { label: string; href: string };
+  };
+};
+
+export const EVENTS: EventItem[] = [
   {
     month: "Sep",
     day: "11",
     name: "2026 Women's Retreat",
     detail: "September 11–13, 2026 · Camper Daley, Calabasas",
     href: "/events/2026-womens-retreat",
+    page: {
+      slug: "2026-womens-retreat",
+      paragraphs: [
+        "Phillip told Nathanael with an excited heart, “Come and see!” He wanted his friend to have an encounter with the Jesus! And this is what I’m telling you... Come and see that you might have a personal encounter with Jesus. This retreat is going to be a time for you to get away with the Lord, reconnect with friends, meet new friends and relax. I hope that you will come and see what the Lord has in store for you!",
+        "This year’s theme is One Obsession. Taken from Phillipians 3:1-15. Our very special guest speaker is Karyn Johnson from Calvary Chapel Downey. As Karyn and I were talking and praying about this she said, women’s retreats are our special date with the Jesus! Register today for your date is waiting for you!",
+      ],
+      facts: [
+        { label: "When", value: "September 11–13, 2026" },
+        { label: "Where", value: "Camper Daley, 26801 Dorothy Dr., Calabasas, CA 91302" },
+        { label: "Speaker", value: "Karyn Johnson, Calvary Chapel Downey" },
+        { label: "Theme", value: "One Obsession — Philippians 3:1–15" },
+      ],
+      register: {
+        label: "Register now",
+        href: "https://www.ccsantaclarita.com/upcoming-events?sapurl=Lyt4M3N0L2xiL2V2Lyt2cGQyZ244L3JlZ2lzdGVyP2JyYW5kaW5nPXRydWUmZW1iZWQ9dHJ1ZSZyZWNlbnRSb3V0ZT1hcHAud2ViLWFwcC5saWJyYXJ5LmNhbGVuZGFyJnJlY2VudFJvdXRlU2x1Zz0lMkJ3cTU0eWd3",
+      },
+    },
+  },
+  {
+    month: "Sep",
+    day: "11",
+    name: "Family Movie Night",
+    detail: "September 11 · 7:00 pm · Popcorn will be provided",
+    href: "/events/family-movie",
+    page: {
+      slug: "family-movie",
+      paragraphs: [
+        "Grab the family and join us for a fun night together!",
+        "Bring your family, invite a friend, and come enjoy a great movie and fellowship together! We can’t wait to see you there!",
+      ],
+      facts: [
+        { label: "Date", value: "September 11, 2026" },
+        { label: "Time", value: "7:00 PM" },
+        { label: "Where", value: "Calvary Chapel Conejo Valley" },
+        { label: "Movie", value: "David" },
+        { label: "Popcorn", value: "Popcorn will be provided!" },
+      ],
+    },
   },
   {
     month: "Sep",
@@ -365,12 +416,149 @@ export const EVENTS = [
     detail: "September 25 · 6:30–7:30 pm · No need to sign up",
     href: "/ministries/evangelism-discipleship",
   },
+];
+
+/* Already happened, kept as a record on /events. Verbatim facts. */
+export const PAST_EVENTS: { date: string; name: string; detail: string }[] = [
   {
-    month: "TBD",
-    day: "",
-    name: "Family Movie Night",
-    detail: "Date to be announced · 7:00 pm · Popcorn will be provided",
-    href: "/events/family-movie",
+    date: "August 15, 2026",
+    name: "Night of Worship",
+    detail: "5:00–7:00 PM · Calvary Chapel Reason For Hope, 3001 S. Rose Ave, Oxnard",
+  },
+  {
+    date: "July 25, 2026",
+    name: "Women's Breakfast",
+    detail: "Saturday at 9:00 AM · Calvary Chapel Conejo Valley",
+  },
+  {
+    date: "May 15–17, 2026",
+    name: "2026 Men's Retreat — “Walk in the Spirit”",
+    detail: "Santa Barbara Christian Camp · Galatians 5:16–26",
+  },
+];
+
+/* /about/about-us, verbatim: the statement of faith, Pastor Dave's bio,
+   the team. /about carries an older version of the team blurbs; the
+   about-us text is used because it is the fuller and more recent one.
+   Photos are being replaced (docs/00-START-HERE.md), so there are none. */
+export const BELIEFS = {
+  intro: [
+    "The Calvary Chapel Church has been formed as a fellowship of believers in the Lordship of Jesus Christ. Our supreme desire is to know Christ and be conformed into His image by the power of the Holy Spirit.",
+    "We are not a denominational church. We are not opposed to denominations as such, only their over-emphasis of doctrinal differences that have led to the division of the body of Christ. We believe that the only true basis of Christian fellowship is His (Agape) love, which is greater than any differences we possess and without which we have no right to claim ourselves as Christians.",
+  ],
+  worship: [
+    { we: "We believe worship of God should be Spiritual.", therefore: "We remain flexible and yielded to the Holy Spirit to direct our worship." },
+    { we: "We believe worship of God should be Inspirational.", therefore: "We give a great place to music in our worship." },
+    { we: "We believe worship of God should be Intelligent.", therefore: "Our services are designed with great emphasis upon teaching of the Word of God that He might instruct us how He should be worshipped." },
+    { we: "We believe worship of God is Fruitful.", therefore: "We look for His Love in our lives as the supreme manifestation that we have truly been worshipping Him. We Seek to teach the Word of God in such a way that its message can be applied to an individual’s life, leading that person to greater maturity in Christ." },
+  ],
+};
+
+/* /home: "Who We Are", "What We Do", "WHY WE'RE HERE". Verbatim. */
+export const WHO_WE_ARE = [
+  {
+    title: "Who we are",
+    text: "Located in the city of Thousand Oaks, California, Calvary Chapel Conejo Valley has been formed as a fellowship of believers in the Lordship of Jesus Christ. Our supreme desire is to know Christ and be conformed to His image.",
+  },
+  {
+    title: "What we do",
+    text: "At Calvary Chapel Conejo Valley, we study the Bible verse by verse, chapter by chapter, book by book, because God wants us to receive the whole of His counsel (Acts 20:27). As we study this way, the Lord reveals all of His will and His love for us. We don’t just teach from the Bible as much as we teach through the Bible.",
+  },
+  {
+    title: "Why we’re here",
+    text: "The heart of the body is to reach our community with the Gospel. Feeding the flock of God by consistently accurately teaching His Word is the primary focus of Calvary Chapel. It’s also our heart concerning evangelism, that “healthy sheep beget healthy sheep” and that as God’s people are fed the Word, they will naturally share the Good News of Jesus with others, leading them to Christ.",
+  },
+];
+
+export const PASTOR = {
+  name: "David Johnston",
+  paragraphs: [
+    "Having served in ministry for over 35 years, First as Youth and Men’s ministry Pastor at Calvary Chapel Antelope Valley and Calvary Chapel San Jose. Then, in July of 2000, Pastor Dave and his wife planted Calvary Chapel Santa Cruz where Dave served as Senior Pastor for 10 years. Pastor Dave has a passion for God’s people, and for seeing them grow to maturity in and through His Word.",
+    "A builder at heart, and dedicated to the spread of the Gospel, Pastor Dave planted Calvary Chapel Calabasas in April of 2013, not long after transitioning out of the Senior Pastor role in Santa Cruz, leaving a ministry which continues to thrive and serve the community there. In March of 2021, CC Calabasas officially became CC Conejo Valley for the next chapter in the ministry of this growing church.",
+    "Dave was born and raised as a “preacher’s kid,” giving his life to the Lord at the early age of four in Mrs. Green’s Sunday School class. In his early 20’s the Lord clearly called Dave into pastoral ministry, and over the past 35 years he has had the privilege of responding to the Lord’s call on his life to simply “Preach the Word, Love the People.”",
+    "To that end, he has served tirelessly preaching faithfully and without compromise the truths of the Word of God, the passion of his life. He and his wonderful wife, Lynette, have four beautiful children, Ashley, Johnny, David, and Mark.",
+    "In all things, Pastor Dave’s heart is to live as did the Apostle Paul, that “For to me, to live is Christ, and to die is gain.” (Phil. 1:21)",
+  ],
+};
+
+export const TEAM: { names: string; text: string }[] = [
+  {
+    names: "Dave and Lynette Johnston",
+    text: "Pastor Dave serves as the Senior Pastor at Calvary Chapel Conejo Valley. As the overseer of the flock, he leads the fellowship with pastoral care and love. His wife, Lynette, is actively involved in the Children’s Ministry, where she joyfully shares the love of Jesus with the little ones.",
+  },
+  {
+    names: "Joshua and Jennifer Camper",
+    text: "Pastor Joshua serves as an Associate Pastor, overseeing both the Youth Ministry and the Marriage Ministry alongside his wife, Jennifer. Jennifer also plays an active role in the church administration and contributes to the Children’s Ministry.",
+  },
+  {
+    names: "Tim and Kathy Hutchinson",
+    text: "Pastor Tim serves as an Associate Pastor. In addition to his pastoral responsibilities, he leads our worship services and co-teaches the Men’s Bible Study group. His wife, Kathy, is actively involved in the Hospitality Ministry and also supports the fellowship through various other roles.",
+  },
+  {
+    names: "Mark and Irina Swartz",
+    text: "Pastor Mark serves as an Associate Pastor. He teaches the Foundations of Faith class and helps manage video content for the fellowship.",
+  },
+  {
+    names: "Brent and Carrie Hebert",
+    text: "Pastor Brent and his wife, Carrie, are valued members of our leadership team. In addition, Pastor Brent plays an active role in teaching during the Men’s Bible Study.",
+  },
+];
+
+/* /about/who-we-support and /give/buyumba, verbatim. */
+export const SUPPORT = {
+  intro:
+    "Here at Calvary Chapel Conejo Valley, in addition to our internal ministries, we support several ministry and community outreach programs. Please take a look at some of them below. God Bless!",
+  orgs: [
+    {
+      name: "Buyamba Ministry in Uganda",
+      paragraphs: [
+        "Buyamba, a non-profit 501(c)3 corporation, was founded in the U.S. in 1999, to support the Dongos’ efforts with Buyamba Orphan Outreach in Uganda. Buyamba supported them through a child sponsorship program and provision of needed resources. As a result, God Cares Nursery and Primary School opened in 2002 with 97 children, in the basement of the church where The Dongo family continues to serve. Currently, Buyamba financially supports the education and care of over 1800 children through our sponsorship programs.",
+        "For a gift of $20.00, you can feed a family for two-three weeks! The family will receive 22lbs of posho, 4.5lbs of sugar, 11lbs of rice and 2 bars of soap. Or send a check by mail, in the memo write “Buyumba feed a Family”.",
+      ],
+      links: [
+        { label: "Learn more at ugandabuyamba.com", href: "https://www.ugandabuyamba.com/" },
+        { label: "Feed a family: donate online", href: "https://interland3.donorperfect.net/weblink/weblink.aspx?name=E116403&id=1" },
+      ],
+    },
+    {
+      name: "Ohana Health",
+      paragraphs: [
+        "Ohana helps out newly pregnant women navigate unplanned pregnancies with ultrasounds, supplies, and general support.",
+      ],
+      links: [{ label: "Visit ohanahealthclinic.com", href: "https://ohanahealthclinic.com/" }],
+    },
+  ],
+};
+
+/* /give, verbatim. PayPal and the Newbury Park mailing address still
+   carry the Calabasas identity and are an open question for Dave
+   (docs/00-START-HERE.md); they are carried over as they stand. */
+export const GIVE = {
+  thanks:
+    "Thank you for your partnership in ministry with us. We’re so grateful for the financial gifts given to allow us to continue the work of accomplishing God’s mission and vision for our church. Please know your generous giving is making a difference for the glory of God at our church.",
+  paypal: "cccalabasas@gmx.com",
+  checks: {
+    payee: "Calvary Chapel Conejo Valley",
+    address: "668 Cayo Grande Ct. Newbury Park, CA 91320",
+  },
+  questions:
+    "If you have any questions or are running into difficulties with online giving, please reach out to Pastor Dave Johnston. God Bless!",
+  amplifyFormId: "3e927587-cc4a-4508-ba6b-9bebe7030fea",
+};
+
+/* /memorials, verbatim. */
+export const MEMORIALS = [
+  {
+    title: "Memorial for Mark Andrew Johnston",
+    text: "Please join the Johnston family in remembering the wonderful & beautiful life of our beloved Mark Johnston.",
+    facts: [
+      { label: "When", value: "Saturday September 25, 2021" },
+      { label: "Time", value: "11am" },
+      { label: "Where", value: "Godspeak Church, 320 Via Las Brisas, Newbury Park, CA, 91320" },
+    ],
+    verse: "2 Corinthians 5:8",
+    giving:
+      "The family has not asked for donations but many have wanted to give towards the memorial service, so, if you feel led to give we have made it possible, just click the button below.",
   },
 ];
 

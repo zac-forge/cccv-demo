@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { MINISTRIES } from "@/lib/content";
+import { EVENTS, MINISTRIES } from "@/lib/content";
 import { SITE_URL } from "@/lib/site";
 
 // Required under output: 'export'. See robots.ts.
@@ -16,6 +16,12 @@ const ROUTES = [
   "/connect",
   "/ministries",
   ...MINISTRIES.map((m) => m.href),
+  "/events",
+  ...EVENTS.filter((e) => e.page).map((e) => e.href),
+  "/about",
+  "/about/who-we-support",
+  "/give",
+  "/memorials",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
