@@ -59,14 +59,17 @@ export default function Watch() {
                 through the Bible.
               </p>
             </div>
-            {/* The aside, in the poster header's columns: a yellow rule and
-                lede-size text, the homepage hero's treatment of the same
-                verse, bottom-aligned with the lede. Below lg it stacks. */}
+            {/* The aside, across the five columns the title leaves: the
+                homepage hero's yellow rule with the pull quote's type, so
+                it sets three lines and holds the right block instead of
+                sitting small in the corner (Drew, September 4). Bottom-
+                aligned with the lede. Below lg it stacks. */}
             <Verse
               reference="Romans 10:17"
               tone="dark"
               layout="quote"
-              className="lg:col-span-4 lg:col-start-9 lg:pb-1"
+              size="pull"
+              className="lg:col-span-5 lg:col-start-8 lg:pb-1"
             />
           </div>
           <WatchNav current="/watch" className="mt-10 md:mt-14" />
