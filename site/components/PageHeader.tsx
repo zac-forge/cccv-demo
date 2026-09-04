@@ -16,13 +16,16 @@ type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-
    (PosterArt). `statement` is the deck's other form: one sentence set
    between lede and section size, spanning the full shell beneath the
    title row, for a page whose opening is a statement rather than a
-   paragraph (/about). */
+   paragraph (/about). `asideNear` hangs the aside right after a short
+   title, in the columns the scrim keeps clean, rather than out under
+   the rays where it competes with the sun (/about). */
 export default function PageHeader({
   trail,
   title,
   lede,
   statement,
   aside,
+  asideNear = false,
   field = "field-stock",
   poster = false,
 }: {
@@ -31,6 +34,7 @@ export default function PageHeader({
   lede?: React.ReactNode;
   statement?: React.ReactNode;
   aside?: React.ReactNode;
+  asideNear?: boolean;
   field?: Field;
   poster?: boolean;
 }) {
@@ -59,7 +63,7 @@ export default function PageHeader({
       <div className="shell relative">
         {trail && <Breadcrumb trail={trail} />}
         <div className="mt-9 grid gap-10 md:mt-12 lg:grid-cols-12 lg:items-end lg:gap-16">
-          <div className="lg:col-span-7">
+          <div className={asideNear ? "lg:col-span-4" : "lg:col-span-7"}>
             <h1 className="f-display t-poster max-w-[11ch]">{title}</h1>
             {lede && (
               <div className="t-lede muted measure-tight mt-8 md:mt-10">
@@ -68,7 +72,15 @@ export default function PageHeader({
             )}
           </div>
           {aside && (
-            <div className="lg:col-span-4 lg:col-start-9 lg:pb-1">{aside}</div>
+            <div
+              className={
+                asideNear
+                  ? "lg:col-span-4 lg:col-start-6 lg:pb-1"
+                  : "lg:col-span-4 lg:col-start-9 lg:pb-1"
+              }
+            >
+              {aside}
+            </div>
           )}
         </div>
         {statement && (

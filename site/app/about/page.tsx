@@ -78,6 +78,7 @@ export default function About() {
         trail={[{ label: "About", href: "/about" }]}
         title="About"
         aside={<Verse reference="Acts 20:27" tone="dark" layout="quote" />}
+        asideNear
         statement={<p>{WHO.text}</p>}
       />
 
@@ -219,14 +220,14 @@ export default function About() {
             {TEAM.map((person) => (
               <li
                 key={person.names}
-                className="rule-t grid grid-cols-[6.75rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[9rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-[12rem_1fr_2fr] lg:gap-16"
+                className="rule-t grid grid-cols-[7.5rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[10rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-[14rem_1fr_2fr] lg:gap-16"
               >
                 <div className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:row-span-1">
                   <Image
                     src={`/staff/${person.portrait}.webp`}
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 6.75rem, (max-width: 1024px) 9rem, 12rem"
+                    sizes="(max-width: 768px) 7.5rem, (max-width: 1024px) 10rem, 14rem"
                     className="object-cover object-top"
                   />
                 </div>
