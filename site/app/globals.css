@@ -1511,6 +1511,8 @@
     }
   }
   .sermon-format {
+    display: inline-flex;
+    align-items: center;
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.14em;

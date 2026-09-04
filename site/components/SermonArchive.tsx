@@ -109,9 +109,16 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
 
   const watchable = canWatch(selected);
   const listenable = canListen(selected);
+  /* Watch plays video, or audio when the video was only ever Clover's;
+     Listen plays audio or nothing. Neither pretends: when the format
+     asked for is not here yet, the plate says so. */
   const mode: "video" | "audio" | "none" =
-    watchable && (format === "watch" || !listenable)
-      ? "video"
+    format === "watch"
+      ? watchable
+        ? "video"
+        : listenable
+          ? "audio"
+          : "none"
       : listenable
         ? "audio"
         : "none";
@@ -295,7 +302,8 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
       </section>
 
       {/* ---- The list. Typographic: date, title, speaker and series,
-              and the formats as the links. One row per teaching. ---- */}
+              and the formats the church has as the links; the player
+              says when one is not here yet. One row per teaching. ---- */}
       <section aria-label="Messages" className="field-stock pt-[clamp(2.5rem,4vw,3.5rem)] pb-[clamp(3.5rem,6vw,5rem)]">
         <div className="shell">
           <ol>
@@ -322,23 +330,17 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
                       {t.speaker} · {t.series}
                     </span>
                   </button>
-                  <span className="col-start-2 flex gap-5 sm:col-start-3">
-                    {video &&
-                      (canWatch(t) ? (
-                        <button type="button" onClick={() => select(t, "watch")} className="sermon-format">
-                          Video
-                        </button>
-                      ) : (
-                        <span className="t-meta muted">Video</span>
-                      ))}
-                    {audio &&
-                      (canListen(t) ? (
-                        <button type="button" onClick={() => select(t, "listen")} className="sermon-format">
-                          Audio
-                        </button>
-                      ) : (
-                        <span className="t-meta muted">Audio</span>
-                      ))}
+                  <span className="col-start-2 flex items-center gap-5 sm:col-start-3">
+                    {video && (
+                      <button type="button" onClick={() => select(t, "watch")} className="sermon-format">
+                        Video
+                      </button>
+                    )}
+                    {audio && (
+                      <button type="button" onClick={() => select(t, "listen")} className="sermon-format">
+                        Audio
+                      </button>
+                    )}
                   </span>
                 </li>
               );
