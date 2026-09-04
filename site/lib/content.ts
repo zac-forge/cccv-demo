@@ -367,7 +367,7 @@ export type EventItem = {
 export const EVENTS: EventItem[] = [
   {
     month: "Sep",
-    day: "11",
+    day: "11–13",
     name: "2026 Women's Retreat",
     detail: "September 11–13, 2026 · Camp Daley, Calabasas",
     href: "/events/2026-womens-retreat",

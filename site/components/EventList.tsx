@@ -22,7 +22,10 @@ export default function EventList({
             href={e.href}
             className="pressable grid grid-cols-[5rem_1fr_auto] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 md:py-10"
           >
-            <span aria-hidden="true" className="f-data t-date">
+            <span
+              aria-hidden="true"
+              className={`f-data ${e.day.includes("–") ? "t-date-range" : "t-date"}`}
+            >
               <span className="t-eyebrow block">{e.month}</span>
               {e.day}
             </span>

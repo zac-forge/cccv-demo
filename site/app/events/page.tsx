@@ -58,10 +58,12 @@ export default function Events() {
                           className="object-cover"
                         />
                       </span>
-                      <span className="mt-4 grid grid-cols-[4rem_1fr] items-baseline gap-x-4">
+                      <span className="mt-4 grid grid-cols-[5.5rem_1fr] items-baseline gap-x-4">
                         <span
                           aria-hidden="true"
-                          className="f-data text-[1.75rem] leading-none text-yellow"
+                          className={`f-data leading-none text-yellow ${
+                            e.day.includes("–") ? "text-[1.375rem]" : "text-[1.75rem]"
+                          }`}
                         >
                           <span className="t-eyebrow block">{e.month}</span>
                           {e.day}

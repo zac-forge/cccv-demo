@@ -219,6 +219,13 @@
     line-height: 0.78;
     letter-spacing: -0.032em;
   }
+  /* A date range ("11–13") is nearly three ems wide, so it takes one
+     step down to stay inside the same date column as a single day. */
+  .t-date-range {
+    font-size: clamp(2rem, 4.2vw, 3.5rem);
+    line-height: 0.78;
+    letter-spacing: -0.032em;
+  }
 
   .t-card {
     font-family: var(--font-display);
