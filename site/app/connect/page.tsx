@@ -401,7 +401,9 @@ export default function Connect() {
         </div>
       </section>
 
-      <CTABand />
+      {/* Find Us above is salt, so the close goes stock: the band must
+          never share a field with the section above it. */}
+      <CTABand field="field-stock" />
     </main>
   );
 }
