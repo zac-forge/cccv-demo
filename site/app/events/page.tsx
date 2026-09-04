@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
 import EventList from "@/components/EventList";
-import PageHeader from "@/components/PageHeader";
 import { EVENTS, PAST_EVENTS } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -13,17 +15,79 @@ export const metadata: Metadata = {
 
 /* Upcoming, then past. Their /eventscalendar index is empty (47 chars),
    so the page is the rows themselves. Three real upcoming events; none
-   invented. */
+   invented.
+
+   The opening is a poster on ink (Drew, September 4): the title at
+   poster size and, beside it, every upcoming event that has artwork as
+   a plate, each a link to its page with the date in yellow numerals and
+   the name as its caption. Ink because the list below keeps the Events
+   field, yellow, and yellow numerals only sit on a dark ground. No
+   sunburst: the plates own that corner. */
+
+const FEATURED = EVENTS.filter((e) => e.page?.image);
+
 export default function Events() {
   return (
     <main id="main">
-      <PageHeader
-        field="field-yellow"
-        trail={[{ label: "Events", href: "/events" }]}
-        title="What’s coming up"
-      />
+      <header className="field-ink page-header-poster">
+        <div className="shell">
+          <Breadcrumb trail={[{ label: "Events", href: "/events" }]} />
+          <div className="mt-9 grid gap-12 md:mt-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-5">
+              <h1 className="f-display t-poster max-w-[8ch]">
+                What&rsquo;s coming up
+              </h1>
+            </div>
 
-      <section aria-label="Upcoming events" className="field-yellow pb-[clamp(5rem,8vw,7rem)]">
+            {FEATURED.length > 0 && (
+              <ul
+                className={`grid gap-8 lg:col-span-7 lg:col-start-6 ${
+                  FEATURED.length > 1 ? "sm:grid-cols-2" : ""
+                }`}
+              >
+                {FEATURED.map((e, i) => (
+                  <li key={e.name}>
+                    <Link href={e.href} className="pressable block">
+                      <span className="relative block aspect-[3/2] overflow-hidden border border-[color:var(--rule)]">
+                        <Image
+                          src={e.page!.image!}
+                          alt=""
+                          fill
+                          priority={i === 0}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
+                          className="object-cover"
+                        />
+                      </span>
+                      <span className="mt-4 grid grid-cols-[4rem_1fr] items-baseline gap-x-4">
+                        <span
+                          aria-hidden="true"
+                          className="f-data text-[1.75rem] leading-none text-yellow"
+                        >
+                          <span className="t-eyebrow block">{e.month}</span>
+                          {e.day}
+                        </span>
+                        <span>
+                          <span className="f-data block text-[1.25rem] leading-tight">
+                            {e.name}
+                          </span>
+                          <span className="muted mt-1 block text-[0.9375rem]">
+                            {e.detail}
+                          </span>
+                        </span>
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </header>
+
+      <section
+        aria-label="Upcoming events"
+        className="field-yellow py-[clamp(4rem,7vw,6rem)]"
+      >
         <div className="shell">
           <EventList events={EVENTS} />
         </div>
