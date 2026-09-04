@@ -1,14 +1,23 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
-import PageHeader from "@/components/PageHeader";
+import Verse from "@/components/Verse";
+import WatchNav from "@/components/WatchNav";
 
 /* ------------------------------------------------------------------
    /radio, verbatim. "Faith Comes By Hearing" is taken from the same
    recordings the archive holds, so this page is informational: where
    and when it airs. Station list is theirs; the plan asks that all six
    be confirmed still on air before launch (docs/01-build-plan.md §4).
+
+   The opening is /watch/sermons' (Drew, September 4: "needs a verse or
+   something in the right side of the hero like all messages"): a
+   running head, the title and their paragraph in the left seven
+   columns, a verse at pull size in the five beside them, the Watch
+   strip beneath. The verse is Romans 10:17, the one the broadcast is
+   named for; it also opens /watch, and that repetition is the point.
    ------------------------------------------------------------------ */
 
 const STATIONS: {
@@ -36,22 +45,40 @@ export const metadata: Metadata = {
 export default function Radio() {
   return (
     <main id="main">
-      <PageHeader
-        field="field-ink"
-        trail={[
-          { label: "Messages", href: "/watch" },
-          { label: "Radio", href: "/watch/radio" },
-        ]}
-        title="Faith Comes By Hearing"
-        lede={
-          <p>
-            Taken from live recordings of both Sunday morning and Wednesday night
-            services, &ldquo;Faith Comes By Hearing&rdquo; is our daily radio
-            broadcast featuring Pastor Dave&rsquo;s dynamic verse-by-verse
-            teaching.
-          </p>
-        }
-      />
+      <div className="field-ink">
+        <header className="shell pt-[clamp(2.5rem,5vw,4rem)]">
+          <Breadcrumb
+            trail={[
+              { label: "Messages", href: "/watch" },
+              { label: "Radio", href: "/watch/radio" },
+            ]}
+          />
+          <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-7">
+              <p data-reveal="" className="t-eyebrow text-yellow">
+                On the radio
+              </p>
+              <h1 data-reveal="clip" className="f-display t-feature mt-4 max-w-[14ch]">
+                <span>Faith Comes By Hearing</span>
+              </h1>
+              <p data-reveal="" className="t-lede muted measure-tight mt-7">
+                Taken from live recordings of both Sunday morning and Wednesday
+                night services, &ldquo;Faith Comes By Hearing&rdquo; is our daily
+                radio broadcast featuring Pastor Dave&rsquo;s dynamic
+                verse-by-verse teaching.
+              </p>
+            </div>
+            <Verse
+              reference="Romans 10:17"
+              tone="dark"
+              layout="quote"
+              size="pull"
+              className="lg:col-span-5 lg:col-start-8 lg:pb-1"
+            />
+          </div>
+          <WatchNav current="/watch/radio" className="mt-10 md:mt-14" />
+        </header>
+      </div>
 
       <section aria-label="Stations and times" className="field-stock band">
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
