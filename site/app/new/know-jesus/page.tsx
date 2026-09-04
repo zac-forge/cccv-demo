@@ -171,12 +171,18 @@ export default function KnowJesus() {
       {/* The prayer. The one dark moment on the page, and the hinge of it:
           everything above leads here, everything below follows from it.
           Set the way the hero sets Romans 10:17 — a yellow rule, the
-          display face — so the quotations on the site are one idea. */}
+          display face — so the quotations on the site are one idea.
+          Romans 10:9 sits in the five columns the prayer leaves, the
+          Messages hero's aside (the rule, the pull quote's type): the
+          promise the prayer answers, confess and believe and be saved,
+          set a step larger than the prayer because the page's next line
+          is that the prayer is not what saves. The grid stretches both,
+          so the two rules run the same height. Below lg it stacks. */}
       <section aria-label="A prayer" className="field-ink band">
-        <div className="shell lg:grid lg:grid-cols-12 lg:gap-x-16">
+        <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-x-16">
           <blockquote
             data-reveal=""
-            className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-9"
+            className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-7"
           >
             &ldquo;Jesus, I know that I am a sinner and that I need You. I
             believe that You died for my sins and rose again. I turn from my sin
@@ -184,6 +190,13 @@ export default function KnowJesus() {
             You. I give my life to You. Thank You for Your grace and for the
             gift of salvation. Amen.&rdquo;
           </blockquote>
+          <Verse
+            reference="Romans 10:9"
+            tone="dark"
+            layout="quote"
+            size="pull"
+            className="lg:col-span-5 lg:col-start-8"
+          />
         </div>
       </section>
 

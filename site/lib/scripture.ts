@@ -14,6 +14,10 @@ export const NKJV: Record<string, string> = {
     "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.",
   "Romans 5:8":
     "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.",
+  /* Begins lowercase because the verse continues 10:8. Checked against
+     biblegateway.com (NKJV) on 2026-09-04. */
+  "Romans 10:9":
+    "that if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved.",
   "Romans 10:17":
     "So then faith comes by hearing, and hearing by the word of God.",
   /* Inner quotation set in single marks so it nests inside the outer
