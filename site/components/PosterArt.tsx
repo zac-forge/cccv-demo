@@ -2,8 +2,10 @@ import Image from "next/image";
 
 /* The art behind a poster header or band. Three pieces and none, so the
    sunburst is one choice among several rather than every page's
-   wallpaper (Drew, September 4). All from lg up, the same rule as the
-   ghost words. The parent needs `relative isolate overflow-hidden`.
+   wallpaper (Drew, September 4). From md up: below that the header is
+   one narrow column and the type would sit on the art; the phone case
+   is for the mobile pass. The parent needs `relative isolate
+   overflow-hidden`.
 
    rays    the hero's sunburst as a printed corner mark, mirrored so the
            sun sits top-right, with a scrim that returns the left of the
@@ -36,9 +38,9 @@ export default function PosterArt({ art = "rays" }: { art?: PosterArtName }) {
           width={1400}
           height={525}
           aria-hidden="true"
-          className="poster-rays hidden lg:block"
+          className="poster-rays hidden md:block"
         />
-        <div className="poster-scrim hidden lg:block" aria-hidden="true" />
+        <div className="poster-scrim hidden md:block" aria-hidden="true" />
       </>
     );
   }
@@ -51,7 +53,7 @@ export default function PosterArt({ art = "rays" }: { art?: PosterArtName }) {
       width={piece.width}
       height={piece.height}
       aria-hidden="true"
-      className="poster-plate hidden lg:block"
+      className="poster-plate hidden md:block"
     />
   );
 }
