@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import ActionDetailSection from "@/components/ActionDetailSection";
+import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
-import PageHeader from "@/components/PageHeader";
+import PosterArt from "@/components/PosterArt";
 import SectionIndex from "@/components/SectionIndex";
 import StepSequence from "@/components/StepSequence";
 import Verse from "@/components/Verse";
@@ -23,10 +24,12 @@ import { CHURCH } from "@/lib/site";
    the address (spatial). Numerals appear only on the directory steps,
    which are the one real sequence.
 
-   The page opens as a poster on blue (Drew, September 4), the same
-   form as /about: the title at poster size, Pastor Dave's number hung
-   beside it as the aside, and his line across the full shell as the
-   statement.
+   The page opens on Pastor Dave's sentence (Drew, September 4): "We
+   count it a blessing and a privilege to serve each and every one of
+   you" at feature size is the hero, with Connect as a running head
+   above it and the two actions beneath. The sunburst hangs behind with
+   the whole disc showing; an earlier poster header clipped it under
+   the site header and floated the number mid-page.
 
    Their sign-up forms (serve, directory) currently fail to load on the
    live site ("He must enable SSL"). Whether they come back through
@@ -68,32 +71,27 @@ function Row({ label, children }: { label: string; children: React.ReactNode }) 
 export default function Connect() {
   return (
     <main id="main">
-      <PageHeader
-        poster
-        field="field-blue"
-        trail={[{ label: "Connect", href: "/connect" }]}
-        title="Connect"
-        asideNear
-        aside={
-          <p>
-            <span className="t-eyebrow block text-[color:var(--color-yellow-onblue)]">
-              Call or text Pastor Dave
-            </span>
-            <a
-              href={CHURCH.phoneHref}
-              className="f-data mt-3 inline-block text-[clamp(1.75rem,3vw,2.5rem)] leading-none"
-            >
-              {CHURCH.phone}
-            </a>
+      <header className="field-blue page-header-poster relative isolate overflow-hidden">
+        <PosterArt art="rays" sun />
+        <div className="shell relative">
+          <Breadcrumb trail={[{ label: "Connect", href: "/connect" }]} />
+          <p className="t-eyebrow mt-9 text-[color:var(--color-yellow-onblue)] md:mt-12">
+            Connect
           </p>
-        }
-        statement={
-          <p>
+          <h1 className="f-display t-feature mt-5 max-w-[24ch]">
             We count it a blessing and a privilege to serve each and every one
             of you.
-          </p>
-        }
-      />
+          </h1>
+          <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row md:mt-10">
+            <a href={CHURCH.smsHref} className="btn btn-sun">
+              Text a prayer request
+            </a>
+            <a href={CHURCH.phoneHref} className="btn btn-outline">
+              Call {CHURCH.phone}
+            </a>
+          </div>
+        </div>
+      </header>
 
       {/* =========================================================
           PRAYER — the ask and the number on the left, the prayer

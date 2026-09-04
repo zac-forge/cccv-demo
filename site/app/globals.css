@@ -364,6 +364,43 @@
       transparent 74%
     );
   }
+  /* The sunburst hung for a short header: flush to the corner so the
+     whole disc shows, and larger, with the clean zone pushed right so
+     a sentence at feature size sits on plain field. */
+  .poster-rays-sun {
+    top: 0;
+    right: 0;
+    width: clamp(640px, 66vw, 1100px);
+  }
+  .poster-scrim-wide {
+    background: linear-gradient(
+      90deg,
+      var(--field) 0%,
+      var(--field) 52%,
+      transparent 82%
+    );
+  }
+  /* A full-bleed landscape behind a header (/about): a light blue wash
+     over the sky so cloud bands never sit under the type. */
+  .poster-sky {
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(49, 94, 118, 0.6) 0%,
+      rgba(49, 94, 118, 0.4) 45%,
+      rgba(49, 94, 118, 0) 72%
+    );
+  }
+  @media (min-width: 768px) {
+    .poster-sky {
+      background: linear-gradient(
+        100deg,
+        rgba(49, 94, 118, 0.5) 0%,
+        rgba(49, 94, 118, 0.3) 38%,
+        rgba(49, 94, 118, 0) 62%
+      );
+    }
+  }
   /* A painted piece (cross, sower): the right half of the header, top
      to bottom, its own left third faded out so the field takes over
      with no seam. The pieces are painted on their field's colour, so

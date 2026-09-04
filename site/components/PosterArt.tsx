@@ -9,7 +9,9 @@ import Image from "next/image";
 
    rays    the hero's sunburst as a printed corner mark, mirrored so the
            sun sits top-right, with a scrim that returns the left of the
-           band to clean field so type never sits on yellow.
+           band to clean field so type never sits on yellow. `sun` hangs
+           it flush to the corner and larger, so the whole disc shows in
+           a short header instead of slipping under the site header.
    cross   a plain cross on a hill before sunrise, painted on Baptism
            Blue. Fills the right half, masked in from the left.
    sower   a sower at dusk, painted on Maranatha Ink. Same placement.
@@ -26,7 +28,13 @@ const PAINTED = {
   sower: { src: "/site/sower.webp", width: 1400, height: 933 },
 } as const;
 
-export default function PosterArt({ art = "rays" }: { art?: PosterArtName }) {
+export default function PosterArt({
+  art = "rays",
+  sun = false,
+}: {
+  art?: PosterArtName;
+  sun?: boolean;
+}) {
   if (art === "none") return null;
 
   if (art === "rays") {
@@ -38,9 +46,12 @@ export default function PosterArt({ art = "rays" }: { art?: PosterArtName }) {
           width={1400}
           height={525}
           aria-hidden="true"
-          className="poster-rays hidden md:block"
+          className={`poster-rays hidden md:block ${sun ? "poster-rays-sun" : ""}`}
         />
-        <div className="poster-scrim hidden md:block" aria-hidden="true" />
+        <div
+          className={`poster-scrim hidden md:block ${sun ? "poster-scrim-wide" : ""}`}
+          aria-hidden="true"
+        />
       </>
     );
   }

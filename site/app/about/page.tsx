@@ -20,11 +20,11 @@ import { CHURCH } from "@/lib/site";
    gets the composition its job asks for, typography and rules before
    components, and numerals only where there is a real sequence.
 
-   - The page opens on blue with the title, Acts 20:27 (the verse "What
-     we do" cites) under it, the Conejo Valley as a bordered plate
-     beside them, and their "Who we are" statement across the full
-     shell. A plate, not a background: the band along the header's foot
-     vanished into the field and only showed from lg (Drew, Sept 4).
+   - The page opens on the Conejo Valley, full bleed (Drew, Sept 4,
+     after a poster on blue, a band along the foot and a plate all
+     failed): the title and their "Who we are" statement in the sky at
+     the left, hills below and right. Acts 20:27, the verse "What we
+     do" cites, opens the beliefs section as a pull quote.
    - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
@@ -72,37 +72,25 @@ const [WHO, WHAT, WHY] = WHO_WE_ARE;
 export default function About() {
   return (
     <main id="main">
-      {/* The opening: the title with Acts 20:27 under it, the Conejo
-          Valley as a plate beside them (a picture, not a background, so
-          it shows at every width), and their "Who we are" statement
-          across the full shell beneath. The same shape as /events. */}
-      <header className="field-blue page-header-poster">
-        <div className="shell">
+      {/* The opening: the Conejo Valley itself, full bleed, with the title
+          and their "Who we are" statement in the open sky at the left and
+          the hills filling the rest. The homepage's treatment at about
+          two-thirds the height. Type stays in the sky zone, since type
+          over hills cannot be read. */}
+      <header className="field-blue relative isolate flex min-h-[max(600px,66vh)] items-start overflow-hidden">
+        <Image
+          src="/site/valley-hero.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[30%_50%] md:object-center"
+        />
+        <div className="poster-sky absolute inset-0 -z-10" aria-hidden="true" />
+        <div className="shell relative pb-[clamp(6rem,14vw,12rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
           <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
-          <div className="mt-9 grid gap-10 md:mt-12 lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-5">
-              <h1 className="f-display t-poster max-w-[11ch]">About</h1>
-              <Verse
-                reference="Acts 20:27"
-                tone="dark"
-                layout="quote"
-                className="mt-8 max-w-[34ch] md:mt-10"
-              />
-            </div>
-            <div className="relative aspect-[12/5] overflow-hidden border border-[color:var(--rule)] bg-stock lg:col-span-7">
-              <Image
-                src="/site/valley.webp"
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover object-bottom"
-              />
-            </div>
-          </div>
-          <div className="f-text t-pull rule-t mt-10 pt-8 md:mt-14 md:pt-10">
-            <p>{WHO.text}</p>
-          </div>
+          <h1 className="f-display t-poster mt-9 max-w-[11ch] md:mt-12">About</h1>
+          <p className="f-text t-pull mt-8 max-w-[28ch] md:mt-10">{WHO.text}</p>
         </div>
       </header>
 
@@ -144,7 +132,12 @@ export default function About() {
           >
             What we believe
           </h2>
-          <div className="prose mt-10 md:mt-12">
+          <Verse
+            reference="Acts 20:27"
+            layout="pull"
+            className="mt-10 max-w-[42rem] md:mt-12"
+          />
+          <div className="prose mt-12 md:mt-16">
             {BELIEFS.intro.map((para) => (
               <p key={para.slice(0, 40)}>{para}</p>
             ))}
