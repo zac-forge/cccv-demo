@@ -1472,12 +1472,58 @@
     background-color: var(--focus);
   }
 
-  /* The teaching now in the player, marked in the library. */
-  .sermon-preview[aria-current="true"] .sermon-plate {
-    background-color: var(--color-blue);
+  /* Filters. Rectangular, bordered, no chrome. */
+  .filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
-  .sermon-preview[aria-current="true"] .sermon-preview-title {
+  .filter input,
+  .filter select {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.625rem 0.875rem;
+    border: 1px solid var(--color-ink);
+    border-radius: 0;
+    background: var(--color-stock);
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 0.9375rem;
+  }
+  .filter select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--color-ink) 50%),
+      linear-gradient(135deg, var(--color-ink) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    padding-right: 2.25rem;
+  }
+
+  /* Rows: the title is the selector, the formats are the links. The
+     teaching now in the player reads in Baptism Blue. */
+  .sermon-title[aria-current="true"] .f-data {
     color: var(--color-blue);
+  }
+  @media (hover: hover) {
+    .sermon-title:hover .f-data {
+      color: var(--color-blue);
+    }
+  }
+  .sermon-format {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: var(--color-red);
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 1px;
+    min-height: 2.75rem;
+  }
+  .sermon-format:hover {
+    text-decoration-thickness: 2px;
   }
 
   /* The plate as the media area: the book at the top, the control or
