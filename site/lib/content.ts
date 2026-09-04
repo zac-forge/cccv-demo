@@ -5,6 +5,8 @@
    Source page is noted on each block.
    ------------------------------------------------------------------ */
 
+import { CHURCH } from "./site";
+
 /* /services — "When we Meet", "Where We Mee t", and the homepage
    livestream block. Verbatim. */
 export const TIMES = [
@@ -53,10 +55,13 @@ export const SUNDAY_STEPS = [
 ];
 
 /* /ministries/* — one page each. Blurbs are their copy, tightened.
-   Meta lines are their stated meeting times, verbatim. */
+   Meta lines are their stated meeting times, verbatim. `slug` names the
+   illustration in /public/ministries; `href` keeps the church's own
+   /ministries/* URL, so none of these eight ever needs a redirect. */
 export const MINISTRIES = [
   {
     slug: "01-foundations",
+    href: "/ministries/foundations-of-faith",
     wide: true, ratio: "16/10", field: "field-stock",
     name: "Foundations of Faith",
     blurb:
@@ -65,6 +70,7 @@ export const MINISTRIES = [
   },
   {
     slug: "02-evangelism",
+    href: "/ministries/evangelism-discipleship",
     wide: false, ratio: "4/5", field: "field-salt",
     name: "Evangelism & Discipleship",
     blurb:
@@ -73,6 +79,7 @@ export const MINISTRIES = [
   },
   {
     slug: "03-men",
+    href: "/ministries/men",
     wide: false, ratio: "4/5", field: "field-blue",
     name: "Men",
     blurb:
@@ -81,6 +88,7 @@ export const MINISTRIES = [
   },
   {
     slug: "04-women",
+    href: "/ministries/women",
     wide: false, ratio: "4/5", field: "field-salt",
     name: "Women",
     blurb:
@@ -89,6 +97,7 @@ export const MINISTRIES = [
   },
   {
     slug: "05-children",
+    href: "/ministries/children",
     wide: false, ratio: "4/5", field: "field-stock",
     name: "Children",
     blurb:
@@ -97,6 +106,7 @@ export const MINISTRIES = [
   },
   {
     slug: "06-youth",
+    href: "/ministries/youth",
     wide: true, ratio: "16/10", field: "field-blue",
     name: "Youth",
     blurb:
@@ -105,6 +115,7 @@ export const MINISTRIES = [
   },
   {
     slug: "07-young-adults",
+    href: "/ministries/young-adults",
     wide: true, ratio: "16/9", field: "field-salt",
     name: "Young Adults",
     blurb:
@@ -113,6 +124,7 @@ export const MINISTRIES = [
   },
   {
     slug: "08-marriage",
+    href: "/ministries/marriage",
     wide: true, ratio: "16/9", field: "field-stock",
     name: "Marriage",
     blurb:
@@ -122,7 +134,9 @@ export const MINISTRIES = [
 ];
 
 /* /eventscalendar/* and /ministries/evangelism-discipleship.
-   Dates are theirs, including the movie night's "TBD".
+   Dates are theirs, including the movie night's "TBD". The retreat and
+   the movie night keep their live-site slugs; the class is a ministry
+   page on their site, not an event page, and links there.
    NOTE: DEMO.md asked for a Men's Breakfast. There is no such event
    anywhere on their site, so I did not invent one — the Evangelism &
    Discipleship class is a real dated event and takes the third slot. */
@@ -132,34 +146,61 @@ export const EVENTS = [
     day: "11",
     name: "2026 Women's Retreat",
     detail: "September 11–13, 2026 · Camper Daley, Calabasas",
+    href: "/events/2026-womens-retreat",
   },
   {
     month: "Sep",
     day: "25",
     name: "Evangelism & Discipleship Class",
     detail: "September 25 · 6:30–7:30 pm · No need to sign up",
+    href: "/ministries/evangelism-discipleship",
   },
   {
     month: "TBD",
     day: "",
     name: "Family Movie Night",
     detail: "Date to be announced · 7:00 pm · Popcorn will be provided",
+    href: "/events/family-movie",
   },
 ];
 
-/* IA: 23 Clover nav links collapsed into three footer groups. */
-export const FOOTER_LINKS = [
+/* IA: 23 Clover nav links collapsed into three footer groups. Labels are
+   mine; targets are the routes in docs/01-build-plan.md §3. The three
+   external links are the church's own, from /home. */
+export const FOOTER_LINKS: {
+  heading: string;
+  links: { label: string; href: string; external?: boolean }[];
+}[] = [
   {
     heading: "Church",
-    links: ["About Us", "What We Believe", "Who We Support", "Ministries"],
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "What We Believe", href: "/about#beliefs" },
+      { label: "Who We Support", href: "/about/who-we-support" },
+      { label: "Ministries", href: "/ministries" },
+      { label: "Memorials", href: "/memorials" },
+    ],
   },
   {
     heading: "Watch & Listen",
-    links: ["Livestream", "Sermons", "YouTube", "Facebook", "Rumble", "Radio"],
+    links: [
+      { label: "Livestream", href: "/watch/live" },
+      { label: "Sermons", href: "/watch" },
+      { label: "Radio", href: "/watch/radio" },
+      { label: "YouTube", href: CHURCH.social.youtube, external: true },
+      { label: "Facebook", href: CHURCH.social.facebook, external: true },
+      { label: "Rumble", href: CHURCH.social.rumble, external: true },
+    ],
   },
   {
     heading: "Connect",
-    links: ["Services", "Prayer", "Serve", "Invite", "Give"],
+    links: [
+      { label: "Service times", href: "/new" },
+      { label: "Prayer", href: "/connect#prayer" },
+      { label: "Serve", href: "/connect#serve" },
+      { label: "Directory", href: "/connect#directory" },
+      { label: "Give", href: "/give" },
+    ],
   },
 ];
 

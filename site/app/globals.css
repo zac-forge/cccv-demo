@@ -25,6 +25,15 @@
      (4.56). Used ONLY for small caps on blue — the yellow field itself
      and every other use keeps --color-yellow exactly as approved. */
   --color-yellow-onblue: #e8cf7a;
+
+  /* The brighter original red, approved for display type at 24px and up.
+     It measures 3.57 on Album Stock: AA Large only, so it can never
+     replace --color-red, which carries body copy, links and small UI.
+     Kept out of @theme on purpose, so Tailwind generates no text-*
+     utility for it; the only way to use it is .display-red below, which
+     applies solely to the display scale. Light grounds only — on ink it
+     falls to 2.9 and fails even AA Large. */
+  --color-red-display: #c44932;
   --focus: var(--color-red);
   color-scheme: light;
 
@@ -182,6 +191,14 @@
     letter-spacing: -0.034em;
   }
 
+  /* Display red is scoped to the three sizes that are always 24px+. Add a
+     size here before using it anywhere else; never a bare text colour. */
+  .t-hero.display-red,
+  .t-section.display-red,
+  .t-feature.display-red {
+    color: var(--color-red-display);
+  }
+
   .t-times {
     font-size: clamp(1.75rem, 3.2vw, 2.75rem);
     line-height: 0.98;
@@ -226,6 +243,51 @@
   .t-lede {
     font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
     line-height: 1.6;
+  }
+
+  /* ----------------------------------------------------------------
+     Long-form reading. The audience skews older and reads on a phone at
+     night: a step up from UI size, more leading than the UI gets, and a
+     measure held by the grid (see Passage in /new/know-jesus).
+     ---------------------------------------------------------------- */
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+  @media (min-width: 768px) {
+    .prose {
+      font-size: 1.1875rem;
+    }
+  }
+  .passage + .passage {
+    margin-top: 1.6em;
+  }
+  .link-inline {
+    color: var(--color-red);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+  .link-inline:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* The display face at text size: optical size down, wonk off, and a
+     weight that reads rather than shouts. Scripture and the prayer. */
+  .f-text {
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 500, "SOFT" 40, "WONK" 0, "opsz" 18;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .t-prayer {
+    font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+    line-height: 1.5;
+  }
+
+  /* The interior page opening. Sits flush under the solid site header. */
+  .page-header {
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
   }
 
   /* 55–68 characters. Never centred. */

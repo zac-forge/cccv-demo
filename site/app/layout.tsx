@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
-import Motion from "./Motion";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Motion from "@/components/Motion";
+import {
+  CF_BEACON_TOKEN,
+  CHURCH,
+  GOOGLE_SITE_VERIFICATION,
+  INDEXABLE,
+  SITE_URL,
+} from "@/lib/site";
 
 // Runs before first paint, so nothing ever flashes hidden. Motion is
 // opt-in: without this attribute every reveal state in globals.css is
@@ -22,24 +31,37 @@ const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
 });
 
+// The demo host keeps saying so in its title; the real host does not.
+const TITLE = INDEXABLE ? CHURCH.name : `${CHURCH.name} — design concept`;
+
+// Service times and address are theirs (/services, /home); "verse by
+// verse" is their own description of the teaching (/services).
 const DESCRIPTION =
-  "A design concept for Calvary Chapel Conejo Valley in Thousand Oaks, California. A demonstration, not the church's live site.";
+  "Verse-by-verse Bible teaching in Thousand Oaks, California. Sundays at 9 and 11 am, Wednesdays at 7 pm, at 101 N. Skyline Dr.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cccv-one.vercel.app"),
-  title: "Calvary Chapel Conejo Valley — design concept",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: `%s · ${CHURCH.name}`,
+  },
   description: DESCRIPTION,
-  // This demo must never be indexed. It carries the church's name and
-  // real copy, so a search result pointing here instead of
-  // ccconejovalley.com would send people to the wrong place.
-  robots: { index: false, follow: false },
+  // Only the real host is ever indexable. See lib/site.ts.
+  robots: INDEXABLE
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
+  verification: GOOGLE_SITE_VERIFICATION
+    ? { google: GOOGLE_SITE_VERIFICATION }
+    : undefined,
   openGraph: {
-    title: "Calvary Chapel Conejo Valley — design concept",
+    siteName: CHURCH.name,
+    title: TITLE,
     description: DESCRIPTION,
     type: "website",
+    locale: "en_US",
     images: [
       {
-        url: "/site/hero.png",
+        url: "/site/hero.webp",
         width: 1915,
         height: 821,
         alt: "Screenprinted sunrise over the Conejo Valley hills",
@@ -64,8 +86,28 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: ARM_MOTION }} />
       </head>
       <body className="grain">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:bg-ink focus:px-4 focus:py-3 focus:text-salt"
+        >
+          Skip to content
+        </a>
+
+        <Header />
         {children}
+        <Footer />
         <Motion />
+
+        {/* Cloudflare Web Analytics: cookieless, one small deferred script.
+            Emitted only when a token exists, so every build until
+            prelaunch ships nothing here at all. */}
+        {CF_BEACON_TOKEN && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+          />
+        )}
       </body>
     </html>
   );

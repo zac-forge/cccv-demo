@@ -1,27 +1,19 @@
 import Image from "next/image";
-import Header from "./Header";
-import SermonPlayer from "./SermonPlayer";
-import {
-  EVENTS,
-  FOOTER_LINKS,
-  MINISTRIES,
-  SERMON,
-  SUNDAY_STEPS,
-  TIMES,
-} from "./content";
+import Link from "next/link";
+import SermonPlayer from "@/components/SermonPlayer";
+import { EVENTS, MINISTRIES, SERMON, SUNDAY_STEPS, TIMES } from "@/lib/content";
+import { verse } from "@/lib/scripture";
+import { CHURCH, churchJsonLd } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
-      <a
-        href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:bg-ink focus:px-4 focus:py-3 focus:text-salt"
-      >
-        Skip to content
-      </a>
-
-      <div id="top" />
-      <Header />
+      {/* The one place the church is marked up as an organisation and a
+          place. docs/01-build-plan.md §6. */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(churchJsonLd()) }}
+      />
 
       <main id="main">
         {/* =========================================================
@@ -34,7 +26,7 @@ export default function Home() {
               the sun clears the type block instead of sitting behind it;
               desktop keeps its approved 105% / centred crop. */}
           <Image
-            src="/site/hero.png"
+            src="/site/hero.webp"
             alt=""
             fill
             priority
@@ -70,8 +62,7 @@ export default function Home() {
                   Verbatim, not fitted to the layout. */}
               <figure className="max-w-[34ch] border-l-2 border-yellow pl-5">
                 <blockquote className="t-lede muted">
-                  &ldquo;So then faith comes by hearing, and hearing by the word
-                  of God.&rdquo;
+                  &ldquo;{verse("Romans 10:17")}&rdquo;
                 </blockquote>
                 <figcaption className="t-eyebrow mt-3 text-yellow">
                   Romans 10:17
@@ -79,9 +70,9 @@ export default function Home() {
               </figure>
 
               <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-stretch md:pb-1">
-                <a href="#new-here" className="btn btn-sun">
+                <Link href="/new" className="btn btn-sun">
                   Plan your visit
-                </a>
+                </Link>
                 <a href="#message" className="btn btn-outline">
                   Watch a message
                 </a>
@@ -158,9 +149,9 @@ export default function Home() {
                 >
                   <span>What a Sunday looks like</span>
                 </h2>
-                <a href="#connect" className="link-rule mt-8">
+                <Link href="/new" className="link-rule mt-8">
                   Plan your visit
-                </a>
+                </Link>
               </div>
 
               {/* Bleeds past the container on the right rather than
@@ -168,7 +159,7 @@ export default function Home() {
               <div className="relative lg:col-span-7 lg:-ml-20 lg:mr-[calc(50%-50vw)]">
                 <div className="relative aspect-[16/10] w-full border border-ink lg:aspect-auto lg:h-[26rem]">
                   <Image
-                    src="/ministries/01-foundations-alt.png"
+                    src="/ministries/01-foundations-alt.webp"
                     alt="Screenprinted illustration of an open Bible, a pencil and reading glasses on a wooden table"
                     fill
                     sizes="(max-width: 1024px) 100vw, 60vw"
@@ -223,7 +214,7 @@ export default function Home() {
             ========================================================= */}
         <section id="message" className="field-ink relative isolate overflow-hidden">
           <Image
-            src="/site/message-bg.png"
+            src="/site/message-bg.webp"
             alt=""
             fill
             sizes="100vw"
@@ -289,7 +280,7 @@ export default function Home() {
                   a particular book, check back in a bit.
                 </p>
 
-                <a href="#" className="link-folio group mt-10 md:mt-12">
+                <Link href="/watch" className="link-folio group mt-10 md:mt-12">
                   Browse recent teachings
                   <span
                     aria-hidden="true"
@@ -297,7 +288,7 @@ export default function Home() {
                   >
                     &rarr;
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -350,14 +341,14 @@ export default function Home() {
                   }
                 >
                   <article
-                    className={`ministry-card ${m.field} flex h-full flex-col border border-ink`}
+                    className={`ministry-card ${m.field} relative flex h-full flex-col border border-ink`}
                   >
                     <div
                       className="relative w-full overflow-hidden border-b border-ink"
                       style={{ aspectRatio: m.ratio }}
                     >
                       <Image
-                        src={`/ministries/${m.slug}.png`}
+                        src={`/ministries/${m.slug}.webp`}
                         alt=""
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
@@ -365,7 +356,14 @@ export default function Home() {
                       />
                     </div>
                     <div className="flex flex-1 flex-col p-5 lg:p-6">
-                      <h3 className="t-card">{m.name}</h3>
+                      <h3 className="t-card">
+                        {/* Stretched over the card: one target, one tab
+                            stop, and the article stays plain block
+                            content rather than the inside of an anchor. */}
+                        <Link href={m.href} className="after:absolute after:inset-0">
+                          {m.name}
+                        </Link>
+                      </h3>
                       <p className="muted mt-3 text-[0.9375rem] leading-snug">
                         {m.blurb}
                       </p>
@@ -403,8 +401,8 @@ export default function Home() {
                   data-reveal=""
                   className="rule-t last:border-b last:border-[color:var(--rule)]"
                 >
-                  <a
-                    href="#"
+                  <Link
+                    href={e.href}
                     className="pressable grid grid-cols-[5rem_1fr_auto] items-baseline gap-x-6 py-8 sm:grid-cols-[11rem_1fr_auto] sm:gap-x-10 md:py-10"
                   >
                     <span aria-hidden="true" className="f-data t-date">
@@ -440,7 +438,7 @@ export default function Home() {
                     <span aria-hidden="true" className="event-go">
                       &#8594;
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -469,20 +467,20 @@ export default function Home() {
               <p className="mt-10">
                 <span className="t-eyebrow block text-red">Pastor Dave</span>
                 <a
-                  href="#"
+                  href={CHURCH.phoneHref}
                   className="f-data mt-2 inline-block text-[1.75rem] leading-none md:text-[2.25rem]"
                 >
-                  (831) 428-2214
+                  {CHURCH.phone}
                 </a>
               </p>
 
               <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-                <a href="#new-here" className="btn btn-ink">
+                <Link href="/new" className="btn btn-ink">
                   Plan your visit
-                </a>
-                <a href="#" className="btn btn-outline">
+                </Link>
+                <Link href="/connect#prayer" className="btn btn-outline">
                   Send a prayer request
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -496,7 +494,7 @@ export default function Home() {
             className="relative mx-6 mb-16 aspect-[4/3] border border-ink lg:absolute lg:inset-y-0 lg:right-0 lg:mx-0 lg:mb-0 lg:aspect-auto lg:w-[42vw] lg:border-y-0 lg:border-r-0"
           >
             <Image
-              src="/site/dovedeck.png"
+              src="/site/dovedeck.webp"
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
@@ -505,94 +503,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* ===========================================================
-          FOOTER — the back of a printed programme. One graphic
-          device: the dove, outline only, blue showing through it.
-          =========================================================== */}
-      <footer
-        id="about"
-        className="field-blue relative isolate overflow-hidden py-20 md:py-24"
-      >
-        {/* Environmental type in the space the dove used to occupy:
-            mass and balance, not a second heading. Cropped by the top
-            and right edges. */}
-        <span
-          aria-hidden="true"
-          data-drift=""
-          className="ghost-word ghost-on-blue f-display right-[-3vw] top-[-2rem] hidden text-right text-[clamp(7rem,13vw,15rem)] lg:block"
-        >
-          Conejo
-          <br />
-          Valley
-        </span>
-
-        <div className="shell relative">
-          <img
-            src="/logotype-white-trim.svg"
-            alt="Calvary Chapel Conejo Valley"
-            width={1601}
-            height={611}
-            className="h-auto w-[64vw] max-w-[420px]"
-          />
-
-          <div className="rule-t mt-16 grid gap-12 pt-12 lg:grid-cols-12 lg:gap-16">
-            <address className="not-italic leading-relaxed lg:col-span-4">
-              101 N. Skyline Dr.
-              <br />
-              Thousand Oaks, CA 91362
-              <br />
-              <span className="mt-3 inline-block">(831) 428-2214</span>
-            </address>
-
-            <div className="grid gap-10 sm:grid-cols-3 lg:col-span-8">
-              {FOOTER_LINKS.map((col) => (
-                <nav key={col.heading} aria-label={col.heading}>
-                  <h2 className="t-eyebrow t-eyebrow-onblue">{col.heading}</h2>
-                  <ul className="mt-5 space-y-1 lg:space-y-3">
-                    {col.links.map((link) => (
-                      <li key={link}>
-                        {/* Give is the one action in a list of
-                            destinations. A yellow rule echoes the nav
-                            chip without dropping a filled block into a
-                            link column and breaking its rhythm. */}
-                        <a
-                          href="#"
-                          className={`inline-block py-2 text-[0.9375rem] underline-offset-4 lg:inline lg:py-0 ${
-                            link === "Give"
-                              ? "footer-give"
-                              : "muted hover:text-salt hover:underline"
-                          }`}
-                        >
-                          {link}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              ))}
-            </div>
-          </div>
-
-          {/* Back-of-the-sleeve publisher line. Identity and location
-              only, both already verified elsewhere on the page. */}
-          <span
-            aria-hidden="true"
-            className="sign-off bottom-0 right-0 hidden text-right lg:block"
-          >
-            Calvary Chapel
-            <br />
-            Conejo Valley
-            <br />
-            Thousand Oaks, CA
-          </span>
-
-          <p className="rule-t muted mt-14 pt-14 text-[0.8125rem]">
-            Design concept for Calvary Chapel Conejo Valley. Not the live site.
-            Copy is drawn from ccconejovalley.com.
-          </p>
-        </div>
-      </footer>
     </>
   );
 }

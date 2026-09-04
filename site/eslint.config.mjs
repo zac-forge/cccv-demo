@@ -1,19 +1,18 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextVitals from "eslint-config-next/core-web-vitals";
+import nextTs from "eslint-config-next/typescript";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({ baseDirectory: __dirname });
-
+// eslint-config-next 16 ships flat configs directly. Going through
+// FlatCompat.extends() on these throws a circular-structure error before
+// a single file is linted.
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextVitals,
+  ...nextTs,
   {
     // The logotype is vector artwork served as-is; the image optimizer has
     // nothing to do with an SVG, so a plain <img> is correct here.
     rules: { "@next/next/no-img-element": "off" },
   },
+  { ignores: ["out/**", ".next/**", ".vercel/**"] },
 ];
 
 export default eslintConfig;

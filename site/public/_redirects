@@ -1,0 +1,63 @@
+# Cloudflare `_redirects` for Workers static assets. Copied into out/ by
+# the export.
+#
+# Every line carries an explicit 301: this file defaults to 302, which
+# passes no link equity. First match wins, so the specific rules sit
+# above the splats. Everything expired lands on its section, never on /.
+#
+# Source: the live sitemap, 70 URLs, read 2026-09-03. Targets are the
+# routes in docs/01-build-plan.md §3. URLs that survive unchanged
+# (/about, /about/who-we-support, /give, /memorials, /ministries and the
+# eight /ministries/* pages) are simply not listed.
+
+# ---- Home ----
+/home                                 /                                   301
+/working-page                         /                                   301
+/news                                 /                                   301
+
+# ---- New here ----
+/first-time                           /new                                301
+/services                             /new                                301
+/services/christmas-eve               /new                                301
+/services/easter                      /new                                301
+/services/easter-eventsservices       /new                                301
+/covid-policy                         /new                                301
+/know-jesus                           /new/know-jesus                     301
+
+# ---- Watch ----
+/livestream                           /watch/live                         301
+/radio                                /watch/radio                        301
+# /sermons/memory-verse has real content (1,889 chars) and no home in the
+# new IA yet. It lands on the archive until one is decided.
+/sermons                              /watch                              301
+/sermons/*                            /watch                              301
+
+# ---- Ministries: the second, parallel tree ----
+/mens                                 /ministries/men                     301
+/mens/*                               /ministries/men                     301
+/womens                               /ministries/women                   301
+/womens/*                             /ministries/women                   301
+/childrens                            /ministries/children                301
+/childrens/*                          /ministries/children                301
+/young-adults                         /ministries/young-adults            301
+/ministries/middle-school             /ministries/youth                   301
+/youth                                /ministries/youth                   301
+/youth/*                              /ministries/youth                   301
+
+# ---- Events, past and otherwise ----
+/eventscalendar                       /events                             301
+/eventscalendar/*                     /events                             301
+/fellowship                           /events                             301
+/fellowship/*                         /events                             301
+
+# ---- Connect ----
+/prayer                               /connect                            301
+/serve                                /connect                            301
+/invite                               /connect                            301
+/stay-in-touch                        /connect                            301
+/stay-in-touch/*                      /connect                            301
+
+# ---- About and give ----
+/about/about-us                       /about                              301
+/give/buyumba                         /about/who-we-support               301
+/maui-giving                          /give                               301
