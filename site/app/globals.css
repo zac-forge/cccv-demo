@@ -433,6 +433,25 @@
     max-width: 46ch;
   }
 
+  /* A run of uncited paragraphs on a long-form page. Below xl it keeps
+     the measure; from xl up it sets in two balanced columns across the
+     shell, where the verse column would otherwise sit empty, so a
+     chapter is half as tall. Paragraphs never break across a column.
+     Under xl a column would fall below the 55ch floor. */
+  .run > :not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  @media (min-width: 1280px) {
+    .run {
+      max-width: none;
+      columns: 2;
+      column-gap: 4rem;
+    }
+    .run > * {
+      break-inside: avoid;
+    }
+  }
+
   /* ----------------------------------------------------------------
      Layout
      ---------------------------------------------------------------- */

@@ -48,6 +48,16 @@ function Passage({
   );
 }
 
+/* A run of paragraphs that cite nothing. From xl up it sets in two
+   columns across the shell, where the verse column would otherwise sit
+   empty, so a chapter is half as tall and no paragraph reads beside a
+   blank margin. Paragraphs stay whole and the columns balance. A lone
+   paragraph between cited ones stays a Passage: there is nothing to
+   fill the second column with. */
+function Run({ children }: { children: React.ReactNode }) {
+  return <div className="passage measure run">{children}</div>;
+}
+
 export default function KnowJesus() {
   return (
     <main id="main">
@@ -118,35 +128,29 @@ export default function KnowJesus() {
           </Passage>
 
           <h2 data-reveal="clip"><span>What it means to respond</span></h2>
-          <Passage>
+          <Run>
             <p>
               Salvation is not something we earn by being good enough, and it
               isn&rsquo;t something we can accomplish through religious
               activity. It is God&rsquo;s gift of grace, received through faith
               in Jesus Christ.
             </p>
-          </Passage>
-          <Passage>
             <p>
               Coming to Christ means recognizing our sin and our need for a
               Savior, turning to God in repentance, and placing our trust in
               what He has done for us.
             </p>
-          </Passage>
-          <Passage>
             <p>
               No matter what you have done or how far from God you feel, the
               way to Him is open. He turns no one away who trusts Him.
             </p>
-          </Passage>
-          <Passage>
             <p>
               Repentance means turning from our sin and turning toward God. It
               doesn&rsquo;t mean that we will never struggle with sin again. It
               means that we acknowledge our sin, turn to Christ, and desire to
               follow Him.
             </p>
-          </Passage>
+          </Run>
           <Passage verses={["John 6:37"]}>
             <p>
               Jesus said, &ldquo;the one who comes to Me I will by no means cast
@@ -185,35 +189,31 @@ export default function KnowJesus() {
 
       <article className="field-stock">
         <div className="shell prose pb-[clamp(5rem,8vw,7rem)] pt-[clamp(4rem,7vw,6rem)]">
-          <Passage>
-            {/* Their bold, set as display type: the one line on the page
-                that carries its own weight, and the one use of display red. */}
-            <p
-              data-reveal="clip"
-              className="f-display t-section display-red max-w-[12ch]"
-            >
-              <span>It isn&rsquo;t the prayer that saves you. Jesus saves.</span>
-            </p>
-            <p className="mt-8">
+          {/* Their bold, set as display type: the one line on the page
+              that carries its own weight, and the one use of display red. */}
+          <p
+            data-reveal="clip"
+            className="f-display t-section display-red max-w-[12ch]"
+          >
+            <span>It isn&rsquo;t the prayer that saves you. Jesus saves.</span>
+          </p>
+          <Run>
+            <p>
               If you have genuinely placed your trust in Christ, your hope is
               not in the words you prayed but in the Savior you are trusting.
             </p>
-          </Passage>
-          <Passage>
             <p>
               Jesus calls us not simply to make a decision, but to follow Him.
               Faith is not a moment; it is a life.
             </p>
-          </Passage>
+          </Run>
 
           <h2 data-reveal="clip"><span>Where to begin</span></h2>
-          <Passage>
+          <Run>
             <p>
               If you have put your faith in Jesus, we&rsquo;d love to help you
               grow in your relationship with Him.
             </p>
-          </Passage>
-          <Passage>
             <p>
               One of the most important ways we come to know God is through His
               Word. Begin reading the Bible regularly, and consider starting
@@ -221,15 +221,11 @@ export default function KnowJesus() {
               believers, and being part of a Bible-teaching church are also
               important parts of growing as a Christian.
             </p>
-          </Passage>
-          <Passage>
             <p>
               You don&rsquo;t have to figure everything out on your own. Talk
               with a pastor or another mature Christian who can answer your
               questions and walk alongside you.
             </p>
-          </Passage>
-          <Passage>
             <p>
               If anything here raises a question, please don&rsquo;t hesitate
               to{" "}
@@ -238,7 +234,7 @@ export default function KnowJesus() {
               </Link>
               . We would be blessed to help you take the next step.
             </p>
-          </Passage>
+          </Run>
         </div>
       </article>
 
