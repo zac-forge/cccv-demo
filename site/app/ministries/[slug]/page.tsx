@@ -51,13 +51,15 @@ export default async function MinistryPage({ params }: { params: Params }) {
   if (!m) notFound();
   const d = m.detail;
   const [lede, ...rest] = d.intro;
-  /* The opening is one field. A salt header runs on into the plate and
-     schedule, so the schedule's first rule never sits on a seam between
-     salt and stock, where it read as a stray line (Drew, September 4,
-     on Young Adults and Evangelism). Blue cannot carry the ink-bordered
-     plate or the red labels, so a blue header still meets stock. The
-     closing band then takes the other light field. */
-  const opening = m.field === "field-salt" ? "field-salt" : "field-stock";
+  /* The gap between the header and the plate. On a stock header the
+     section is the same field, so the header's own foot is enough and
+     the plate sits close (Drew, September 4, on Children). On salt or
+     blue the seam needs the band's full buffer: without it the
+     schedule's first rule sat right on the colour change and read as a
+     stray line (Young Adults, Evangelism), and carrying salt on into
+     the section did not work either. */
+  const opening =
+    m.field === "field-stock" ? "field-stock pb-[clamp(6rem,9vw,9rem)]" : "field-stock band";
 
   return (
     <main id="main">
@@ -71,10 +73,8 @@ export default async function MinistryPage({ params }: { params: Params }) {
         lede={<p>{lede}</p>}
       />
 
-      {/* The handbill at full size beside its schedule. The header's own
-          foot is the gap above it; a band's worth on top of that was too
-          much (Drew, September 4). */}
-      <section className={`${opening} pb-[clamp(6rem,9vw,9rem)]`}>
+      {/* The handbill at full size beside its schedule. */}
+      <section className={opening}>
         <div className="shell grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <div
             data-reveal=""
@@ -185,7 +185,7 @@ export default async function MinistryPage({ params }: { params: Params }) {
         )}
       </section>
 
-      <CTABand field={opening === "field-salt" ? "field-stock" : "field-salt"} />
+      <CTABand />
     </main>
   );
 }
