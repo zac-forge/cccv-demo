@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ActionDetailSection from "@/components/ActionDetailSection";
 import CTABand from "@/components/CTABand";
-import Disclosure from "@/components/Disclosure";
-import OpportunityMatrix from "@/components/OpportunityMatrix";
 import PageHeader from "@/components/PageHeader";
 import SectionIndex from "@/components/SectionIndex";
-import SectionLabel from "@/components/SectionLabel";
 import StepSequence from "@/components/StepSequence";
 import Verse from "@/components/Verse";
 import { CHURCH } from "@/lib/site";
@@ -19,9 +16,12 @@ import { CHURCH } from "@/lib/site";
    "Tuedays" is corrected. Section labels, the prayer headline, step
    titles and link labels are mine; CONTENT-SOURCES.md §10.
 
-   Five jobs, five rhythms, so it never reads as one column: an index,
-   an editorial split, an action band with a disclosure, a pull quote
-   over a matrix, a numbered process, a map beside the address.
+   Five jobs, five compositions, so it never reads as one column and
+   never as one component repeated: a contents strip, an editorial split
+   (pastoral), an action band (functional), a pull quote over a plain
+   list (inspirational), a numbered process (procedural), a map beside
+   the address (spatial). Numerals appear only on the directory steps,
+   which are the one real sequence.
 
    Their sign-up forms (serve, directory) currently fail to load on the
    live site ("He must enable SSL"). Whether they come back through
@@ -75,7 +75,7 @@ export default function Connect() {
       />
 
       {/* =========================================================
-          01 PRAYER — the ask and the number on the left, the prayer
+          PRAYER — the ask and the number on the left, the prayer
           schedule as a rail on the right.
           ========================================================= */}
       <div className="field-stock">
@@ -84,7 +84,6 @@ export default function Connect() {
 
           <ActionDetailSection
             id="prayer"
-            n="01"
             label="Prayer"
             title="How can we pray for you?"
             detailTitle="Join us for prayer"
@@ -146,18 +145,20 @@ export default function Connect() {
       </div>
 
       {/* =========================================================
-          02 STAY INFORMED — the keyword is the object. Their Flocknote
-          keyword and number, /stay-in-touch; the four steps behind a
-          disclosure, verbatim.
+          STAY IN THE LOOP — the keyword is the object. Their Flocknote
+          keyword and number, /stay-in-touch. The four sign-up steps
+          stay in view as secondary copy, condensed (CONTENT-SOURCES §10).
           ========================================================= */}
       <section
         id="stay-in-touch"
         aria-labelledby="stay-in-touch-title"
         className="field-blue py-[clamp(4rem,7vw,6.5rem)]"
       >
-        <div className="shell grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-16">
+        <div className="shell grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <SectionLabel n="02" label="Stay informed" tone="dark" />
+            <p className="t-eyebrow text-[color:var(--color-yellow-onblue)]">
+              Stay in the loop
+            </p>
             <h2 id="stay-in-touch-title" className="mt-6">
               <span className="t-eyebrow muted block">Text</span>{" "}
               <a
@@ -173,37 +174,33 @@ export default function Connect() {
               </a>
             </h2>
             <p className="t-lede muted measure-tight mt-8">
-              Start receiving info about all our upcoming events by text and
-              email.
+              Receive upcoming events and church updates by text and email.
             </p>
           </div>
 
           <div className="lg:col-span-4 lg:col-start-9">
-            <Disclosure summary="How sign-up works">
-              <ol className="list-decimal space-y-3 pl-5 text-[1rem] leading-relaxed marker:text-[color:var(--color-yellow-onblue)]">
-                <li>
-                  In the message box type &ldquo;{KEYWORD}&rdquo; — make sure
-                  there are NO SPACES.
-                </li>
-                <li>
-                  You&rsquo;ll receive a text from &ldquo;Calvary Chapel Conejo
-                  Valley.&rdquo; Click the blue sign-up link.
-                </li>
-                <li>
-                  Enter your &ldquo;First Name&rdquo; &ldquo;Last Name&rdquo;
-                  &ldquo;Email&rdquo; &amp; &ldquo;Phone&rdquo; if asked, then
-                  Click &ldquo;Save&rdquo;. You can select a ministry and click
-                  &ldquo;Next&rdquo; or to just join the general church alerts
-                  just click &ldquo;Next&rdquo;.
-                </li>
-                <li>
-                  Please check the email you used to sign-up, as sometimes you
-                  will get a verification email (it can take up to 5 minutes to
-                  receive). Just follow the simple verification process in your
-                  email.
-                </li>
-              </ol>
-            </Disclosure>
+            <h3 className="t-eyebrow text-[color:var(--color-yellow-onblue)]">
+              First time? Here&rsquo;s what happens
+            </h3>
+            <ol className="rule-t mt-3 max-w-[36ch] list-decimal space-y-2.5 pl-5 pt-4 text-[0.9375rem] leading-snug marker:text-[color:var(--color-yellow-onblue)]">
+              <li>
+                Type &ldquo;{KEYWORD}&rdquo; in the message box, with no
+                spaces.
+              </li>
+              <li>
+                You&rsquo;ll receive a text from &ldquo;Calvary Chapel Conejo
+                Valley.&rdquo; Click the blue sign-up link.
+              </li>
+              <li>
+                Enter your name, email and phone if asked, then click Save.
+                Pick a ministry, or click Next to join the general church
+                alerts.
+              </li>
+              <li>
+                Check the email you signed up with for a verification message.
+                It can take up to 5 minutes.
+              </li>
+            </ol>
           </div>
         </div>
       </section>
@@ -211,35 +208,36 @@ export default function Connect() {
       <div className="field-stock">
         <div className="shell">
           {/* =========================================================
-              03 SERVE — Mark 9:35 opens it as a pull quote; the needs
-              are a numbered matrix; the wider ask is a second route.
-              Names and roles are theirs, /serve.
+              SERVE — Mark 9:35 opens it as a pull quote and is the
+              moment; the needs are a plain ruled list under a small
+              head; the wider ask is a second route. Names and roles are
+              theirs, /serve; the head is Drew's.
               ========================================================= */}
           <section
             id="serve"
             aria-labelledby="serve-title"
             className="py-14 md:py-20"
           >
-            <SectionLabel n="03" label="Serve" />
+            <p className="t-eyebrow text-red">Serve</p>
             <Verse
               reference="Mark 9:35"
               layout="pull"
               className="mt-7 max-w-[42rem]"
             />
 
-            <h2
-              id="serve-title"
-              className="f-display mt-14 text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em] md:mt-20"
-            >
-              Current serving opportunities
+            <h2 id="serve-title" className="t-subhead mt-14 md:mt-20">
+              Current serving needs
             </h2>
-            <OpportunityMatrix
-              className="mt-8"
-              items={CHURCH.serve.map((row) => ({
-                title: row.area,
-                detail: `Contact ${row.contact}`,
-              }))}
-            />
+            <dl className="mt-6 grid md:grid-cols-2 md:gap-x-16">
+              {CHURCH.serve.map((row) => (
+                <div key={row.area} className="rule-t py-5 md:py-6">
+                  <dt className="t-card">{row.area}</dt>
+                  <dd className="muted mt-1.5 text-[1rem] leading-snug">
+                    {row.contact}
+                  </dd>
+                </div>
+              ))}
+            </dl>
 
             {/* PLACEHOLDER: their sign-up form is down on the live site and
                 its replacement (Amplify or a Worker) is undecided. Until
@@ -260,8 +258,10 @@ export default function Connect() {
           </section>
 
           {/* =========================================================
-              04 DIRECTORY — their three instructions as three steps,
-              the two photo routes beneath. /stay-in-touch/cccv-directory.
+              DIRECTORY — their three instructions as three steps, the
+              page's one numbered treatment, because these are the one
+              real sequence. The two photo routes beneath.
+              /stay-in-touch/cccv-directory.
               ========================================================= */}
           <section
             id="directory"
@@ -270,7 +270,7 @@ export default function Connect() {
           >
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-7">
-                <SectionLabel n="04" label="Directory" />
+                <p className="t-eyebrow text-red">Directory</p>
                 <h2
                   id="directory-title"
                   className="f-display t-section mt-5 max-w-[12ch]"
@@ -344,7 +344,7 @@ export default function Connect() {
       </div>
 
       {/* =========================================================
-          05 FIND US — the address beside the campus map, the same
+          FIND US — the address beside the campus map, the same
           plate /new uses. The map is a drawing; the directions button
           is what gets someone there.
           ========================================================= */}
@@ -355,7 +355,7 @@ export default function Connect() {
       >
         <div className="shell grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <SectionLabel n="05" label="Find us" />
+            <p className="t-eyebrow text-red">Find us</p>
             <h2
               id="contact-title"
               className="f-data mt-6 text-[clamp(1.75rem,2.8vw,2.5rem)] leading-tight"

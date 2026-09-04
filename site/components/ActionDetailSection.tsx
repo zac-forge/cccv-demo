@@ -1,12 +1,9 @@
-import SectionLabel from "./SectionLabel";
-
 /* An editorial split: the ask on the left (label, headline, copy, the
    primary action), and a detail rail on the right for the practical
    facts that would otherwise sit in paragraphs. Stacks on a phone with
    the ask first and the rail directly under it. */
 export default function ActionDetailSection({
   id,
-  n,
   label,
   title,
   children,
@@ -15,7 +12,6 @@ export default function ActionDetailSection({
   className = "",
 }: {
   id: string;
-  n: string;
   label: string;
   title: string;
   children: React.ReactNode;
@@ -30,7 +26,7 @@ export default function ActionDetailSection({
       className={`grid gap-12 lg:grid-cols-12 lg:gap-16 ${className}`}
     >
       <div className="lg:col-span-7">
-        <SectionLabel n={n} label={label} />
+        <p className="t-eyebrow text-red">{label}</p>
         <h2
           id={`${id}-title`}
           className="f-display t-section mt-5 max-w-[14ch]"

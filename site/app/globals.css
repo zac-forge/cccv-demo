@@ -1313,8 +1313,9 @@
 
 /* ------------------------------------------------------------------
    Content patterns for long interior pages. First used on /connect;
-   SectionIndex, SectionLabel, ActionDetailSection, Disclosure,
-   OpportunityMatrix, StepSequence and Verse's pull layout.
+   SectionIndex, ActionDetailSection, StepSequence and Verse's pull layout.
+   Typography, rules and spacing do the organising: no cards, no
+   accordions, numerals only where the content is a sequence.
    ------------------------------------------------------------------ */
 @layer base {
   /* Anchor jumps from a section index must not animate for anyone who
@@ -1335,11 +1336,11 @@
     letter-spacing: -0.012em;
   }
 
-  /* Section index: a printed contents line. Rows on a phone; from lg one
-     strip of equal cells divided by hairlines. Hover and focus fill the
-     cell in ink, the same move btn-outline makes. The list hangs out by
-     its own padding so the resting labels align with the column. */
-  .section-index ol {
+  /* Section index: a contents strip. Rows on a phone; from lg one strip
+     of equal cells divided by hairlines. Hover and focus fill the cell in
+     ink, the same move btn-outline makes. The list hangs out by its own
+     padding so the resting labels align with the column. */
+  .section-index ul {
     display: grid;
     margin-inline: -0.75rem;
   }
@@ -1348,8 +1349,7 @@
   }
   .section-index-link {
     display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
+    align-items: center;
     width: 100%;
     min-height: 3rem;
     padding: 0.875rem 0.75rem;
@@ -1361,28 +1361,16 @@
     transition: background-color var(--dur-fast) var(--ease-out),
       color var(--dur-fast) var(--ease-out);
   }
-  .section-index-n {
-    font-size: 0.9375rem;
-    letter-spacing: -0.01em;
-    text-transform: none;
-    color: var(--color-red);
-    transition: color var(--dur-fast) var(--ease-out);
-  }
   .section-index-link:hover,
   .section-index-link:focus-visible {
     background-color: var(--color-ink);
     color: var(--color-salt);
   }
-  /* Yellow on ink: a dark ground, so the palette rule holds. */
-  .section-index-link:hover .section-index-n,
-  .section-index-link:focus-visible .section-index-n {
-    color: var(--color-yellow);
-  }
   .section-index-link:focus-visible {
     outline-offset: -3px;
   }
   @media (min-width: 1024px) {
-    .section-index ol {
+    .section-index ul {
       grid-auto-flow: column;
       grid-auto-columns: 1fr;
       margin-inline: -1rem;
@@ -1394,48 +1382,5 @@
     .section-index-link {
       padding: 1rem;
     }
-  }
-
-  /* Disclosure: native details/summary, no animation. The mark is the
-     state: + closed, − open, and the content itself. */
-  .disclosure {
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-  .disclosure-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    min-height: 3rem;
-    padding: 0.875rem 0;
-    cursor: pointer;
-    list-style: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .disclosure-summary::-webkit-details-marker {
-    display: none;
-  }
-  .disclosure-summary:hover {
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
-    text-decoration-thickness: 2px;
-  }
-  .disclosure-mark {
-    flex: none;
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-  .disclosure-mark::before {
-    content: "+";
-  }
-  .disclosure[open] .disclosure-mark::before {
-    content: "\2212";
-  }
-  .disclosure-body {
-    padding-block: 0.25rem 1.5rem;
   }
 }
