@@ -158,8 +158,8 @@ export default function About() {
       {/* =========================================================
           MEET OUR PASTOR — his bio as they wrote it in the reading
           column. The rail carries the three plants he dates himself,
-          and Phil. 1:21 sits at the foot beside the paragraph that
-          quotes it.
+          then a portrait of Dave and Lynette at column width, and
+          Phil. 1:21 at the foot beside the paragraph that quotes it.
           ========================================================= */}
       <section
         id="pastor"
@@ -196,7 +196,18 @@ export default function About() {
                 </div>
               ))}
             </dl>
-            <Verse reference="Philippians 1:21" className="mt-10 lg:mt-auto" />
+            {/* PLACEHOLDER: the screenprinted couple until the staff photos
+                arrive; then this is Dave and Lynette, with a real alt. */}
+            <div className="relative mt-10 aspect-[2/3] overflow-hidden border border-ink">
+              <Image
+                src="/staff/couple.webp"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 30vw"
+                className="object-cover object-top"
+              />
+            </div>
+            <Verse reference="Philippians 1:21" className="mt-10 lg:mt-auto lg:pt-10" />
           </div>
         </div>
       </section>
