@@ -104,9 +104,9 @@ export default function About() {
 
       {/* =========================================================
           WHAT WE BELIEVE — the statement of faith, in their words. The
-          two paragraphs at reading measure, then the four convictions
-          as a litany: one ruled row each, the adjective in display type
-          beside its "Therefore".
+          two paragraphs side by side across the full shell (Drew, Sept
+          4), then the four convictions as a litany: one ruled row each,
+          the adjective in display type beside its "Therefore".
           ========================================================= */}
       <section
         id="beliefs"
@@ -120,9 +120,11 @@ export default function About() {
           >
             What we believe
           </h2>
-          <div className="prose measure mt-10 md:mt-12">
+          <div className="mt-10 grid gap-8 md:mt-12 md:grid-cols-2 md:gap-16">
             {BELIEFS.intro.map((para) => (
-              <p key={para.slice(0, 40)}>{para}</p>
+              <p key={para.slice(0, 40)} className="prose">
+                {para}
+              </p>
             ))}
           </div>
           <ul className="mt-14 md:mt-20">
@@ -144,7 +146,7 @@ export default function About() {
                       {stem && "."}
                     </span>
                   </p>
-                  <p className="prose max-w-[46ch] lg:col-span-6 lg:col-start-7 lg:pt-2">
+                  <p className="prose lg:col-span-6 lg:col-start-7 lg:pt-2">
                     <span className="t-eyebrow mr-3 text-red">Therefore</span>
                     {w.therefore}
                   </p>
