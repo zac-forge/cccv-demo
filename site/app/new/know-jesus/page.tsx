@@ -25,8 +25,11 @@ export const metadata: Metadata = {
 };
 
 /* One paragraph and the scripture it cites, side by side from lg up.
-   The column is seven of twelve, capped at the site measure. The verse
-   hangs in the outer four and starts on the paragraph's first line. */
+   At lg the column is seven of twelve, capped at the site measure, and
+   the verse hangs in the outer four, starting on the paragraph's first
+   line. From xl, where the runs set in two columns, the page keeps one
+   gutter: six and six, so the verse's rule spans the same half the run's
+   second column fills and nothing steps in or out down the page. */
 function Passage({
   verses = [],
   children,
@@ -36,9 +39,9 @@ function Passage({
 }) {
   return (
     <div className="passage lg:grid lg:grid-cols-12 lg:gap-x-16">
-      <div className="measure lg:col-span-7">{children}</div>
+      <div className="measure lg:col-span-7 xl:col-span-6">{children}</div>
       {verses.length > 0 && (
-        <div className="mt-6 space-y-4 lg:col-span-4 lg:col-start-9 lg:mt-0">
+        <div className="mt-6 space-y-4 lg:col-span-4 lg:col-start-9 lg:mt-0 xl:col-span-6 xl:col-start-7">
           {verses.map((reference) => (
             <Verse key={reference} reference={reference} />
           ))}
@@ -177,12 +180,13 @@ export default function KnowJesus() {
           promise the prayer answers, confess and believe and be saved,
           set a step larger than the prayer because the page's next line
           is that the prayer is not what saves. The grid stretches both,
-          so the two rules run the same height. Below lg it stacks. */}
+          so the two rules run the same height. Below lg it stacks; from
+          xl it splits six and six on the article's gutter. */}
       <section aria-label="A prayer" className="field-ink band">
         <div className="shell grid gap-10 lg:grid-cols-12 lg:gap-x-16">
           <blockquote
             data-reveal=""
-            className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-7"
+            className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-7 xl:col-span-6"
           >
             &ldquo;Jesus, I know that I am a sinner and that I need You. I
             believe that You died for my sins and rose again. I turn from my sin
@@ -195,7 +199,7 @@ export default function KnowJesus() {
             tone="dark"
             layout="quote"
             size="pull"
-            className="lg:col-span-5 lg:col-start-8"
+            className="lg:col-span-5 lg:col-start-8 xl:col-span-6 xl:col-start-7"
           />
         </div>
       </section>
