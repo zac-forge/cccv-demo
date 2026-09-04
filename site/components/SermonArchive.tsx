@@ -137,8 +137,8 @@ export default function SermonArchive() {
                    index carries those URLs there is nothing to play here. */
                 <div className="flex aspect-video items-center justify-center border border-[color:var(--rule)] p-8">
                   <p className="muted max-w-[30ch] text-center text-[0.9375rem]">
-                    The audio for this message is being moved to the archive
-                    and will play here soon.
+                    This message is being moved to the new archive and will
+                    play here soon.
                   </p>
                 </div>
               )}

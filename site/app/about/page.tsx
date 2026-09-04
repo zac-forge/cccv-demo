@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import CTABand from "@/components/CTABand";
 import PageHeader from "@/components/PageHeader";
@@ -101,25 +102,33 @@ export default function About() {
       </section>
 
       {/* =========================================================
-          MEET OUR TEAM — no photos yet, on purpose. The names are the
-          artwork: a blue plate, the couple set large, the blurb below.
+          MEET OUR TEAM — photos are being replaced, so each card carries
+          a screenprinted portrait plate instead: a couple from behind,
+          looking at the valley. Deliberate, not a missing image.
           ========================================================= */}
       <section id="team" aria-labelledby="team-title" className="field-stock band">
         <div className="shell">
           <h2 id="team-title" className="f-display t-section max-w-[12ch]">
             Meet our team
           </h2>
-          <ul className="mt-12 grid gap-6 md:mt-14 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
             {TEAM.map((person) => (
-              <li key={person.names} className="flex flex-col border border-ink">
-                <div className="field-blue px-6 pb-7 pt-10">
-                  <h3 className="f-display text-[clamp(1.5rem,2vw,1.875rem)] leading-[1.02] tracking-[-0.02em]">
-                    {person.names}
-                  </h3>
+              <li key={person.names} className="flex flex-col border border-ink bg-salt">
+                <div className="relative aspect-[4/5] overflow-hidden border-b border-ink">
+                  <Image
+                    src={`/staff/${person.portrait}.webp`}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top"
+                  />
                 </div>
-                <p className="muted flex-1 bg-salt px-6 py-6 text-[0.9375rem] leading-relaxed">
-                  {person.text}
-                </p>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="t-card">{person.names}</h3>
+                  <p className="muted mt-3 text-[0.9375rem] leading-relaxed">
+                    {person.text}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

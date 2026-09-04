@@ -114,16 +114,16 @@ export default function NewHere() {
             </a>
           </div>
 
-          {/* PLACEHOLDER: the map slot. Drew is having a stylised map of
-              the campus drawn; until it lands, the Conejo Valley strip from
-              the brand assets stands in. Same box, same crop. */}
-          <div className="relative aspect-[16/9] overflow-hidden border border-ink bg-stock lg:col-span-7">
+          {/* A stylised map, not a real one: the 101, Hillcrest, Skyline
+              and the campus, drawn in the two inks. The directions button
+              is what actually gets someone there. */}
+          <div className="relative aspect-[3/2] overflow-hidden border border-ink lg:col-span-7">
             <Image
-              src="/site/landscape.webp"
-              alt=""
+              src="/site/church-map.webp"
+              alt="Illustrated map: Calvary Chapel Conejo Valley at 101 N. Skyline Dr., off W. Hillcrest Dr. and US 101, with the Conejo Valley hills behind"
               fill
               sizes="(max-width: 1024px) 100vw, 60vw"
-              className="object-contain object-bottom"
+              className="object-cover"
             />
           </div>
         </div>

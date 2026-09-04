@@ -357,6 +357,7 @@ export type EventItem = {
   href: string;
   page?: {
     slug: string;
+    image?: string;
     paragraphs: string[];
     facts: Fact[];
     register?: { label: string; href: string };
@@ -372,6 +373,7 @@ export const EVENTS: EventItem[] = [
     href: "/events/2026-womens-retreat",
     page: {
       slug: "2026-womens-retreat",
+      image: "/events/2026-womens-retreat.webp",
       paragraphs: [
         "Phillip told Nathanael with an excited heart, “Come and see!” He wanted his friend to have an encounter with the Jesus! And this is what I’m telling you... Come and see that you might have a personal encounter with Jesus. This retreat is going to be a time for you to get away with the Lord, reconnect with friends, meet new friends and relax. I hope that you will come and see what the Lord has in store for you!",
         "This year’s theme is One Obsession. Taken from Phillipians 3:1-15. Our very special guest speaker is Karyn Johnson from Calvary Chapel Downey. As Karyn and I were talking and praying about this she said, women’s retreats are our special date with the Jesus! Register today for your date is waiting for you!",
@@ -396,6 +398,7 @@ export const EVENTS: EventItem[] = [
     href: "/events/family-movie",
     page: {
       slug: "family-movie",
+      image: "/events/family-movie.webp",
       paragraphs: [
         "Grab the family and join us for a fun night together!",
         "Bring your family, invite a friend, and come enjoy a great movie and fellowship together! We can’t wait to see you there!",
@@ -481,25 +484,30 @@ export const PASTOR = {
   ],
 };
 
-export const TEAM: { names: string; text: string }[] = [
+export const TEAM: { names: string; text: string; portrait: "couple" | "male" | "female" }[] = [
   {
     names: "Dave and Lynette Johnston",
+    portrait: "couple",
     text: "Pastor Dave serves as the Senior Pastor at Calvary Chapel Conejo Valley. As the overseer of the flock, he leads the fellowship with pastoral care and love. His wife, Lynette, is actively involved in the Children’s Ministry, where she joyfully shares the love of Jesus with the little ones.",
   },
   {
     names: "Joshua and Jennifer Camper",
+    portrait: "couple",
     text: "Pastor Joshua serves as an Associate Pastor, overseeing both the Youth Ministry and the Marriage Ministry alongside his wife, Jennifer. Jennifer also plays an active role in the church administration and contributes to the Children’s Ministry.",
   },
   {
     names: "Tim and Kathy Hutchinson",
+    portrait: "couple",
     text: "Pastor Tim serves as an Associate Pastor. In addition to his pastoral responsibilities, he leads our worship services and co-teaches the Men’s Bible Study group. His wife, Kathy, is actively involved in the Hospitality Ministry and also supports the fellowship through various other roles.",
   },
   {
     names: "Mark and Irina Swartz",
+    portrait: "couple",
     text: "Pastor Mark serves as an Associate Pastor. He teaches the Foundations of Faith class and helps manage video content for the fellowship.",
   },
   {
     names: "Brent and Carrie Hebert",
+    portrait: "couple",
     text: "Pastor Brent and his wife, Carrie, are valued members of our leadership team. In addition, Pastor Brent plays an active role in teaching during the Men’s Bible Study.",
   },
 ];

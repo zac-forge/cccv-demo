@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import CTABand from "@/components/CTABand";
 import Facts from "@/components/Facts";
@@ -48,10 +49,24 @@ export default async function EventPage({ params }: { params: Params }) {
 
       <section className="field-stock band">
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="prose measure lg:col-span-7">
-            {page.paragraphs.map((para) => (
-              <p key={para.slice(0, 40)}>{para}</p>
-            ))}
+          <div className="lg:col-span-7">
+            {page.image && (
+              <div className="relative mb-10 aspect-[3/2] overflow-hidden border border-ink">
+                <Image
+                  src={page.image}
+                  alt=""
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+            <div className="prose measure">
+              {page.paragraphs.map((para) => (
+                <p key={para.slice(0, 40)}>{para}</p>
+              ))}
+            </div>
           </div>
           <div className="lg:col-span-4 lg:col-start-9">
             <Facts facts={page.facts} />
