@@ -18,6 +18,9 @@ export type NavItem = {
   href: string;
   section: string | null;
   children?: NavChild[];
+  /* The band's link back to the section page, where the first child
+     is not already that page. */
+  overview?: string;
 };
 
 /* The Watch family, in the order the strip prints them. */
@@ -33,6 +36,7 @@ export const NAV: NavItem[] = [
     label: "Visit",
     href: "/new",
     section: "new-here",
+    overview: "Plan your visit",
     children: [{ label: "Know Jesus", href: "/new/know-jesus" }],
   },
   { label: "Messages", href: "/watch", section: "message", children: WATCH_NAV },
@@ -40,6 +44,7 @@ export const NAV: NavItem[] = [
     label: "Ministries",
     href: "/ministries",
     section: "ministries",
+    overview: "All ministries",
     children: MINISTRIES.map((m) => ({ label: m.name, href: m.href })),
   },
   { label: "Events", href: "/events", section: "events" },
@@ -48,6 +53,7 @@ export const NAV: NavItem[] = [
     label: "About",
     href: "/about",
     section: null,
+    overview: "About us",
     children: [
       { label: "Who we support", href: "/about/who-we-support" },
       { label: "Memorials", href: "/memorials" },

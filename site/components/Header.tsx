@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent } from "react";
+import type { CSSProperties, FocusEvent, KeyboardEvent as ReactKeyboardEvent } from "react";
 import type { NavItem } from "@/lib/nav";
 
 const GIVE_HREF = "/give";
 
 /* The nav tree comes from lib/nav.ts by way of the layout, so the
    content file it reads stays on the server. Items with children carry
-   a subnav: a panel hung from the header's rule from lg up, an index
+   a subnav: an ink band hung from the header's rule from lg up, an index
    line under the item in the phone menu. */
 export default function Header({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
@@ -20,6 +20,9 @@ export default function Header({ nav }: { nav: NavItem[] }) {
   // nothing to watch.
   const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
+  // A subnav band is open: hover or focus within an item that has one.
+  // Tracked so the transparent homepage header goes solid under it.
+  const [bandOpen, setBandOpen] = useState(false);
   const [heroGone, setHeroGone] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -124,8 +127,9 @@ export default function Header({ nav }: { nav: NavItem[] }) {
     if (event.key === "Escape") (event.target as HTMLElement).blur();
   };
 
-  // The panel needs an opaque ground, so an open menu forces the solid state.
-  const isSolid = !isHome || heroGone || open;
+  // The phone panel and a subnav band both need the header solid beneath
+  // them, so either forces the solid state.
+  const isSolid = !isHome || heroGone || open || bandOpen;
   // Section ids only mean something on the homepage; a stale marker must
   // not follow a client-side navigation onto another page.
   const current = isHome ? active : null;
@@ -165,8 +169,22 @@ export default function Header({ nav }: { nav: NavItem[] }) {
               const isCurrent = isHome
                 ? item.section !== null && current === item.section
                 : pathname.startsWith(item.href);
+              // The band itself opens in CSS; these only tell the header.
+              // Blur within the item (link to link) is not a close.
+              const band = item.children
+                ? {
+                    onMouseEnter: () => setBandOpen(true),
+                    onMouseLeave: () => setBandOpen(false),
+                    onFocus: () => setBandOpen(true),
+                    onBlur: (event: FocusEvent<HTMLLIElement>) => {
+                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                        setBandOpen(false);
+                      }
+                    },
+                  }
+                : {};
               return (
-                <li key={item.label} className="nav-item">
+                <li key={item.label} className="nav-item" {...band}>
                   <Link
                     href={item.href}
                     className="navlink"
@@ -176,19 +194,41 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                     {item.label}
                   </Link>
                   {item.children && (
-                    <ul className="nav-panel" aria-label={`${item.label} pages`}>
-                      {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            className="nav-sublink"
-                            aria-current={onChild(child.href)}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                    // The subnav as a band, not a box: the header's full width
+                    // on ink, the section as a yellow running head with a folio
+                    // link to its page, the pages in the display face. The
+                    // page openings' language, so the menu is the site's.
+                    <div className="nav-band field-ink">
+                      <div className="shell grid grid-cols-12 items-start gap-16">
+                        <div className="col-span-3">
+                          <p className="t-eyebrow text-yellow">{item.label}</p>
+                          {item.overview && (
+                            <Link href={item.href} className="link-folio group mt-4">
+                              {item.overview}
+                              <span
+                                aria-hidden="true"
+                                className="transition-transform duration-150 group-hover:translate-x-1"
+                              >
+                                &rarr;
+                              </span>
+                            </Link>
+                          )}
+                        </div>
+                        <ul className="nav-band-list col-span-9" aria-label={`${item.label} pages`}>
+                          {item.children.map((child) => (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                className="nav-band-link"
+                                aria-current={onChild(child.href)}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   )}
                 </li>
               );
