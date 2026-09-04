@@ -22,6 +22,9 @@ const ROUTES = [
   "/about/who-we-support",
   "/give",
   "/memorials",
+  "/watch",
+  "/watch/live",
+  "/watch/radio",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
