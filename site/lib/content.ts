@@ -205,6 +205,42 @@ export const FOOTER_LINKS: {
   },
 ];
 
+/* The homepage hero, one entry per slide. Slide 1 is the approved hero:
+   "Faith Comes By Hearing" is the title of their daily radio broadcast
+   (/radio), set in sentence case, with Romans 10:17 (NKJV) beneath it.
+   Slide 2 is the /new/know-jesus title and that page's first sentence.
+   Button labels are mine. `art` picks the background in Hero.tsx. */
+export const HERO_SLIDES: {
+  id: string;
+  art: "sunrise" | "rays";
+  title: string;
+  quote?: string;
+  lede?: string;
+  ctas: { label: string; href: string; variant: "sun" | "outline" }[];
+}[] = [
+  {
+    id: "faith",
+    art: "sunrise",
+    title: "Faith comes by hearing.",
+    quote: "Romans 10:17",
+    ctas: [
+      { label: "Plan your visit", href: "/new", variant: "sun" },
+      { label: "Watch a message", href: "#message", variant: "outline" },
+    ],
+  },
+  {
+    id: "know-jesus",
+    art: "rays",
+    title: "How can I know Jesus?",
+    lede:
+      "Our greatest desire is for people to know God personally through Jesus Christ.",
+    ctas: [
+      { label: "Start here", href: "/new/know-jesus", variant: "sun" },
+      { label: "Send a prayer request", href: "/connect#prayer", variant: "outline" },
+    ],
+  },
+];
+
 /* The current message on their YouTube channel. Title, passage and series
    name are theirs, taken from the video and its playlist.
    https://www.youtube.com/watch?v=NvkGG0jTnyI */

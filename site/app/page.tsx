@@ -1,9 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import KnowJesusCard from "@/components/KnowJesusCard";
+import Hero from "@/components/Hero";
 import SermonPlayer from "@/components/SermonPlayer";
 import { EVENTS, MINISTRIES, SERMON, SUNDAY_STEPS, TIMES } from "@/lib/content";
-import { verse } from "@/lib/scripture";
 import { CHURCH, churchJsonLd } from "@/lib/site";
 
 export default function Home() {
@@ -17,70 +16,9 @@ export default function Home() {
       />
 
       <main id="main">
-        {/* =========================================================
-            HERO — poster. The artwork puts the sun and its rays in
-            the upper right, so mark and headline take the flat navy
-            at upper left and run wider than any column would allow.
-            ========================================================= */}
-        <section className="field-ink relative isolate -mt-[69px] flex min-h-[max(600px,92svh)] items-end overflow-hidden pb-16 pt-[69px] md:-mt-[97px] md:min-h-[max(680px,92vh)] md:items-center md:pb-14 md:pt-[97px]">
-          {/* One plane at every width. Mobile zooms and lifts the crop so
-              the sun clears the type block instead of sitting behind it;
-              desktop keeps its approved 105% / centred crop. */}
-          <Image
-            src="/site/hero.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-img -z-20 -translate-y-[8%] scale-[1.25] object-cover md:translate-y-0 md:scale-105"
-          />
-          <div className="hero-scrim absolute inset-0 -z-10" aria-hidden="true" />
-          <div
-            className="hero-topscrim absolute inset-x-0 top-0 -z-10 h-[228px]"
-            aria-hidden="true"
-          />
-
-          {/* Not a centred container: the block is pinned left and the
-              headline is allowed to run past the mark above it. */}
-          <div className="w-full max-w-[1320px] px-[clamp(24px,5vw,64px)] md:mx-auto">
-            <img
-              id="hero-sentinel"
-              src="/logotype-white-trim.svg"
-              alt="Calvary Chapel Conejo Valley"
-              width={1601}
-              height={611}
-              className="h-auto w-[52vw] max-w-[208px] md:w-[30vw] md:max-w-[420px]"
-            />
-
-            {/* Their own words: "Faith Comes By Hearing" is the title of
-                their daily radio broadcast (/radio). */}
-            <h1 className="f-display t-hero mt-6 max-w-[8ch] md:mt-24 md:max-w-[11ch]">
-              Faith comes by hearing.
-            </h1>
-
-            <div className="mt-7 flex flex-col gap-7 md:mt-12 md:flex-row md:items-end md:gap-16">
-              {/* Romans 10:17, NKJV — the translation their site quotes.
-                  Verbatim, not fitted to the layout. */}
-              <figure className="max-w-[34ch] border-l-2 border-yellow pl-5">
-                <blockquote className="t-lede muted">
-                  &ldquo;{verse("Romans 10:17")}&rdquo;
-                </blockquote>
-                <figcaption className="t-eyebrow mt-3 text-yellow">
-                  Romans 10:17
-                </figcaption>
-              </figure>
-
-              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-stretch md:pb-1">
-                <Link href="/new" className="btn btn-sun">
-                  Plan your visit
-                </Link>
-                <a href="#message" className="btn btn-outline">
-                  Watch a message
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Hero: components/Hero.tsx. Slide 1 is the approved poster;
+            the rest share its shape. */}
+        <Hero />
 
         {/* =========================================================
             SERVICE TIMES — flat blue information band. Printed on the
@@ -197,12 +135,6 @@ export default function Home() {
                 </li>
               ))}
             </ol>
-
-            {/* The tract, on the right, under the illustration's side of
-                the grid; the ghosted "Sunday" balances it bottom-left. */}
-            <div className="mt-14 grid gap-10 md:mt-16 lg:grid-cols-12 lg:gap-14">
-              <KnowJesusCard className="lg:col-span-5 lg:col-start-8" />
-            </div>
           </div>
         </section>
 

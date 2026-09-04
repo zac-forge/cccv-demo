@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Breadcrumb from "./Breadcrumb";
 import type { Crumb } from "./Breadcrumb";
+import PosterArt from "./PosterArt";
 
 type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink";
 
@@ -12,10 +12,8 @@ type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink";
 
    poster — for a page that has to open like a poster rather than a
    chapter: the title near hero size, a deck, and an aside (a verse, a
-   time, a date) hung on the right. The sunburst from the hero comes back
-   as a printed corner mark, mirrored into the top-right and cropped by
-   the edges, from lg up only — the same rule as the ghost words. The
-   scrim keeps the type zone clean field. */
+   time, a date) hung on the right, with the sunburst in the corner
+   (PosterArt). */
 export default function PageHeader({
   trail,
   title,
@@ -51,15 +49,7 @@ export default function PageHeader({
     <header
       className={`${field} page-header-poster relative isolate overflow-hidden`}
     >
-      <Image
-        src="/site/sun-rays.webp"
-        alt=""
-        width={1400}
-        height={525}
-        aria-hidden="true"
-        className="poster-rays hidden lg:block"
-      />
-      <div className="poster-scrim hidden lg:block" aria-hidden="true" />
+      <PosterArt />
 
       <div className="shell relative">
         {trail && <Breadcrumb trail={trail} />}

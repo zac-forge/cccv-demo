@@ -347,20 +347,6 @@
     );
   }
 
-  /* The tract. Tilted from lg up only; a phone has no margin to tilt into. */
-  .tract {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: clamp(1.5rem, 3vw, 2.25rem);
-    border: 1px solid var(--color-yellow);
-    box-shadow: inset 0 3px 0 var(--color-yellow);
-  }
-  @media (min-width: 1024px) {
-    .tract {
-      rotate: -1.2deg;
-    }
-  }
 
   /* 55–68 characters. Never centred. */
   .measure {
@@ -725,6 +711,140 @@
     );
   }
 
+  /* ----------------------------------------------------------------
+     Hero slider. No autoplay; it turns when someone turns it. Art layers
+     stack behind, slides stack in front; both crossfade on the reveal
+     curve, and both are plain state without JavaScript: slide 1 is the
+     one marked active in the HTML.
+     ---------------------------------------------------------------- */
+  .hero-art {
+    position: absolute;
+    inset: 0;
+    z-index: -20;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+      visibility 0s linear var(--dur-reveal);
+  }
+  .hero-art[data-active="true"] {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--dur-reveal) var(--ease-out), visibility 0s;
+  }
+  .hero-stack {
+    display: grid;
+  }
+  .hero-slide {
+    grid-area: 1 / 1;
+    align-self: start;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+      translate var(--dur-reveal) var(--ease-out),
+      visibility 0s linear var(--dur-reveal);
+  }
+  [data-motion="on"] .hero-slide {
+    translate: 0 12px;
+  }
+  .hero-slide[data-active="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    translate: none;
+    transition: opacity var(--dur-reveal) var(--ease-out),
+      translate var(--dur-reveal) var(--ease-out),
+      visibility 0s;
+  }
+
+  /* Slide 2's art: the sunburst in the top-right. Below lg the type is
+     bottom-aligned, so the scrim clears the lower half; from lg the type
+     is centred and runs left, so the scrim clears the left instead. */
+  .hero-rays {
+    position: absolute;
+    top: -4%;
+    right: -14%;
+    width: clamp(420px, 96vw, 1120px);
+    height: auto;
+    scale: -1 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-rays-scrim {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 30%,
+      var(--color-blue) 58%
+    );
+  }
+  @media (min-width: 1024px) {
+    /* Low enough that the disc clears the nav scrim and shows in the
+       corner, as it does on the poster header. */
+    .hero-rays {
+      top: 10%;
+      right: -6%;
+      width: clamp(720px, 66vw, 1200px);
+    }
+    .hero-rays-scrim {
+      background: linear-gradient(
+        90deg,
+        var(--color-blue) 0%,
+        var(--color-blue) 46%,
+        transparent 78%
+      );
+    }
+  }
+
+  /* Controls: bars, not dots, and square buttons. 44px targets. */
+  .hero-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .hero-dot {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 44px;
+    margin-right: 6px;
+    --focus: var(--color-yellow);
+  }
+  .hero-dot > span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: color-mix(in srgb, var(--color-salt) 38%, transparent);
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+  .hero-dot:hover > span {
+    background: color-mix(in srgb, var(--color-salt) 70%, transparent);
+  }
+  .hero-dot[aria-current="true"] > span {
+    background: var(--color-yellow);
+  }
+  .hero-btn {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid color-mix(in srgb, var(--color-salt) 55%, transparent);
+    color: var(--color-salt);
+    font-size: 1.125rem;
+    line-height: 1;
+    --focus: var(--color-yellow);
+    transition: background-color var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .hero-btn:hover {
+      background: var(--color-salt);
+      border-color: var(--color-salt);
+      color: var(--color-ink);
+    }
+  }
   .hero-img {
     /* Portrait crop. Held right so the sun is in frame at all — 28%
        put the phone over the flat left-hand sky, where there is none —
