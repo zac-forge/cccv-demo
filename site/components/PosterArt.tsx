@@ -19,7 +19,9 @@ import Image from "next/image";
            (/watch/radio).
    lectern an open Bible under one stage light, on ink (/watch/live).
    doors   open doors on a Sunday morning, on Baptism Blue (/new).
-   pier    an empty pier at dusk, on ink (the 404).
+   shepherd the shepherd walking home with the lamb across his
+           shoulders, seen from behind, on ink (the 404; it replaced an
+           empty pier once Luke 15:4 went on the page).
    none    type only.
    The full bleeds (the valley on /about, the coast on
    /about/who-we-support, the oak on /memorials) are BleedHeader. */
@@ -30,7 +32,7 @@ export type PosterArtName =
   | "tower"
   | "lectern"
   | "doors"
-  | "pier"
+  | "shepherd"
   | "none";
 
 /* The painted pieces own the right side, so the header stacks its aside
@@ -41,7 +43,7 @@ export const ART_OWNS_RIGHT: ReadonlySet<PosterArtName> = new Set([
   "tower",
   "lectern",
   "doors",
-  "pier",
+  "shepherd",
 ]);
 
 const PAINTED = {
@@ -50,7 +52,7 @@ const PAINTED = {
   tower: { src: "/site/radio-tower.webp", width: 1400, height: 933 },
   lectern: { src: "/site/live-lectern.webp", width: 1400, height: 933 },
   doors: { src: "/site/visit-doors.webp", width: 1400, height: 933 },
-  pier: { src: "/site/pier.webp", width: 1400, height: 933 },
+  shepherd: { src: "/site/shepherd.webp", width: 1400, height: 933 },
 } as const;
 
 export default function PosterArt({

@@ -3,7 +3,7 @@ import CTABand from "@/components/CTABand";
 import PageHeader from "@/components/PageHeader";
 import Verse from "@/components/Verse";
 
-/* Branded: a poster on ink with the empty pier, the body on stock.
+/* Branded: a poster on ink with the shepherd, the body on stock.
    Seventy old URLs are moving, so any redirect that was missed lands
    here; the band below puts service times one tap away even from a
    dead link. The copy is mine, warm rather than blunt, and the lost
@@ -13,7 +13,7 @@ export default function NotFound() {
     <main id="main">
       <PageHeader
         poster
-        art="pier"
+        art="shepherd"
         field="field-ink"
         title="Sorry, that page has wandered off."
         lede={<p>It may have moved, or the address has a typo in it.</p>}
