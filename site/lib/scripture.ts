@@ -18,6 +18,12 @@ export const NKJV: Record<string, string> = {
      biblegateway.com (NKJV) on 2026-09-04. */
   "Romans 10:9":
     "that if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved.",
+  /* Jesus speaking; the verse opens on a quotation mark that does not
+     close until 15:7, so it is left off here and the Verse component's
+     own pair carries it. Checked against biblegateway.com (NKJV) on
+     2026-09-04. */
+  "Luke 15:4":
+    "What man of you, having a hundred sheep, if he loses one of them, does not leave the ninety-nine in the wilderness, and go after the one which is lost until he finds it?",
   "Romans 10:17":
     "So then faith comes by hearing, and hearing by the word of God.",
   /* Inner quotation set in single marks so it nests inside the outer
