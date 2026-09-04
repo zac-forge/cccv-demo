@@ -5,9 +5,10 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { EventItem } from "@/lib/content";
 
-/* Event artwork as a strip of poster plates: one whole plate showing on
-   a phone, two from sm, never a partial third. The strip moves only
-   when someone moves it: a swipe, the keyboard, or the two arrows.
+/* Event artwork as a strip of poster plates: one plate and the edge of
+   the next on a phone, two and the edge of a third from sm, so the
+   strip shows that it scrolls. It moves only when someone moves it: a
+   swipe, the keyboard, or the two arrows.
    Native scroll-snap does the scrolling; the arrows are the only
    script. With as many plates as fit, the arrows do not render. */
 export default function EventPosters({ events }: { events: EventItem[] }) {
@@ -43,7 +44,7 @@ export default function EventPosters({ events }: { events: EventItem[] }) {
     });
   };
 
-  // One plate always fits; two fit from sm. Arrows only where there is
+  // One plate fits a phone, two fit from sm. Arrows only where there is
   // more than fits.
   const arrows =
     events.length <= 1 ? "hidden" : events.length === 2 ? "sm:hidden" : "";

@@ -20,7 +20,8 @@ export const metadata: Metadata = {
    poster size and, beside it, every upcoming event that has artwork as
    a plate (EventPosters), each a link to its page with the date in
    yellow numerals and the name as its caption. The plates are a strip:
-   one whole plate on a phone, two from sm, more by scrolling. Ink
+   one and the edge of the next on a phone, two and the edge of a third
+   from sm, the rest by scrolling. Ink
    because the list below keeps the Events field, yellow, and yellow
    numerals only sit on a dark ground. No sunburst: the plates own that
    corner. */
