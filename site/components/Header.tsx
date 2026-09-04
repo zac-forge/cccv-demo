@@ -243,7 +243,23 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                     <div className="nav-band field-ink">
                       <div className="shell grid grid-cols-12 items-baseline gap-16">
                         <p className="t-eyebrow col-span-2 text-yellow">{item.label}</p>
-                        <ul className="nav-band-list col-span-10" aria-label={`${item.label} pages`}>
+                        {/* Up to five pages run as one line. More than that
+                            (Ministries, nine) sets as an index in columns
+                            read top to bottom, each column at its own width,
+                            so the list aligns and no name ever breaks: a
+                            running line of nine bold labels had no structure
+                            and read as a jumble (Drew, September 4). */}
+                        <ul
+                          className={`nav-band-list col-span-10 ${
+                            item.children.length > 5 ? "nav-band-index" : ""
+                          }`}
+                          style={
+                            item.children.length > 5
+                              ? ({ "--rows": Math.ceil(item.children.length / 3) } as CSSProperties)
+                              : undefined
+                          }
+                          aria-label={`${item.label} pages`}
+                        >
                           {item.children.map((child) => (
                             <li key={child.href}>
                               <Link

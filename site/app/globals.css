@@ -1129,6 +1129,17 @@
     column-gap: 2.75rem;
     row-gap: 0.75rem;
   }
+  /* A long list as an index: `--rows` deep, filled down each column,
+     every column as wide as its widest name and no wider. */
+  .nav-band-index {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--rows, 3), auto);
+    grid-auto-columns: max-content;
+    justify-content: start;
+    column-gap: 3.5rem;
+    row-gap: 0.625rem;
+  }
   .nav-band-link {
     display: inline-block;
     font-family: var(--font-display);
