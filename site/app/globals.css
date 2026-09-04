@@ -1054,64 +1054,88 @@
   /* ----------------------------------------------------------------
      Subnavs, lg and up. An item with children carries a band, not a
      box: the header's full width on ink, hung from the header's rule,
-     the section as a yellow running head on the left with a folio link
-     to its page, the pages set in the display face across the right.
-     The page openings' language, so the menu reads as this site's and
-     not as a dropdown. Opened by hover or by keyboard focus within the
-     item, so the parent stays a plain link; Escape blurs to close. The
-     item spans the header's full height, so the pointer never crosses
-     a gap on the way down, and the band's top sits on the header's
-     rule. The sticky header is the containing block, which is what
-     lets the band span the header from a static list item.
+     the section as a yellow running head on the left, the pages as a
+     running line in the display face across the right, each at its own
+     width so a long name never breaks. The page openings' language, so
+     the menu reads as this site's and not as a dropdown.
+
+     Opened by hover or by keyboard focus within the item, so the parent
+     stays a plain link; Escape blurs to close, and a click closes it
+     until the pointer leaves (data-closed). Hover intent: it opens after
+     140ms, so a pointer crossing the nav opens nothing, and closes
+     after 160ms, so the drop from the label into the band never loses
+     it. The hover zone is the label and, once open, the band plus a
+     bridge (::before) up to the label; the rest of the header stays
+     inert. The sticky header is the containing block, which is what
+     lets the band span the header from a static list item. The Header
+     component carries the same two delays for the solid state.
      ---------------------------------------------------------------- */
   .nav-item {
     display: flex;
     align-items: center;
-    height: 100%;
   }
   .nav-band {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    padding-block: 2.25rem 2.75rem;
+    padding-block: 1.75rem 2.125rem;
     visibility: hidden;
     opacity: 0;
     translate: 0 -6px;
+    /* The intent delays hold with motion off; only the fade is gated. */
+    transition: visibility 0s linear 160ms;
+  }
+  .nav-band::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 2.25rem;
   }
   .nav-item:hover .nav-band,
   .nav-item:focus-within .nav-band {
     visibility: visible;
     opacity: 1;
     translate: none;
+    transition: visibility 0s linear 140ms;
   }
   [data-motion="on"] .nav-band {
-    transition: opacity var(--dur-fast) var(--ease-out),
-      translate var(--dur-fast) var(--ease-out),
-      visibility 0s linear var(--dur-fast);
+    transition: opacity var(--dur-fast) var(--ease-out) 160ms,
+      translate var(--dur-fast) var(--ease-out) 160ms,
+      visibility 0s linear calc(160ms + var(--dur-fast));
   }
   [data-motion="on"] .nav-item:hover .nav-band,
   [data-motion="on"] .nav-item:focus-within .nav-band {
-    transition: opacity var(--dur-fast) var(--ease-out),
-      translate var(--dur-fast) var(--ease-out),
-      visibility 0s;
+    transition: opacity var(--dur-fast) var(--ease-out) 140ms,
+      translate var(--dur-fast) var(--ease-out) 140ms,
+      visibility 0s linear 140ms;
   }
-  /* Four across: the eight ministries in two rows, the four Watch pages
-     in one, the shorter lists filling from the left. */
+  /* Closed by a click: shut at once, hover or not, until the pointer
+     leaves the item and the attribute clears. */
+  .nav-item[data-closed="true"] .nav-band,
+  .nav-item[data-closed="true"]:hover .nav-band,
+  .nav-item[data-closed="true"]:focus-within .nav-band {
+    visibility: hidden;
+    opacity: 0;
+    transition: none;
+  }
   .nav-band-list {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: 2rem;
-    row-gap: 0.875rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2.75rem;
+    row-gap: 0.75rem;
   }
   .nav-band-link {
     display: inline-block;
     font-family: var(--font-display);
     font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 48;
     font-weight: 800;
-    font-size: 1.375rem;
-    line-height: 1.15;
+    font-size: 1.25rem;
+    line-height: 1.2;
     letter-spacing: -0.015em;
+    white-space: nowrap;
     color: var(--color-salt);
     --focus: var(--color-yellow);
     transition: color var(--dur-fast) var(--ease-out);

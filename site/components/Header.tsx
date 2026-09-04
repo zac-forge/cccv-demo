@@ -3,10 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CSSProperties, FocusEvent, KeyboardEvent as ReactKeyboardEvent } from "react";
+import type {
+  CSSProperties,
+  FocusEvent,
+  KeyboardEvent as ReactKeyboardEvent,
+  MouseEvent,
+} from "react";
 import type { NavItem } from "@/lib/nav";
 
 const GIVE_HREF = "/give";
+
+// Hover intent for the subnav bands: a pointer crossing the nav does not
+// open one, and a short drop between the label and the band does not
+// close one. The CSS carries the same two numbers.
+const BAND_OPEN_MS = 140;
+const BAND_CLOSE_MS = 160;
 
 /* The nav tree comes from lib/nav.ts by way of the layout, so the
    content file it reads stays on the server. Items with children carry
@@ -21,8 +32,24 @@ export default function Header({ nav }: { nav: NavItem[] }) {
   const isHome = pathname === "/";
   const [open, setOpen] = useState(false);
   // A subnav band is open: hover or focus within an item that has one.
-  // Tracked so the transparent homepage header goes solid under it.
+  // Tracked so the transparent homepage header goes solid under it, on
+  // the same short delays the band itself opens and closes with, so a
+  // pointer crossing the nav does not flash the header.
   const [bandOpen, setBandOpen] = useState(false);
+  const bandTimer = useRef<number | null>(null);
+  const setBand = useCallback((next: boolean, delay: number) => {
+    if (bandTimer.current !== null) window.clearTimeout(bandTimer.current);
+    bandTimer.current = window.setTimeout(() => setBandOpen(next), delay);
+  }, []);
+  useEffect(
+    () => () => {
+      if (bandTimer.current !== null) window.clearTimeout(bandTimer.current);
+    },
+    []
+  );
+  // A click in a band closes it until the pointer leaves the item, so it
+  // does not hang open over the page it just navigated to.
+  const [closed, setClosed] = useState<string | null>(null);
   const [heroGone, setHeroGone] = useState(false);
   const [active, setActive] = useState<string | null>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -173,18 +200,32 @@ export default function Header({ nav }: { nav: NavItem[] }) {
               // Blur within the item (link to link) is not a close.
               const band = item.children
                 ? {
-                    onMouseEnter: () => setBandOpen(true),
-                    onMouseLeave: () => setBandOpen(false),
-                    onFocus: () => setBandOpen(true),
+                    onMouseEnter: () => setBand(true, BAND_OPEN_MS),
+                    onMouseLeave: () => {
+                      setBand(false, BAND_CLOSE_MS);
+                      setClosed(null);
+                    },
+                    onFocus: () => setBand(true, 0),
                     onBlur: (event: FocusEvent<HTMLLIElement>) => {
                       if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                        setBandOpen(false);
+                        setBand(false, 0);
+                      }
+                    },
+                    onClick: (event: MouseEvent<HTMLLIElement>) => {
+                      if ((event.target as HTMLElement).closest("a")) {
+                        setClosed(item.href);
+                        (event.target as HTMLElement).blur();
                       }
                     },
                   }
                 : {};
               return (
-                <li key={item.label} className="nav-item" {...band}>
+                <li
+                  key={item.label}
+                  className="nav-item"
+                  data-closed={closed === item.href}
+                  {...band}
+                >
                   <Link
                     href={item.href}
                     className="navlink"
@@ -195,26 +236,14 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                   </Link>
                   {item.children && (
                     // The subnav as a band, not a box: the header's full width
-                    // on ink, the section as a yellow running head with a folio
-                    // link to its page, the pages in the display face. The
-                    // page openings' language, so the menu is the site's.
+                    // on ink, the section as a yellow running head, the pages
+                    // as a running line in the display face, each at its own
+                    // width. The page openings' language, so the menu is the
+                    // site's.
                     <div className="nav-band field-ink">
-                      <div className="shell grid grid-cols-12 items-start gap-16">
-                        <div className="col-span-3">
-                          <p className="t-eyebrow text-yellow">{item.label}</p>
-                          {item.overview && (
-                            <Link href={item.href} className="link-folio group mt-4">
-                              {item.overview}
-                              <span
-                                aria-hidden="true"
-                                className="transition-transform duration-150 group-hover:translate-x-1"
-                              >
-                                &rarr;
-                              </span>
-                            </Link>
-                          )}
-                        </div>
-                        <ul className="nav-band-list col-span-9" aria-label={`${item.label} pages`}>
+                      <div className="shell grid grid-cols-12 items-baseline gap-16">
+                        <p className="t-eyebrow col-span-2 text-yellow">{item.label}</p>
+                        <ul className="nav-band-list col-span-10" aria-label={`${item.label} pages`}>
                           {item.children.map((child) => (
                             <li key={child.href}>
                               <Link
@@ -283,8 +312,9 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                 {item.children && (
                   // The subnav as an index line, the Watch strip's shape:
                   // every page one tap away, nothing behind a second tap.
+                  // The section's own page is the row above, so it is skipped.
                   <ul className="-mt-1 mb-1 flex flex-wrap gap-x-5">
-                    {item.children.map((child) => (
+                    {item.children.filter((child) => child.href !== item.href).map((child) => (
                       <li key={child.href}>
                         <Link
                           href={child.href}

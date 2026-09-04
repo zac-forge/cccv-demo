@@ -17,10 +17,10 @@ export type NavItem = {
   label: string;
   href: string;
   section: string | null;
+  /* The section's own page leads its list ("Plan your visit", "All
+     ministries"), so no band opens on a lone item; the phone menu skips
+     it, since the parent row is that link already. */
   children?: NavChild[];
-  /* The band's link back to the section page, where the first child
-     is not already that page. */
-  overview?: string;
 };
 
 /* The Watch family, in the order the strip prints them. */
@@ -36,16 +36,20 @@ export const NAV: NavItem[] = [
     label: "Visit",
     href: "/new",
     section: "new-here",
-    overview: "Plan your visit",
-    children: [{ label: "Know Jesus", href: "/new/know-jesus" }],
+    children: [
+      { label: "Plan your visit", href: "/new" },
+      { label: "Know Jesus", href: "/new/know-jesus" },
+    ],
   },
   { label: "Messages", href: "/watch", section: "message", children: WATCH_NAV },
   {
     label: "Ministries",
     href: "/ministries",
     section: "ministries",
-    overview: "All ministries",
-    children: MINISTRIES.map((m) => ({ label: m.name, href: m.href })),
+    children: [
+      { label: "All ministries", href: "/ministries" },
+      ...MINISTRIES.map((m) => ({ label: m.name, href: m.href })),
+    ],
   },
   { label: "Events", href: "/events", section: "events" },
   { label: "Connect", href: "/connect", section: "connect" },
@@ -53,8 +57,8 @@ export const NAV: NavItem[] = [
     label: "About",
     href: "/about",
     section: null,
-    overview: "About us",
     children: [
+      { label: "About us", href: "/about" },
       { label: "Who we support", href: "/about/who-we-support" },
       { label: "Memorials", href: "/memorials" },
     ],
