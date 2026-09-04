@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 /**
@@ -12,10 +13,19 @@ import { useEffect } from "react";
  * data-motion="on". So reduced-motion and no-JS users never reach any of
  * it, and no element is ever left hidden waiting for React.
  *
+ * It lives in the layout, which survives client-side navigation, so the
+ * whole thing restarts on every route (the pathname dependency): the new
+ * page's elements are observed fresh and the drifters are re-collected.
+ * Before that, a page reached by a link was never observed and sat blank
+ * (September 4). A MutationObserver also catches anything that arrives
+ * after the route settles, so no revealed element can be left hidden.
+ *
  * No React state is touched on scroll; the drift writes straight to
  * style.translate, which is composited.
  */
 export default function Motion() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const root = document.documentElement;
     if (root.dataset.motion !== "on") return;
@@ -31,7 +41,29 @@ export default function Motion() {
       },
       { threshold: 0.01, rootMargin: "0px 0px -10% 0px" }
     );
-    document.querySelectorAll("[data-reveal]").forEach((el) => io.observe(el));
+    const watch = (scope: ParentNode) => {
+      if (
+        scope instanceof Element &&
+        scope.matches("[data-reveal]") &&
+        !scope.classList.contains("is-in")
+      ) {
+        io.observe(scope);
+      }
+      scope.querySelectorAll("[data-reveal]:not(.is-in)").forEach((el) => io.observe(el));
+    };
+    watch(document);
+
+    // Anything added after this route settled (a list re-rendered, a
+    // late component) is observed as it lands. Observing an element
+    // twice is a no-op, so the sweep is cheap.
+    const mo = new MutationObserver((records) => {
+      for (const record of records) {
+        record.addedNodes.forEach((node) => {
+          if (node instanceof Element) watch(node);
+        });
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
 
     // ---- Background plane drift. Desktop only. ----
     const drifters = Array.from(
@@ -82,10 +114,11 @@ export default function Motion() {
 
     return () => {
       io.disconnect();
+      mo.disconnect();
       stop();
       wide.removeEventListener("change", restart);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
