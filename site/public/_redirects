@@ -29,8 +29,8 @@
 /radio                                /watch/radio                        301
 # /sermons/memory-verse has real content (1,889 chars) and no home in the
 # new IA yet. It lands on the archive until one is decided.
-/sermons                              /watch                              301
-/sermons/*                            /watch                              301
+/sermons                              /watch/sermons                        301
+/sermons/*                            /watch/sermons                        301
 
 # ---- Ministries: the second, parallel tree ----
 /mens                                 /ministries/men                     301

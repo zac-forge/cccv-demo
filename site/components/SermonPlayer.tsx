@@ -6,15 +6,24 @@ import { useState } from "react";
 type Props = {
   videoId: string;
   title: string;
+  /* Optional outside control, so another button can start the same
+     player. Left undefined, the facade keeps its own state. */
+  playing?: boolean;
+  onPlay?: () => void;
 };
 
 /**
  * Click-to-play facade. The poster frame is all that loads until someone
  * actually presses play, so no YouTube script runs on first paint.
  */
-export default function SermonPlayer({ videoId, title }: Props) {
-  const [playing, setPlaying] = useState(false);
+export default function SermonPlayer({ videoId, title, playing: controlled, onPlay }: Props) {
+  const [own, setOwn] = useState(false);
   const [ready, setReady] = useState(false);
+  const playing = controlled ?? own;
+  const start = () => {
+    setOwn(true);
+    onPlay?.();
+  };
 
   if (playing) {
     return (
@@ -44,7 +53,7 @@ export default function SermonPlayer({ videoId, title }: Props) {
   return (
     <button
       type="button"
-      onClick={() => setPlaying(true)}
+      onClick={start}
       aria-label={`Play the message: ${title}`}
       className="group relative block aspect-video w-full overflow-hidden border border-[color:var(--rule)] bg-ink"
     >

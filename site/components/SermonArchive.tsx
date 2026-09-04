@@ -6,7 +6,7 @@ import SermonPlayer from "./SermonPlayer";
 
 /* The whole archive as one page: a JSON index fetched once, filters that
    run in the browser, a window of rows, and one player at the top. A
-   sermon has a shareable address at /watch?s=<id>, resolved here from
+   sermon has a shareable address at /watch/sermons?s=<id>, resolved here from
    the same index, so no page is ever built per sermon
    (docs/01-build-plan.md §1). */
 

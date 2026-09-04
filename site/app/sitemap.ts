@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 /* Only routes that exist. Add each page as it ships. The ministry and
    event slugs come from lib/content.ts until Sanity supplies them, and
-   /watch?s=<id> deliberately stays out: those are shareable, not
+   /watch/sermons?s=<id> deliberately stays out: those are shareable, not
    indexable. */
 const ROUTES = [
   "/",
@@ -23,6 +23,7 @@ const ROUTES = [
   "/give",
   "/memorials",
   "/watch",
+  "/watch/sermons",
   "/watch/live",
   "/watch/radio",
 ];

@@ -1384,3 +1384,86 @@
     }
   }
 }
+
+/* ------------------------------------------------------------------
+   Watch + listen. WatchNav and the sermon preview plate, first used on
+   /watch (2026-09-04).
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Watch-family navigation: a printed running strip under the page
+     opening, not tabs. The current page carries the field's accent as
+     its rule; the others draw one in their own colour on hover. */
+  .watch-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: clamp(1.25rem, 3vw, 2.25rem);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .watch-nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 3rem;
+    padding-block: 0.75rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    color: var(--muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .watch-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background-color: currentColor;
+    scale: 0 1;
+    transform-origin: left center;
+    transition: scale var(--dur-fast) var(--ease-out);
+  }
+  .watch-nav-link:hover,
+  .watch-nav-link[aria-current="page"] {
+    color: inherit;
+  }
+  .watch-nav-link:hover::after {
+    scale: 1 1;
+  }
+  .watch-nav-link[aria-current="page"]::after {
+    scale: 1 1;
+    background-color: var(--focus);
+  }
+
+  /* Sermon preview plate: a sleeve for a teaching that has no picture.
+     The book sets in display type on ink inside a printed frame. */
+  .sermon-plate {
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding: 0.625rem 0.75rem;
+    background-color: var(--color-ink);
+    color: var(--color-salt);
+    border: 1px solid var(--rule);
+    outline: 1px solid color-mix(in srgb, var(--color-salt) 32%, transparent);
+    outline-offset: -7px;
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 900, "SOFT" 60, "WONK" 1, "opsz" 72;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+    transition: background-color var(--dur-fast) var(--ease-out);
+  }
+  @media (hover: hover) {
+    .sermon-preview:hover .sermon-plate {
+      background-color: var(--color-blue);
+    }
+    .sermon-preview:hover .sermon-preview-title {
+      color: var(--color-blue);
+    }
+  }
+}
