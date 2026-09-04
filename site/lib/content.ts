@@ -195,6 +195,7 @@ export const FOOTER_LINKS: {
   {
     heading: "Connect",
     links: [
+      { label: "Know Jesus", href: "/new/know-jesus" },
       { label: "Service times", href: "/new" },
       { label: "Prayer", href: "/connect#prayer" },
       { label: "Serve", href: "/connect#serve" },

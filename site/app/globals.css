@@ -88,6 +88,7 @@
      colour so the ring is always visible on that ground.
      ---------------------------------------------------------------- */
   .field-ink {
+    --field: var(--color-ink);
     background-color: var(--color-ink);
     color: var(--color-salt);
     --focus: var(--color-yellow);
@@ -95,6 +96,7 @@
     --muted: color-mix(in srgb, var(--color-salt) 78%, transparent);
   }
   .field-blue {
+    --field: var(--color-blue);
     background-color: var(--color-blue);
     color: var(--color-salt);
     --focus: var(--color-yellow);
@@ -102,6 +104,7 @@
     --muted: color-mix(in srgb, var(--color-salt) 84%, transparent);
   }
   .field-yellow {
+    --field: var(--color-yellow);
     background-color: var(--color-yellow);
     color: var(--color-ink);
     --focus: var(--color-ink);
@@ -109,6 +112,7 @@
     --muted: color-mix(in srgb, var(--color-ink) 80%, transparent);
   }
   .field-stock {
+    --field: var(--color-stock);
     background-color: var(--color-stock);
     color: var(--color-ink);
     --focus: var(--color-red);
@@ -116,6 +120,7 @@
     --muted: color-mix(in srgb, var(--color-ink) 78%, transparent);
   }
   .field-salt {
+    --field: var(--color-salt);
     background-color: var(--color-salt);
     color: var(--color-ink);
     --focus: var(--color-red);
@@ -304,6 +309,57 @@
   /* The interior page opening. Sits flush under the solid site header. */
   .page-header {
     padding-block: clamp(2.5rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+  .page-header-poster {
+    padding-block: clamp(2.75rem, 5vw, 4.5rem) clamp(3.5rem, 7vw, 6rem);
+  }
+  /* Between t-feature and t-hero: a poster, not the hero. */
+  .t-poster {
+    font-size: clamp(2.875rem, 6.2vw, 5.75rem);
+    line-height: 0.92;
+    letter-spacing: -0.032em;
+  }
+  /* The hero's sunburst as a corner mark. Mirrored so the sun sits in the
+     top-right and the rays fan back across the header; the scrim then
+     returns the left of the header to clean field, so the title and deck
+     never sit on yellow. */
+  .poster-rays {
+    position: absolute;
+    z-index: -2;
+    top: -3%;
+    right: -3%;
+    width: clamp(560px, 58vw, 960px);
+    height: auto;
+    scale: -1 1;
+    pointer-events: none;
+    user-select: none;
+  }
+  .poster-scrim {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      var(--field) 0%,
+      var(--field) 44%,
+      transparent 74%
+    );
+  }
+
+  /* The tract. Tilted from lg up only; a phone has no margin to tilt into. */
+  .tract {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    border: 1px solid var(--color-yellow);
+    box-shadow: inset 0 3px 0 var(--color-yellow);
+  }
+  @media (min-width: 1024px) {
+    .tract {
+      rotate: -1.2deg;
+    }
   }
 
   /* 55–68 characters. Never centred. */

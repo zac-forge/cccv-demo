@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import KnowJesusCard from "@/components/KnowJesusCard";
 import SermonPlayer from "@/components/SermonPlayer";
 import { EVENTS, MINISTRIES, SERMON, SUNDAY_STEPS, TIMES } from "@/lib/content";
 import { verse } from "@/lib/scripture";
@@ -196,6 +197,12 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+
+            {/* The tract, on the right, under the illustration's side of
+                the grid; the ghosted "Sunday" balances it bottom-left. */}
+            <div className="mt-14 grid gap-10 md:mt-16 lg:grid-cols-12 lg:gap-14">
+              <KnowJesusCard className="lg:col-span-5 lg:col-start-8" />
+            </div>
           </div>
         </section>
 

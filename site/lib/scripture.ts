@@ -16,6 +16,8 @@ export const NKJV: Record<string, string> = {
     "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.",
   "Romans 10:17":
     "So then faith comes by hearing, and hearing by the word of God.",
+  "John 6:37":
+    "All that the Father gives Me will come to Me, and the one who comes to Me I will by no means cast out.",
 };
 
 /* Fails the build rather than shipping a blank where a verse should be. */
