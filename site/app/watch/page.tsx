@@ -5,6 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
 import LatestMessage from "@/components/LatestMessage";
 import SermonPreview from "@/components/SermonPreview";
+import Verse from "@/components/Verse";
 import WatchNav from "@/components/WatchNav";
 import { SERMON } from "@/lib/content";
 import { recentSermons } from "@/lib/sermons";
@@ -14,8 +15,11 @@ import { recentSermons } from "@/lib/sermons";
    message, three recent teachings, the way to the livestream, and the
    radio broadcast. The archive itself is /watch/sermons.
 
-   Cadence, top to bottom: a restrained opening on ink, the Watch strip,
-   the message as the anchor; then a beat of stock for the recent three
+   Cadence, top to bottom: a restrained opening on ink, Romans 10:17
+   hung on its right the way the poster headers hang an aside (the
+   verse the radio broadcast is named for, so the opening seeds the
+   radio section at the foot; Drew, September 4), the Watch strip, the
+   message as the anchor; then a beat of stock for the recent three
    beside the livestream; a blue interruption for the radio; the close.
 
    Copy: the headline is Drew's; the lede is theirs (their teaching
@@ -44,14 +48,27 @@ export default function Watch() {
       <div className="field-ink">
         <header className="shell pt-[clamp(2.5rem,5vw,4rem)]">
           <Breadcrumb trail={[{ label: "Messages", href: "/watch" }]} />
-          <p className="t-eyebrow mt-7 text-yellow md:mt-9">Messages</p>
-          <h1 className="f-display t-feature mt-4 max-w-[14ch]">
-            Teaching the Word, verse by verse.
-          </h1>
-          <p className="t-lede muted measure-tight mt-7">
-            We don&rsquo;t just teach from the Bible as much as we teach
-            through the Bible.
-          </p>
+          <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:items-end lg:gap-16">
+            <div className="lg:col-span-7">
+              <p className="t-eyebrow text-yellow">Messages</p>
+              <h1 className="f-display t-feature mt-4 max-w-[14ch]">
+                Teaching the Word, verse by verse.
+              </h1>
+              <p className="t-lede muted measure-tight mt-7">
+                We don&rsquo;t just teach from the Bible as much as we teach
+                through the Bible.
+              </p>
+            </div>
+            {/* The aside, in the poster header's columns: a yellow rule and
+                lede-size text, the homepage hero's treatment of the same
+                verse, bottom-aligned with the lede. Below lg it stacks. */}
+            <Verse
+              reference="Romans 10:17"
+              tone="dark"
+              layout="quote"
+              className="lg:col-span-4 lg:col-start-9 lg:pb-1"
+            />
+          </div>
           <WatchNav current="/watch" className="mt-10 md:mt-14" />
         </header>
 
