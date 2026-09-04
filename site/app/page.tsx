@@ -47,7 +47,7 @@ export default function Home() {
             <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
               <div className="lg:col-span-5">
                 <p data-reveal="" className="t-eyebrow text-red">
-                  New here
+                  Visit
                 </p>
                 <h2
                   data-reveal="clip"
@@ -186,8 +186,8 @@ export default function Home() {
                   a particular book, check back in a bit.
                 </p>
 
-                <Link href="/watch" className="link-folio group mt-10 md:mt-12">
-                  Browse recent teachings
+                <Link href="/watch/sermons" className="link-folio group mt-10 md:mt-12">
+                  Browse all messages
                   <span
                     aria-hidden="true"
                     className="transition-transform duration-150 group-hover:translate-x-1"

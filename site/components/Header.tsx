@@ -8,8 +8,8 @@ import type { CSSProperties } from "react";
 // `section` is the homepage band each item summarises, and exists only
 // for the scroll-spy there. Everywhere else the href is the whole story.
 const NAV = [
-  { label: "New Here", href: "/new", section: "new-here" },
-  { label: "Watch", href: "/watch", section: "message" },
+  { label: "Visit", href: "/new", section: "new-here" },
+  { label: "Messages", href: "/watch", section: "message" },
   { label: "Ministries", href: "/ministries", section: "ministries" },
   { label: "Events", href: "/events", section: "events" },
   { label: "Connect", href: "/connect", section: "connect" },

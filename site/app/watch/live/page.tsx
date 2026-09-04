@@ -20,7 +20,7 @@ const YT_CHANNEL_ID = "UC3Uw5Cc9fEd5v724Xr6E1KQ";
 export const metadata: Metadata = {
   title: "Watch live",
   description:
-    "Church live streaming is available Sundays 11 AM & Wednesday 7 PM on this website, Facebook, YouTube and Rumble.",
+    "We stream live on Sundays at 11 am and Wednesdays at 7 pm, here and on YouTube, Facebook and Rumble.",
   alternates: { canonical: "/watch/live" },
 };
 
@@ -30,11 +30,11 @@ export default function Live() {
       <PageHeader
         field="field-ink"
         trail={[
-          { label: "Watch", href: "/watch" },
+          { label: "Messages", href: "/watch" },
           { label: "Live", href: "/watch/live" },
         ]}
         title="Watch live"
-        lede={<p>Church Live streaming is available Sundays 11 AM &amp; Wednesday 7 PM.</p>}
+        lede={<p>We stream live on Sundays at 11 am and Wednesdays at 7 pm.</p>}
       />
 
       <section className="field-ink pb-[clamp(5rem,8vw,7rem)]">
@@ -42,7 +42,7 @@ export default function Live() {
           <div className="lg:col-span-5">
             <NextService />
             <p className="muted mt-6 max-w-[38ch] text-[0.9375rem] leading-snug">
-              Stream live from this website, or on Facebook, YouTube and Rumble.
+              Watch here, or on YouTube, Facebook and Rumble.
             </p>
             <ul className="mt-8 flex flex-col gap-3">
               {[
@@ -57,8 +57,8 @@ export default function Live() {
                 </li>
               ))}
             </ul>
-            <Link href="/watch" className="btn btn-outline mt-10">
-              Browse recent teachings
+            <Link href="/watch/sermons" className="btn btn-outline mt-10">
+              Browse all messages
             </Link>
           </div>
           <div className="lg:col-span-7">

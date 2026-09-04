@@ -19,13 +19,13 @@ export const TIMES: {
 }[] = [
   {
     label: "Sunday",
-    value: "9:00 & 11:00\u00a0am",
-    detail: "Worship & New Testament Through The Bible Teaching",
+    value: "9 & 11\u00a0am",
+    detail: "Worship, and New Testament teaching through the Bible",
   },
   {
     label: "Wednesday",
-    value: "7:00 pm",
-    detail: "Worship & Old Testament Through The Bible Teaching",
+    value: "7 pm",
+    detail: "Worship, and Old Testament teaching through the Bible",
   },
   {
     label: "Where",
@@ -37,7 +37,7 @@ export const TIMES: {
   {
     label: "Watch live",
     value: "Live online",
-    detail: "Sundays 11 am & Wednesdays 7 pm on YouTube, Facebook and Rumble",
+    detail: "Sundays 11 am and Wednesdays 7 pm, on YouTube, Facebook and Rumble",
     href: "/watch/live",
   },
 ];
@@ -63,7 +63,7 @@ export const SUNDAY_STEPS: {
     title: "Your kids are looked after",
     body: "Child care and Children's Ministry are provided at both Sunday morning and Wednesday night services, ministering to your children and teaching them the Bible at their level.",
     full: "We here at Calvary Conejo Valley understand the Lord's heart for His precious lambs, and we place a high priority on ministering to the children He has entrusted into our care. Child care and Children's Ministry are provided at both Sunday morning and Wednesday night services, ministering to your children and teaching them the Bible at their level, so it's easy for them to understand.",
-    when: "Sundays during the 11 AM service and Wednesdays evenings during service.",
+    when: "Sundays during the 11 am service, and Wednesday evenings.",
     link: { label: "Children's ministry", href: "/ministries/children" },
   },
   {
@@ -130,7 +130,7 @@ export const MINISTRIES: Ministry[] = [
         "A class by Pastor Mark Swartz for new believers and those who want to understand and study the Word more deeply.",
       ],
       facts: [
-        { label: "When", value: "Sundays at 10 AM, before our 11 AM Church Service" },
+        { label: "When", value: "Sundays at 10 am, before the 11 am service" },
         { label: "Where", value: "In classroom at CCCV" },
       ],
       leaders: "Pastor Mark Swartz",
@@ -146,13 +146,13 @@ export const MINISTRIES: Ministry[] = [
     meta: "6:30–7:30 pm · Sept 25, Oct 23, Nov 27",
     detail: {
       intro: [
-        "Join us for our Evangelism & Discipleship Class—a great opportunity to grow in your faith and be equipped to share it with others.",
+        "Join us for our Evangelism & Discipleship Class: a great opportunity to grow in your faith and be equipped to share it with others.",
         "All are welcome! No need to sign up. We’d love to have you join us!",
       ],
       facts: [
         { label: "Evangelism", value: "Learn to share the gospel of grace" },
         { label: "Discipleship", value: "Learn about how to grow in the grace of God." },
-        { label: "Time", value: "6:30 – 7:30 PM" },
+        { label: "Time", value: "6:30–7:30 pm" },
         { label: "Dates", value: "Sept. 25, Oct. 23 and Nov. 27, 2026" },
       ],
     },
@@ -163,8 +163,8 @@ export const MINISTRIES: Ministry[] = [
     wide: false, ratio: "4/5", field: "field-blue",
     name: "Men",
     blurb:
-      "Pray, eat, worship, study, and enjoy table discussion. Open to the young and not so young.",
-    meta: "Every other Tuesday · On break",
+      "Pray, eat, worship, study, and talk around the table. Open to the young and the not so young.",
+    meta: "On break · back soon",
     detail: {
       title: "Men’s Study",
       intro: [
@@ -174,13 +174,13 @@ export const MINISTRIES: Ministry[] = [
       facts: [
         { label: "Starts", value: "On Break" },
         { label: "When", value: "Every other Tuesday" },
-        { label: "Time", value: "6:30 – 8:00 PM" },
+        { label: "Time", value: "6:30–8 pm" },
         { label: "Where", value: "Classroom 6" },
         { label: "Who", value: "Primarily for adult men ages 18 and up, but study is open to the young and not so young" },
         { label: "Food", value: "We will serve dinner" },
         { label: "Study", value: "(Praying over our next study)" },
       ],
-      note: "Kickoff & Dates: We’ll be kicking off a new session Soon!",
+      note: "We’ll be kicking off a new session soon.",
       leaders: "Pastor Tim Hutchinson",
     },
   },
@@ -190,8 +190,8 @@ export const MINISTRIES: Ministry[] = [
     wide: false, ratio: "4/5", field: "field-salt",
     name: "Women",
     blurb:
-      "A journey through The Gospel of John by Melissa Spoelstra — who Jesus is, what He came to do, and how His life and words invite us into a closer relationship with Him.",
-    meta: "Mondays from Sept. 21 · 6:00–8:15 pm",
+      "A journey through the Gospel of John: who Jesus is, and what He came to do.",
+    meta: "Mondays from Sept. 21 · 6–8:15 pm",
     detail: {
       title: "Women’s Fall Study",
       intro: [
@@ -201,7 +201,7 @@ export const MINISTRIES: Ministry[] = [
       ],
       facts: [
         { label: "When", value: "Monday (starting Sept. 21st)" },
-        { label: "Time", value: "6:00 – 8:15 PM" },
+        { label: "Time", value: "6–8:15 pm" },
         { label: "Where", value: "Calvary Chapel Conejo Valley" },
         { label: "Dinner", value: "Dinner will be provided each week!" },
         { label: "Childcare", value: "Childcare is available, please include on registration!" },
@@ -223,7 +223,7 @@ export const MINISTRIES: Ministry[] = [
         "Child care and Children’s Ministry are provided at both Sunday morning and Wednesday night services, ministering to your children and teaching them the Bible at their level, so it’s easy for them to understand.",
       ],
       facts: [
-        { label: "When", value: "Sundays during the 11 AM service and Wednesdays evenings during service." },
+        { label: "When", value: "Sundays during the 11 am service, and Wednesday evenings." },
       ],
       verse: "Matthew 19:14",
       sections: [
@@ -269,7 +269,7 @@ export const MINISTRIES: Ministry[] = [
         "Grades 6th–12th, please join us for food, worship, prayer, bible study and fellowship.",
       ],
       facts: [
-        { label: "When", value: "Every Sunday, except 1st Sunday of the month. Held during the 11 AM service." },
+        { label: "When", value: "Every Sunday except the first of the month, during the 11 am service." },
         { label: "Who", value: "6th – 12th Graders" },
         { label: "What", value: "We will be reading and studying through the bible book by book, chapter by chapter, and verse by verse." },
         { label: "Bring", value: "Your Bibles (If you don’t have one we will have extra Bibles for you to use and keep)" },
@@ -291,7 +291,7 @@ export const MINISTRIES: Ministry[] = [
           facts: [
             { label: "Who", value: "6th, 7th, and 8th graders welcome!" },
             { label: "What", value: "Bible Study and Fellowship" },
-            { label: "When", value: "Sunday Morning during 11 AM service" },
+            { label: "When", value: "Sunday mornings, during the 11 am service" },
             { label: "Where", value: "Meet at the back of the Sanctuary after worship. Class is held in the upper room." },
             { label: "Questions?", value: "Please reach out to Pastor Joshua Camper or Chris Ramirez." },
           ],
@@ -314,7 +314,7 @@ export const MINISTRIES: Ministry[] = [
       ],
       facts: [
         { label: "When", value: "1st & 3rd Friday of each month." },
-        { label: "Time", value: "6:30pm–8:30pm" },
+        { label: "Time", value: "6:30–8:30 pm" },
         { label: "Age", value: "18–30" },
         { label: "Where", value: "Calvary Chapel Conejo Valley" },
       ],
@@ -335,7 +335,7 @@ export const MINISTRIES: Ministry[] = [
         "Whether you’re newly married, preparing for marriage, or growing together through the seasons of life, this ministry is designed to strengthen your bond, deepen your faith, and connect with others.",
       ],
       facts: [
-        { label: "Time", value: "6:30 PM" },
+        { label: "Time", value: "6:30 pm" },
         { label: "Where", value: "CC Conejo Valley" },
       ],
       leaders: "Juston & Chrissy Peloquin",
@@ -369,20 +369,20 @@ export const EVENTS: EventItem[] = [
     month: "Sep",
     day: "11",
     name: "2026 Women's Retreat",
-    detail: "September 11–13, 2026 · Camper Daley, Calabasas",
+    detail: "September 11–13, 2026 · Camp Daley, Calabasas",
     href: "/events/2026-womens-retreat",
     page: {
       slug: "2026-womens-retreat",
       image: "/events/2026-womens-retreat.webp",
       paragraphs: [
-        "Phillip told Nathanael with an excited heart, “Come and see!” He wanted his friend to have an encounter with the Jesus! And this is what I’m telling you... Come and see that you might have a personal encounter with Jesus. This retreat is going to be a time for you to get away with the Lord, reconnect with friends, meet new friends and relax. I hope that you will come and see what the Lord has in store for you!",
-        "This year’s theme is One Obsession. Taken from Phillipians 3:1-15. Our very special guest speaker is Karyn Johnson from Calvary Chapel Downey. As Karyn and I were talking and praying about this she said, women’s retreats are our special date with the Jesus! Register today for your date is waiting for you!",
+        "Philip told Nathanael with an excited heart, “Come and see!” He wanted his friend to have an encounter with Jesus! And this is what I’m telling you... Come and see that you might have a personal encounter with Jesus. This retreat is going to be a time for you to get away with the Lord, reconnect with friends, meet new friends and relax. I hope that you will come and see what the Lord has in store for you!",
+        "This year’s theme is One Obsession. Taken from Philippians 3:1-15. Our very special guest speaker is Karyn Johnson from Calvary Chapel Downey. As Karyn and I were talking and praying about this she said, women’s retreats are our special date with Jesus! Register today for your date is waiting for you!",
       ],
       facts: [
         { label: "When", value: "September 11–13, 2026" },
-        { label: "Where", value: "Camper Daley, 26801 Dorothy Dr., Calabasas, CA 91302" },
+        { label: "Where", value: "Camp Daley, 26801 Dorothy Dr., Calabasas, CA 91302" },
         { label: "Speaker", value: "Karyn Johnson, Calvary Chapel Downey" },
-        { label: "Theme", value: "One Obsession — Philippians 3:1–15" },
+        { label: "Theme", value: "One Obsession, Philippians 3:1–15" },
       ],
       register: {
         label: "Register now",
@@ -405,7 +405,7 @@ export const EVENTS: EventItem[] = [
       ],
       facts: [
         { label: "Date", value: "September 11, 2026" },
-        { label: "Time", value: "7:00 PM" },
+        { label: "Time", value: "7 pm" },
         { label: "Where", value: "Calvary Chapel Conejo Valley" },
         { label: "Movie", value: "David" },
         { label: "Popcorn", value: "Popcorn will be provided!" },
@@ -426,16 +426,16 @@ export const PAST_EVENTS: { date: string; name: string; detail: string }[] = [
   {
     date: "August 15, 2026",
     name: "Night of Worship",
-    detail: "5:00–7:00 PM · Calvary Chapel Reason For Hope, 3001 S. Rose Ave, Oxnard",
+    detail: "5–7 pm · Calvary Chapel Reason For Hope, 3001 S. Rose Ave, Oxnard",
   },
   {
     date: "July 25, 2026",
     name: "Women's Breakfast",
-    detail: "Saturday at 9:00 AM · Calvary Chapel Conejo Valley",
+    detail: "Saturday at 9 am · Calvary Chapel Conejo Valley",
   },
   {
     date: "May 15–17, 2026",
-    name: "2026 Men's Retreat — “Walk in the Spirit”",
+    name: "2026 Men's Retreat: “Walk in the Spirit”",
     detail: "Santa Barbara Christian Camp · Galatians 5:16–26",
   },
 ];
@@ -521,7 +521,7 @@ export const SUPPORT = {
       name: "Buyamba Ministry in Uganda",
       paragraphs: [
         "Buyamba, a non-profit 501(c)3 corporation, was founded in the U.S. in 1999, to support the Dongos’ efforts with Buyamba Orphan Outreach in Uganda. Buyamba supported them through a child sponsorship program and provision of needed resources. As a result, God Cares Nursery and Primary School opened in 2002 with 97 children, in the basement of the church where The Dongo family continues to serve. Currently, Buyamba financially supports the education and care of over 1800 children through our sponsorship programs.",
-        "For a gift of $20.00, you can feed a family for two-three weeks! The family will receive 22lbs of posho, 4.5lbs of sugar, 11lbs of rice and 2 bars of soap. Or send a check by mail, in the memo write “Buyumba feed a Family”.",
+        "For a gift of $20.00, you can feed a family for two-three weeks! The family will receive 22lbs of posho, 4.5lbs of sugar, 11lbs of rice and 2 bars of soap. Or send a check by mail, in the memo write “Buyamba feed a Family”.",
       ],
       links: [
         { label: "Learn more at ugandabuyamba.com", href: "https://www.ugandabuyamba.com/" },
@@ -548,6 +548,9 @@ export const GIVE = {
   checks: {
     payee: "Calvary Chapel Conejo Valley",
     address: "668 Cayo Grande Ct. Newbury Park, CA 91320",
+    /* Confirmed correct by Dave, 2026-09-04. It is deliberately not the
+       campus, so the page says so rather than looking like a mistake. */
+    note: "This is our mailing address, not the church campus.",
   },
   questions:
     "If you have any questions or are running into difficulties with online giving, please reach out to Pastor Dave Johnston. God Bless!",
@@ -561,7 +564,7 @@ export const MEMORIALS = [
     text: "Please join the Johnston family in remembering the wonderful & beautiful life of our beloved Mark Johnston.",
     facts: [
       { label: "When", value: "Saturday September 25, 2021" },
-      { label: "Time", value: "11am" },
+      { label: "Time", value: "11 am" },
       { label: "Where", value: "Godspeak Church, 320 Via Las Brisas, Newbury Park, CA, 91320" },
     ],
     verse: "2 Corinthians 5:8",
@@ -588,10 +591,10 @@ export const FOOTER_LINKS: {
     ],
   },
   {
-    heading: "Watch & Listen",
+    heading: "Messages",
     links: [
       { label: "Livestream", href: "/watch/live" },
-      { label: "Sermons", href: "/watch" },
+      { label: "All messages", href: "/watch/sermons" },
       { label: "Radio", href: "/watch/radio" },
       { label: "YouTube", href: CHURCH.social.youtube, external: true },
       { label: "Facebook", href: CHURCH.social.facebook, external: true },
@@ -602,7 +605,7 @@ export const FOOTER_LINKS: {
     heading: "Connect",
     links: [
       { label: "Know Jesus", href: "/new/know-jesus" },
-      { label: "Service times", href: "/new" },
+      { label: "Plan your visit", href: "/new" },
       { label: "Prayer", href: "/connect#prayer" },
       { label: "Serve", href: "/connect#serve" },
       { label: "Directory", href: "/connect#directory" },

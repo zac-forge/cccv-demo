@@ -141,7 +141,7 @@ export default function About() {
             <h2 id="reach-title" className="f-display t-section max-w-[10ch]">
               Connect with us
             </h2>
-            <p className="prose mt-6">We&rsquo;d love to hear from you:</p>
+            <p className="prose mt-6">We&rsquo;d love to hear from you</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
             <p>

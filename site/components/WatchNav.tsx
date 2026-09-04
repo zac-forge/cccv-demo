@@ -7,7 +7,7 @@ import Link from "next/link";
 const ITEMS = [
   { label: "Latest", href: "/watch" },
   { label: "Livestream", href: "/watch/live" },
-  { label: "Sermons", href: "/watch/sermons" },
+  { label: "All messages", href: "/watch/sermons" },
   { label: "Radio", href: "/watch/radio" },
 ];
 

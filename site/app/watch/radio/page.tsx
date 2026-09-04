@@ -18,12 +18,12 @@ const STATIONS: {
   when: string;
   listen?: string;
 }[] = [
-  { station: "KDAR", freq: "98.3 FM The Word", where: "Southern California", when: "Mon–Fri 3:30 PM · Sat 3 PM · Sun 12 PM", listen: "https://983fmtheword.com/listenlive" },
-  { station: "KPTG", freq: "107.1 FM", where: "Southern California", when: "Mon–Fri 10 AM" },
-  { station: "KEPT", freq: "96.9 FM", where: "Northern California Bay Area", when: "Mon–Fri 5:30 PM", listen: "https://streamdb7web.securenetsystems.net/ce/index.cfm?stationCallSign=KEPT" },
-  { station: "KLHT", freq: "91.5 FM", where: "Hawaii", when: "Mon–Fri 5:30 AM", listen: "https://fm.klight.org/" },
-  { station: "KBOOK", freq: "93.3 FM", where: "Nevada, Reno–Sparks", when: "Mon–Fri 11 AM", listen: "https://www.kbook933.com/listen-to-kbook" },
-  { station: "Light Radio", freq: "", where: "Iredell and Beyond", when: "Mon–Fri 11:00 AM and 6:30 PM" },
+  { station: "KDAR", freq: "98.3 FM The Word", where: "Southern California", when: "Mon–Fri 3:30 pm · Sat 3 pm · Sun noon", listen: "https://983fmtheword.com/listenlive" },
+  { station: "KPTG", freq: "107.1 FM", where: "Southern California", when: "Mon–Fri 10 am" },
+  { station: "KEPT", freq: "96.9 FM", where: "Northern California Bay Area", when: "Mon–Fri 5:30 pm", listen: "https://streamdb7web.securenetsystems.net/ce/index.cfm?stationCallSign=KEPT" },
+  { station: "KLHT", freq: "91.5 FM", where: "Hawaii", when: "Mon–Fri 5:30 am", listen: "https://fm.klight.org/" },
+  { station: "KBOOK", freq: "93.3 FM", where: "Nevada, Reno–Sparks", when: "Mon–Fri 11 am", listen: "https://www.kbook933.com/listen-to-kbook" },
+  { station: "Light Radio", freq: "", where: "Iredell and Beyond", when: "Mon–Fri 11 am & 6:30 pm" },
 ];
 
 export const metadata: Metadata = {
@@ -39,7 +39,7 @@ export default function Radio() {
       <PageHeader
         field="field-ink"
         trail={[
-          { label: "Watch", href: "/watch" },
+          { label: "Messages", href: "/watch" },
           { label: "Radio", href: "/watch/radio" },
         ]}
         title="Faith Comes By Hearing"
@@ -85,8 +85,8 @@ export default function Radio() {
             <p className="muted mt-8 max-w-[52ch] text-[0.9375rem] leading-snug">
               The same teaching is in the archive, in full and on demand.
             </p>
-            <Link href="/watch" className="link-rule mt-5">
-              Browse recent teachings
+            <Link href="/watch/sermons" className="link-rule mt-5">
+              Browse all messages
             </Link>
           </div>
 

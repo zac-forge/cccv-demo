@@ -240,7 +240,7 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
             id="library-title"
             className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]"
           >
-            Teaching library
+            Find a message
           </h2>
           <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
             <label className="filter">
@@ -293,7 +293,7 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
           </div>
           <p className="muted mt-5 text-[0.875rem]" role="status">
             {index
-              ? `${Math.min(shown, total)} of ${total.toLocaleString()} teachings`
+              ? `${Math.min(shown, total)} of ${total.toLocaleString()} messages`
               : failed
                 ? "The library could not be loaded."
                 : "Loading the library…"}
@@ -353,7 +353,7 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
               onClick={more}
               className="link-folio group mt-10 min-h-11 md:mt-12"
             >
-              Load more teachings
+              Load more messages
               <span
                 aria-hidden="true"
                 className="transition-transform duration-150 group-hover:translate-x-1"
@@ -364,8 +364,8 @@ export default function SermonArchive({ featured }: { featured: Teaching }) {
           ) : index ? (
             <p ref={endRef} tabIndex={-1} className="t-meta muted mt-10 md:mt-12">
               {total === 0
-                ? "No teachings match."
-                : `All ${total.toLocaleString()} matching teachings are showing.`}
+                ? "No messages match."
+                : `All ${total.toLocaleString()} matching messages are showing.`}
             </p>
           ) : null}
         </div>

@@ -27,9 +27,9 @@ export default function NewHere() {
   return (
     <main id="main">
       <PageHeader
-        trail={[{ label: "New here", href: "/new" }]}
+        trail={[{ label: "Visit", href: "/new" }]}
         title="Plan your visit"
-        lede={<p>New to church? Here&rsquo;s what to expect!</p>}
+        lede={<p>New to church? Here&rsquo;s what to expect.</p>}
       />
 
       <ServiceTimes />

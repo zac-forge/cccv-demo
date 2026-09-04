@@ -24,9 +24,9 @@ import { recentSermons } from "@/lib/sermons";
    ------------------------------------------------------------------ */
 
 export const metadata: Metadata = {
-  title: "Watch + listen",
+  title: "Messages",
   description:
-    "The latest message, recent teachings, the livestream and the Faith Comes By Hearing radio broadcast from Calvary Chapel Conejo Valley. Verse by verse.",
+    "The latest message, recent messages, the livestream and the Faith Comes By Hearing radio broadcast from Calvary Chapel Conejo Valley. Verse by verse.",
   alternates: { canonical: "/watch" },
 };
 
@@ -43,8 +43,8 @@ export default function Watch() {
           ========================================================= */}
       <div className="field-ink">
         <header className="shell pt-[clamp(2.5rem,5vw,4rem)]">
-          <Breadcrumb trail={[{ label: "Watch", href: "/watch" }]} />
-          <p className="t-eyebrow mt-7 text-yellow md:mt-9">Watch + listen</p>
+          <Breadcrumb trail={[{ label: "Messages", href: "/watch" }]} />
+          <p className="t-eyebrow mt-7 text-yellow md:mt-9">Messages</p>
           <h1 className="f-display t-feature mt-4 max-w-[14ch]">
             Teaching the Word, verse by verse.
           </h1>
@@ -86,10 +86,10 @@ export default function Watch() {
                 id="recent-title"
                 className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]"
               >
-                Recent teachings
+                Recent messages
               </h2>
               <Link href="/watch/sermons" className="link-folio group shrink-0">
-                View all teachings
+                All messages
                 <span
                   aria-hidden="true"
                   className="transition-transform duration-150 group-hover:translate-x-1"
@@ -119,8 +119,7 @@ export default function Watch() {
               Wednesdays 7 pm
             </p>
             <p className="muted mt-4 max-w-[30ch] text-[0.9375rem] leading-snug">
-              Stream live from this website, or on Facebook, YouTube and
-              Rumble.
+              Watch here, or on YouTube, Facebook and Rumble.
             </p>
             <Link href="/watch/live" className="link-folio group mt-7">
               Livestream

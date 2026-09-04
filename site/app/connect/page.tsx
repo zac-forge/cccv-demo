@@ -33,14 +33,14 @@ export const metadata: Metadata = {
   title: "Connect",
   // Pastor Dave, /home.
   description:
-    "Prayer, serving, the church directory and how to reach Pastor Dave at Calvary Chapel Conejo Valley. We count it a blessing and a privilege to serve each and every one of you.",
+    "Prayer, serving, the church directory, and how to reach Pastor Dave at Calvary Chapel Conejo Valley.",
   alternates: { canonical: "/connect" },
 };
 
 /* The ids are what the rest of the site links to. Order is the page. */
 const SECTIONS = [
   { id: "prayer", label: "Prayer" },
-  { id: "stay-in-touch", label: "Stay informed" },
+  { id: "stay-in-touch", label: "Stay in touch" },
   { id: "serve", label: "Serve" },
   { id: "directory", label: "Directory" },
   { id: "contact", label: "Find us" },
@@ -157,7 +157,7 @@ export default function Connect() {
         <div className="shell grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
             <p className="t-eyebrow text-[color:var(--color-yellow-onblue)]">
-              Stay in the loop
+              Stay in touch
             </p>
             <h2 id="stay-in-touch-title" className="mt-6">
               <span className="t-eyebrow muted block">Text</span>{" "}

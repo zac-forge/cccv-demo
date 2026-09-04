@@ -18,7 +18,7 @@ import { featuredTeaching } from "@/lib/sermons";
 const PODCAST = "https://podcasts.apple.com/us/podcast/calvary-chapel-calabasas/id1491958200";
 
 export const metadata: Metadata = {
-  title: "Recent teachings",
+  title: "All messages",
   description:
     "Twenty-five years of verse-by-verse teaching from Calvary Chapel Conejo Valley: every message, in one library, with one player.",
   alternates: { canonical: "/watch/sermons" },
@@ -35,18 +35,17 @@ export default function Sermons() {
         <header className="shell pt-[clamp(2.5rem,5vw,4rem)]">
           <Breadcrumb
             trail={[
-              { label: "Watch", href: "/watch" },
-              { label: "Recent teachings", href: "/watch/sermons" },
+              { label: "Messages", href: "/watch" },
+              { label: "All messages", href: "/watch/sermons" },
             ]}
           />
           <h1 className="f-display t-feature mt-7 max-w-[14ch] md:mt-9">
-            Recent teachings
+            All messages
           </h1>
           <p className="t-lede muted measure-tight mt-6">
-            Here are some of our most recent teachings. We&rsquo;re always
-            adding to our online library from Pastor Dave&rsquo;s previous
-            teachings, so if you&rsquo;re looking for a particular book, check
-            back in a bit.
+            We&rsquo;re always adding to our online library from Pastor
+            Dave&rsquo;s previous teachings, so if you&rsquo;re looking for a
+            particular book, check back in a bit.
           </p>
           <p className="mt-4">
             <a

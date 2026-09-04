@@ -6,8 +6,9 @@ import Verse from "@/components/Verse";
 
 /* ------------------------------------------------------------------
    Copy supplied by Drew on 2026-09-03, replacing the live /know-jesus
-   page. Every paragraph below is that text, verbatim, in its order,
-   with its inline citations. The only things that are mine: headings
+   page, then edited for rhythm on 2026-09-04 per docs/06-copy-pass.md
+   §3: three headings, one paragraph cut, five reworded. Doctrine and
+   the inline citations are untouched. The only things that are mine: headings
    set in sentence case (the source has them in Title Case), the
    bolded sentence pair set in the display face, the link on "contact
    us", and the verses set apart beside the paragraphs that cite them,
@@ -54,7 +55,7 @@ export default function KnowJesus() {
         poster
         field="field-blue"
         trail={[
-          { label: "New here", href: "/new" },
+          { label: "Visit", href: "/new" },
           { label: "How can I know Jesus?", href: "/new/know-jesus" },
         ]}
         title="How can I know Jesus?"
@@ -115,7 +116,7 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>Respond to Jesus</h2>
+          <h2>What it means to respond</h2>
           <Passage>
             <p>
               Salvation is not something we earn by being good enough, and it
@@ -126,16 +127,15 @@ export default function KnowJesus() {
           </Passage>
           <Passage>
             <p>
-              To come to Christ means recognizing our sin and our need for a
+              Coming to Christ means recognizing our sin and our need for a
               Savior, turning to God in repentance, and placing our trust in
-              Jesus Christ and what He has done for us.
+              what He has done for us.
             </p>
           </Passage>
           <Passage>
             <p>
-              No matter what you have done or how far you may feel from God, you
-              can come to Him through Jesus. He will not reject those who come
-              to Him in faith.
+              No matter what you have done or how far from God you feel, the
+              way to Him is open. He turns no one away who trusts Him.
             </p>
           </Passage>
           <Passage>
@@ -153,18 +153,11 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>You can come to Jesus today</h2>
+          <h2>You can come today</h2>
           <Passage>
             <p>
-              There is no special formula or set of words that saves us. What
-              matters is placing your faith in Jesus Christ.
-            </p>
-          </Passage>
-          <Passage>
-            <p>
-              If you are ready to turn to God and put your trust in Jesus, you
-              can talk to Him honestly in prayer. You might pray something like
-              this:
+              If you are ready to turn to God and put your trust in Jesus, talk
+              to Him honestly. You might pray something like this:
             </p>
           </Passage>
         </div>
@@ -201,13 +194,12 @@ export default function KnowJesus() {
           </Passage>
           <Passage>
             <p>
-              Jesus calls us not simply to make a decision, but to follow Him. A
-              life of faith is a lifelong journey of growing in our relationship
-              with Him.
+              Jesus calls us not simply to make a decision, but to follow Him.
+              Faith is not a moment; it is a life.
             </p>
           </Passage>
 
-          <h2>Begin your walk with Jesus</h2>
+          <h2>Where to begin</h2>
           <Passage>
             <p>
               If you have put your faith in Jesus, we&rsquo;d love to help you
@@ -226,19 +218,18 @@ export default function KnowJesus() {
           <Passage>
             <p>
               You don&rsquo;t have to figure everything out on your own. Talk
-              with a pastor or another mature Christian who can help answer your
-              questions and encourage you as you follow Jesus.
+              with a pastor or another mature Christian who can answer your
+              questions and walk alongside you.
             </p>
           </Passage>
           <Passage>
             <p>
-              If you have questions about faith, Jesus, or what it means to
-              follow Him, please don&rsquo;t hesitate to{" "}
+              If anything here raises a question, please don&rsquo;t hesitate
+              to{" "}
               <Link href="/connect" className="link-inline">
                 contact us
               </Link>
-              . We&rsquo;d be blessed to help you take your next step in your
-              walk with Jesus.
+              . We would be blessed to help you take the next step.
             </p>
           </Passage>
         </div>
