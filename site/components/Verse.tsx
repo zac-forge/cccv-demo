@@ -7,8 +7,10 @@ type Props = {
   tone?: "light" | "dark";
   /* margin: a gloss beside a reading column — a left rule on a phone, a
      top rule from lg up, where it hangs in the outer columns. quote: the
-     hero's treatment, a left rule at every width and lede-sized type. */
-  layout?: "margin" | "quote";
+     hero's treatment, a left rule at every width and lede-sized type.
+     pull: a pull quote that opens a section, a short rule above and
+     display type between the lede and the section head. */
+  layout?: "margin" | "quote" | "pull";
   className?: string;
 };
 
@@ -27,18 +29,24 @@ export default function Verse({
   const frame =
     layout === "margin"
       ? `border-l-2 ${rule} pl-5 lg:border-l-0 lg:border-t lg:border-[color:var(--rule)] lg:pl-0 lg:pt-3`
-      : `border-l-2 ${rule} pl-5 md:pl-6`;
+      : layout === "quote"
+        ? `border-l-2 ${rule} pl-5 md:pl-6`
+        : `border-t-2 ${rule} pt-6 md:pt-8`;
   const size =
     layout === "margin"
       ? "text-[0.9375rem] leading-[1.5] lg:text-[1rem]"
-      : "t-lede";
+      : layout === "quote"
+        ? "t-lede"
+        : "t-pull";
 
   return (
     <figure className={`${frame} ${className}`}>
       <blockquote className={`f-text ${size}`}>
         &ldquo;{verse(reference)}&rdquo;
       </blockquote>
-      <figcaption className={`t-meta mt-2 ${caption}`}>{reference}</figcaption>
+      <figcaption className={`t-meta ${layout === "pull" ? "mt-4" : "mt-2"} ${caption}`}>
+        {reference}
+      </figcaption>
     </figure>
   );
 }
