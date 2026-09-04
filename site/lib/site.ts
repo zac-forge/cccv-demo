@@ -37,6 +37,24 @@ export const CHURCH = {
   /* /home and the footer of every page. Verbatim, including the (831). */
   phone: "(831) 428-2214",
   phoneHref: "tel:+18314282214",
+  /* "text me your prayer requests" — Pastor Dave, /home. */
+  smsHref: "sms:+18314282214",
+  /* docs/03-reference-spec.md §9. */
+  email: "davidjohnston@calvarychapel.com",
+  /* /prayer, "Click Here to Join". */
+  prayerZoom:
+    "https://zoom.us/j/5383558530?pwd=xiuy4FPbVZjuvWXrNme2YqOQWhbI24.1&omn=93253277878",
+  /* /stay-in-touch/cccv-directory: the two photo routes. */
+  directoryEmail: "cccv.jencamper@gmail.com",
+  directoryDrive:
+    "https://drive.google.com/drive/folders/1J0BmDmJboEqN4e-7jxKnwLxjFyYc81DE?usp=drive_link",
+  /* /serve, "Current serving opportunities", verbatim. */
+  serve: [
+    { area: "Youth Ministry", contact: "Pastor Joshua Camper" },
+    { area: "Middle School Ministry", contact: "Pastor Joshua Camper" },
+    { area: "Children's Ministry", contact: "Kristin Yepremian" },
+    { area: "Event Planning", contact: "Jennifer Camper" },
+  ],
   /* The campus. The Newbury Park mailing address is on /give only and is
      still an open question (docs/00-START-HERE.md). */
   address: {
@@ -45,6 +63,8 @@ export const CHURCH = {
     state: "CA",
     zip: "91362",
   },
+  /* Their Google Maps pin, from /services. */
+  directions: "https://maps.app.goo.gl/3t9a2ASysHGqvm6FA",
   /* Their own links, from /home. */
   social: {
     youtube: "https://www.youtube.com/channel/UC3Uw5Cc9fEd5v724Xr6E1KQ",

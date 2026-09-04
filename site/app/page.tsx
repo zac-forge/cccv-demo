@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/Hero";
+import MinistryGrid from "@/components/MinistryGrid";
 import SermonPlayer from "@/components/SermonPlayer";
-import { EVENTS, MINISTRIES, SERMON, SUNDAY_STEPS, TIMES } from "@/lib/content";
+import ServiceTimes from "@/components/ServiceTimes";
+import { EVENTS, SERMON, SUNDAY_STEPS } from "@/lib/content";
 import { CHURCH, churchJsonLd } from "@/lib/site";
 
 export default function Home() {
@@ -20,43 +22,7 @@ export default function Home() {
             the rest share its shape. */}
         <Hero />
 
-        {/* =========================================================
-            SERVICE TIMES — flat blue information band. Printed on the
-            back of the bulletin, not four cards.
-            ========================================================= */}
-        <section
-          aria-label="Service times and location"
-          className="field-blue band-sm relative"
-        >
-          {/* Their own location, set vertically in the band's outer
-              margin. Desktop only — narrower widths have no margin to
-              put it in. */}
-          <span
-            aria-hidden="true"
-            className="edge-note right-[clamp(10px,1.5vw,24px)] top-1/2 hidden -translate-y-1/2 lg:block"
-          >
-            Thousand Oaks &middot; California
-          </span>
-
-          <div className="shell">
-            <dl className="-mx-4 grid grid-cols-2 sm:-mx-8 lg:grid-cols-4">
-              {TIMES.map((cell) => (
-                <div
-                  key={cell.label}
-                  className="border-t border-[color:var(--rule)] px-4 py-8 [&:nth-child(even)]:border-l sm:px-8 lg:[&:not(:first-child)]:border-l"
-                >
-                  <dt className="t-eyebrow t-eyebrow-onblue">{cell.label}</dt>
-                  <dd className="mt-4">
-                    <p className="f-data t-times max-sm:text-[1.375rem]">{cell.value}</p>
-                    <p className="muted mt-3 max-w-[26ch] text-[0.9375rem] leading-snug">
-                      {cell.detail}
-                    </p>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
+        <ServiceTimes />
 
         {/* =========================================================
             NEW HERE — editorial. Oversized ghosted numerals, printed
@@ -268,54 +234,9 @@ export default function Home() {
               </p>
             </div>
 
-            <ul className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-16 lg:grid-cols-12 lg:gap-6">
-              {MINISTRIES.map((m) => (
-                <li
-                  key={m.slug}
-                  data-reveal=""
-                  className={
-                    m.wide
-                      ? "sm:col-span-2 lg:col-span-6"
-                      : "sm:col-span-1 lg:col-span-3"
-                  }
-                >
-                  <article
-                    className={`ministry-card ${m.field} relative flex h-full flex-col border border-ink`}
-                  >
-                    <div
-                      className="relative w-full overflow-hidden border-b border-ink"
-                      style={{ aspectRatio: m.ratio }}
-                    >
-                      <Image
-                        src={`/ministries/${m.slug}.webp`}
-                        alt=""
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-5 lg:p-6">
-                      <h3 className="t-card">
-                        {/* Stretched over the card: one target, one tab
-                            stop, and the article stays plain block
-                            content rather than the inside of an anchor. */}
-                        <Link href={m.href} className="after:absolute after:inset-0">
-                          {m.name}
-                        </Link>
-                      </h3>
-                      <p className="muted mt-3 text-[0.9375rem] leading-snug">
-                        {m.blurb}
-                      </p>
-                      {/* mt-auto, so the meeting time sits on the card
-                          floor rather than wherever the blurb happens to
-                          end. Titles and blurbs run to different lengths;
-                          this is the line that has to agree across a row. */}
-                      <p className="t-meta mt-auto pt-5">{m.meta}</p>
-                    </div>
-                  </article>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-14 md:mt-16">
+              <MinistryGrid reveal />
+            </div>
           </div>
         </section>
 

@@ -16,6 +16,12 @@ export const NKJV: Record<string, string> = {
     "But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us.",
   "Romans 10:17":
     "So then faith comes by hearing, and hearing by the word of God.",
+  /* Inner quotation set in single marks so it nests inside the outer
+     pair the Verse component adds; the words are the verse's own. */
+  "Mark 9:35":
+    "And He sat down, called the twelve, and said to them, ‘If anyone desires to be first, he shall be last of all and servant of all.’",
+  "Matthew 19:14":
+    "But Jesus said, ‘Let the little children come to Me, and do not forbid them; for of such is the kingdom of heaven.’",
   "John 6:37":
     "All that the Father gives Me will come to Me, and the one who comes to Me I will by no means cast out.",
 };
