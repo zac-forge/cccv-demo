@@ -217,21 +217,21 @@ export default function About() {
             {TEAM.map((person) => (
               <li
                 key={person.names}
-                className="rule-t grid grid-cols-[5.5rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[7rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-12 lg:gap-16"
+                className="rule-t grid grid-cols-[6.75rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[9rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-[12rem_1fr_2fr] lg:gap-16"
               >
-                <div className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:col-span-2 lg:row-span-1">
+                <div className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:row-span-1">
                   <Image
                     src={`/staff/${person.portrait}.webp`}
                     alt=""
                     fill
-                    sizes="(max-width: 768px) 5.5rem, (max-width: 1024px) 7rem, 12vw"
+                    sizes="(max-width: 768px) 6.75rem, (max-width: 1024px) 9rem, 12rem"
                     className="object-cover object-top"
                   />
                 </div>
-                <h3 className="f-display text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.05] tracking-[-0.02em] lg:col-span-3">
+                <h3 className="f-display text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.05] tracking-[-0.02em]">
                   {person.names}
                 </h3>
-                <p className="max-w-[58ch] text-[1.0625rem] leading-[1.6] lg:col-span-6 lg:col-start-7">
+                <p className="max-w-[58ch] text-[1.0625rem] leading-[1.6]">
                   {person.text}
                 </p>
               </li>
