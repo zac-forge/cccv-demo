@@ -20,13 +20,12 @@ import { CHURCH } from "@/lib/site";
    gets the composition its job asks for, typography and rules before
    components, and numerals only where there is a real sequence.
 
-   - The page opens as a poster on blue (Drew, Sept 4), like
-     /new/know-jesus: the title at poster size with Acts 20:27 hung
-     beside it, the verse "What we do" cites, then their "Who we are"
-     statement across the full shell. Blue, not salt, because the
-     sunburst is yellow and yellow only sits on a dark ground. The art
-     is the Conejo Valley band along the foot, not the sunburst, since
-     the page is about where the church is (Drew, Sept 4).
+   - The page opens as a poster on ink (Drew, Sept 4): the title at
+     poster size with Acts 20:27 hung beside it, the verse "What we do"
+     cites, then their "Who we are" statement across the full shell,
+     and the Conejo Valley band along the foot, since the page is about
+     where the church is. Ink, not blue: the band is blue hills, and on
+     the blue field it vanished.
    - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
@@ -77,7 +76,7 @@ export default function About() {
       <PageHeader
         poster
         art="valley"
-        field="field-blue"
+        field="field-ink"
         trail={[{ label: "About", href: "/about" }]}
         title="About"
         aside={<Verse reference="Acts 20:27" tone="dark" layout="quote" />}
