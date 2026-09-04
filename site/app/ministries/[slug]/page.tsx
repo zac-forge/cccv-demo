@@ -51,6 +51,13 @@ export default async function MinistryPage({ params }: { params: Params }) {
   if (!m) notFound();
   const d = m.detail;
   const [lede, ...rest] = d.intro;
+  /* The opening is one field. A salt header runs on into the plate and
+     schedule, so the schedule's first rule never sits on a seam between
+     salt and stock, where it read as a stray line (Drew, September 4,
+     on Young Adults and Evangelism). Blue cannot carry the ink-bordered
+     plate or the red labels, so a blue header still meets stock. The
+     closing band then takes the other light field. */
+  const opening = m.field === "field-salt" ? "field-salt" : "field-stock";
 
   return (
     <main id="main">
@@ -67,7 +74,7 @@ export default async function MinistryPage({ params }: { params: Params }) {
       {/* The handbill at full size beside its schedule. The header's own
           foot is the gap above it; a band's worth on top of that was too
           much (Drew, September 4). */}
-      <section className="field-stock pb-[clamp(6rem,9vw,9rem)]">
+      <section className={`${opening} pb-[clamp(6rem,9vw,9rem)]`}>
         <div className="shell grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <div
             data-reveal=""
@@ -178,7 +185,7 @@ export default async function MinistryPage({ params }: { params: Params }) {
         )}
       </section>
 
-      <CTABand />
+      <CTABand field={opening === "field-salt" ? "field-stock" : "field-salt"} />
     </main>
   );
 }
