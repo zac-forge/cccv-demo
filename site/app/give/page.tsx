@@ -65,7 +65,7 @@ export default function Give() {
               <p className="mt-4 text-[1.0625rem] leading-snug">
                 Send to:
                 <br />
-                {GIVE.checks.address}
+                <strong className="font-semibold">{GIVE.checks.address}</strong>
               </p>
               <p className="muted mt-2 text-[0.9375rem] leading-snug">
                 {GIVE.checks.note}
