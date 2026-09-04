@@ -56,13 +56,15 @@ export default function Give() {
             <div data-reveal="" className="rule-t mt-6 pt-5">
               <p className="t-eyebrow text-red">By mail</p>
               <p className="mt-2 text-[1.0625rem] leading-snug">
-                {/* The name breaks to its own line rather than wrapping
-                    mid-name (Drew, September 4). */}
-                Make checks payable to
+                {/* Two labelled lines, each value on its own line so the
+                    name and the address never wrap mid-way (Drew, September 4). */}
+                Make checks payable to:
                 <br />
                 <strong className="font-semibold whitespace-nowrap">{GIVE.checks.payee}</strong>
                 <br />
-                Send to: {GIVE.checks.address}
+                Send to:
+                <br />
+                {GIVE.checks.address}
               </p>
               <p className="muted mt-2 text-[0.9375rem] leading-snug">
                 {GIVE.checks.note}
