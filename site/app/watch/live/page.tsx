@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
 import LivePlayer from "@/components/LivePlayer";
 import NextService from "@/components/NextService";
-import PageHeader from "@/components/PageHeader";
+import PosterArt from "@/components/PosterArt";
+import WatchNav from "@/components/WatchNav";
 import { CHURCH } from "@/lib/site";
 
 /* ------------------------------------------------------------------
@@ -27,19 +29,38 @@ export const metadata: Metadata = {
 export default function Live() {
   return (
     <main id="main">
-      <PageHeader
-        poster
-        art="lectern"
-        field="field-ink"
-        trail={[
-          { label: "Messages", href: "/watch" },
-          { label: "Live", href: "/watch/live" },
-        ]}
-        title="Watch live"
-        lede={<p>We stream live on Sundays at 11 am and Wednesdays at 7 pm.</p>}
-      />
+      {/* The Messages opening, as /watch/radio has it: running head, title
+          and lede in the left seven columns, the lectern owning the right,
+          the Watch strip beneath. It was the one Messages page without the
+          strip (Drew, September 4). No verse: none of their livestream
+          copy cites one. */}
+      <div className="field-ink relative isolate overflow-hidden" data-art="lectern">
+        <PosterArt art="lectern" />
+        <header className="shell relative pt-[clamp(2.5rem,5vw,4rem)]">
+          <Breadcrumb
+            trail={[
+              { label: "Messages", href: "/watch" },
+              { label: "Live", href: "/watch/live" },
+            ]}
+          />
+          <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
+              <p data-reveal="" className="t-eyebrow text-yellow">
+                Livestream
+              </p>
+              <h1 data-reveal="clip" className="f-display t-feature mt-4 max-w-[14ch]">
+                <span>Watch live</span>
+              </h1>
+              <p data-reveal="" className="t-lede muted measure-tight mt-7">
+                We stream live on Sundays at 11 am and Wednesdays at 7 pm.
+              </p>
+            </div>
+          </div>
+          <WatchNav current="/watch/live" className="mt-10 md:mt-14" />
+        </header>
+      </div>
 
-      <section className="field-ink pb-[clamp(5rem,8vw,7rem)]">
+      <section className="field-ink pt-[clamp(3rem,5vw,4.5rem)] pb-[clamp(5rem,8vw,7rem)]">
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <NextService />
