@@ -1052,6 +1052,85 @@
   }
 
   /* ----------------------------------------------------------------
+     Subnavs, lg and up. An item with children carries a panel hung from
+     the header's bottom rule, its text aligned to the item's left edge:
+     the printed vocabulary, flat stock, ink type, a hairline, no shadow.
+     Opened by hover or by keyboard focus within the item, so the parent
+     stays a plain link to its section page; Escape blurs to close. The
+     item spans the header's full height, so the pointer never crosses a
+     gap on the way down, and the panel's own top rule sits exactly on
+     the header's, so the two draw as one line.
+     ---------------------------------------------------------------- */
+  .nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .nav-panel {
+    --panel-pad: 1.5rem;
+    position: absolute;
+    top: 100%;
+    left: calc(-1 * var(--panel-pad));
+    min-width: 13rem;
+    padding: 1rem var(--panel-pad) 1.125rem;
+    background: var(--color-stock);
+    color: var(--color-ink);
+    border: 1px solid var(--color-ink);
+    visibility: hidden;
+    opacity: 0;
+    translate: 0 -4px;
+  }
+  .nav-item:hover .nav-panel,
+  .nav-item:focus-within .nav-panel {
+    visibility: visible;
+    opacity: 1;
+    translate: none;
+  }
+  [data-motion="on"] .nav-panel {
+    transition: opacity var(--dur-fast) var(--ease-out),
+      translate var(--dur-fast) var(--ease-out),
+      visibility 0s linear var(--dur-fast);
+  }
+  [data-motion="on"] .nav-item:hover .nav-panel,
+  [data-motion="on"] .nav-item:focus-within .nav-panel {
+    transition: opacity var(--dur-fast) var(--ease-out),
+      translate var(--dur-fast) var(--ease-out),
+      visibility 0s;
+  }
+  .nav-sublink {
+    display: block;
+    padding-block: 0.4375rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    color: var(--color-ink);
+    /* The chip's trick: the panel is always stock, whatever the header. */
+    --focus: var(--color-red);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .nav-sublink:hover,
+  .nav-sublink[aria-current="page"] {
+    color: var(--color-red);
+  }
+
+  /* The same subnav in the phone menu: an index line under its parent,
+     the Watch strip's shape, each link tall enough for a thumb. */
+  .mobile-sublink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    color: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  }
+  .mobile-sublink:hover,
+  .mobile-sublink[aria-current="page"] {
+    color: var(--color-red);
+  }
+
+  /* ----------------------------------------------------------------
      Mobile menu. A real disclosure rather than a display toggle: it
      collapses to zero grid rows so the height can animate to auto.
      The closed state is plain CSS, so with motion off or JS disabled

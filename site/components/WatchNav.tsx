@@ -1,16 +1,11 @@
 import Link from "next/link";
+import { WATCH_NAV } from "@/lib/nav";
 
 /* The Watch family, as a printed running strip under a page opening:
    uppercase micro type, one rule above and below, the current page
-   carrying the field's accent as its rule. Real routes only. Used on
-   /watch for now; the other three pages take it when they are reviewed. */
-const ITEMS = [
-  { label: "Latest", href: "/watch" },
-  { label: "Livestream", href: "/watch/live" },
-  { label: "All messages", href: "/watch/sermons" },
-  { label: "Radio", href: "/watch/radio" },
-];
-
+   carrying the field's accent as its rule. Real routes only, from the
+   same list the header's Messages subnav prints. Used on /watch and
+   /watch/sermons; the other two pages take it when they are reviewed. */
 export default function WatchNav({
   current,
   className = "",
@@ -21,7 +16,7 @@ export default function WatchNav({
   return (
     <nav aria-label="Watch and listen" className={`watch-nav ${className}`}>
       <ul>
-        {ITEMS.map((item) => (
+        {WATCH_NAV.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}

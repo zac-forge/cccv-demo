@@ -3,6 +3,7 @@ import { Fraunces, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { NAV } from "@/lib/nav";
 import Motion from "@/components/Motion";
 import {
   CF_BEACON_TOKEN,
@@ -93,7 +94,7 @@ export default function RootLayout({
           Skip to content
         </a>
 
-        <Header />
+        <Header nav={NAV} />
         {children}
         <Footer />
         <Motion />

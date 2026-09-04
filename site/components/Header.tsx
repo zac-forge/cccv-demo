@@ -3,22 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CSSProperties } from "react";
-
-// `section` is the homepage band each item summarises, and exists only
-// for the scroll-spy there. Everywhere else the href is the whole story.
-const NAV = [
-  { label: "Visit", href: "/new", section: "new-here" },
-  { label: "Messages", href: "/watch", section: "message" },
-  { label: "Ministries", href: "/ministries", section: "ministries" },
-  { label: "Events", href: "/events", section: "events" },
-  { label: "Connect", href: "/connect", section: "connect" },
-  { label: "About", href: "/about", section: null },
-];
+import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent } from "react";
+import type { NavItem } from "@/lib/nav";
 
 const GIVE_HREF = "/give";
 
-export default function Header() {
+/* The nav tree comes from lib/nav.ts by way of the layout, so the
+   content file it reads stays on the server. Items with children carry
+   a subnav: a panel hung from the header's rule from lg up, an index
+   line under the item in the phone menu. */
+export default function Header({ nav }: { nav: NavItem[] }) {
   const pathname = usePathname();
   // Only the homepage has a hero to sit over. Every other page starts
   // solid — in the prerendered HTML, not after hydration — so the nav can
@@ -57,9 +51,9 @@ export default function Header() {
   // scroll handler, to stay consistent with the rest of the motion runtime.
   useEffect(() => {
     if (!isHome) return;
-    const sections = NAV.map((item) =>
-      item.section ? document.getElementById(item.section) : null
-    ).filter((el): el is HTMLElement => el !== null);
+    const sections = nav
+      .map((item) => (item.section ? document.getElementById(item.section) : null))
+      .filter((el): el is HTMLElement => el !== null);
     if (sections.length === 0) return;
 
     const io = new IntersectionObserver(
@@ -72,7 +66,7 @@ export default function Header() {
     );
     sections.forEach((section) => io.observe(section));
     return () => io.disconnect();
-  }, [isHome]);
+  }, [isHome, nav]);
 
   const close = useCallback((returnFocus: boolean) => {
     setOpen(false);
@@ -124,11 +118,18 @@ export default function Header() {
     };
   }, [open, close]);
 
+  // A subnav panel opens on hover or on keyboard focus within its item
+  // (CSS). Escape drops focus, which is what closes it.
+  const onNavKey = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (event.key === "Escape") (event.target as HTMLElement).blur();
+  };
+
   // The panel needs an opaque ground, so an open menu forces the solid state.
   const isSolid = !isHome || heroGone || open;
   // Section ids only mean something on the homepage; a stale marker must
   // not follow a client-side navigation onto another page.
   const current = isHome ? active : null;
+  const onChild = (href: string) => (!isHome && pathname === href ? "page" : undefined);
 
   return (
     <header className="site-header sticky top-0 z-50" data-solid={isSolid}>
@@ -151,26 +152,48 @@ export default function Header() {
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
-          {NAV.map((item) => {
-            // On the homepage the marker follows the scroll; elsewhere it
-            // marks the section the current page belongs to.
-            const onPage = !isHome && pathname === item.href;
-            const isCurrent = isHome
-              ? item.section !== null && current === item.section
-              : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="navlink"
-                data-active={isCurrent}
-                aria-current={onPage ? "page" : isCurrent ? "location" : undefined}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+        <nav
+          aria-label="Primary"
+          className="hidden h-full items-center gap-8 lg:flex"
+          onKeyDown={onNavKey}
+        >
+          <ul className="flex h-full items-center gap-8">
+            {nav.map((item) => {
+              // On the homepage the marker follows the scroll; elsewhere it
+              // marks the section the current page belongs to.
+              const onPage = !isHome && pathname === item.href;
+              const isCurrent = isHome
+                ? item.section !== null && current === item.section
+                : pathname.startsWith(item.href);
+              return (
+                <li key={item.label} className="nav-item">
+                  <Link
+                    href={item.href}
+                    className="navlink"
+                    data-active={isCurrent}
+                    aria-current={onPage ? "page" : isCurrent ? "location" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.children && (
+                    <ul className="nav-panel" aria-label={`${item.label} pages`}>
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            className="nav-sublink"
+                            aria-current={onChild(child.href)}
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
           <Link href={GIVE_HREF} className="navlink navlink-give">
             Give
           </Link>
@@ -202,21 +225,45 @@ export default function Header() {
       >
         <div className="mobile-panel-inner bg-stock">
           <nav aria-label="Primary, mobile" className="shell flex flex-col py-2">
-            {NAV.map((item, i) => (
-              <Link
+            {nav.map((item, i) => (
+              // `--i` on the row staggers every link in it, parent and
+              // children alike, as one beat.
+              <div
                 key={item.label}
-                href={item.href}
-                onClick={() => close(false)}
                 style={{ "--i": i } as CSSProperties}
-                className="border-b border-ink/15 py-3.5 text-[1.0625rem] font-medium text-ink last:border-b-0"
+                className="border-b border-ink/15 py-1.5"
               >
-                {item.label}
-              </Link>
+                <Link
+                  href={item.href}
+                  onClick={() => close(false)}
+                  className="block py-2.5 text-[1.0625rem] font-medium leading-snug text-ink"
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  // The subnav as an index line, the Watch strip's shape:
+                  // every page one tap away, nothing behind a second tap.
+                  <ul className="-mt-1 mb-1 flex flex-wrap gap-x-5">
+                    {item.children.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          onClick={() => close(false)}
+                          className="mobile-sublink"
+                          aria-current={onChild(child.href)}
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             ))}
             <Link
               href={GIVE_HREF}
               onClick={() => close(false)}
-              style={{ "--i": NAV.length } as CSSProperties}
+              style={{ "--i": nav.length } as CSSProperties}
               className="navlink navlink-give my-5 self-start"
             >
               Give
