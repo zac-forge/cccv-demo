@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import CTABand from "@/components/CTABand";
 import PageHeader from "@/components/PageHeader";
@@ -19,14 +20,17 @@ import { CHURCH } from "@/lib/site";
    gets the composition its job asks for, typography and rules before
    components, and numerals only where there is a real sequence.
 
-   - The opening keeps its two columns; Acts 20:27, which "What we do"
-     cites, is set in the margin beneath it, as /new/know-jesus does.
+   - The page opens as a poster (Drew, Sept 4): the title at poster
+     size with Acts 20:27 hung beside it, the verse "What we do" cites,
+     then their "Who we are" statement across the full shell.
+   - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
    - The pastor's bio is an editorial split with a dated rail for the
      three plants in his own account. Dates are the page's one sequence.
-   - The team is a ruled roster, not cards. Photos are being replaced;
-     a portrait slot fits the row when they arrive.
+   - The team is a ruled roster, not cards: a portrait plate, the names
+     and the blurb in one row. Photos are being replaced, so the plate
+     holds the screenprinted placeholder until they arrive (Drew, Sept 4).
    - "Connect with us" is one ruled row that closes the roster and
      points at /connect and at Ministries we support.
    ------------------------------------------------------------------ */
@@ -67,16 +71,17 @@ export default function About() {
   return (
     <main id="main">
       <PageHeader
+        poster
         field="field-salt"
         trail={[{ label: "About", href: "/about" }]}
         title="About"
-        lede={<p>{WHO.text}</p>}
+        aside={<Verse reference="Acts 20:27" layout="quote" />}
+        statement={<p>{WHO.text}</p>}
       />
 
       {/* =========================================================
           WHAT WE DO, WHY WE'RE HERE — two of the three /home blocks,
-          side by side. The first is the lede above. "What we do" cites
-          Acts 20:27, so the verse is repeated in full beneath it.
+          side by side. The first is the statement above.
           ========================================================= */}
       <section
         aria-label="What we do"
@@ -86,7 +91,6 @@ export default function About() {
           <div className="rule-t pt-6">
             <h2 className="t-subhead">{WHAT.title}</h2>
             <p className="prose mt-4 max-w-[46ch]">{WHAT.text}</p>
-            <Verse reference="Acts 20:27" className="mt-8 max-w-[36ch]" />
           </div>
           <div className="rule-t pt-6">
             <h2 className="t-subhead">{WHY.title}</h2>
@@ -195,9 +199,9 @@ export default function About() {
       </section>
 
       {/* =========================================================
-          MEET OUR TEAM — a ruled roster: the couple's names in the
-          display face, their blurb beside. No cards, no placeholder
-          portraits; when the new photos come, a plate fits the row.
+          MEET OUR TEAM — a ruled roster: a portrait plate, the couple's
+          names in the display face, their blurb beside. Photos are being
+          replaced, so the plate carries the placeholder for now.
           "Connect with us" closes the roster as one more ruled row.
           ========================================================= */}
       <section
@@ -213,12 +217,21 @@ export default function About() {
             {TEAM.map((person) => (
               <li
                 key={person.names}
-                className="rule-t grid gap-3 py-7 md:py-8 lg:grid-cols-12 lg:gap-16"
+                className="rule-t grid grid-cols-[5.5rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[7rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-12 lg:gap-16"
               >
-                <h3 className="f-display text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.05] tracking-[-0.02em] lg:col-span-4">
+                <div className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:col-span-2 lg:row-span-1">
+                  <Image
+                    src={`/staff/${person.portrait}.webp`}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 5.5rem, (max-width: 1024px) 7rem, 12vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+                <h3 className="f-display text-[clamp(1.5rem,2.2vw,1.875rem)] leading-[1.05] tracking-[-0.02em] lg:col-span-3">
                   {person.names}
                 </h3>
-                <p className="max-w-[58ch] text-[1.0625rem] leading-[1.6] lg:col-span-7 lg:col-start-6">
+                <p className="max-w-[58ch] text-[1.0625rem] leading-[1.6] lg:col-span-6 lg:col-start-7">
                   {person.text}
                 </p>
               </li>

@@ -13,11 +13,15 @@ type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-
    poster — for a page that has to open like a poster rather than a
    chapter: the title near hero size, a deck, and an aside (a verse, a
    time, a date) hung on the right, with the sunburst in the corner
-   (PosterArt). */
+   (PosterArt). `statement` is the deck's other form: one sentence set
+   between lede and section size, spanning the full shell beneath the
+   title row, for a page whose opening is a statement rather than a
+   paragraph (/about). */
 export default function PageHeader({
   trail,
   title,
   lede,
+  statement,
   aside,
   field = "field-stock",
   poster = false,
@@ -25,6 +29,7 @@ export default function PageHeader({
   trail?: Crumb[];
   title: string;
   lede?: React.ReactNode;
+  statement?: React.ReactNode;
   aside?: React.ReactNode;
   field?: Field;
   poster?: boolean;
@@ -66,6 +71,11 @@ export default function PageHeader({
             <div className="lg:col-span-4 lg:col-start-9 lg:pb-1">{aside}</div>
           )}
         </div>
+        {statement && (
+          <div className="f-text t-pull rule-t mt-10 pt-8 md:mt-14 md:pt-10">
+            {statement}
+          </div>
+        )}
       </div>
     </header>
   );
