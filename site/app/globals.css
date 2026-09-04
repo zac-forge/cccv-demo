@@ -1708,10 +1708,9 @@
     overflow-wrap: anywhere;
     transition: background-color var(--dur-fast) var(--ease-out);
   }
+  /* The preview's plate carries the sermon art, so its hover lives on
+     the art (SermonPreview); only the title changes here. */
   @media (hover: hover) {
-    .sermon-preview:hover .sermon-plate {
-      background-color: var(--color-blue);
-    }
     .sermon-preview:hover .sermon-preview-title {
       color: var(--color-blue);
     }

@@ -6,31 +6,17 @@ import { useState } from "react";
 type Props = {
   videoId: string;
   title: string;
-  /* The poster frame. Defaults to the site's message art rather than
-     YouTube's thumbnail, which is whatever the livestream happened to be
-     showing; a real poster can be passed once Sanity carries one. */
-  poster?: string;
   /* Optional outside control, so another button can start the same
      player. Left undefined, the facade keeps its own state. */
   playing?: boolean;
   onPlay?: () => void;
 };
 
-/* Drew's sermon placeholder (assets/sermon-placeholder.png), cropped to
-   16:9 so the rays meet the horizon seven tenths of the way down. */
-const POSTER = "/site/message-poster.webp";
-
 /**
  * Click-to-play facade. The poster frame is all that loads until someone
  * actually presses play, so no YouTube script runs on first paint.
  */
-export default function SermonPlayer({
-  videoId,
-  title,
-  poster = POSTER,
-  playing: controlled,
-  onPlay,
-}: Props) {
+export default function SermonPlayer({ videoId, title, playing: controlled, onPlay }: Props) {
   const [own, setOwn] = useState(false);
   const [ready, setReady] = useState(false);
   const playing = controlled ?? own;
@@ -71,25 +57,16 @@ export default function SermonPlayer({
       aria-label={`Play the message: ${title}`}
       className="group relative block aspect-video w-full overflow-hidden border border-[color:var(--rule)] bg-ink"
     >
-      {/* On hover the art comes up a shade and eases in a touch, the sun
-          rising; it never swaps to the YouTube frame (Drew, September 4).
-          The scale waits on motion-safe. */}
       <Image
-        src={poster}
+        src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
         alt=""
         fill
         sizes="(max-width: 1024px) 100vw, 56vw"
-        className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
+        className="object-cover"
       />
       <span
         aria-hidden="true"
-        className="absolute inset-0 bg-ink/20 transition-colors duration-300 group-hover:bg-ink/0"
-      />
-      {/* The badge sits where the rays converge, on the horizon, so it
-          reads as the sun and is never yellow on yellow. */}
-      <span
-        aria-hidden="true"
-        className="absolute left-1/2 top-[70%] -translate-x-1/2 -translate-y-1/2"
+        className="absolute inset-0 flex items-center justify-center bg-ink/50 transition-colors duration-100 group-hover:bg-ink/30"
       >
         <svg width="96" height="64" viewBox="0 0 96 64" fill="none">
           <rect width="96" height="64" fill="#D8B84C" />
