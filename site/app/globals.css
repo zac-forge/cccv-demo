@@ -885,6 +885,12 @@
     .ministry-card:hover img {
       scale: 1.015;
     }
+    .ministry-card:hover .t-card {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.14em;
+      text-decoration-color: var(--color-red);
+    }
   }
 
   .numeral-ghost {

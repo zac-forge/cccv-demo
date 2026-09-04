@@ -229,10 +229,15 @@ export default function Home() {
                   <span>Somewhere to grow, whoever you are</span>
                 </h2>
               </div>
-              <p className="muted max-w-[30ch] text-[0.9375rem]">
-                Eight studies and fellowships, meeting through the week on
-                campus.
-              </p>
+              <div className="flex flex-col items-start gap-5">
+                <p className="muted max-w-[30ch] text-[0.9375rem]">
+                  Eight studies and fellowships, meeting through the week on
+                  campus.
+                </p>
+                <Link href="/ministries" className="link-rule">
+                  All ministries
+                </Link>
+              </div>
             </div>
 
             <div className="mt-14 md:mt-16">
@@ -251,9 +256,14 @@ export default function Home() {
             <p data-reveal="" className="t-eyebrow">
               Events
             </p>
-            <h2 data-reveal="clip" className="f-display t-section mt-5">
-              <span>What&rsquo;s coming up</span>
-            </h2>
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <h2 data-reveal="clip" className="f-display t-section mt-5">
+                <span>What&rsquo;s coming up</span>
+              </h2>
+              <Link href="/events" className="link-rule">
+                All events
+              </Link>
+            </div>
 
             <div className="mt-14 md:mt-16">
               <EventList events={EVENTS} reveal />
