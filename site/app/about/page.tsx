@@ -114,7 +114,7 @@ export default function About() {
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 md:mt-14 lg:grid-cols-3">
             {TEAM.map((person) => (
               <li key={person.names} className="flex flex-col border border-ink bg-salt">
-                <div className="relative aspect-[4/5] overflow-hidden border-b border-ink">
+                <div className="relative aspect-[2/3] overflow-hidden border-b border-ink">
                   <Image
                     src={`/staff/${person.portrait}.webp`}
                     alt=""
