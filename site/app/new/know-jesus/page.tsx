@@ -215,7 +215,7 @@ export default function KnowJesus() {
             <span>
               It isn&rsquo;t the prayer that saves you.
               <br />
-              Jesus saves.
+              <em>Jesus saves.</em>
             </span>
           </p>
           <Run>

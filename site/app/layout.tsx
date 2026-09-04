@@ -19,8 +19,11 @@ import {
 // reduced motion, JS disabled, and any script failure.
 const ARM_MOTION = `try{if(window.matchMedia&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver'in window){document.documentElement.dataset.motion='on'}}catch(e){}`;
 
+/* The italic is Fraunces' own, not a synthesised slant; first used for
+   "Jesus saves." on /new/know-jesus (Drew, September 4). */
 const fraunces = Fraunces({
   subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
   variable: "--font-fraunces",
   axes: ["SOFT", "WONK", "opsz"],
