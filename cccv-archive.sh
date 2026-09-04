@@ -31,7 +31,7 @@
 #
 # To send the terabyte straight to an external drive while the catalog stays
 # in the git repo at home:
-#   CCCV_DEST=/Volumes/CCCV/cccv-sermon-archive \
+#   CCCV_JOBS=16 CCCV_DEST=/Volumes/CCCV/cccv-sermon-archive \
 #   CCCV_MANIFEST=~/cccv-sermon-archive/manifest \
 #   caffeinate -i ./cccv-archive.sh all
 #
