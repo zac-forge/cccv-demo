@@ -1,62 +1,46 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SermonPlayer from "./SermonPlayer";
+import SermonPreview from "./SermonPreview";
+import {
+  buildTeachings,
+  canListen,
+  canWatch,
+  fmtDate,
+  type Index,
+  type Teaching,
+} from "@/lib/teachings";
 
-/* The whole archive as one page: a JSON index fetched once, filters that
-   run in the browser, a window of rows, and one player at the top. A
-   sermon has a shareable address at /watch/sermons?s=<id>, resolved here from
-   the same index, so no page is ever built per sermon
-   (docs/01-build-plan.md §1). */
+/* The library as one page with one player. The featured teaching is in
+   the HTML from the build; the index arrives in the browser and becomes
+   the library, nine at a time. Choosing a teaching swaps what the one
+   media area shows and updates the address (?s=<row id>) in place, so
+   every teaching stays shareable without a page per sermon
+   (docs/01-build-plan.md §1). A shared link resolves once the index has
+   loaded; until then the featured teaching stands in. */
 
-type Index = {
-  speakers: string[];
-  series: string[];
-  // id, date, speakerIdx, seriesIdx, title, kind, youtubeId, audioUrl
-  items: [string, string, number, number, string, string, string, string][];
-};
-type Sermon = {
-  id: string;
-  date: string;
-  speaker: string;
-  series: string;
-  title: string;
-  kind: string;
-  youtubeId: string;
-  audioUrl: string;
-};
+const PAGE = 9;
 
-const PAGE = 40;
-
-const fmtDate = (iso: string) =>
-  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  });
-
-export default function SermonArchive() {
-  const params = useSearchParams();
-  const wanted = params.get("s");
-
+export default function SermonArchive({ featured }: { featured: Teaching }) {
   const [index, setIndex] = useState<Index | null>(null);
   const [failed, setFailed] = useState(false);
-  const [q, setQ] = useState("");
-  const [speaker, setSpeaker] = useState("");
-  const [series, setSeries] = useState("");
-  const [year, setYear] = useState("");
-  const [kind, setKind] = useState("");
+  const [selectedId, setSelectedId] = useState(featured.id);
+  const [format, setFormat] = useState<"watch" | "listen">("watch");
   const [shown, setShown] = useState(PAGE);
-  const [selectedId, setSelectedId] = useState<string | null>(wanted);
+  const [reachedEnd, setReachedEnd] = useState(false);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const endRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     let alive = true;
     fetch("/sermons.json")
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((data: Index) => {
-        if (alive) setIndex(data);
+        if (!alive) return;
+        setIndex(data);
+        const wanted = new URLSearchParams(window.location.search).get("s");
+        if (wanted) setSelectedId(wanted);
       })
       .catch(() => {
         if (alive) setFailed(true);
@@ -66,193 +50,202 @@ export default function SermonArchive() {
     };
   }, []);
 
-  const all = useMemo<Sermon[]>(
+  /* The index knows nothing of the featured message's YouTube id; the
+     build does. Carry it across so the same teaching plays either way. */
+  const teachings = useMemo<Teaching[]>(
     () =>
       index
-        ? index.items.map(([id, date, sp, se, title, k, yt, au]) => ({
-            id,
-            date,
-            speaker: index.speakers[sp],
-            series: index.series[se],
-            title,
-            kind: k,
-            youtubeId: yt,
-            audioUrl: au,
-          }))
+        ? buildTeachings(index).map((t) =>
+            t.ids.includes(featured.id) && !t.youtubeId
+              ? { ...t, youtubeId: featured.youtubeId }
+              : t
+          )
         : [],
-    [index]
+    [index, featured]
   );
 
-  const years = useMemo(
-    () => Array.from(new Set(all.map((s) => s.date.slice(0, 4)))).sort().reverse(),
-    [all]
-  );
-  const seriesList = useMemo(
-    () => (index ? [...index.series].sort((a, b) => a.localeCompare(b)) : []),
-    [index]
-  );
-  const speakerList = useMemo(
-    () => (index ? [...index.speakers].sort((a, b) => a.localeCompare(b)) : []),
-    [index]
-  );
+  const selected: Teaching =
+    teachings.find((t) => t.ids.includes(selectedId)) ??
+    teachings.find((t) => t.ids.includes(featured.id)) ??
+    featured;
 
-  const filtered = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return all.filter(
-      (s) =>
-        (!speaker || s.speaker === speaker) &&
-        (!series || s.series === series) &&
-        (!year || s.date.startsWith(year)) &&
-        (!kind || (kind === "video" ? s.youtubeId !== "" || s.kind === "video" : s.kind === kind)) &&
-        (!needle || s.title.toLowerCase().includes(needle) || s.series.toLowerCase().includes(needle))
-    );
-  }, [all, q, speaker, series, year, kind]);
+  const watchable = canWatch(selected);
+  const listenable = canListen(selected);
+  const mode: "video" | "audio" | "none" =
+    watchable && (format === "watch" || !listenable)
+      ? "video"
+      : listenable
+        ? "audio"
+        : "none";
 
-  const selected = all.find((s) => s.id === selectedId) ?? null;
-
-  const select = (s: Sermon) => {
-    setSelectedId(s.id);
-    // Shareable without a navigation: the address updates in place.
+  const select = (t: Teaching) => {
+    setSelectedId(t.id);
+    setFormat("watch");
     const url = new URL(window.location.href);
-    url.searchParams.set("s", s.id);
+    url.searchParams.set("s", t.id);
     window.history.replaceState(null, "", url);
-    document.getElementById("player")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Back to the one player. The scroll follows the page's own
+    // scroll-behavior, which reduced motion already turns off.
+    document.getElementById("player")?.scrollIntoView({ block: "start" });
+    titleRef.current?.focus({ preventScroll: true });
   };
 
-  const resetPage = () => setShown(PAGE);
+  const total = teachings.length;
+  const more = () => {
+    const next = shown + PAGE;
+    setShown(next);
+    if (next >= total) setReachedEnd(true);
+  };
+  useEffect(() => {
+    if (reachedEnd) endRef.current?.focus({ preventScroll: true });
+  }, [reachedEnd]);
 
   return (
     <>
-      {/* ---- The player. Empty until something is chosen. ---- */}
-      {selected && (
-        <section id="player" aria-label="Now playing" className="field-ink band-sm">
-          <div className="shell grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              {selected.youtubeId ? (
-                <SermonPlayer videoId={selected.youtubeId} title={selected.title} />
-              ) : selected.audioUrl ? (
-                <audio controls preload="none" src={selected.audioUrl} className="w-full" />
-              ) : (
-                /* PLACEHOLDER: audio is moving to archive.org; until the
-                   index carries those URLs there is nothing to play here. */
-                <div className="flex aspect-video items-center justify-center border border-[color:var(--rule)] p-8">
-                  <p className="muted max-w-[30ch] text-center text-[0.9375rem]">
+      {/* ---- The one media area. Poster, sleeve with audio, or sleeve
+              with a note; always the same 16:9 plate so nothing jumps. ---- */}
+      <section
+        id="player"
+        aria-labelledby="now-title"
+        className="field-ink pt-[clamp(2.5rem,4vw,3.5rem)] pb-[clamp(3.5rem,6vw,5rem)]"
+      >
+        <div className="shell grid items-start gap-6 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-7">
+            {mode === "video" ? (
+              <SermonPlayer
+                key={selected.id}
+                videoId={selected.youtubeId}
+                title={selected.title}
+              />
+            ) : (
+              <div className="sermon-plate media-plate aspect-video w-full text-[clamp(1.75rem,3.5vw,3rem)]">
+                <span aria-hidden="true">{selected.series}</span>
+                {mode === "audio" ? (
+                  <audio
+                    key={selected.id}
+                    controls
+                    preload="none"
+                    src={selected.audioUrl}
+                    aria-label={`Listen: ${selected.title}`}
+                    className="w-full"
+                  />
+                ) : (
+                  /* PLACEHOLDER: audio is moving to archive.org; until the
+                     index carries those URLs there is nothing to play. */
+                  <p className="muted max-w-[32ch] font-[family-name:var(--font-body)] text-[0.9375rem] font-normal leading-snug tracking-normal [font-variation-settings:normal]">
                     This message is being moved to the new archive and will
                     play here soon.
                   </p>
-                </div>
-              )}
-            </div>
-            <div className="lg:col-span-6">
-              <p className="t-eyebrow muted">
-                {fmtDate(selected.date)} · {selected.speaker}
-              </p>
-              <h2 className="f-display t-section mt-4">{selected.title}</h2>
-              <p className="f-data mt-6 text-[clamp(1.25rem,2vw,1.75rem)] leading-none">
-                {selected.series}
-              </p>
-            </div>
+                )}
+              </div>
+            )}
           </div>
-        </section>
-      )}
 
-      {/* ---- Filters ---- */}
-      <section aria-label="Find a message" className="field-salt band-sm">
-        <div className="shell">
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr]">
-            <label className="filter">
-              <span className="t-eyebrow text-red">Search</span>
-              <input
-                type="search"
-                value={q}
-                onChange={(e) => {
-                  setQ(e.target.value);
-                  resetPage();
-                }}
-                placeholder="Title or book"
-              />
-            </label>
-            <label className="filter">
-              <span className="t-eyebrow text-red">Series</span>
-              <select value={series} onChange={(e) => { setSeries(e.target.value); resetPage(); }}>
-                <option value="">All</option>
-                {seriesList.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-            </label>
-            <label className="filter">
-              <span className="t-eyebrow text-red">Speaker</span>
-              <select value={speaker} onChange={(e) => { setSpeaker(e.target.value); resetPage(); }}>
-                <option value="">All</option>
-                {speakerList.map((s) => (
-                  <option key={s} value={s}>{s}</option>
-                ))}
-              </select>
-            </label>
-            <label className="filter">
-              <span className="t-eyebrow text-red">Year</span>
-              <select value={year} onChange={(e) => { setYear(e.target.value); resetPage(); }}>
-                <option value="">All</option>
-                {years.map((y) => (
-                  <option key={y} value={y}>{y}</option>
-                ))}
-              </select>
-            </label>
-            <label className="filter">
-              <span className="t-eyebrow text-red">Format</span>
-              <select value={kind} onChange={(e) => { setKind(e.target.value); resetPage(); }}>
-                <option value="">All</option>
-                <option value="video">Video</option>
-                <option value="audio">Audio</option>
-              </select>
-            </label>
+          <div className="lg:col-span-5">
+            <p className="t-eyebrow muted">
+              {fmtDate(selected.date)}
+              {selected.speaker !== "Unknown" ? ` · ${selected.speaker}` : ""}
+            </p>
+            <h2
+              id="now-title"
+              ref={titleRef}
+              tabIndex={-1}
+              className="f-display mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.04] tracking-[-0.025em]"
+            >
+              {selected.name}
+            </h2>
+            <p className="f-data mt-5 text-[clamp(1.25rem,2vw,1.625rem)] leading-none">
+              {selected.passage || selected.series}
+            </p>
+            {selected.passage && (
+              <p className="t-meta muted mt-4">{selected.series}</p>
+            )}
+            {watchable && listenable && (
+              <div role="group" aria-label="Format" className="mt-6 flex gap-7">
+                <button
+                  type="button"
+                  aria-pressed={mode === "video"}
+                  onClick={() => setFormat("watch")}
+                  className="fmt-choice"
+                >
+                  Watch
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={mode === "audio"}
+                  onClick={() => setFormat("listen")}
+                  className="fmt-choice"
+                >
+                  Listen
+                </button>
+              </div>
+            )}
           </div>
-          <p className="muted mt-5 text-[0.875rem]" role="status">
-            {index
-              ? `${filtered.length.toLocaleString()} of ${all.length.toLocaleString()} messages`
-              : failed
-                ? "The archive could not be loaded."
-                : "Loading the archive…"}
-          </p>
         </div>
       </section>
 
-      {/* ---- The list. Typographic: 1,545 of these have no picture. ---- */}
-      <section aria-label="Messages" className="field-stock band">
+      {/* ---- The library: nine, then nine more each time. Denser than
+              the marketing pages; rows on a phone, three across from md. ---- */}
+      <section
+        aria-labelledby="library-title"
+        className="field-stock pt-[clamp(3rem,5vw,4rem)] pb-[clamp(3.5rem,6vw,5rem)]"
+      >
         <div className="shell">
-          <ol>
-            {filtered.slice(0, shown).map((s) => (
-              <li key={s.id} className="rule-t last:border-b last:border-[color:var(--rule)]">
-                <button
-                  type="button"
-                  onClick={() => select(s)}
-                  aria-current={s.id === selectedId ? "true" : undefined}
-                  className="sermon-row pressable grid w-full grid-cols-[6.5rem_1fr_auto] items-baseline gap-x-6 py-5 text-left sm:grid-cols-[9rem_1fr_auto] sm:gap-x-10 md:py-6"
-                >
-                  <span className="t-meta pt-1 text-red">{fmtDate(s.date)}</span>
-                  <span>
-                    <span className="f-data block text-[1.125rem] leading-tight md:text-[1.375rem]">
-                      {s.title}
-                    </span>
-                    <span className="muted mt-1.5 block text-[0.875rem]">
-                      {s.speaker} · {s.series}
-                    </span>
-                  </span>
-                  <span className="t-meta muted">{s.youtubeId || s.kind === "video" ? "Video" : "Audio"}</span>
-                </button>
+          <div className="rule-b flex flex-col gap-2 pb-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+            <h2
+              id="library-title"
+              className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]"
+            >
+              Teaching library
+            </h2>
+            <p className="t-meta muted" role="status">
+              {index
+                ? `${Math.min(shown, total)} of ${total.toLocaleString()} teachings`
+                : failed
+                  ? "The library could not be loaded."
+                  : "Loading the library…"}
+            </p>
+          </div>
+
+          <ol className="md:mt-8 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+            {teachings.slice(0, shown).map((t) => (
+              <li
+                key={t.id}
+                className="border-b border-[color:var(--rule)] py-4 md:border-0 md:py-0"
+              >
+                <SermonPreview
+                  sermon={t}
+                  onSelect={() => select(t)}
+                  selected={t.id === selected.id}
+                  showFormats
+                />
               </li>
             ))}
           </ol>
-          {filtered.length > shown && (
+
+          {index && shown < total ? (
             <button
               type="button"
-              onClick={() => setShown((n) => n + PAGE)}
-              className="btn btn-ink mt-10"
+              onClick={more}
+              className="link-folio group mt-10 min-h-11 md:mt-12"
             >
-              Show more
+              Load more teachings
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-150 group-hover:translate-x-1"
+              >
+                &rarr;
+              </span>
             </button>
-          )}
+          ) : index ? (
+            <p
+              ref={endRef}
+              tabIndex={-1}
+              className="t-meta muted mt-10 md:mt-12"
+            >
+              All {total.toLocaleString()} teachings are showing.
+            </p>
+          ) : null}
         </div>
       </section>
     </>

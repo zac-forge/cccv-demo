@@ -1098,44 +1098,6 @@
   }
 
   /* ----------------------------------------------------------------
-     Archive filters and rows. Rectangular, bordered, no chrome.
-     ---------------------------------------------------------------- */
-  .filter {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .filter input,
-  .filter select {
-    width: 100%;
-    min-height: 44px;
-    padding: 0.625rem 0.875rem;
-    border: 1px solid var(--color-ink);
-    border-radius: 0;
-    background: var(--color-stock);
-    color: var(--color-ink);
-    font: inherit;
-    font-size: 0.9375rem;
-  }
-  .filter select {
-    appearance: none;
-    background-image: linear-gradient(45deg, transparent 50%, var(--color-ink) 50%),
-      linear-gradient(135deg, var(--color-ink) 50%, transparent 50%);
-    background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
-    background-size: 6px 6px, 6px 6px;
-    background-repeat: no-repeat;
-    padding-right: 2.25rem;
-  }
-  .sermon-row[aria-current="true"] .f-data {
-    color: var(--color-blue);
-  }
-  @media (hover: hover) {
-    .sermon-row:hover .f-data {
-      color: var(--color-blue);
-    }
-  }
-
-  /* ----------------------------------------------------------------
      Press. Anything that is tappable but is not a .btn.
      ---------------------------------------------------------------- */
   .pressable {
@@ -1465,5 +1427,65 @@
     .sermon-preview:hover .sermon-preview-title {
       color: var(--color-blue);
     }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Sermon library (/watch/sermons): the one media area's format choice,
+   the selected item, the audio and unavailable states of the plate.
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Watch / Listen, where a teaching has both: two words with a rule,
+     the pressed one carrying the field's accent. */
+  .fmt-choice {
+    position: relative;
+    min-height: 2.75rem;
+    padding-block: 0.5rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .fmt-choice::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: currentColor;
+    scale: 0 1;
+    transform-origin: left center;
+    transition: scale var(--dur-fast) var(--ease-out);
+  }
+  .fmt-choice:hover,
+  .fmt-choice[aria-pressed="true"] {
+    color: inherit;
+  }
+  .fmt-choice:hover::after {
+    scale: 1 1;
+  }
+  .fmt-choice[aria-pressed="true"]::after {
+    scale: 1 1;
+    background-color: var(--focus);
+  }
+
+  /* The teaching now in the player, marked in the library. */
+  .sermon-preview[aria-current="true"] .sermon-plate {
+    background-color: var(--color-blue);
+  }
+  .sermon-preview[aria-current="true"] .sermon-preview-title {
+    color: var(--color-blue);
+  }
+
+  /* The plate as the media area: the book at the top, the control or
+     the note at the foot. */
+  .media-plate {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 1.25rem;
   }
 }
