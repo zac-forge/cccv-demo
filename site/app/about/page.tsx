@@ -89,13 +89,16 @@ export default function About() {
         <div className="poster-sky absolute inset-0 -z-10" aria-hidden="true" />
         <div className="shell relative pb-[clamp(6rem,14vw,12rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
           <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
-          <h1 className="f-display t-poster mt-9 max-w-[11ch] md:mt-12">About</h1>
-          {/* The homepage hero's deck: reading size, a yellow rule down the
-              left, so the title is the one big thing and the sentence is
-              read rather than looked at. */}
-          <p className="muted mt-8 max-w-[40ch] border-l-2 border-yellow pl-5 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-[1.55] md:mt-10 md:pl-6">
-            {WHO.text}
-          </p>
+          {/* Title and deck on a printed label: flat ink at two-thirds,
+              square, no border, its padding pulled back so the type keeps
+              the shell's left edge. The deck is the homepage hero's:
+              reading size with a yellow rule down the left. */}
+          <div className="mt-9 inline-block max-w-full bg-[rgba(22,19,26,0.66)] px-6 py-7 md:mt-12 md:px-10 md:py-9 md:-ml-10 -ml-6">
+            <h1 className="f-display t-poster max-w-[11ch]">About</h1>
+            <p className="muted mt-7 max-w-[40ch] border-l-2 border-yellow pl-5 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-[1.55] md:mt-8 md:pl-6">
+              {WHO.text}
+            </p>
+          </div>
         </div>
       </header>
 
