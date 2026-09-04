@@ -33,7 +33,7 @@ export default function Events() {
       <header className="field-ink page-header-poster">
         <div className="shell">
           <Breadcrumb trail={[{ label: "Events", href: "/events" }]} />
-          <div className="mt-9 grid gap-12 md:mt-12 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <div className="mt-9 grid gap-12 md:mt-12 lg:grid-cols-12 lg:items-center lg:gap-16">
             <div className="lg:col-span-5">
               <h1 className="f-display t-poster max-w-[8ch]">
                 What&rsquo;s coming up
