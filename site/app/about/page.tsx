@@ -90,7 +90,12 @@ export default function About() {
         <div className="shell relative pb-[clamp(6rem,14vw,12rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
           <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
           <h1 className="f-display t-poster mt-9 max-w-[11ch] md:mt-12">About</h1>
-          <p className="f-text t-pull mt-8 max-w-[28ch] md:mt-10">{WHO.text}</p>
+          {/* The homepage hero's deck: reading size, a yellow rule down the
+              left, so the title is the one big thing and the sentence is
+              read rather than looked at. */}
+          <p className="muted mt-8 max-w-[40ch] border-l-2 border-yellow pl-5 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-[1.55] md:mt-10 md:pl-6">
+            {WHO.text}
+          </p>
         </div>
       </header>
 
