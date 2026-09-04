@@ -77,7 +77,7 @@ export default function About() {
           the hills filling the rest. The homepage's treatment at about
           two-thirds the height. Type stays in the sky zone, since type
           over hills cannot be read. */}
-      <header className="field-blue relative isolate flex min-h-[max(600px,66vh)] items-start overflow-hidden">
+      <header className="field-blue relative isolate flex min-h-[max(550px,60vh)] items-start overflow-hidden">
         <Image
           src="/site/valley-hero.webp"
           alt=""
@@ -87,7 +87,7 @@ export default function About() {
           className="-z-20 object-cover object-[30%_50%] md:object-center"
         />
         <div className="poster-sky absolute inset-0 -z-10" aria-hidden="true" />
-        <div className="shell relative pb-[clamp(6rem,14vw,12rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
+        <div className="shell relative pb-[clamp(3rem,10vw,9rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
           <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
           {/* Title and deck on a printed label: flat ink at two-thirds,
               square, no border, its padding pulled back so the type keeps
