@@ -26,11 +26,16 @@ export default function PosterBand({
       <PosterArt />
       <div className="shell relative">
         <div className="lg:max-w-[58%]">
-          <h2 id={id} className="f-display t-feature max-w-[11ch]">
-            {title}
+          <h2 id={id} data-reveal="clip" className="f-display t-feature max-w-[11ch]">
+            <span>{title}</span>
           </h2>
-          <p className="t-lede muted measure-tight mt-7 md:mt-8">{lede}</p>
-          <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row md:mt-10">
+          <p data-reveal="" className="t-lede muted measure-tight mt-7 md:mt-8">
+            {lede}
+          </p>
+          <div
+            data-reveal=""
+            className="mt-9 flex flex-col items-start gap-3 sm:flex-row md:mt-10"
+          >
             {ctas.map((cta) => (
               <Link key={cta.label} href={cta.href} className={`btn btn-${cta.variant}`}>
                 {cta.label}

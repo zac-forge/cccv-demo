@@ -50,7 +50,7 @@ export default function Verse({
         : `border-t-2 ${rule} pt-6 md:pt-8`;
 
   return (
-    <figure className={`${frame} ${className}`}>
+    <figure data-reveal="" className={`${frame} ${className}`}>
       <blockquote className={`f-text ${step}`}>
         &ldquo;{verse(reference)}&rdquo;
       </blockquote>

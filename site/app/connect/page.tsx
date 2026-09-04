@@ -75,14 +75,22 @@ export default function Connect() {
         <PosterArt art="rays" sun />
         <div className="shell relative">
           <Breadcrumb trail={[{ label: "Connect", href: "/connect" }]} />
-          <p className="t-eyebrow mt-9 text-[color:var(--color-yellow-onblue)] md:mt-12">
+          <p
+            data-reveal=""
+            className="t-eyebrow mt-9 text-[color:var(--color-yellow-onblue)] md:mt-12"
+          >
             Connect
           </p>
-          <h1 className="f-display t-feature mt-5 max-w-[20ch]">
-            We count it a blessing and a privilege to serve each and every one
-            of you.
+          <h1 data-reveal="clip" className="f-display t-feature mt-5 max-w-[20ch]">
+            <span>
+              We count it a blessing and a privilege to serve each and every one
+              of you.
+            </span>
           </h1>
-          <div className="mt-9 flex flex-col items-start gap-3 sm:flex-row md:mt-10">
+          <div
+            data-reveal=""
+            className="mt-9 flex flex-col items-start gap-3 sm:flex-row md:mt-10"
+          >
             <a href={CHURCH.smsHref} className="btn btn-sun">
               Text a prayer request
             </a>
@@ -111,7 +119,7 @@ export default function Connect() {
               // Their /prayer: "Sundays 9 AM & Tuesdays at 6 pm. We are
               // praying via phone and in person on Sundays, and on the
               // phone on Tuesdays." Set as a schedule.
-              <dl>
+              <dl data-reveal="" data-late="">
                 <Row label="Sundays">
                   <span className="f-data text-[1.375rem] leading-none">9 AM</span>
                   <span className="muted mt-1.5 block text-[0.9375rem]">
@@ -135,7 +143,7 @@ export default function Connect() {
               </dl>
             }
           >
-            <div className="prose measure mt-7">
+            <div data-reveal="" className="prose measure mt-7">
               <p>
                 Please feel free to call me with any questions or concerns, and
                 text me your prayer requests as I want to continue to intercede
@@ -175,10 +183,13 @@ export default function Connect() {
       >
         <div className="shell grid gap-12 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <p className="t-eyebrow text-[color:var(--color-yellow-onblue)]">
+            <p
+              data-reveal=""
+              className="t-eyebrow text-[color:var(--color-yellow-onblue)]"
+            >
               Stay in touch
             </p>
-            <h2 id="stay-in-touch-title" className="mt-6">
+            <h2 data-reveal="" id="stay-in-touch-title" className="mt-6">
               <span className="t-eyebrow muted block">Text</span>{" "}
               <a
                 href={`sms:${SHORTCODE}&body=${encodeURIComponent(KEYWORD)}`}
@@ -192,7 +203,7 @@ export default function Connect() {
                 </span>
               </a>
             </h2>
-            <p className="t-lede muted measure-tight mt-8">
+            <p data-reveal="" className="t-lede muted measure-tight mt-8">
               Receive upcoming events and church updates by text and email.
             </p>
           </div>
@@ -201,21 +212,24 @@ export default function Connect() {
             <h3 className="t-eyebrow text-[color:var(--color-yellow-onblue)]">
               First time? Here&rsquo;s what happens
             </h3>
-            <ol className="rule-t mt-3 max-w-[36ch] list-decimal space-y-2.5 pl-5 pt-4 text-[0.9375rem] leading-snug marker:text-[color:var(--color-yellow-onblue)]">
-              <li>
+            <ol
+              data-stagger=""
+              className="rule-t mt-3 max-w-[36ch] list-decimal space-y-2.5 pl-5 pt-4 text-[0.9375rem] leading-snug marker:text-[color:var(--color-yellow-onblue)]"
+            >
+              <li data-reveal="">
                 Type &ldquo;{KEYWORD}&rdquo; in the message box, with no
                 spaces.
               </li>
-              <li>
+              <li data-reveal="">
                 You&rsquo;ll receive a text from &ldquo;Calvary Chapel Conejo
                 Valley.&rdquo; Click the blue sign-up link.
               </li>
-              <li>
+              <li data-reveal="">
                 Enter your name, email and phone if asked, then click Save.
                 Pick a ministry, or click Next to join the general church
                 alerts.
               </li>
-              <li>
+              <li data-reveal="">
                 Check the email you signed up with for a verification message.
                 It can take up to 5 minutes.
               </li>
@@ -237,7 +251,9 @@ export default function Connect() {
             aria-labelledby="serve-title"
             className="py-14 md:py-20"
           >
-            <p className="t-eyebrow text-red">Serve</p>
+            <p data-reveal="" className="t-eyebrow text-red">
+              Serve
+            </p>
             <Verse
               reference="Mark 9:35"
               layout="pull"
@@ -247,7 +263,7 @@ export default function Connect() {
             <h2 id="serve-title" className="t-subhead mt-14 md:mt-20">
               Current serving needs
             </h2>
-            <dl className="mt-6 grid md:grid-cols-2 md:gap-x-16">
+            <dl data-reveal="" className="mt-6 grid md:grid-cols-2 md:gap-x-16">
               {CHURCH.serve.map((row) => (
                 <div key={row.area} className="rule-t py-5 md:py-6">
                   <dt className="t-card">{row.area}</dt>
@@ -289,14 +305,17 @@ export default function Connect() {
           >
             <div className="grid gap-8 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-7">
-                <p className="t-eyebrow text-red">Directory</p>
+                <p data-reveal="" className="t-eyebrow text-red">
+                  Directory
+                </p>
                 <h2
+                  data-reveal="clip"
                   id="directory-title"
                   className="f-display t-section mt-5 max-w-[12ch]"
                 >
-                  Church directory
+                  <span>Church directory</span>
                 </h2>
-                <div className="prose measure mt-7">
+                <div data-reveal="" className="prose measure mt-7">
                   <p>
                     At CCCV, we value the importance of connection and
                     fellowship within our church community. One way we foster
@@ -344,7 +363,10 @@ export default function Connect() {
               ]}
             />
             <div className="rule-t grid gap-4 pt-8 md:pt-10 lg:grid-cols-12 lg:gap-16">
-              <div className="flex flex-col items-start gap-3 sm:flex-row lg:col-span-8 lg:col-start-3">
+              <div
+                data-reveal=""
+                className="flex flex-col items-start gap-3 sm:flex-row lg:col-span-8 lg:col-start-3"
+              >
                 <a href={`mailto:${CHURCH.directoryEmail}`} className="btn btn-ink">
                   Email your photo
                 </a>
@@ -374,8 +396,11 @@ export default function Connect() {
       >
         <div className="shell grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="t-eyebrow text-red">Find us</p>
+            <p data-reveal="" className="t-eyebrow text-red">
+              Find us
+            </p>
             <h2
+              data-reveal=""
               id="contact-title"
               className="f-data mt-6 text-[clamp(1.75rem,2.8vw,2.5rem)] leading-tight"
             >
@@ -408,7 +433,11 @@ export default function Connect() {
             </a>
           </div>
 
-          <div className="relative order-first aspect-[3/2] overflow-hidden border border-ink lg:order-none lg:col-span-7">
+          <div
+            data-reveal=""
+            data-late=""
+            className="relative order-first aspect-[3/2] overflow-hidden border border-ink lg:order-none lg:col-span-7"
+          >
             <Image
               src="/site/church-map.webp"
               alt="Illustrated map: Calvary Chapel Conejo Valley at 101 N. Skyline Dr., off W. Hillcrest Dr. and US 101, with the Conejo Valley hills behind"

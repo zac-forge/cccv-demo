@@ -47,6 +47,15 @@ No Cloudflare or Sanity account exists yet, and none is needed to build the page
   tightened by deleting at most. Invent nothing about the church. Anything without a source is a
   short placeholder marked `PLACEHOLDER` in a comment, never plausible filler.
 - **The logotype is artwork.** Never set "Calvary Chapel" in a font.
+- **Every page carries the motion grammar, the homepage's included.** The runtime in
+  `components/Motion.tsx` is global; a page opts in with attributes: `data-reveal=""` on an eyebrow,
+  a lede, a body block or a card; `data-reveal="clip"` on a display heading, its text wrapped in a
+  `<span>`; `data-late=""` beside `data-reveal` on a plate that follows its heading; `data-stagger=""`
+  on a list that is a real sequence, `data-reveal=""` on its items; `data-drift=""` only on
+  background art with slack. One attribute per block, never per paragraph; nothing on navs, section
+  wrappers or images themselves. The shared components (`PageHeader`, `CTABand`, `PosterBand`,
+  `Facts`, `Verse`, `StepSequence`, `ActionDetailSection`; `MinistryGrid` and `EventList` via
+  `reveal`) carry their own. A new page without the attributes is unfinished (Drew, September 4).
 - **Nothing in `site/public` is optimized.** `output: 'export'` has no image optimizer; the custom
   loader in `lib/image-loader.ts` only resizes Sanity CDN URLs. Anything committed to `public/` ships
   byte-for-byte, so it must be hand-sized WebP at the largest size it is displayed, never a PNG

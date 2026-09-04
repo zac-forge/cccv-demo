@@ -11,11 +11,14 @@ export default function NotFound() {
       <PageHeader title="There is no page at this address." />
       <div className="field-stock">
         <div className="shell prose pb-[clamp(5rem,8vw,7rem)]">
-          <p className="measure-tight">
+          <p data-reveal="" className="measure-tight">
             It may have moved. The links below go to the places most people are
             looking for.
           </p>
-          <ul className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <ul
+            data-reveal=""
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
             <li>
               <Link href="/" className="btn btn-ink">
                 Home

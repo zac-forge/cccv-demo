@@ -56,6 +56,9 @@ export default function PosterArt({
     );
   }
 
+  /* The plate drifts with the scroll (data-drift, Motion.tsx); the CSS
+     gives it slack below the header's clip so the travel never shows an
+     edge. The sunburst does not drift: the whole disc has to stay put. */
   const piece = PAINTED[art];
   return (
     <Image
@@ -64,6 +67,7 @@ export default function PosterArt({
       width={piece.width}
       height={piece.height}
       aria-hidden="true"
+      data-drift=""
       className="poster-plate hidden md:block"
     />
   );

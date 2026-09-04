@@ -30,7 +30,7 @@ export default function LatestMessage({
 
   return (
     <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
-      <div ref={plate} className="lg:col-span-7">
+      <div ref={plate} data-reveal="" data-late="" className="lg:col-span-7">
         <SermonPlayer
           videoId={videoId}
           title={title}
@@ -40,10 +40,13 @@ export default function LatestMessage({
       </div>
 
       <div className="lg:col-span-5">
-        <p className="t-eyebrow tracking-[0.34em]">Latest message</p>
-        <p className="t-eyebrow muted mt-2 tracking-[0.26em]">{tags.join(" · ")}</p>
+        <div data-reveal="">
+          <p className="t-eyebrow tracking-[0.34em]">Latest message</p>
+          <p className="t-eyebrow muted mt-2 tracking-[0.26em]">{tags.join(" · ")}</p>
+        </div>
         <h2
           id="latest-title"
+          data-reveal="clip"
           className="f-display mt-6 text-[clamp(2.25rem,3.8vw,3.25rem)] leading-[1.02] tracking-[-0.03em] md:mt-8"
         >
           {titleLines.map((line, i) => (
@@ -53,12 +56,14 @@ export default function LatestMessage({
             </span>
           ))}
         </h2>
-        <p className="f-data mt-6 text-[clamp(1.375rem,2.2vw,1.875rem)] leading-none md:mt-8">
-          {passage}
-        </p>
-        <button type="button" onClick={watch} className="btn btn-sun mt-8 md:mt-10">
-          Watch the message
-        </button>
+        <div data-reveal="">
+          <p className="f-data mt-6 text-[clamp(1.375rem,2.2vw,1.875rem)] leading-none md:mt-8">
+            {passage}
+          </p>
+          <button type="button" onClick={watch} className="btn btn-sun mt-8 md:mt-10">
+            Watch the message
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -22,8 +22,10 @@ export default function CTABand({ field = "field-salt" }: { field?: Field }) {
     >
       <div className="shell">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-12">
-          <h2 className="f-display t-section max-w-[12ch]">Come and see.</h2>
-          <div className="flex flex-col gap-3 sm:flex-row md:shrink-0">
+          <h2 data-reveal="clip" className="f-display t-section max-w-[12ch]">
+            <span>Come and see.</span>
+          </h2>
+          <div data-reveal="" className="flex flex-col gap-3 sm:flex-row md:shrink-0">
             <Link href="/new" className="btn btn-ink">
               Plan your visit
             </Link>
@@ -34,9 +36,12 @@ export default function CTABand({ field = "field-salt" }: { field?: Field }) {
         </div>
 
         {/* Full width, so a time or an address never has to break. */}
-        <dl className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 md:mt-14">
+        <dl
+          data-stagger=""
+          className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 md:mt-14"
+        >
           {cells.map((cell) => (
-            <div key={cell.label} className="rule-t pt-5">
+            <div key={cell.label} data-reveal="" className="rule-t pt-5">
               <dt className="t-eyebrow text-red">{cell.label}</dt>
               <dd className="mt-3">
                 <p className="f-data text-[1.5rem] leading-none md:text-[1.75rem]">

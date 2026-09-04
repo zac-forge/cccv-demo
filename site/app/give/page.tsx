@@ -36,14 +36,14 @@ export default function Give() {
 
       <section aria-label="Give online" className="field-stock band">
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
+          <div data-reveal="" data-late="" className="lg:col-span-7">
             <GivingForm formId={GIVE.amplifyFormId} />
           </div>
 
           <div className="lg:col-span-4 lg:col-start-9">
-            <h2 className="t-subhead">Other ways to give</h2>
+            <h2 data-reveal="" className="t-subhead">Other ways to give</h2>
 
-            <div className="rule-t mt-6 pt-5">
+            <div data-reveal="" className="rule-t mt-6 pt-5">
               <p className="t-eyebrow text-red">PayPal</p>
               <p className="mt-2 text-[1.0625rem] leading-snug">
                 You can also give via PayPal using the email address{" "}
@@ -53,7 +53,7 @@ export default function Give() {
               </p>
             </div>
 
-            <div className="rule-t mt-6 pt-5">
+            <div data-reveal="" className="rule-t mt-6 pt-5">
               <p className="t-eyebrow text-red">By mail</p>
               <p className="mt-2 text-[1.0625rem] leading-snug">
                 Make checks payable to <strong className="font-semibold">{GIVE.checks.payee}</strong>
@@ -65,7 +65,7 @@ export default function Give() {
               </p>
             </div>
 
-            <div className="rule-t mt-6 pt-5">
+            <div data-reveal="" className="rule-t mt-6 pt-5">
               <p className="t-eyebrow text-red">Questions</p>
               <p className="mt-2 text-[1.0625rem] leading-snug">{GIVE.questions}</p>
               <Link href="/connect" className="link-rule mt-5">

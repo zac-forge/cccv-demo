@@ -26,16 +26,19 @@ export default function ActionDetailSection({
       className={`grid gap-12 lg:grid-cols-12 lg:gap-16 ${className}`}
     >
       <div className="lg:col-span-7">
-        <p className="t-eyebrow text-red">{label}</p>
+        <p data-reveal="" className="t-eyebrow text-red">
+          {label}
+        </p>
         <h2
           id={`${id}-title`}
+          data-reveal="clip"
           className="f-display t-section mt-5 max-w-[14ch]"
         >
-          {title}
+          <span>{title}</span>
         </h2>
-        {children}
+        <div data-reveal="">{children}</div>
       </div>
-      <div className="lg:col-span-4 lg:col-start-9">
+      <div data-reveal="" data-late="" className="lg:col-span-4 lg:col-start-9">
         {detailTitle && <h3 className="t-card">{detailTitle}</h3>}
         <div className={detailTitle ? "mt-5" : ""}>{detail}</div>
       </div>

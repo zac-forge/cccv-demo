@@ -22,7 +22,8 @@ export default function ServiceTimes() {
       </span>
 
       <div className="shell">
-        <dl className="-mx-4 grid grid-cols-2 sm:-mx-8 lg:grid-cols-4">
+        {/* The four cells as a short sequence, the homepage's beats. */}
+        <dl data-stagger="" className="-mx-4 grid grid-cols-2 sm:-mx-8 lg:grid-cols-4">
           {TIMES.map((cell) => {
             const value = (
               <p className="f-data t-times max-sm:text-[1.375rem]">{cell.value}</p>
@@ -30,6 +31,7 @@ export default function ServiceTimes() {
             return (
               <div
                 key={cell.label}
+                data-reveal=""
                 className="border-t border-[color:var(--rule)] px-4 py-8 [&:nth-child(even)]:border-l sm:px-8 lg:[&:not(:first-child)]:border-l"
               >
                 <dt className="t-eyebrow t-eyebrow-onblue">{cell.label}</dt>

@@ -25,7 +25,7 @@ export default function Ministries() {
       />
       <section aria-label="All ministries" className="field-salt pb-[clamp(5rem,8vw,7rem)]">
         <div className="shell">
-          <MinistryGrid />
+          <MinistryGrid reveal />
         </div>
       </section>
       <CTABand field="field-stock" />

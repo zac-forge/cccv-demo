@@ -41,14 +41,19 @@ export default function NewHere() {
           ========================================================= */}
       <section aria-labelledby="sunday" className="field-stock band">
         <div className="shell">
-          <h2 id="sunday" className="f-display t-section max-w-[13ch]">
-            What a Sunday looks like
+          <h2
+            data-reveal="clip"
+            id="sunday"
+            className="f-display t-section max-w-[13ch]"
+          >
+            <span>What a Sunday looks like</span>
           </h2>
 
-          <ol className="mt-12 md:mt-16">
+          <ol data-stagger="" className="mt-12 md:mt-16">
             {SUNDAY_STEPS.map((step, i) => (
               <li
                 key={step.title}
+                data-reveal=""
                 className="rule-t grid gap-5 py-10 md:py-14 lg:grid-cols-12 lg:gap-16"
               >
                 <span
@@ -96,10 +101,17 @@ export default function NewHere() {
       <section aria-labelledby="getting-here" className="field-salt band">
         <div className="shell grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <h2 id="getting-here" className="f-display t-section max-w-[10ch]">
-              Getting here
+            <h2
+              data-reveal="clip"
+              id="getting-here"
+              className="f-display t-section max-w-[10ch]"
+            >
+              <span>Getting here</span>
             </h2>
-            <p className="f-data mt-8 text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight">
+            <p
+              data-reveal=""
+              className="f-data mt-8 text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight"
+            >
               {CHURCH.address.street}
               <br />
               {CHURCH.address.city}, {CHURCH.address.state} {CHURCH.address.zip}
@@ -117,7 +129,11 @@ export default function NewHere() {
           {/* A stylised map, not a real one: the 101, Hillcrest, Skyline
               and the campus, drawn in the two inks. The directions button
               is what actually gets someone there. */}
-          <div className="relative aspect-[3/2] overflow-hidden border border-ink lg:col-span-7">
+          <div
+            data-reveal=""
+            data-late=""
+            className="relative aspect-[3/2] overflow-hidden border border-ink lg:col-span-7"
+          >
             <Image
               src="/site/church-map.webp"
               alt="Illustrated map: Calvary Chapel Conejo Valley at 101 N. Skyline Dr., off W. Hillcrest Dr. and US 101, with the Conejo Valley hills behind"

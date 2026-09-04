@@ -51,7 +51,11 @@ export default async function EventPage({ params }: { params: Params }) {
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             {page.image && (
-              <div className="relative mb-10 aspect-[3/2] overflow-hidden border border-ink">
+              <div
+                data-reveal=""
+                data-late=""
+                className="relative mb-10 aspect-[3/2] overflow-hidden border border-ink"
+              >
                 <Image
                   src={page.image}
                   alt=""
@@ -62,7 +66,7 @@ export default async function EventPage({ params }: { params: Params }) {
                 />
               </div>
             )}
-            <div className="prose measure">
+            <div data-reveal="" className="prose measure">
               {page.paragraphs.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}

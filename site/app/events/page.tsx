@@ -37,13 +37,17 @@ export default function Events() {
           <Breadcrumb trail={[{ label: "Events", href: "/events" }]} />
           <div className="mt-9 grid gap-12 md:mt-12 lg:grid-cols-12 lg:items-center lg:gap-16">
             <div className="lg:col-span-5">
-              <h1 className="f-display t-poster max-w-[8ch]">
-                What&rsquo;s coming up
+              <h1 data-reveal="clip" className="f-display t-poster max-w-[8ch]">
+                <span>What&rsquo;s coming up</span>
               </h1>
             </div>
 
             {FEATURED.length > 0 && (
-              <div className="lg:col-span-7 lg:col-start-6">
+              <div
+                data-reveal=""
+                data-late=""
+                className="lg:col-span-7 lg:col-start-6"
+              >
                 <EventPosters events={FEATURED} />
               </div>
             )}
@@ -56,19 +60,24 @@ export default function Events() {
         className="field-yellow py-[clamp(4rem,7vw,6rem)]"
       >
         <div className="shell">
-          <EventList events={EVENTS} />
+          <EventList events={EVENTS} reveal />
         </div>
       </section>
 
       <section aria-labelledby="past" className="field-stock band">
         <div className="shell">
-          <h2 id="past" className="f-display t-section max-w-[10ch]">
-            Recently
+          <h2
+            data-reveal="clip"
+            id="past"
+            className="f-display t-section max-w-[10ch]"
+          >
+            <span>Recently</span>
           </h2>
-          <ul className="mt-12 md:mt-14">
+          <ul data-stagger="" className="mt-12 md:mt-14">
             {PAST_EVENTS.map((e) => (
               <li
                 key={e.name}
+                data-reveal=""
                 className="rule-t grid gap-2 py-6 last:border-b last:border-[color:var(--rule)] sm:grid-cols-[11rem_1fr] sm:gap-x-10 md:py-7"
               >
                 <span className="t-eyebrow pt-1.5 text-red">{e.date}</span>

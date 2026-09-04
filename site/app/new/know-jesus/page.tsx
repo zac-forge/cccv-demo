@@ -73,7 +73,7 @@ export default function KnowJesus() {
 
       <article className="field-stock">
         <div className="shell prose pb-[clamp(4rem,7vw,6rem)] pt-[clamp(3rem,5vw,4rem)]">
-          <h2>We have all sinned</h2>
+          <h2 data-reveal="clip"><span>We have all sinned</span></h2>
           <Passage verses={["Romans 3:23"]}>
             <p>
               God is holy, perfectly good, and completely righteous. He created
@@ -92,7 +92,7 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>Jesus came to save us</h2>
+          <h2 data-reveal="clip"><span>Jesus came to save us</span></h2>
           <Passage>
             <p>
               God did not leave us without hope. Jesus Christ, the Son of God,
@@ -117,7 +117,7 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>What it means to respond</h2>
+          <h2 data-reveal="clip"><span>What it means to respond</span></h2>
           <Passage>
             <p>
               Salvation is not something we earn by being good enough, and it
@@ -154,7 +154,7 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>You can come today</h2>
+          <h2 data-reveal="clip"><span>You can come today</span></h2>
           <Passage>
             <p>
               If you are ready to turn to God and put your trust in Jesus, talk
@@ -170,7 +170,10 @@ export default function KnowJesus() {
           display face — so the quotations on the site are one idea. */}
       <section aria-label="A prayer" className="field-ink band">
         <div className="shell lg:grid lg:grid-cols-12 lg:gap-x-16">
-          <blockquote className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-9">
+          <blockquote
+            data-reveal=""
+            className="f-text t-prayer border-l-2 border-yellow pl-6 md:pl-8 lg:col-span-9"
+          >
             &ldquo;Jesus, I know that I am a sinner and that I need You. I
             believe that You died for my sins and rose again. I turn from my sin
             and place my trust in You. Please forgive me and help me to follow
@@ -185,8 +188,11 @@ export default function KnowJesus() {
           <Passage>
             {/* Their bold, set as display type: the one line on the page
                 that carries its own weight, and the one use of display red. */}
-            <p className="f-display t-section display-red max-w-[12ch]">
-              It isn&rsquo;t the prayer that saves you. Jesus saves.
+            <p
+              data-reveal="clip"
+              className="f-display t-section display-red max-w-[12ch]"
+            >
+              <span>It isn&rsquo;t the prayer that saves you. Jesus saves.</span>
             </p>
             <p className="mt-8">
               If you have genuinely placed your trust in Christ, your hope is
@@ -200,7 +206,7 @@ export default function KnowJesus() {
             </p>
           </Passage>
 
-          <h2>Where to begin</h2>
+          <h2 data-reveal="clip"><span>Where to begin</span></h2>
           <Passage>
             <p>
               If you have put your faith in Jesus, we&rsquo;d love to help you

@@ -56,7 +56,7 @@ export default function Radio() {
       <section aria-label="Stations and times" className="field-stock band">
         <div className="shell grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <table className="w-full border-collapse text-left">
+            <table data-reveal="" className="w-full border-collapse text-left">
               <thead>
                 <tr className="t-eyebrow text-red">
                   <th scope="col" className="rule-b pb-3 pr-4 font-bold">Station</th>
@@ -92,7 +92,11 @@ export default function Radio() {
 
           {/* The radio, as itself this time: the homepage buries this
               plate under an ink overlay to make it a tone. */}
-          <div className="relative aspect-[12/5] overflow-hidden border border-ink lg:col-span-5 lg:aspect-[4/5]">
+          <div
+            data-reveal=""
+            data-late=""
+            className="relative aspect-[12/5] overflow-hidden border border-ink lg:col-span-5 lg:aspect-[4/5]"
+          >
             <Image
               src="/site/message-bg.webp"
               alt="Screenprinted illustration of a tabletop radio"

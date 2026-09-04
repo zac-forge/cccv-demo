@@ -94,7 +94,10 @@ export default function About() {
               back on both sides so the type keeps the shell's edges (Drew,
               September 4: both columns, not one). The deck is the homepage hero's:
               reading size with a yellow rule down the left. */}
-          <div className="-mx-6 mt-9 bg-[rgba(22,19,26,0.66)] px-6 py-7 md:-mx-10 md:mt-12 md:px-10 md:py-9">
+          <div
+            data-reveal=""
+            className="-mx-6 mt-9 bg-[rgba(22,19,26,0.66)] px-6 py-7 md:-mx-10 md:mt-12 md:px-10 md:py-9"
+          >
             <h1 className="f-display t-poster max-w-[11ch]">About</h1>
             <p className="muted mt-7 border-l-2 border-yellow pl-5 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-[1.55] md:mt-8 md:pl-6">
               {WHO.text}
@@ -112,11 +115,11 @@ export default function About() {
         className="field-salt pb-[clamp(4rem,7vw,6rem)]"
       >
         <div className="shell grid gap-10 md:grid-cols-2 md:gap-16">
-          <div className="rule-t pt-6">
+          <div data-reveal="" className="rule-t pt-6">
             <h2 className="t-subhead">{WHAT.title}</h2>
             <p className="prose mt-4 max-w-[46ch]">{WHAT.text}</p>
           </div>
-          <div className="rule-t pt-6">
+          <div data-reveal="" className="rule-t pt-6">
             <h2 className="t-subhead">{WHY.title}</h2>
             <p className="prose mt-4 max-w-[46ch]">{WHY.text}</p>
           </div>
@@ -136,17 +139,18 @@ export default function About() {
       >
         <div className="shell">
           <h2
+            data-reveal="clip"
             id="beliefs-title"
             className="f-display t-section max-w-[12ch]"
           >
-            What we believe
+            <span>What we believe</span>
           </h2>
           <Verse
             reference="Acts 20:27"
             layout="pull"
             className="mt-10 max-w-[42rem] md:mt-12"
           />
-          <div className="prose mt-12 md:mt-16">
+          <div data-reveal="" className="prose mt-12 md:mt-16">
             {BELIEFS.intro.map((para) => (
               <p key={para.slice(0, 40)}>{para}</p>
             ))}
@@ -157,6 +161,7 @@ export default function About() {
               return (
                 <li
                   key={w.we}
+                  data-reveal=""
                   className="rule-t grid gap-5 py-8 md:py-10 lg:grid-cols-12 lg:gap-16"
                 >
                   <p className="lg:col-span-5">
@@ -194,14 +199,17 @@ export default function About() {
       >
         <div className="shell grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <p className="t-eyebrow text-red">Meet our pastor</p>
+            <p data-reveal="" className="t-eyebrow text-red">
+              Meet our pastor
+            </p>
             <h2
+              data-reveal="clip"
               id="pastor-title"
               className="f-display t-section mt-5 max-w-[12ch]"
             >
-              {PASTOR.name}
+              <span>{PASTOR.name}</span>
             </h2>
-            <div className="prose measure mt-10 md:mt-12">
+            <div data-reveal="" className="prose measure mt-10 md:mt-12">
               {PASTOR.paragraphs.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}
@@ -209,10 +217,11 @@ export default function About() {
           </div>
           <div className="lg:col-span-4 lg:col-start-9 lg:flex lg:flex-col">
             <h3 className="t-card">Where he has served</h3>
-            <dl className="mt-5">
+            <dl data-stagger="" className="mt-5">
               {MILESTONES.map((m) => (
                 <div
                   key={m.year}
+                  data-reveal=""
                   className="rule-t grid grid-cols-[5rem_1fr] gap-4 py-4"
                 >
                   <dt className="f-data text-[1.375rem] leading-none">
@@ -224,7 +233,11 @@ export default function About() {
             </dl>
             {/* PLACEHOLDER: the screenprinted couple until the staff photos
                 arrive; then this is Dave and Lynette, with a real alt. */}
-            <div className="relative mt-10 aspect-[2/3] overflow-hidden border border-ink">
+            <div
+              data-reveal=""
+              data-late=""
+              className="relative mt-10 aspect-[2/3] overflow-hidden border border-ink"
+            >
               <Image
                 src="/staff/couple.webp"
                 alt=""
@@ -250,16 +263,25 @@ export default function About() {
         className="field-stock band"
       >
         <div className="shell">
-          <h2 id="team-title" className="f-display t-section max-w-[12ch]">
-            Meet our team
+          <h2
+            data-reveal="clip"
+            id="team-title"
+            className="f-display t-section max-w-[12ch]"
+          >
+            <span>Meet our team</span>
           </h2>
           <ul className="mt-12 md:mt-14">
             {TEAM.map((person) => (
               <li
                 key={person.names}
+                data-reveal=""
                 className="rule-t grid grid-cols-[7.5rem_1fr] gap-x-5 gap-y-3 py-7 md:grid-cols-[10rem_1fr] md:gap-x-8 md:py-8 lg:grid-cols-[14rem_1fr_2fr] lg:gap-16"
               >
-                <div className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:row-span-1">
+                <div
+                  data-reveal=""
+                  data-late=""
+                  className="relative row-span-2 aspect-[2/3] overflow-hidden border border-ink lg:row-span-1"
+                >
                   <Image
                     src={`/staff/${person.portrait}.webp`}
                     alt=""
@@ -282,7 +304,7 @@ export default function About() {
             aria-labelledby="reach-title"
             className="rule-t mt-4 grid gap-8 pt-8 md:pt-10 lg:grid-cols-12 lg:gap-16"
           >
-            <div className="lg:col-span-4">
+            <div data-reveal="" className="lg:col-span-4">
               <h2 id="reach-title" className="t-subhead">
                 Connect with us
               </h2>
@@ -290,7 +312,10 @@ export default function About() {
                 We&rsquo;d love to hear from you
               </p>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
+            <div
+              data-reveal=""
+              className="grid gap-6 sm:grid-cols-2 lg:col-span-7 lg:col-start-6"
+            >
               <p>
                 <a
                   href={`mailto:${CHURCH.email}`}

@@ -48,11 +48,13 @@ export default function PageHeader({
       <header className={`${field} page-header`}>
         <div className="shell">
           {trail && <Breadcrumb trail={trail} />}
-          <h1 className="f-display t-feature mt-7 max-w-[14ch] md:mt-9">
-            {title}
+          <h1 data-reveal="clip" className="f-display t-feature mt-7 max-w-[14ch] md:mt-9">
+            <span>{title}</span>
           </h1>
           {lede && (
-            <div className="t-lede measure-tight mt-7 md:mt-9">{lede}</div>
+            <div data-reveal="" className="t-lede measure-tight mt-7 md:mt-9">
+              {lede}
+            </div>
           )}
         </div>
       </header>
@@ -72,18 +74,24 @@ export default function PageHeader({
         {trail && <Breadcrumb trail={trail} />}
         <div className="mt-9 grid gap-10 md:mt-12 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className={asideNear && !stacked ? "lg:col-span-4" : "lg:col-span-7"}>
-            <h1 className="f-display t-poster max-w-[11ch]">{title}</h1>
+            <h1 data-reveal="clip" className="f-display t-poster max-w-[11ch]">
+              <span>{title}</span>
+            </h1>
             {lede && (
-              <div className="t-lede muted measure-tight mt-8 md:mt-10">
+              <div data-reveal="" className="t-lede muted measure-tight mt-8 md:mt-10">
                 {lede}
               </div>
             )}
             {aside && stacked && (
-              <div className="mt-8 max-w-[34ch] md:mt-10">{aside}</div>
+              <div data-reveal="" data-late="" className="mt-8 max-w-[34ch] md:mt-10">
+                {aside}
+              </div>
             )}
           </div>
           {aside && !stacked && (
             <div
+              data-reveal=""
+              data-late=""
               className={
                 asideNear
                   ? "lg:col-span-4 lg:col-start-6 lg:pb-1"
@@ -95,7 +103,7 @@ export default function PageHeader({
           )}
         </div>
         {statement && (
-          <div className="f-text t-pull rule-t mt-10 pt-8 md:mt-14 md:pt-10">
+          <div data-reveal="" className="f-text t-pull rule-t mt-10 pt-8 md:mt-14 md:pt-10">
             {statement}
           </div>
         )}

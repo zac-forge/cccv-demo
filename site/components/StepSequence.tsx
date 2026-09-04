@@ -9,10 +9,11 @@ export default function StepSequence({
   className?: string;
 }) {
   return (
-    <ol className={className}>
+    <ol data-stagger="" className={className}>
       {steps.map((step, i) => (
         <li
           key={step.title}
+          data-reveal=""
           className="rule-t grid gap-4 py-8 md:py-10 lg:grid-cols-12 lg:gap-16"
         >
           <span

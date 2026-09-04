@@ -33,18 +33,22 @@ export default function WhoWeSupport() {
               className="rule-t grid gap-6 py-12 md:py-16 lg:grid-cols-12 lg:gap-16"
             >
               <h2
+                data-reveal="clip"
                 id={org.name}
                 className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em] lg:col-span-4"
               >
-                {org.name}
+                <span>{org.name}</span>
               </h2>
               <div className="lg:col-span-8 lg:col-start-5">
-                <div className="prose measure">
+                <div data-reveal="" className="prose measure">
                   {org.paragraphs.map((para) => (
                     <p key={para.slice(0, 40)}>{para}</p>
                   ))}
                 </div>
-                <div className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:gap-10">
+                <div
+                  data-reveal=""
+                  className="mt-8 flex flex-col items-start gap-5 sm:flex-row sm:gap-10"
+                >
                   {org.links.map((link) => (
                     <a
                       key={link.href}

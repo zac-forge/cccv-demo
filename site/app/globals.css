@@ -411,9 +411,11 @@
     z-index: -1;
     top: 0;
     right: 0;
-    bottom: 0;
+    /* 16px of slack under the header's clip: the plate drifts up to
+       14px with the scroll (data-drift) and never shows its bottom edge. */
+    bottom: -16px;
     width: 50%;
-    height: 100%;
+    height: calc(100% + 16px);
     object-fit: cover;
     object-position: right center;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 40%);
@@ -1391,21 +1393,38 @@
      that genuinely read as a sequence. Ministries is deliberately left
      out — eight staggered cards is a waterfall, and each card already
      arrives on its own as it is scrolled to. */
+  /* Interior pages mark such a list with data-stagger on the list
+     itself (steps, a printed schedule, the three service cells), the
+     same three beats. */
   #new-here li[data-reveal]:nth-child(2),
-  #events li[data-reveal]:nth-child(2) {
+  #events li[data-reveal]:nth-child(2),
+  [data-stagger] > [data-reveal]:nth-child(2) {
     --reveal-delay: 70ms;
   }
   #new-here li[data-reveal]:nth-child(3),
-  #events li[data-reveal]:nth-child(3) {
+  #events li[data-reveal]:nth-child(3),
+  [data-stagger] > [data-reveal]:nth-child(3) {
     --reveal-delay: 140ms;
   }
   #new-here li[data-reveal]:nth-child(n + 4),
-  #events li[data-reveal]:nth-child(n + 4) {
+  #events li[data-reveal]:nth-child(n + 4),
+  [data-stagger] > [data-reveal]:nth-child(n + 4) {
     --reveal-delay: 210ms;
   }
   /* Plates that follow their own heading by a beat. */
   [data-motion="on"] [data-late] {
     --reveal-delay: 160ms;
+  }
+  /* A reveal inside a reveal collapses to the outer one, so a Verse or a
+     step list inside a revealed block never rises twice as far or fades
+     twice. Shared components carry their own attribute; pages wrap them
+     freely. */
+  [data-motion="on"] [data-reveal] [data-reveal],
+  [data-motion="on"] [data-reveal] [data-reveal="clip"] > * {
+    opacity: 1;
+    translate: none;
+    clip-path: none;
+    transition: none;
   }
 
   /* Mobile takes less of everything: shorter travel, no stagger. Drift

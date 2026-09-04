@@ -50,9 +50,13 @@ export default function Sermons() {
           />
           <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:items-end lg:gap-16">
             <div className="lg:col-span-7">
-              <p className="t-eyebrow text-yellow">{YEARS}</p>
-              <h1 className="f-display t-feature mt-4 max-w-[14ch]">All messages</h1>
-              <p className="t-lede muted measure-tight mt-7">
+              <p data-reveal="" className="t-eyebrow text-yellow">
+                {YEARS}
+              </p>
+              <h1 data-reveal="clip" className="f-display t-feature mt-4 max-w-[14ch]">
+                <span>All messages</span>
+              </h1>
+              <p data-reveal="" className="t-lede muted measure-tight mt-7">
                 We&rsquo;re always adding to our online library from Pastor
                 Dave&rsquo;s previous teachings, so if you&rsquo;re looking for a
                 particular book, check back in a bit.

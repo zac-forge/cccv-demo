@@ -56,6 +56,8 @@ export default async function MinistryPage({ params }: { params: Params }) {
       <section className="field-stock band">
         <div className="shell grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
           <div
+            data-reveal=""
+            data-late=""
             className="relative overflow-hidden border border-ink lg:col-span-6"
             style={{ aspectRatio: m.ratio }}
           >
@@ -70,10 +72,14 @@ export default async function MinistryPage({ params }: { params: Params }) {
           </div>
 
           <div className="lg:col-span-5 lg:col-start-8">
-            {d.note && <p className="mb-6 text-[0.9375rem] leading-snug text-red">{d.note}</p>}
+            {d.note && (
+              <p data-reveal="" className="mb-6 text-[0.9375rem] leading-snug text-red">
+                {d.note}
+              </p>
+            )}
             <Facts facts={d.facts} />
             {d.leaders && (
-              <p className="rule-t mt-0 pt-5">
+              <p data-reveal="" className="rule-t mt-0 pt-5">
                 <span className="t-eyebrow block text-red">Led by</span>
                 <span className="t-card mt-2 block">{d.leaders}</span>
               </p>
@@ -83,7 +89,7 @@ export default async function MinistryPage({ params }: { params: Params }) {
 
         {(rest.length > 0 || d.verse || d.sections) && (
           <div className="shell mt-16 md:mt-20">
-            <div className="prose measure">
+            <div data-reveal="" className="prose measure">
               {rest.map((para) => (
                 <p key={para.slice(0, 40)}>{para}</p>
               ))}

@@ -25,16 +25,19 @@ export default function Memorials() {
           {MEMORIALS.map((m) => (
             <article key={m.title} className="rule-t pt-10 lg:grid lg:grid-cols-12 lg:gap-x-16">
               <div className="lg:col-span-7">
-                <h2 className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]">
-                  {m.title}
+                <h2
+                  data-reveal="clip"
+                  className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]"
+                >
+                  <span>{m.title}</span>
                 </h2>
-                <div className="prose measure mt-6">
+                <div data-reveal="" className="prose measure mt-6">
                   <p>{m.text}</p>
                 </div>
                 <div className="mt-8 max-w-[52ch]">
                   <Verse reference={m.verse} layout="quote" />
                 </div>
-                <div className="prose measure mt-10">
+                <div data-reveal="" className="prose measure mt-10">
                   <p>{m.giving}</p>
                 </div>
                 {/* PLACEHOLDER: the button's original target was a form on

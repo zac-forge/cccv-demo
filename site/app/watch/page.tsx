@@ -50,11 +50,13 @@ export default function Watch() {
           <Breadcrumb trail={[{ label: "Messages", href: "/watch" }]} />
           <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:items-end lg:gap-16">
             <div className="lg:col-span-7">
-              <p className="t-eyebrow text-yellow">Messages</p>
-              <h1 className="f-display t-feature mt-4 max-w-[14ch]">
-                Teaching the Word, verse by verse.
+              <p data-reveal="" className="t-eyebrow text-yellow">
+                Messages
+              </p>
+              <h1 data-reveal="clip" className="f-display t-feature mt-4 max-w-[14ch]">
+                <span>Teaching the Word, verse by verse.</span>
               </h1>
-              <p className="t-lede muted measure-tight mt-7">
+              <p data-reveal="" className="t-lede muted measure-tight mt-7">
                 We don&rsquo;t just teach from the Bible as much as we teach
                 through the Bible.
               </p>
@@ -103,10 +105,11 @@ export default function Watch() {
           <div className="lg:col-span-8">
             <div className="rule-b flex flex-col gap-3 pb-4 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
               <h2
+                data-reveal="clip"
                 id="recent-title"
                 className="f-display text-[clamp(1.875rem,3vw,2.75rem)] leading-[1] tracking-[-0.025em]"
               >
-                Recent messages
+                <span>Recent messages</span>
               </h2>
               <Link href="/watch/sermons" className="link-folio group shrink-0">
                 All messages
@@ -118,10 +121,11 @@ export default function Watch() {
                 </span>
               </Link>
             </div>
-            <ul className="md:mt-8 md:grid md:grid-cols-3 md:gap-8">
+            <ul data-stagger="" className="md:mt-8 md:grid md:grid-cols-3 md:gap-8">
               {RECENT.map((s) => (
                 <li
                   key={s.id}
+                  data-reveal=""
                   className="border-b border-[color:var(--rule)] py-5 md:border-0 md:py-0"
                 >
                   <SermonPreview sermon={s} href={`/watch/sermons?s=${s.id}`} />
@@ -130,7 +134,11 @@ export default function Watch() {
             </ul>
           </div>
 
-          <div className="border-t border-[color:var(--rule)] pt-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+          <div
+            data-reveal=""
+            data-late=""
+            className="border-t border-[color:var(--rule)] pt-8 lg:col-span-4 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0"
+          >
             <p className="t-eyebrow text-red">Watch live</p>
             {/* Their times, /home. The livestream page computes the next one. */}
             <p className="f-data mt-4 text-[clamp(1.5rem,2.4vw,2rem)] leading-tight">
@@ -164,7 +172,11 @@ export default function Watch() {
         className="field-blue py-[clamp(4rem,7vw,6.5rem)]"
       >
         <div className="shell grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
-          <div className="relative order-first aspect-[12/5] overflow-hidden border border-[color:var(--rule)] lg:order-none lg:col-span-5 lg:aspect-[4/5]">
+          <div
+            data-reveal=""
+            data-late=""
+            className="relative order-first aspect-[12/5] overflow-hidden border border-[color:var(--rule)] lg:order-none lg:col-span-5 lg:aspect-[4/5]"
+          >
             <Image
               src="/site/message-bg.webp"
               alt="Screenprinted illustration of a tabletop radio"
@@ -174,11 +186,20 @@ export default function Watch() {
             />
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="t-eyebrow text-[color:var(--color-yellow-onblue)]">On the radio</p>
-            <h2 id="radio-title" className="f-display t-section mt-5 max-w-[12ch]">
-              Faith Comes By Hearing
+            <p
+              data-reveal=""
+              className="t-eyebrow text-[color:var(--color-yellow-onblue)]"
+            >
+              On the radio
+            </p>
+            <h2
+              data-reveal="clip"
+              id="radio-title"
+              className="f-display t-section mt-5 max-w-[12ch]"
+            >
+              <span>Faith Comes By Hearing</span>
             </h2>
-            <p className="t-lede muted measure-tight mt-7">
+            <p data-reveal="" className="t-lede muted measure-tight mt-7">
               Taken from live recordings of both Sunday morning and Wednesday
               night services, &ldquo;Faith Comes By Hearing&rdquo; is our daily
               radio broadcast featuring Pastor Dave&rsquo;s dynamic

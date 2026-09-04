@@ -44,7 +44,7 @@ export default function Live() {
             <p className="muted mt-6 max-w-[38ch] text-[0.9375rem] leading-snug">
               Watch here, or on YouTube, Facebook and Rumble.
             </p>
-            <ul className="mt-8 flex flex-col gap-3">
+            <ul data-reveal="" className="mt-8 flex flex-col gap-3">
               {[
                 { label: "YouTube", href: `${CHURCH.social.youtube}/live` },
                 { label: "Facebook", href: CHURCH.social.facebook },
@@ -61,7 +61,7 @@ export default function Live() {
               Browse all messages
             </Link>
           </div>
-          <div className="lg:col-span-7">
+          <div data-reveal="" data-late="" className="lg:col-span-7">
             <LivePlayer channelId={YT_CHANNEL_ID} />
           </div>
         </div>
