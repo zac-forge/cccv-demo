@@ -61,7 +61,8 @@ export default function Give() {
                 Make checks payable to:
                 <br />
                 <strong className="font-semibold whitespace-nowrap">{GIVE.checks.payee}</strong>
-                <br />
+              </p>
+              <p className="mt-4 text-[1.0625rem] leading-snug">
                 Send to:
                 <br />
                 {GIVE.checks.address}
