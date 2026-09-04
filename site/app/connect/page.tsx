@@ -23,6 +23,11 @@ import { CHURCH } from "@/lib/site";
    the address (spatial). Numerals appear only on the directory steps,
    which are the one real sequence.
 
+   The page opens as a poster on blue (Drew, September 4), the same
+   form as /about: the title at poster size, Pastor Dave's number hung
+   beside it as the aside, and his line across the full shell as the
+   statement.
+
    Their sign-up forms (serve, directory) currently fail to load on the
    live site ("He must enable SSL"). Whether they come back through
    Amplify or a Worker is open (docs/01-build-plan.md §5); until then
@@ -64,9 +69,25 @@ export default function Connect() {
   return (
     <main id="main">
       <PageHeader
+        poster
+        field="field-blue"
         trail={[{ label: "Connect", href: "/connect" }]}
         title="Connect"
-        lede={
+        asideNear
+        aside={
+          <p>
+            <span className="t-eyebrow block text-[color:var(--color-yellow-onblue)]">
+              Call or text Pastor Dave
+            </span>
+            <a
+              href={CHURCH.phoneHref}
+              className="f-data mt-3 inline-block text-[clamp(1.75rem,3vw,2.5rem)] leading-none"
+            >
+              {CHURCH.phone}
+            </a>
+          </p>
+        }
+        statement={
           <p>
             We count it a blessing and a privilege to serve each and every one
             of you.
