@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import BleedHeader from "@/components/BleedHeader";
 import CTABand from "@/components/CTABand";
-import PageHeader from "@/components/PageHeader";
 import { SUPPORT } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -14,14 +14,16 @@ export const metadata: Metadata = {
 export default function WhoWeSupport() {
   return (
     <main id="main">
-      <PageHeader
-        field="field-salt"
+      {/* The coast from the Conejo hills at first light, a plane heading
+          out: the /about full bleed, looking past the valley. */}
+      <BleedHeader
+        src="/site/support-hero.webp"
         trail={[
           { label: "About", href: "/about" },
           { label: "Who we support", href: "/about/who-we-support" },
         ]}
         title="Ministries we support"
-        lede={<p>{SUPPORT.intro}</p>}
+        deck={SUPPORT.intro}
       />
 
       <div className="field-stock">

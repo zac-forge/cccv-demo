@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Breadcrumb from "@/components/Breadcrumb";
+import BleedHeader from "@/components/BleedHeader";
 import CTABand from "@/components/CTABand";
 import Verse from "@/components/Verse";
 import { BELIEFS, PASTOR, TEAM, WHO_WE_ARE } from "@/lib/content";
@@ -77,34 +77,12 @@ export default function About() {
           the hills filling the rest. The homepage's treatment at about
           two-thirds the height. Type stays in the sky zone, since type
           over hills cannot be read. */}
-      <header className="field-blue relative isolate flex min-h-[max(550px,60vh)] items-start overflow-hidden">
-        <Image
-          src="/site/valley-hero.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover object-[30%_50%] md:object-center"
-        />
-        <div className="poster-sky absolute inset-0 -z-10" aria-hidden="true" />
-        <div className="shell relative pb-[clamp(3rem,10vw,9rem)] pt-[clamp(2.75rem,5vw,4.5rem)]">
-          <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
-          {/* Title and deck on a printed label: flat ink at two-thirds,
-              square, no border, spanning the shell with its padding pulled
-              back on both sides so the type keeps the shell's edges (Drew,
-              September 4: both columns, not one). The deck is the homepage hero's:
-              reading size with a yellow rule down the left. */}
-          <div
-            data-reveal=""
-            className="-mx-6 mt-9 bg-[rgba(22,19,26,0.66)] px-6 py-7 md:-mx-10 md:mt-12 md:px-10 md:py-9"
-          >
-            <h1 className="f-display t-poster max-w-[11ch]">About</h1>
-            <p className="muted mt-7 border-l-2 border-yellow pl-5 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-[1.55] md:mt-8 md:pl-6">
-              {WHO.text}
-            </p>
-          </div>
-        </div>
-      </header>
+      <BleedHeader
+        src="/site/valley-hero.webp"
+        trail={[{ label: "About", href: "/about" }]}
+        title="About"
+        deck={WHO.text}
+      />
 
       {/* =========================================================
           WHAT WE DO, WHY WE'RE HERE — two of the three /home blocks,

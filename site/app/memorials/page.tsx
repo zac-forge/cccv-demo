@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BleedHeader from "@/components/BleedHeader";
 import Facts from "@/components/Facts";
-import PageHeader from "@/components/PageHeader";
 import Verse from "@/components/Verse";
 import { MEMORIALS } from "@/lib/content";
 
@@ -16,9 +16,15 @@ export const metadata: Metadata = {
 export default function Memorials() {
   return (
     <main id="main">
-      <PageHeader
+      {/* The oak and the bench at dusk, the /about full bleed. The page
+          has no introduction of its own, so the verse it already carries
+          takes the deck's place. On a phone the crop keeps the bench. */}
+      <BleedHeader
+        src="/site/memorials-hero.webp"
+        phoneCrop="object-[62%_50%]"
         trail={[{ label: "Memorials", href: "/memorials" }]}
         title="Memorials"
+        aside={<Verse reference="2 Corinthians 5:8" tone="dark" layout="quote" />}
       />
       <div className="field-stock">
         <div className="shell pb-[clamp(5rem,8vw,7rem)]">

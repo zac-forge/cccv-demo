@@ -2,13 +2,14 @@ import Link from "next/link";
 import CTABand from "@/components/CTABand";
 import PageHeader from "@/components/PageHeader";
 
-/* Branded, on stock. Seventy old URLs are moving, so any redirect that
-   was missed lands here; the band below puts service times one tap away
-   even from a dead link. */
+/* Branded: a poster on ink with the empty pier, the body on stock.
+   Seventy old URLs are moving, so any redirect that was missed lands
+   here; the band below puts service times one tap away even from a
+   dead link. */
 export default function NotFound() {
   return (
     <main id="main">
-      <PageHeader title="There is no page at this address." />
+      <PageHeader poster art="pier" field="field-ink" title="There is no page at this address." />
       <div className="field-stock">
         <div className="shell prose pb-[clamp(5rem,8vw,7rem)]">
           <p data-reveal="" className="measure-tight">

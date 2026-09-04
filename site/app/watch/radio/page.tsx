@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
+import PosterArt from "@/components/PosterArt";
 import Verse from "@/components/Verse";
 import WatchNav from "@/components/WatchNav";
 
@@ -45,15 +46,20 @@ export const metadata: Metadata = {
 export default function Radio() {
   return (
     <main id="main">
-      <div className="field-ink">
-        <header className="shell pt-[clamp(2.5rem,5vw,4rem)]">
+      {/* The tower fills the right half, so Romans 10:17 stacks under the
+          paragraph the way a poster header stacks its aside when a painted
+          piece owns the right (PageHeader); it sat in the five columns
+          beside the title until the art came (Drew, September 4). */}
+      <div className="field-ink relative isolate overflow-hidden" data-art="tower">
+        <PosterArt art="tower" />
+        <header className="shell relative pt-[clamp(2.5rem,5vw,4rem)]">
           <Breadcrumb
             trail={[
               { label: "Messages", href: "/watch" },
               { label: "Radio", href: "/watch/radio" },
             ]}
           />
-          <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <div className="mt-7 grid gap-10 md:mt-9 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">
               <p data-reveal="" className="t-eyebrow text-yellow">
                 On the radio
@@ -67,14 +73,13 @@ export default function Radio() {
                 radio broadcast featuring Pastor Dave&rsquo;s dynamic
                 verse-by-verse teaching.
               </p>
+              <Verse
+                reference="Romans 10:17"
+                tone="dark"
+                layout="quote"
+                className="mt-8 md:mt-10"
+              />
             </div>
-            <Verse
-              reference="Romans 10:17"
-              tone="dark"
-              layout="quote"
-              size="pull"
-              className="lg:col-span-5 lg:col-start-8 lg:pb-1"
-            />
           </div>
           <WatchNav current="/watch/radio" className="mt-10 md:mt-14" />
         </header>

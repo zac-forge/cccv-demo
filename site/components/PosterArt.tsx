@@ -15,17 +15,42 @@ import Image from "next/image";
    cross   a plain cross on a hill before sunrise, painted on Baptism
            Blue. Fills the right half, masked in from the left.
    sower   a sower at dusk, painted on Maranatha Ink. Same placement.
+   tower   a transmitter on a ridge over the valley at night, on ink
+           (/watch/radio).
+   lectern an open Bible under one stage light, on ink (/watch/live).
+   doors   open doors on a Sunday morning, on Baptism Blue (/new).
+   pier    an empty pier at dusk, on ink (the 404).
    none    type only.
-   The Conejo Valley band is not here: it is a plate on /about. */
-export type PosterArtName = "rays" | "cross" | "sower" | "none";
+   The full bleeds (the valley on /about, the coast on
+   /about/who-we-support, the oak on /memorials) are BleedHeader. */
+export type PosterArtName =
+  | "rays"
+  | "cross"
+  | "sower"
+  | "tower"
+  | "lectern"
+  | "doors"
+  | "pier"
+  | "none";
 
 /* The painted pieces own the right side, so the header stacks its aside
    under the deck rather than hanging it in the art. */
-export const ART_OWNS_RIGHT: ReadonlySet<PosterArtName> = new Set(["cross", "sower"]);
+export const ART_OWNS_RIGHT: ReadonlySet<PosterArtName> = new Set([
+  "cross",
+  "sower",
+  "tower",
+  "lectern",
+  "doors",
+  "pier",
+]);
 
 const PAINTED = {
   cross: { src: "/site/cross-dawn.webp", width: 1400, height: 933 },
   sower: { src: "/site/sower.webp", width: 1400, height: 933 },
+  tower: { src: "/site/radio-tower.webp", width: 1400, height: 933 },
+  lectern: { src: "/site/live-lectern.webp", width: 1400, height: 933 },
+  doors: { src: "/site/visit-doors.webp", width: 1400, height: 933 },
+  pier: { src: "/site/pier.webp", width: 1400, height: 933 },
 } as const;
 
 export default function PosterArt({

@@ -34,7 +34,7 @@ export default function NewHere() {
           schedule band beneath is the poster's foot, one field. */}
       <PageHeader
         poster
-        sun
+        art="doors"
         field="field-blue"
         trail={[{ label: "Visit", href: "/new" }]}
         title="Plan your visit"

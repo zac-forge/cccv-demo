@@ -28,6 +28,8 @@ export default function Live() {
   return (
     <main id="main">
       <PageHeader
+        poster
+        art="lectern"
         field="field-ink"
         trail={[
           { label: "Messages", href: "/watch" },
