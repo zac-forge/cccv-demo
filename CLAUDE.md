@@ -66,3 +66,7 @@ No Cloudflare or Sanity account exists yet, and none is needed to build the page
 Don't over-test. Build passes, one screenshot of what changed, push. Skip multi-breakpoint sweeps
 and re-screenshotting after small fixes unless there is a specific question whose answer changes
 what you do. Measurement is warranted for new or changed design.
+
+Load no skills unless Drew names one, no subagents unless the job needs them, and keep reads
+narrow: this file @-includes `docs/00-START-HERE.md`, so every turn already carries a large
+context, and the session usage limit is the real budget (Drew, September 4).
