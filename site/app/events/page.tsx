@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
 import EventList from "@/components/EventList";
+import EventPosters from "@/components/EventPosters";
 import { EVENTS, PAST_EVENTS } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -19,10 +18,12 @@ export const metadata: Metadata = {
 
    The opening is a poster on ink (Drew, September 4): the title at
    poster size and, beside it, every upcoming event that has artwork as
-   a plate, each a link to its page with the date in yellow numerals and
-   the name as its caption. Ink because the list below keeps the Events
-   field, yellow, and yellow numerals only sit on a dark ground. No
-   sunburst: the plates own that corner. */
+   a plate (EventPosters), each a link to its page with the date in
+   yellow numerals and the name as its caption. The plates are a strip:
+   one whole plate on a phone, two from sm, more by scrolling. Ink
+   because the list below keeps the Events field, yellow, and yellow
+   numerals only sit on a dark ground. No sunburst: the plates own that
+   corner. */
 
 const FEATURED = EVENTS.filter((e) => e.page?.image);
 
@@ -40,47 +41,9 @@ export default function Events() {
             </div>
 
             {FEATURED.length > 0 && (
-              <ul
-                className={`grid gap-8 lg:col-span-7 lg:col-start-6 ${
-                  FEATURED.length > 1 ? "sm:grid-cols-2" : ""
-                }`}
-              >
-                {FEATURED.map((e, i) => (
-                  <li key={e.name}>
-                    <Link href={e.href} className="pressable block">
-                      <span className="relative block aspect-[3/2] overflow-hidden border border-[color:var(--rule)]">
-                        <Image
-                          src={e.page!.image!}
-                          alt=""
-                          fill
-                          priority={i === 0}
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 30vw"
-                          className="object-cover"
-                        />
-                      </span>
-                      <span className="mt-4 grid grid-cols-[5.5rem_1fr] items-baseline gap-x-4">
-                        <span
-                          aria-hidden="true"
-                          className={`f-data leading-none text-yellow ${
-                            e.day.includes("–") ? "text-[1.375rem]" : "text-[1.75rem]"
-                          }`}
-                        >
-                          <span className="t-eyebrow block">{e.month}</span>
-                          {e.day}
-                        </span>
-                        <span>
-                          <span className="f-data block text-[1.25rem] leading-tight">
-                            {e.name}
-                          </span>
-                          <span className="muted mt-1 block text-[0.9375rem]">
-                            {e.detail}
-                          </span>
-                        </span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="lg:col-span-7 lg:col-start-6">
+                <EventPosters events={FEATURED} />
+              </div>
             )}
           </div>
         </div>

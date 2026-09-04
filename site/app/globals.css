@@ -1305,6 +1305,58 @@
     letter-spacing: -0.012em;
   }
 
+  /* Poster strip (EventPosters): whole plates only, one on a phone and
+     two from sm, the rest reached by scrolling. Snap keeps a plate flush
+     left after every move; the scrollbar is hidden because the arrows
+     and the swipe are the controls. Media queries, not variants: variants
+     do not reach custom classes in this layer. */
+  .poster-strip {
+    display: flex;
+    column-gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .poster-strip::-webkit-scrollbar {
+    display: none;
+  }
+  .poster-strip > li {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 640px) {
+    .poster-strip > li {
+      flex-basis: calc((100% - 2rem) / 2);
+    }
+  }
+  /* The strip's arrows: a square outline chip in the field's own colour.
+     Hover fills salt, because on ink the btn-outline fill would vanish. */
+  .strip-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+    color: currentColor;
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: background-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-out);
+  }
+  .strip-arrow:hover {
+    background: var(--color-salt);
+    border-color: var(--color-salt);
+    color: var(--color-ink);
+  }
+  .strip-arrow[aria-disabled="true"] {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
   /* Section index: a contents strip. Rows on a phone; from lg one strip
      of equal cells divided by hairlines. Hover and focus fill the cell in
      ink, the same move btn-outline makes. The list hangs out by its own
