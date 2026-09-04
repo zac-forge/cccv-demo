@@ -297,7 +297,7 @@ build_jobs() { # <url_column> <extension>
     function clean(s,   t) {
       t = s
       gsub(/[\/\\:*?"<>|]/, " ", t)          # illegal on macOS and Windows
-      gsub(/[\x00-\x1f]/, "", t)             # control characters
+      gsub(/[\x01-\x1f]/, "", t)             # control characters. \x00 in a class breaks macOS awk under UTF-8
       gsub(/  +/, " ", t)
       sub(/^ +/, "", t); sub(/ +$/, "", t)
       sub(/\.+$/, "", t)                     # no trailing dots
