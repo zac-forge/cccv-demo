@@ -26,7 +26,16 @@ export const metadata: Metadata = {
 export default function NewHere() {
   return (
     <main id="main">
+      {/* The opening is a poster on blue, the sunburst whole in the
+          corner (Drew, September 4: the hero matches the other subpages,
+          which open as posters on a field, not as a chapter on stock).
+          Title and lede only: the right belongs to the sun, and no verse
+          is hung because none of their visit copy cites one. The blue
+          schedule band beneath is the poster's foot, one field. */}
       <PageHeader
+        poster
+        sun
+        field="field-blue"
         trail={[{ label: "Visit", href: "/new" }]}
         title="Plan your visit"
         lede={<p>New to church? Here&rsquo;s what to expect.</p>}

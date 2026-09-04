@@ -21,7 +21,9 @@ type Field = "field-stock" | "field-salt" | "field-blue" | "field-ink" | "field-
    title, in the columns the scrim keeps clean, rather than out under
    the rays where it competes with the sun (/about). `art` picks the
    piece behind the poster (PosterArt); a painted piece owns the right
-   side, so the aside then stacks under the deck instead. */
+   side, so the aside then stacks under the deck instead. `sun` hangs
+   the sunburst flush to the corner so the whole disc shows in a short
+   header (/new), the way /connect hangs it. */
 export default function PageHeader({
   trail,
   title,
@@ -30,6 +32,7 @@ export default function PageHeader({
   aside,
   asideNear = false,
   art = "rays",
+  sun = false,
   field = "field-stock",
   poster = false,
 }: {
@@ -40,6 +43,7 @@ export default function PageHeader({
   aside?: React.ReactNode;
   asideNear?: boolean;
   art?: PosterArtName;
+  sun?: boolean;
   field?: Field;
   poster?: boolean;
 }) {
@@ -68,7 +72,7 @@ export default function PageHeader({
       className={`${field} page-header-poster relative isolate overflow-hidden`}
       data-art={art}
     >
-      <PosterArt art={art} />
+      <PosterArt art={art} sun={sun} />
 
       <div className="shell relative">
         {trail && <Breadcrumb trail={trail} />}
