@@ -104,7 +104,7 @@ export default function About() {
 
       {/* =========================================================
           WHAT WE BELIEVE — the statement of faith, in their words. The
-          two paragraphs side by side across the full shell (Drew, Sept
+          two paragraphs in one column across the full shell (Drew, Sept
           4), then the four convictions as a litany: one ruled row each,
           the adjective in display type beside its "Therefore".
           ========================================================= */}
@@ -120,11 +120,9 @@ export default function About() {
           >
             What we believe
           </h2>
-          <div className="mt-10 grid gap-8 md:mt-12 md:grid-cols-2 md:gap-16">
+          <div className="prose mt-10 md:mt-12">
             {BELIEFS.intro.map((para) => (
-              <p key={para.slice(0, 40)} className="prose">
-                {para}
-              </p>
+              <p key={para.slice(0, 40)}>{para}</p>
             ))}
           </div>
           <ul className="mt-14 md:mt-20">
