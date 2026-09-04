@@ -20,9 +20,11 @@ import { CHURCH } from "@/lib/site";
    gets the composition its job asks for, typography and rules before
    components, and numerals only where there is a real sequence.
 
-   - The page opens as a poster (Drew, Sept 4): the title at poster
-     size with Acts 20:27 hung beside it, the verse "What we do" cites,
-     then their "Who we are" statement across the full shell.
+   - The page opens as a poster on blue (Drew, Sept 4), like
+     /new/know-jesus: the title at poster size with Acts 20:27 hung
+     beside it, the verse "What we do" cites, then their "Who we are"
+     statement across the full shell. Blue, not salt, because the
+     sunburst is yellow and yellow only sits on a dark ground.
    - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
@@ -72,10 +74,10 @@ export default function About() {
     <main id="main">
       <PageHeader
         poster
-        field="field-salt"
+        field="field-blue"
         trail={[{ label: "About", href: "/about" }]}
         title="About"
-        aside={<Verse reference="Acts 20:27" layout="quote" />}
+        aside={<Verse reference="Acts 20:27" tone="dark" layout="quote" />}
         statement={<p>{WHO.text}</p>}
       />
 
