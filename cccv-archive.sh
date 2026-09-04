@@ -21,10 +21,19 @@
 #   ./cccv-archive.sh verify      Compare local sizes against remote. No download.
 #   ./cccv-archive.sh deep        Compare md5 against recorded S3 ETags. Local only.
 #   ./cccv-archive.sh report      What is done, what is missing.
+#   ./cccv-archive.sh all         audio, notes, video, channel, channel-pull,
+#                                 deep, report, in that order. One command.
 #
 # Environment:
-#   CCCV_DEST   where to write         (default ~/cccv-sermon-archive)
-#   CCCV_JOBS   parallel downloads     (default 4)
+#   CCCV_DEST      where the media goes   (default ~/cccv-sermon-archive)
+#   CCCV_MANIFEST  where the catalog is   (default $CCCV_DEST/manifest)
+#   CCCV_JOBS      parallel downloads     (default 4)
+#
+# To send the terabyte straight to an external drive while the catalog stays
+# in the git repo at home:
+#   CCCV_DEST=/Volumes/CCCV/cccv-sermon-archive \
+#   CCCV_MANIFEST=~/cccv-sermon-archive/manifest \
+#   caffeinate -i ./cccv-archive.sh all
 #
 # Requires: curl and python3 (both present on a stock Mac with Xcode command
 # line tools). yt-dlp only for the youtube stage. No Homebrew needed.
@@ -36,7 +45,9 @@ API="${CCCV_API:-https://mediaplayer.cloversites.com}"
 DEST="${CCCV_DEST:-$HOME/cccv-sermon-archive}"
 JOBS="${CCCV_JOBS:-4}"
 
-MDIR="$DEST/manifest"
+# The catalog may live apart from the media, so the git repo at home stays the
+# manifest's home while the files go to an external drive.
+MDIR="${CCCV_MANIFEST:-$DEST/manifest}"
 MANIFEST="$MDIR/player.json"
 SRCDIR="$MDIR/sources"
 INDEX="$MDIR/index.tsv"
@@ -588,6 +599,23 @@ cmd_deepverify() {
   say "deep: $(grep -c '^OK' "$MDIR/deepverify.tsv" || true) ok, $(grep -c '^CORRUPT' "$MDIR/deepverify.tsv" || true) corrupt, $(grep -c '^MULTIPART' "$MDIR/deepverify.tsv" || true) multipart (size-checked only), $(grep -c '^MISSING' "$MDIR/deepverify.tsv" || true) missing"
 }
 
+# Everything, in order. Each stage is resumable, so re-running after an
+# interruption or an unplugged drive picks up where it stopped.
+cmd_all() {
+  require_index
+  cmd_audio
+  cmd_notes
+  cmd_video
+  if command -v yt-dlp >/dev/null 2>&1; then
+    cmd_channel
+    cmd_channel_pull
+  else
+    say "yt-dlp is not installed, skipping the YouTube-only stage. Install it, then run '$0 channel' and '$0 channel-pull'"
+  fi
+  cmd_deepverify
+  cmd_report
+}
+
 cmd_report() {
   require_index
   printf '\nCCCV sermon archive\n  %s\n\n' "$DEST"
@@ -620,6 +648,7 @@ case "${1:-}" in
   verify)   cmd_verify ;;
   deep)     cmd_deepverify ;;
   report)   cmd_report ;;
+  all)      cmd_all ;;
   __get)    shift; cmd__get "$@" ;;
-  *)        sed -n '2,26p' "$0" | sed 's/^# \{0,1\}//' ;;
+  *)        sed -n '2,/^$/p' "$0" | sed 's/^# \{0,1\}//' ;;
 esac
