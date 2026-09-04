@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sermons": "node scripts/build-sermon-index.mjs"
+    "sermons": "node scripts/build-sermon-index.mjs",
+    "preview": "node scripts/serve-out.mjs out 4173"
   },
   "dependencies": {
     "next": "16.3.3",
