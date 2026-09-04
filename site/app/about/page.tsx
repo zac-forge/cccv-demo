@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 import CTABand from "@/components/CTABand";
-import PageHeader from "@/components/PageHeader";
 import Verse from "@/components/Verse";
 import { BELIEFS, PASTOR, TEAM, WHO_WE_ARE } from "@/lib/content";
 import { CHURCH } from "@/lib/site";
@@ -20,12 +20,11 @@ import { CHURCH } from "@/lib/site";
    gets the composition its job asks for, typography and rules before
    components, and numerals only where there is a real sequence.
 
-   - The page opens as a poster on ink (Drew, Sept 4): the title at
-     poster size with Acts 20:27 hung beside it, the verse "What we do"
-     cites, then their "Who we are" statement across the full shell,
-     and the Conejo Valley band along the foot, since the page is about
-     where the church is. Ink, not blue: the band is blue hills, and on
-     the blue field it vanished.
+   - The page opens on blue with the title, Acts 20:27 (the verse "What
+     we do" cites) under it, the Conejo Valley as a bordered plate
+     beside them, and their "Who we are" statement across the full
+     shell. A plate, not a background: the band along the header's foot
+     vanished into the field and only showed from lg (Drew, Sept 4).
    - "What we do" and "Why we're here" stay side by side, matched.
    - The creed is four adjectives, so the adjectives are the display
      type: their sentences split typographically, never rewritten.
@@ -73,16 +72,39 @@ const [WHO, WHAT, WHY] = WHO_WE_ARE;
 export default function About() {
   return (
     <main id="main">
-      <PageHeader
-        poster
-        art="valley"
-        field="field-ink"
-        trail={[{ label: "About", href: "/about" }]}
-        title="About"
-        aside={<Verse reference="Acts 20:27" tone="dark" layout="quote" />}
-        asideNear
-        statement={<p>{WHO.text}</p>}
-      />
+      {/* The opening: the title with Acts 20:27 under it, the Conejo
+          Valley as a plate beside them (a picture, not a background, so
+          it shows at every width), and their "Who we are" statement
+          across the full shell beneath. The same shape as /events. */}
+      <header className="field-blue page-header-poster">
+        <div className="shell">
+          <Breadcrumb trail={[{ label: "About", href: "/about" }]} />
+          <div className="mt-9 grid gap-10 md:mt-12 lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-5">
+              <h1 className="f-display t-poster max-w-[11ch]">About</h1>
+              <Verse
+                reference="Acts 20:27"
+                tone="dark"
+                layout="quote"
+                className="mt-8 max-w-[34ch] md:mt-10"
+              />
+            </div>
+            <div className="relative aspect-[12/5] overflow-hidden border border-[color:var(--rule)] bg-stock lg:col-span-7">
+              <Image
+                src="/site/valley.webp"
+                alt=""
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover object-bottom"
+              />
+            </div>
+          </div>
+          <div className="f-text t-pull rule-t mt-10 pt-8 md:mt-14 md:pt-10">
+            <p>{WHO.text}</p>
+          </div>
+        </div>
+      </header>
 
       {/* =========================================================
           WHAT WE DO, WHY WE'RE HERE — two of the three /home blocks,

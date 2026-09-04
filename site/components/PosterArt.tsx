@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-/* The art behind a poster header or band. Four pieces and none, so the
+/* The art behind a poster header or band. Three pieces and none, so the
    sunburst is one choice among several rather than every page's
    wallpaper (Drew, September 4). All from lg up, the same rule as the
    ghost words. The parent needs `relative isolate overflow-hidden`.
@@ -11,10 +11,9 @@ import Image from "next/image";
    cross   a plain cross on a hill before sunrise, painted on Baptism
            Blue. Fills the right half, masked in from the left.
    sower   a sower at dusk, painted on Maranatha Ink. Same placement.
-   valley  the Conejo Valley band along the foot of the header, under
-           the type; the header grows to make room (globals.css).
-   none    type only. */
-export type PosterArtName = "rays" | "cross" | "sower" | "valley" | "none";
+   none    type only.
+   The Conejo Valley band is not here: it is a plate on /about. */
+export type PosterArtName = "rays" | "cross" | "sower" | "none";
 
 /* The painted pieces own the right side, so the header stacks its aside
    under the deck rather than hanging it in the art. */
@@ -41,19 +40,6 @@ export default function PosterArt({ art = "rays" }: { art?: PosterArtName }) {
         />
         <div className="poster-scrim hidden lg:block" aria-hidden="true" />
       </>
-    );
-  }
-
-  if (art === "valley") {
-    return (
-      <Image
-        src="/site/valley.webp"
-        alt=""
-        width={1600}
-        height={533}
-        aria-hidden="true"
-        className="poster-foot hidden lg:block"
-      />
     );
   }
 
