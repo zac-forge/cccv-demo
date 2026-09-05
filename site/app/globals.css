@@ -1179,55 +1179,46 @@
 
   /* The same subnav in the phone menu: an index line under its parent,
      the Watch strip's shape, each link tall enough for a thumb. */
-  .mobile-sublink {
-    display: inline-flex;
-    align-items: center;
-    min-height: 36px;
-    font-size: 0.9375rem;
-    line-height: 1.2;
-    color: color-mix(in srgb, var(--color-ink) 72%, transparent);
-  }
-  .mobile-sublink:hover,
-  .mobile-sublink[aria-current="page"] {
-    color: var(--color-red);
-  }
 
   /* ----------------------------------------------------------------
-     Mobile menu. A real disclosure rather than a display toggle: it
-     collapses to zero grid rows so the height can animate to auto.
-     The closed state is plain CSS, so with motion off or JS disabled
-     it still hides correctly and stays out of the tab order.
+     Phone menu. A full-screen ink panel fixed under the bar, the
+     desktop band's language at phone scale: sections in the display
+     face, their pages as a two-column index beneath, Give and the
+     service times at the foot. The closed state is plain CSS, so with
+     motion off or JS disabled it stays hidden and out of the tab
+     order. It scrolls inside itself; Header locks the body while open.
      ---------------------------------------------------------------- */
   .mobile-panel {
-    display: grid;
-    grid-template-rows: 0fr;
+    position: fixed;
+    top: 68px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background-color: var(--color-ink);
+    color: var(--color-salt);
+    border-top: 1px solid color-mix(in srgb, var(--color-salt) 26%, transparent);
     visibility: hidden;
+    opacity: 0;
+  }
+  @media (min-width: 768px) {
+    .mobile-panel {
+      top: 96px;
+    }
   }
   .mobile-panel[data-open="true"] {
-    grid-template-rows: 1fr;
     visibility: visible;
-  }
-  .mobile-panel-inner {
-    min-height: 0;
-    overflow: hidden;
-  }
-  /* The rule belongs to the open state only. As a Tailwind border-t
-     utility it outranked anything here (utilities beat components) and
-     kept painting its 1px at zero height, pushing the header to 70px
-     against the hero's -69px pull and reopening the seam at the top of
-     the page. Owned here, it simply does not exist while closed. */
-  .mobile-panel[data-open="true"] .mobile-panel-inner {
-    border-top: 1px solid color-mix(in srgb, var(--color-ink) 85%, transparent);
+    opacity: 1;
   }
   [data-motion="on"] .mobile-panel {
-    /* Visibility flips only after the collapse has finished, so the
-       panel does not vanish mid-animation. */
-    transition: grid-template-rows var(--dur-standard) var(--ease-out),
+    /* Visibility flips only after the fade has finished, so the panel
+       does not vanish mid-animation. */
+    transition: opacity var(--dur-standard) var(--ease-out),
       visibility 0s linear var(--dur-standard);
   }
   [data-motion="on"] .mobile-panel[data-open="true"] {
-    transition: grid-template-rows var(--dur-standard) var(--ease-out),
-      visibility 0s;
+    transition: opacity var(--dur-standard) var(--ease-out), visibility 0s;
   }
   [data-motion="on"] .mobile-panel a {
     opacity: 0;
@@ -1239,6 +1230,52 @@
     transition: opacity var(--dur-fast) var(--ease-out),
       translate var(--dur-fast) var(--ease-out);
     transition-delay: calc(var(--i, 0) * 40ms);
+  }
+  .mobile-section {
+    padding-block: 1.125rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-salt) 18%, transparent);
+  }
+  .mobile-link {
+    display: block;
+    padding-block: 0.125rem;
+    font-family: var(--font-display);
+    font-variation-settings: "wght" 800, "SOFT" 60, "WONK" 0, "opsz" 48;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 7.5vw, 2.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-salt);
+  }
+  .mobile-link[aria-current="page"] {
+    color: var(--color-yellow);
+  }
+  .mobile-index {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .mobile-sublink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    font-size: 0.9375rem;
+    line-height: 1.2;
+    color: color-mix(in srgb, var(--color-salt) 72%, transparent);
+  }
+  .mobile-sublink[aria-current="page"] {
+    color: var(--color-yellow);
+  }
+  .mobile-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  .mobile-times {
+    font-size: 1.0625rem;
+    color: color-mix(in srgb, var(--color-salt) 72%, transparent);
   }
 
   /* The radio is composed with the object right and open wall left,

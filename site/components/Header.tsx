@@ -302,34 +302,41 @@ export default function Header({ nav }: { nav: NavItem[] }) {
         </button>
       </div>
 
+      {/* The phone menu: a full-screen ink panel fixed under the bar, the
+          desktop band's language at phone scale. Sections in the display
+          face, each section's pages as a two-column index beneath so
+          Ministries reads as a list instead of a wrapping jumble (the
+          stock dropdown with grey sublinks was "terrible", Drew,
+          September 4). Give and the service times at the foot, which is
+          what a phone visitor came for. Scrolls inside itself on a short
+          phone; the body is locked while it is open. */}
       <div
         id="mobile-nav"
         ref={panelRef}
         data-open={open}
         className="mobile-panel lg:hidden"
       >
-        <div className="mobile-panel-inner bg-stock">
-          <nav aria-label="Primary, mobile" className="shell flex flex-col py-2">
+        <nav aria-label="Primary, mobile" className="shell flex min-h-full flex-col pt-4 pb-10">
+          <ul className="flex flex-col">
             {nav.map((item, i) => (
-              // `--i` on the row staggers every link in it, parent and
+              // `--i` on the section staggers every link in it, parent and
               // children alike, as one beat.
-              <div
+              <li
                 key={item.label}
                 style={{ "--i": i } as CSSProperties}
-                className="border-b border-ink/15 py-1.5"
+                className="mobile-section"
               >
                 <Link
                   href={item.href}
                   onClick={() => close(false)}
-                  className="block py-2.5 text-[1.0625rem] font-medium leading-snug text-ink"
+                  className="mobile-link"
+                  aria-current={onChild(item.href)}
                 >
                   {item.label}
                 </Link>
                 {item.children && (
-                  // The subnav as an index line, the Watch strip's shape:
-                  // every page one tap away, nothing behind a second tap.
                   // The section's own page is the row above, so it is skipped.
-                  <ul className="-mt-1 mb-1 flex flex-wrap gap-x-5">
+                  <ul className="mobile-index">
                     {item.children.filter((child) => child.href !== item.href).map((child) => (
                       <li key={child.href}>
                         <Link
@@ -344,18 +351,17 @@ export default function Header({ nav }: { nav: NavItem[] }) {
                     ))}
                   </ul>
                 )}
-              </div>
+              </li>
             ))}
-            <Link
-              href={GIVE_HREF}
-              onClick={() => close(false)}
-              style={{ "--i": nav.length } as CSSProperties}
-              className="navlink navlink-give my-5 self-start"
-            >
+          </ul>
+          <div style={{ "--i": nav.length } as CSSProperties} className="mobile-foot">
+            <Link href={GIVE_HREF} onClick={() => close(false)} className="navlink navlink-give">
               Give
             </Link>
-          </nav>
-        </div>
+            {/* Their times, /home; the same line /watch prints. */}
+            <p className="f-data mobile-times">Sundays 11 am &middot; Wednesdays 7 pm</p>
+          </div>
+        </nav>
       </div>
     </header>
   );
